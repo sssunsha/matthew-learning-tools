@@ -1,0 +1,650 @@
+// Metro风格配色变量
+$metro-deep-blue: #0078d4;
+$metro-dark-blue: #005a9e;
+$metro-light-blue: #50a0d8;
+$metro-accent-blue: #00b7c3;
+$metro-green: #107c10;
+$metro-orange: #ff8c00;
+
+.multiplication-table-container {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  animation: page-flip-in 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes page-flip-in {
+  0% {
+    transform: perspective(1000px) rotateY(90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: perspective(1000px) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 30px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid $metro-deep-blue;
+  flex-shrink: 0;
+
+  .back-btn {
+    background: rgba(0, 120, 212, 0.2);
+    color: #ffffff;
+    transition: all 0.3s;
+
+    &:hover {
+      background: $metro-deep-blue;
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .table-title {
+    font-size: 2em;
+    font-weight: 200;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 1px;
+    flex: 1;
+  }
+
+  .quiz-btn {
+    background: $metro-green;
+    color: white;
+    font-size: 1.1em;
+    padding: 8px 24px;
+    
+    &:hover {
+      background: lighten($metro-green, 10%);
+      transform: scale(1.05);
+    }
+  }
+}
+
+.table-wrapper {
+  flex: 1;
+  overflow: hidden;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.multiplication-table {
+  border-collapse: separate;
+  border-spacing: 1px;
+  background: rgba(0, 0, 0, 0.5);
+  animation: table-appear 0.6s ease-out 0.3s both;
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+
+  th, td {
+    padding: 0.3vh 0.2vw;
+    text-align: center;
+    font-family: 'Segoe UI', 'Microsoft YaHei', '微软雅黑', sans-serif;
+    font-weight: 400;
+    font-size: clamp(0.7rem, 1.2vh, 1.1rem);
+    transition: all 0.3s;
+    width: calc(100% / 20);
+    height: calc(100% / 20);
+  }
+
+  .corner-cell {
+    background: rgba(0, 60, 106, 0.8);
+    color: #ffffff;
+    font-size: 1.4em;
+    font-weight: 600;
+    border: 2px solid $metro-deep-blue;
+    position: sticky;
+    left: 0;
+    top: 0;
+    z-index: 30;
+  }
+
+  .header-cell {
+    background: rgba(0, 90, 158, 0.9);
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    transition: all 0.3s;
+    
+    &:hover {
+      background: $metro-light-blue;
+      transform: scale(1.1);
+    }
+
+    &.header-highlighted {
+      background: $metro-accent-blue;
+      color: #ffffff;
+      font-weight: 700;
+      transform: scale(1.25);
+      box-shadow: 0 8px 24px rgba(0, 186, 195, 0.8);
+      border: 3px solid lighten($metro-accent-blue, 20%);
+      z-index: 25;
+      font-size: 1.4em;
+    }
+  }
+
+  .row-header {
+    background: rgba(0, 90, 158, 0.9);
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    transition: all 0.3s;
+
+    &:hover {
+      background: $metro-light-blue;
+      transform: scale(1.1);
+    }
+
+    &.header-highlighted {
+      background: $metro-accent-blue;
+      color: #ffffff;
+      font-weight: 700;
+      transform: scale(1.25);
+      box-shadow: 0 8px 24px rgba(0, 186, 195, 0.8);
+      border: 3px solid lighten($metro-accent-blue, 20%);
+      z-index: 15;
+      font-size: 1.4em;
+    }
+  }
+
+  .data-cell {
+    background: rgba(26, 32, 44, 0.8);
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.95em;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(0, 120, 212, 0.4);
+      transform: scale(1.15);
+      font-weight: 600;
+      font-size: 1.1em;
+      box-shadow: 0 4px 12px rgba(0, 120, 212, 0.6);
+      z-index: 5;
+    }
+
+    // 对角线高亮（1×1到19×19）
+    &.diagonal-highlight {
+      background: rgba(255, 140, 0, 0.25);
+      border: 1px solid $metro-orange;
+      font-weight: 600;
+      color: $metro-orange;
+    }
+
+    // 被选中的单元格
+    &.selected-cell {
+      background: $metro-green;
+      border: 3px solid lighten($metro-green, 20%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.5em;
+      transform: scale(1.4);
+      box-shadow: 0 12px 32px rgba(16, 124, 16, 1);
+      z-index: 20;
+      animation: cell-pop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+  }
+
+  @keyframes cell-pop {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1.4);
+      opacity: 1;
+    }
+  }
+
+  tbody tr {
+    animation: row-appear 0.3s ease-out backwards;
+  }
+
+  @for $i from 1 through 19 {
+    tbody tr:nth-child(#{$i}) {
+      animation-delay: #{0.5 + $i * 0.03}s;
+    }
+  }
+}
+
+@keyframes table-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes row-appear {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// 滚动条样式
+.table-wrapper::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: $metro-deep-blue;
+
+  &:hover {
+    background: $metro-light-blue;
+  }
+}
+
+// 响应式设计
+@media (max-width: 1200px) {
+  .multiplication-table {
+    th, td {
+      padding: 6px 10px;
+      min-width: 35px;
+      font-size: 0.9em;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .table-header {
+    padding: 15px 20px;
+
+    .table-title {
+      font-size: 1.4em;
+    }
+  }
+
+  .table-wrapper {
+    padding: 15px;
+  }
+
+  .multiplication-table {
+    th, td {
+      padding: 4px 8px;
+      min-width: 30px;
+      font-size: 0.85em;
+    }
+
+    .corner-cell,
+    .header-cell,
+    .row-header {
+      font-size: 0.9em;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .table-header {
+    .table-title {
+      font-size: 1.2em;
+    }
+  }
+
+  .multiplication-table {
+    th, td {
+      padding: 3px 6px;
+      min-width: 28px;
+      font-size: 0.8em;
+    }
+  }
+}
+
+// 测验对话框样式
+.quiz-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: overlay-fade-in 0.3s ease-out;
+}
+
+@keyframes overlay-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.quiz-dialog {
+  background: rgba(26, 32, 44, 0.95);
+  border: 2px solid $metro-deep-blue;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: dialog-slide-up 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes dialog-slide-up {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.quiz-dialog-header {
+  padding: 20px 30px;
+  background: $metro-deep-blue;
+  border-bottom: 2px solid $metro-light-blue;
+  border-radius: 10px 10px 0 0;
+
+  h2 {
+    margin: 0;
+    color: white;
+    font-size: 1.8em;
+    font-weight: 300;
+  }
+}
+
+.quiz-dialog-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.questions-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  overflow-y: auto;
+  padding-right: 5px;
+  max-height: 300px;
+  
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $metro-deep-blue;
+    border-radius: 4px;
+    
+    &:hover {
+      background: $metro-light-blue;
+    }
+  }
+}
+
+.question-item {
+  background: rgba(0, 90, 158, 0.3);
+  border: 2px solid rgba(0, 120, 212, 0.5);
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 120, 212, 0.4);
+  }
+
+  &.active {
+    border-color: $metro-accent-blue;
+    background: rgba(0, 183, 195, 0.2);
+    box-shadow: 0 0 20px rgba(0, 183, 195, 0.5);
+  }
+
+  &.correct {
+    border-color: $metro-green;
+    background: rgba(16, 124, 16, 0.2);
+    
+    .answer-input {
+      color: $metro-green;
+      font-weight: bold;
+    }
+  }
+
+  &.incorrect {
+    border-color: #e74856;
+    background: rgba(231, 72, 86, 0.2);
+    
+    .answer-input {
+      color: #e74856;
+      font-weight: bold;
+    }
+  }
+
+  .question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .question-number {
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .voice-btn {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    padding: 0;
+    background: rgba(0, 120, 212, 0.3);
+    color: white;
+    transition: all 0.3s;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+    }
+
+    &:hover {
+      background: $metro-deep-blue;
+      transform: scale(1.1);
+    }
+
+    &.listening {
+      background: #e74856;
+      animation: pulse 1s infinite;
+
+      mat-icon {
+        color: white;
+      }
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+  }
+
+  .question-text {
+    font-size: 1.1em;
+    color: white;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .answer-input {
+    width: 100%;
+    padding: 6px;
+    font-size: 1em;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    outline: none;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .correct-answer {
+    margin-top: 5px;
+    color: #e74856;
+    font-size: 0.85em;
+    font-weight: bold;
+  }
+}
+
+.number-keyboard {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .keyboard-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+
+    .key-btn {
+      flex: 1;
+      max-width: 80px;
+      height: 60px;
+      font-size: 1.5em;
+      font-weight: bold;
+      background: $metro-deep-blue;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      transition: all 0.2s;
+
+      &:hover {
+        background: $metro-light-blue;
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      &.delete-btn {
+        background: #e74856;
+        
+        &:hover {
+          background: lighten(#e74856, 10%);
+        }
+      }
+    }
+  }
+}
+
+.quiz-dialog-actions {
+  padding: 20px 30px;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  border-radius: 0 0 10px 10px;
+
+  button {
+    min-width: 120px;
+    padding: 10px 24px;
+    font-size: 1.1em;
+    
+    &[color="primary"] {
+      background: $metro-green;
+      color: white;
+      
+      &:hover {
+        background: lighten($metro-green, 10%);
+      }
+    }
+  }
+}
+
+// 响应式调整
+@media (max-width: 768px) {
+  .quiz-dialog {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .questions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .number-keyboard .keyboard-row .key-btn {
+    height: 50px;
+    font-size: 1.3em;
+  }
+
+  .quiz-dialog-actions {
+    flex-wrap: wrap;
+    
+    button {
+      flex: 1;
+      min-width: 100px;
+    }
+  }
+}

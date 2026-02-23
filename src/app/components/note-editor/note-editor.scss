@@ -1,0 +1,122 @@
+.note-editor-container {
+  min-height: 100vh;
+  height: 100vh;
+  background: linear-gradient(135deg, #a1887f 0%, #8d6e63 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editor-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 15px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid #a1887f;
+  flex-shrink: 0;
+
+  .back-btn {
+    background: rgba(161, 136, 127, 0.3);
+    color: #a1887f;
+    transition: all 0.3s;
+    width: 36px;
+    height: 36px;
+
+    &:hover {
+      background: #a1887f;
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .note-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .note-title {
+      font-size: 1.2em;
+      font-weight: 400;
+      color: #ffffff;
+      margin: 0;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 10px rgba(161, 136, 127, 0.8);
+    }
+
+    .note-meta {
+      font-size: 0.7em;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0;
+      font-weight: 300;
+    }
+  }
+}
+
+.editor-content {
+  flex: 1;
+  padding: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .note-textarea {
+    flex: 1;
+    width: 100%;
+    padding: 20px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    font-size: 16px;
+    font-family: 'Segoe UI', 'Microsoft YaHei', '微软雅黑', sans-serif;
+    line-height: 1.8;
+    resize: none;
+    outline: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+
+    &::placeholder {
+      color: #999;
+      font-style: normal;
+    }
+
+    &:focus {
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 6px 30px rgba(161, 136, 127, 0.3);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .editor-header {
+    padding: 10px 15px;
+
+    .note-info {
+      .note-title {
+        font-size: 1em;
+      }
+
+      .note-meta {
+        font-size: 0.65em;
+      }
+    }
+  }
+
+  .editor-content {
+    padding: 15px;
+
+    .note-textarea {
+      padding: 15px;
+      font-size: 14px;
+    }
+  }
+}

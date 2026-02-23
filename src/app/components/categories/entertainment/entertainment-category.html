@@ -1,0 +1,33 @@
+<div class="category-container entertainment-theme">
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="category-title">娱乐</h1>
+    <p class="category-subtitle">Entertainment</p>
+  </div>
+
+  <div class="metro-grid">
+    <!-- 俄罗斯方块 -->
+    <div class="metro-tile tile-large" (click)="openTetris()">
+      <div class="tile-content">
+        <mat-icon class="tile-icon">extension</mat-icon>
+        <div class="tile-text">
+          <h2>俄罗斯方块</h2>
+          <p>Tetris Game</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 鹦鹉训练 -->
+    <div class="metro-tile tile-large" (click)="openParrotTraining()">
+      <div class="tile-content">
+        <mat-icon class="tile-icon">pets</mat-icon>
+        <div class="tile-text">
+          <h2>鹦鹉训练</h2>
+          <p>Parrot Training</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

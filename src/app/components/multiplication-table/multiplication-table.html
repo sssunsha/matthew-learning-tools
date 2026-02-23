@@ -1,0 +1,138 @@
+<div class="multiplication-table-container">
+  <div class="table-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="table-title">19×19 乘法运算表</h1>
+    <button mat-raised-button color="primary" class="quiz-btn" (click)="openQuizDialog()">
+      测验
+    </button>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="multiplication-table">
+      <thead>
+        <tr>
+          <th class="corner-cell">×</th>
+          @for (col of cols; track col) {
+            <th 
+              class="header-cell"
+              [class.header-highlighted]="isColHeaderHighlighted(col)">
+              {{ col }}
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows; track row) {
+          <tr>
+            <th 
+              class="row-header"
+              [class.header-highlighted]="isRowHeaderHighlighted(row)">
+              {{ row }}
+            </th>
+            @for (col of cols; track col) {
+              <td 
+                class="data-cell" 
+                [class.diagonal-highlight]="row === col"
+                [class.selected-cell]="isSelected(row, col)"
+                (click)="onCellClick(row, col)">
+                {{ getProduct(row, col) }}
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 测验对话框 -->
+@if (showQuizDialog) {
+  <div class="quiz-dialog-overlay" (click)="closeQuizDialog()">
+    <div class="quiz-dialog" (click)="$event.stopPropagation()">
+      <div class="quiz-dialog-header">
+        <h2>乘法测验</h2>
+      </div>
+      
+      <div class="quiz-dialog-content">
+        <div class="questions-grid">
+          @for (question of quizQuestions; track $index; let i = $index) {
+            <div class="question-item" 
+                 [class.active]="i === currentQuestionIndex"
+                 [class.correct]="question.isCorrect === true"
+                 [class.incorrect]="question.isCorrect === false"
+                 (click)="currentQuestionIndex = i">
+              <div class="question-header">
+                <div class="question-number">第 {{ i + 1 }} 题</div>
+                <button 
+                  mat-icon-button 
+                  class="voice-btn"
+                  [class.listening]="isListening && currentQuestionIndex === i"
+                  (click)="startVoiceInput(i); $event.stopPropagation()"
+                  title="语音输入">
+                  <mat-icon>{{ isListening && currentQuestionIndex === i ? 'mic' : 'mic_none' }}</mat-icon>
+                </button>
+              </div>
+              <div class="question-text">{{ question.num1 }} × {{ question.num2 }} =</div>
+              <input 
+                type="text" 
+                class="answer-input"
+                [(ngModel)]="question.userAnswer"
+                readonly
+                placeholder="?">
+              @if (question.isCorrect === false) {
+                <div class="correct-answer">正确答案: {{ question.answer }}</div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- 数字键盘 -->
+        <div class="number-keyboard">
+          <div class="keyboard-row">
+            @for (num of [1, 2, 3]; track num) {
+              <button mat-raised-button class="key-btn" (click)="onNumberClick(num)">
+                {{ num }}
+              </button>
+            }
+          </div>
+          <div class="keyboard-row">
+            @for (num of [4, 5, 6]; track num) {
+              <button mat-raised-button class="key-btn" (click)="onNumberClick(num)">
+                {{ num }}
+              </button>
+            }
+          </div>
+          <div class="keyboard-row">
+            @for (num of [7, 8, 9]; track num) {
+              <button mat-raised-button class="key-btn" (click)="onNumberClick(num)">
+                {{ num }}
+              </button>
+            }
+          </div>
+          <div class="keyboard-row">
+            <button mat-raised-button class="key-btn" (click)="onNumberClick(0)">
+              0
+            </button>
+            <button mat-raised-button class="key-btn delete-btn" (click)="onDelete()">
+              <mat-icon>backspace</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-dialog-actions">
+        <button mat-raised-button color="primary" (click)="verifyAnswers()">
+          验证
+        </button>
+        <button mat-raised-button (click)="regenerateQuestions()">
+          重新出题
+        </button>
+        <button mat-raised-button (click)="closeQuizDialog()">
+          关闭
+        </button>
+      </div>
+    </div>
+  </div>
+}

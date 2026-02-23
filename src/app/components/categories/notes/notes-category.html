@@ -1,0 +1,58 @@
+<div class="category-container notes-theme">
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="category-title">记录</h1>
+    <p class="category-subtitle">Notes</p>
+    <button mat-icon-button class="delete-mode-btn" (click)="toggleDeleteMode()" [class.active]="isDeleteMode">
+      <mat-icon>{{ isDeleteMode ? 'done' : 'delete' }}</mat-icon>
+    </button>
+    <button mat-icon-button class="add-btn" (click)="createNewNote()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="metro-grid" cdkDropList (cdkDropListDropped)="onDrop($event)">
+    <!-- 新建笔记按钮磁贴 -->
+    <div class="metro-tile tile-medium add-note-tile" (click)="createNewNote()">
+      <div class="tile-content">
+        <mat-icon class="tile-icon">add_circle</mat-icon>
+        <div class="tile-text">
+          <h3>新建笔记</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- 动态笔记磁贴 -->
+    <div 
+      *ngFor="let note of notes"
+      class="metro-tile tile-medium note-tile"
+      [class.shake-mode]="isDeleteMode"
+      cdkDrag
+      (click)="openNote(note.id)"
+    >
+      <div class="tile-content">
+        <mat-icon class="tile-icon">description</mat-icon>
+        <div class="tile-text">
+          <h3>{{ note.title }}</h3>
+        </div>
+      </div>
+      
+      <!-- 拖拽手柄 (非删除模式显示) -->
+      <div class="drag-handle" cdkDragHandle *ngIf="!isDeleteMode">
+        <mat-icon>drag_indicator</mat-icon>
+      </div>
+      
+      <!-- 删除按钮 (仅在删除模式显示) -->
+      <button 
+        *ngIf="isDeleteMode"
+        class="delete-btn"
+        mat-icon-button
+        (click)="confirmDelete($event, note.id)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

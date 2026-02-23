@@ -1,0 +1,48 @@
+{
+  "grade": "4",
+  "term": "2",
+  "title": "四年级下学期",
+  "description": "Grade 4 Term 2 Vocabulary",
+  "words": [
+    {
+      "id": 1,
+      "word": "family",
+      "pronunciation": "/ˈfæməli/",
+      "translation": "家庭",
+      "example": "I love my family.",
+      "exampleTranslation": "我爱我的家庭。"
+    },
+    {
+      "id": 2,
+      "word": "father",
+      "pronunciation": "/ˈfɑːðə(r)/",
+      "translation": "父亲",
+      "example": "My father is a doctor.",
+      "exampleTranslation": "我的父亲是一名医生。"
+    },
+    {
+      "id": 3,
+      "word": "mother",
+      "pronunciation": "/ˈmʌðə(r)/",
+      "translation": "母亲",
+      "example": "My mother is very beautiful.",
+      "exampleTranslation": "我的母亲很漂亮。"
+    },
+    {
+      "id": 4,
+      "word": "brother",
+      "pronunciation": "/ˈbrʌðə(r)/",
+      "translation": "兄弟",
+      "example": "I have a younger brother.",
+      "exampleTranslation": "我有一个弟弟。"
+    },
+    {
+      "id": 5,
+      "word": "sister",
+      "pronunciation": "/ˈsɪstə(r)/",
+      "translation": "姐妹",
+      "example": "My sister likes reading.",
+      "exampleTranslation": "我的姐姐喜欢阅读。"
+    }
+  ]
+}

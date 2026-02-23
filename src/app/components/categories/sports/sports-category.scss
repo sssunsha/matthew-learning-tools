@@ -1,0 +1,163 @@
+// 体育分类 - 柔和天蓝色主题
+.sports-theme {
+  --category-color: #64b5f6;
+  --category-dark: #42a5f5;
+  --category-light: #90caf9;
+}
+
+.category-container {
+  min-height: 100vh;
+  height: 100vh;
+  background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--category-color);
+  flex-shrink: 0;
+
+  .back-btn {
+    background: rgba(100, 181, 246, 0.3);
+    color: var(--category-color);
+    transition: all 0.3s;
+    width: 40px;
+    height: 40px;
+
+    &:hover {
+      background: var(--category-color);
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .category-title {
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px var(--category-color);
+  }
+
+  .category-subtitle {
+    font-size: 0.9em;
+    color: var(--category-light);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+}
+
+.metro-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: 150px;
+  gap: 10px;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.metro-tile {
+  background: var(--category-color);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    transform: scale(1.05) rotateZ(2deg);
+    box-shadow: 0 8px 25px rgba(100, 181, 246, 0.5);
+    z-index: 10;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &.tile-large {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  &.tile-medium {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  &.tile-wide {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+}
+
+.tile-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: white;
+
+  .tile-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 10px;
+  }
+
+  .tile-text {
+    text-align: center;
+    
+    h2 {
+      font-size: 1.5em;
+      margin: 10px 0 5px 0;
+      font-weight: 300;
+    }
+
+    p {
+      font-size: 0.9em;
+      margin: 0;
+      opacity: 0.9;
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .category-header {
+    padding: 20px;
+
+    .category-title {
+      font-size: 2em;
+    }
+
+    .category-subtitle {
+      font-size: 1em;
+    }
+  }
+
+  .metro-grid {
+    padding: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-auto-rows: 120px;
+  }
+}

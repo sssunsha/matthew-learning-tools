@@ -1,0 +1,348 @@
+// 记录分类 - 柔和棕色主题
+.notes-theme {
+  --category-color: #a1887f;
+  --category-dark: #8d6e63;
+  --category-light: #bcaaa4;
+}
+
+.category-container {
+  min-height: 100vh;
+  height: 100vh;
+  background: linear-gradient(135deg, #a1887f 0%, #8d6e63 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--category-color);
+  flex-shrink: 0;
+
+  .back-btn,
+  .add-btn,
+  .delete-mode-btn {
+    background: rgba(161, 136, 127, 0.3);
+    color: var(--category-color);
+    transition: all 0.3s;
+    width: 36px;
+    height: 36px;
+
+    &:hover {
+      background: var(--category-color);
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .delete-mode-btn {
+    margin-left: auto;
+    background: rgba(244, 67, 54, 0.3);
+    color: #ef5350;
+
+    &:hover {
+      background: #ef5350;
+      color: #fff;
+    }
+
+    &.active {
+      background: #ef5350;
+      color: #fff;
+      animation: pulse 1.5s infinite;
+    }
+  }
+
+  .add-btn {
+    background: rgba(76, 175, 80, 0.3);
+    color: #66bb6a;
+
+    &:hover {
+      background: #66bb6a;
+      color: #fff;
+    }
+  }
+
+  .category-title {
+    font-size: 1.2em;
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px var(--category-color);
+  }
+
+  .category-subtitle {
+    font-size: 0.75em;
+    color: var(--category-light);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+}
+
+.metro-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: 150px;
+  gap: 10px;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.metro-tile {
+  background: var(--category-color);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    transform: scale(1.05) rotateZ(2deg);
+    box-shadow: 0 8px 25px rgba(161, 136, 127, 0.5);
+    z-index: 10;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &.tile-medium {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
+// 新建笔记按钮样式
+.add-note-tile {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.8) 0%, rgba(102, 187, 106, 0.8) 100%);
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+
+  &:hover {
+    background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .tile-icon {
+    font-size: 56px;
+    width: 56px;
+    height: 56px;
+  }
+}
+
+// 笔记磁贴样式
+.note-tile {
+  background: linear-gradient(135deg, var(--category-color) 0%, var(--category-dark) 100%);
+  
+  .drag-handle {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    padding: 2px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    cursor: move;
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  &:hover .drag-handle {
+    opacity: 1;
+  }
+
+  // 删除按钮样式
+  .delete-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 28px;
+    height: 28px;
+    background: #f44336;
+    color: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    animation: delete-btn-appear 0.3s ease-out;
+
+    &:hover {
+      background: #d32f2f;
+      transform: scale(1.15);
+    }
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  // 抖动模式
+  &.shake-mode {
+    animation: shake 0.5s infinite;
+    transform-origin: center center;
+    cursor: default !important;
+
+    &:hover {
+      transform: scale(1) rotateZ(0deg);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+// 抖动动画
+@keyframes shake {
+  0%, 100% {
+    transform: rotate(-2deg);
+  }
+  25% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(-2deg);
+  }
+  75% {
+    transform: rotate(2deg);
+  }
+}
+
+// 删除按钮出现动画
+@keyframes delete-btn-appear {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// 删除模式按钮脉冲动画
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(244, 67, 54, 0);
+  }
+}
+
+// CDK拖拽样式
+.cdk-drag-preview {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  opacity: 0.8;
+  transform: rotate(5deg);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+  background: rgba(161, 136, 127, 0.3);
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.metro-grid.cdk-drop-list-dragging .metro-tile:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.tile-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  color: white;
+  gap: 8px;
+
+  .tile-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 5px;
+  }
+
+  .tile-text {
+    text-align: center;
+    width: 100%;
+    
+    h3 {
+      font-size: 1em;
+      margin: 0 0 5px 0;
+      font-weight: 400;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .note-preview {
+      font-size: 0.75em;
+      margin: 0;
+      opacity: 0.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 1.3;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .category-header {
+    padding: 10px 15px;
+
+    .category-title {
+      font-size: 1.1em;
+    }
+
+    .category-subtitle {
+      font-size: 0.7em;
+    }
+  }
+
+  .metro-grid {
+    padding: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-auto-rows: 120px;
+  }
+
+  .tile-content {
+    padding: 10px;
+
+    .tile-icon {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .tile-text h3 {
+      font-size: 0.9em;
+    }
+  }
+}

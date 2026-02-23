@@ -1,0 +1,48 @@
+{
+  "grade": "5",
+  "term": "1",
+  "title": "五年级上学期",
+  "description": "Grade 5 Term 1 Vocabulary",
+  "words": [
+    {
+      "id": 1,
+      "word": "computer",
+      "pronunciation": "/kəmˈpjuːtə(r)/",
+      "translation": "电脑",
+      "example": "I use the computer every day.",
+      "exampleTranslation": "我每天使用电脑。"
+    },
+    {
+      "id": 2,
+      "word": "internet",
+      "pronunciation": "/ˈɪntənet/",
+      "translation": "互联网",
+      "example": "The internet is very useful.",
+      "exampleTranslation": "互联网非常有用。"
+    },
+    {
+      "id": 3,
+      "word": "homework",
+      "pronunciation": "/ˈhəʊmwɜːk/",
+      "translation": "家庭作业",
+      "example": "I need to finish my homework.",
+      "exampleTranslation": "我需要完成我的家庭作业。"
+    },
+    {
+      "id": 4,
+      "word": "library",
+      "pronunciation": "/ˈlaɪbrəri/",
+      "translation": "图书馆",
+      "example": "The library has many books.",
+      "exampleTranslation": "图书馆有很多书。"
+    },
+    {
+      "id": 5,
+      "word": "museum",
+      "pronunciation": "/mjuˈziːəm/",
+      "translation": "博物馆",
+      "example": "We visited the museum yesterday.",
+      "exampleTranslation": "我们昨天参观了博物馆。"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "appId": "com.matthew.learningtools",
+  "productName": "MatthewTools",
+  "directories": {
+    "output": "release",
+    "buildResources": "public"
+  },
+  "files": [
+    "dist/**/*",
+    "electron.js",
+    "package.json",
+    "public/**/*"
+  ],
+  "mac": {
+    "target": {
+      "target": "dir",
+      "arch": ["arm64"]
+    },
+    "icon": "public/app_icon.jpg",
+    "category": "public.app-category.education"
+  }
+}

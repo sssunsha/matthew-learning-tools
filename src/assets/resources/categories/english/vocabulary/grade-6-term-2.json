@@ -1,0 +1,48 @@
+{
+  "grade": "6",
+  "term": "2",
+  "title": "六年级下学期",
+  "description": "Grade 6 Term 2 Vocabulary",
+  "words": [
+    {
+      "id": 1,
+      "word": "graduate",
+      "pronunciation": "/ˈɡrædʒueɪt/",
+      "translation": "毕业",
+      "example": "I will graduate from primary school.",
+      "exampleTranslation": "我将从小学毕业。"
+    },
+    {
+      "id": 2,
+      "word": "memory",
+      "pronunciation": "/ˈmeməri/",
+      "translation": "记忆",
+      "example": "I have many good memories.",
+      "exampleTranslation": "我有很多美好的回忆。"
+    },
+    {
+      "id": 3,
+      "word": "friendship",
+      "pronunciation": "/ˈfrendʃɪp/",
+      "translation": "友谊",
+      "example": "Friendship is very important.",
+      "exampleTranslation": "友谊非常重要。"
+    },
+    {
+      "id": 4,
+      "word": "achievement",
+      "pronunciation": "/əˈtʃiːvmənt/",
+      "translation": "成就",
+      "example": "This is a great achievement.",
+      "exampleTranslation": "这是一个伟大的成就。"
+    },
+    {
+      "id": 5,
+      "word": "dream",
+      "pronunciation": "/driːm/",
+      "translation": "梦想",
+      "example": "Never give up your dreams.",
+      "exampleTranslation": "永远不要放弃你的梦想。"
+    }
+  ]
+}

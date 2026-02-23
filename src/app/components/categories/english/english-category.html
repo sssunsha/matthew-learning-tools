@@ -1,0 +1,22 @@
+<div class="category-container english-theme">
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="category-title">英语</h1>
+    <p class="category-subtitle">English</p>
+  </div>
+
+  <div class="metro-grid">
+    <!-- 背单词磁贴 -->
+    <div class="metro-tile tile-large" (click)="openVocabulary()">
+      <div class="tile-content">
+        <mat-icon class="tile-icon">menu_book</mat-icon>
+        <div class="tile-text">
+          <h2>背单词</h2>
+          <p>Vocabulary Learning</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

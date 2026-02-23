@@ -1,0 +1,20 @@
+<div class="note-editor-container" *ngIf="note">
+  <div class="editor-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="note-info">
+      <h1 class="note-title">{{ note.title || '新笔记' }}</h1>
+      <p class="note-meta">最后编辑: {{ note.updatedAt | date:'yyyy-MM-dd HH:mm' }}</p>
+    </div>
+  </div>
+
+  <div class="editor-content">
+    <textarea
+      class="note-textarea"
+      [(ngModel)]="note.content"
+      (ngModelChange)="onContentChange()"
+      placeholder="开始输入笔记内容...&#10;&#10;第一行将作为笔记标题显示在磁贴上。&#10;&#10;支持复制粘贴文本和超链接。"
+    ></textarea>
+  </div>
+</div>

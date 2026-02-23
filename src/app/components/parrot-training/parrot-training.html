@@ -1,0 +1,160 @@
+<div class="parrot-training-container">
+  <div class="training-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="training-title">🦜 鹦鹉训练 🦜</h1>
+  </div>
+
+  <div class="training-content">
+    <!-- 上部分：选择区域 -->
+    <div class="selection-area">
+      <!-- 左边：说话内容 -->
+      <div class="selection-box">
+        <h2>选择说话内容</h2>
+        <div class="button-group">
+          <button 
+            mat-raised-button 
+            [color]="selectedPhrase === '你好' ? 'primary' : ''"
+            (click)="selectPhrase('你好')">
+            你好
+          </button>
+          <button 
+            mat-raised-button 
+            [color]="selectedPhrase === '发财' ? 'primary' : ''"
+            (click)="selectPhrase('发财')">
+            发财
+          </button>
+          <button 
+            mat-raised-button 
+            [color]="selectedPhrase === '妈妈' ? 'primary' : ''"
+            (click)="selectPhrase('妈妈')">
+            妈妈
+          </button>
+          <button 
+            mat-raised-button 
+            [color]="selectedPhrase === '爸爸' ? 'primary' : ''"
+            (click)="selectPhrase('爸爸')">
+            爸爸
+          </button>
+          <button 
+            mat-raised-button 
+            [color]="selectedPhrase === '哥哥' ? 'primary' : ''"
+            (click)="selectPhrase('哥哥')">
+            哥哥
+          </button>
+        </div>
+      </div>
+
+      <!-- 右边：朗读次数 -->
+      <div class="selection-box">
+        <h2>选择朗读次数</h2>
+        <div class="button-group">
+          <button 
+            mat-raised-button 
+            [color]="selectedCount === 10 ? 'accent' : ''"
+            (click)="selectCount(10)">
+            10次
+          </button>
+          <button 
+            mat-raised-button 
+            [color]="selectedCount === 30 ? 'accent' : ''"
+            (click)="selectCount(30)">
+            30次
+          </button>
+          <button 
+            mat-raised-button 
+            [color]="selectedCount === 100 ? 'accent' : ''"
+            (click)="selectCount(100)">
+            100次
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 声音类型选择 -->
+    <div class="voice-selection">
+      <div class="selection-box voice-box">
+        <h2>选择声音类型</h2>
+        <div class="voice-button-group">
+          <button 
+            mat-raised-button 
+            [color]="selectedVoiceType === 'boy' ? 'primary' : ''"
+            (click)="selectVoiceType('boy')">
+            👦 男孩童声
+          </button>
+          <button 
+            mat-raised-button 
+            [color]="selectedVoiceType === 'girl' ? 'primary' : ''"
+            (click)="selectVoiceType('girl')">
+            👧 女孩童声
+          </button>
+          <button 
+            mat-raised-button 
+            [color]="selectedVoiceType === 'woman' ? 'primary' : ''"
+            (click)="selectVoiceType('woman')">
+            👩 成人女声
+          </button>
+          <button 
+            mat-raised-button 
+            [color]="selectedVoiceType === 'man' ? 'primary' : ''"
+            (click)="selectVoiceType('man')">
+            👨 成人男声
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 状态显示 -->
+    <div class="status-display">
+      <div class="parrot-animation">
+        <mat-icon [class.speaking]="isPlaying">pets</mat-icon>
+        <mat-icon [class.speaking]="isPlaying">pets</mat-icon>
+      </div>
+      <div class="status-info">
+        <p class="current-phrase" *ngIf="selectedPhrase">
+          当前内容：<span class="highlight">{{ selectedPhrase }}</span>
+        </p>
+        <p class="current-voice" *ngIf="selectedVoiceType">
+          声音类型：<span class="highlight">{{ getVoiceTypeName() }}</span>
+        </p>
+        <p class="progress" *ngIf="isPlaying || currentPlayCount > 0">
+          进度：<span class="highlight">{{ currentPlayCount }} / {{ selectedCount }}</span>
+        </p>
+        <p class="state-label" [class.playing]="isPlaying" [class.paused]="isPaused">
+          {{ getStateText() }}
+        </p>
+      </div>
+    </div>
+
+    <!-- 下部分：控制按钮 -->
+    <div class="control-buttons">
+      <button 
+        mat-raised-button 
+        color="primary" 
+        class="control-btn start-btn"
+        [disabled]="!selectedPhrase || !selectedCount || !selectedVoiceType || isPlaying"
+        (click)="start()">
+        <mat-icon>play_arrow</mat-icon>
+        开始
+      </button>
+      <button 
+        mat-raised-button 
+        color="warn" 
+        class="control-btn pause-btn"
+        [disabled]="!isPlaying"
+        (click)="pause()">
+        <mat-icon>pause</mat-icon>
+        暂停
+      </button>
+      <button 
+        mat-raised-button 
+        class="control-btn stop-btn"
+        [disabled]="!isPlaying && !isPaused"
+        (click)="stop()">
+        <mat-icon>stop</mat-icon>
+        结束
+      </button>
+    </div>
+  </div>
+</div>

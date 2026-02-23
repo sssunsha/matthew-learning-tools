@@ -1,0 +1,359 @@
+// Metro风格配色变量
+$metro-deep-blue: #0078d4;
+$metro-dark-blue: #005a9e;
+$metro-light-blue: #50a0d8;
+$metro-accent-blue: #00b7c3;
+$metro-green: #107c10;
+$metro-orange: #ff8c00;
+$metro-purple: #881798;
+$metro-red: #e81123;
+$metro-teal: #008272;
+$metro-indigo: #5c2d91;
+$metro-lime: #73aa24;
+$metro-amber: #f7630c;
+$metro-cyan: #00aac3;
+$metro-pink: #e3008c;
+$metro-deep-purple: #6b2f8a;
+$metro-brown: #7e735f;
+
+.metro-home-container {
+  min-height: 100vh;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: metro-fade-in 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes metro-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// 头部区域
+.metro-header {
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid $metro-deep-blue;
+  flex-shrink: 0;
+  
+  .metro-title {
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 0px;
+    text-transform: none;
+  }
+  
+  .metro-subtitle {
+    font-size: 0.75em;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+}
+
+// 磁贴网格区域
+.metro-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 10px;
+  padding: 10px;
+  overflow: auto;
+}
+
+// Metro磁贴基础样式
+.metro-tile {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+  }
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    
+    &::before {
+      left: 100%;
+    }
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+
+  .tile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .tile-icon {
+    font-size: 56px;
+    width: 56px;
+    height: 56px;
+    color: #ffffff;
+  }
+
+  .tile-icon-small {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #ffffff;
+  }
+
+  .tile-text {
+    color: #ffffff;
+
+    h2 {
+      font-size: 1.8em;
+      font-weight: 300;
+      margin: 0 0 5px 0;
+      letter-spacing: 0.5px;
+    }
+
+    h3 {
+      font-size: 1.5em;
+      font-weight: 300;
+      margin: 0 0 5px 0;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      font-size: 0.9em;
+      font-weight: 300;
+      margin: 0;
+      opacity: 0.8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+// 磁贴尺寸
+.tile-large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.tile-wide {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.tile-medium {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.tile-small {
+  grid-column: span 1;
+  grid-row: span 1;
+
+  .tile-content {
+    padding: 15px;
+  }
+}
+
+// 9个大类颜色主题 - 低饱和度柔和配色
+.tile-notes { background: linear-gradient(135deg, #a1887f 0%, #8d6e63 100%); } // 柔和棕色 - 记录
+.tile-chinese { background: linear-gradient(135deg, #9575cd 0%, #7e57c2 100%); } // 柔和紫色
+.tile-math { background: linear-gradient(135deg, #5c9ce6 0%, #4a8fd9 100%); } // 柔和蓝色
+.tile-english { background: linear-gradient(135deg, #81c784 0%, #66bb6a 100%); } // 柔和绿色
+.tile-science { background: linear-gradient(135deg, #4db6ac 0%, #26a69a 100%); } // 柔和青色
+.tile-ai { background: linear-gradient(135deg, #ffb74d 0%, #ffa726 100%); } // 柔和橙色
+.tile-entertainment { background: linear-gradient(135deg, #e57373 0%, #ef5350 100%); } // 柔和红色
+.tile-sports { background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%); } // 柔和天蓝色 - 体育
+.tile-recommend { background: linear-gradient(135deg, #f06292 0%, #ec407a 100%); } // 柔和粉色 - 推荐
+
+// 翻转动画效果
+@keyframes metro-tile-flip {
+  0% {
+    transform: perspective(600px) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(600px) rotateY(90deg);
+  }
+  100% {
+    transform: perspective(600px) rotateY(0deg);
+  }
+}
+
+.metro-tile:active {
+  animation: metro-tile-flip 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// 滚动条样式
+.metro-grid::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.metro-grid::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.metro-grid::-webkit-scrollbar-thumb {
+  background: $metro-deep-blue;
+
+  &:hover {
+    background: $metro-light-blue;
+  }
+}
+
+// 响应式设计
+@media (max-width: 1400px) {
+  .metro-grid {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .metro-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .metro-header {
+    padding: 20px 30px;
+
+    .metro-title {
+      font-size: 2em;
+    }
+  }
+
+  .metro-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .tile-large,
+  .tile-wide {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .metro-header {
+    padding: 15px 20px;
+
+    .metro-title {
+      font-size: 1.6em;
+    }
+
+    .metro-subtitle {
+      font-size: 0.85em;
+    }
+  }
+
+  .metro-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .tile-large {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .tile-wide {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .metro-tile {
+    .tile-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+    }
+
+    .tile-icon-small {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .tile-text {
+      h2 {
+        font-size: 1.4em;
+      }
+
+      h3 {
+        font-size: 1.2em;
+      }
+
+      p {
+        font-size: 0.8em;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .metro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tile-large,
+  .tile-wide,
+  .tile-medium,
+  .tile-small {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .metro-tile {
+    min-height: 100px;
+
+    .tile-content {
+      flex-direction: row;
+      justify-content: flex-start;
+      padding: 15px;
+      gap: 15px;
+    }
+
+    .tile-text {
+      text-align: left;
+    }
+  }
+}

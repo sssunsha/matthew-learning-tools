@@ -1,0 +1,115 @@
+<div class="tetris-container">
+  <div class="tetris-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="tetris-title">俄罗斯方块</h1>
+  </div>
+
+  <div class="game-wrapper">
+    <!-- 左侧：游戏信息 -->
+    <div class="game-info">
+      <div class="info-panel">
+        <h3>分数</h3>
+        <div class="score-display">{{ score }}</div>
+      </div>
+      
+      <div class="info-panel">
+        <h3>等级</h3>
+        <div class="level-display">{{ level }}</div>
+      </div>
+      
+      <div class="info-panel">
+        <h3>行数</h3>
+        <div class="lines-display">{{ lines }}</div>
+      </div>
+
+      <div class="controls-info">
+        <h3>操作说明</h3>
+        <div class="control-item">
+          <mat-icon>arrow_back</mat-icon>
+          <span>左移</span>
+        </div>
+        <div class="control-item">
+          <mat-icon>arrow_forward</mat-icon>
+          <span>右移</span>
+        </div>
+        <div class="control-item">
+          <mat-icon>arrow_upward</mat-icon>
+          <span>旋转</span>
+        </div>
+        <div class="control-item">
+          <mat-icon>space_bar</mat-icon>
+          <span>快速下落</span>
+        </div>
+        <div class="control-item">
+          <span class="key-label">P</span>
+          <span>暂停</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 中间：游戏区域 -->
+    <div class="game-board-wrapper">
+      <div class="game-board" [class.game-over]="gameOver">
+        @for (row of board; track $index; let r = $index) {
+          <div class="board-row" [class.flashing]="isRowFlashing(r)">
+            @for (cell of row; track $index; let c = $index) {
+              <div 
+                class="board-cell" 
+                [style.background-color]="getCellColor(r, c)"
+                [class.has-block]="getCellColor(r, c) !== 'transparent'">
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- 游戏结束提示 -->
+      @if (gameOver) {
+        <div class="game-over-overlay">
+          <div class="game-over-panel">
+            <h2>游戏结束</h2>
+            <div class="final-score">
+              <p>最终分数</p>
+              <div class="score">{{ score }}</div>
+            </div>
+            <button mat-raised-button color="primary" (click)="restart()">
+              <mat-icon>refresh</mat-icon>
+              重新开始
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- 暂停提示 -->
+      @if (isPaused && !gameOver) {
+        <div class="pause-overlay">
+          <div class="pause-panel">
+            <mat-icon>pause_circle</mat-icon>
+            <h2>游戏暂停</h2>
+            <p>按 P 继续游戏</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- 右侧：控制按钮 -->
+    <div class="game-controls">
+      <button mat-raised-button color="accent" (click)="togglePause()" [disabled]="gameOver">
+        <mat-icon>{{ isPaused ? 'play_arrow' : 'pause' }}</mat-icon>
+        {{ isPaused ? '继续' : '暂停' }}
+      </button>
+      
+      <button mat-raised-button [color]="isMusicPlaying ? 'warn' : 'accent'" (click)="toggleMusic()">
+        <mat-icon>{{ isMusicPlaying ? 'volume_off' : 'volume_up' }}</mat-icon>
+        {{ isMusicPlaying ? '关闭音乐' : '播放音乐' }}
+      </button>
+      
+      <button mat-raised-button color="primary" (click)="restart()">
+        <mat-icon>refresh</mat-icon>
+        重新开始
+      </button>
+    </div>
+  </div>
+</div>

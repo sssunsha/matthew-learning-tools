@@ -1,0 +1,2089 @@
+{
+  "grade": "3",
+  "term": "1",
+  "title": "三年级上学期",
+  "description": "Grade 3 Term 1 Vocabulary - 外研社版（一年级起点）",
+  "totalWords": 202,
+  "words": [
+    {
+      "id": 1,
+      "word": "Welcome",
+      "pronunciation": "",
+      "translation": "欢迎",
+      "partOfSpeech": "v.",
+      "example": "Welcome to our school!",
+      "exampleTranslation": "欢迎来到我们学校！",
+      "unit": 0
+    },
+    {
+      "id": 2,
+      "word": "hi",
+      "pronunciation": "",
+      "translation": "嗨，嘿，你好",
+      "partOfSpeech": "interj.",
+      "example": "Hi, how are you?",
+      "exampleTranslation": "嗨，你好吗？",
+      "unit": 0
+    },
+    {
+      "id": 3,
+      "word": "I",
+      "pronunciation": "",
+      "translation": "我",
+      "partOfSpeech": "pron.",
+      "example": "I am a student.",
+      "exampleTranslation": "我是一名学生。",
+      "unit": 0
+    },
+    {
+      "id": 4,
+      "word": "be (am, is, are)",
+      "pronunciation": "",
+      "translation": "是",
+      "partOfSpeech": "v.",
+      "example": "I am happy.",
+      "exampleTranslation": "我很高兴。",
+      "unit": 0
+    },
+    {
+      "id": 5,
+      "word": "what",
+      "pronunciation": "",
+      "translation": "什么",
+      "partOfSpeech": "pron.",
+      "example": "What is your name?",
+      "exampleTranslation": "你叫什么名字？",
+      "unit": 0
+    },
+    {
+      "id": 6,
+      "word": "your",
+      "pronunciation": "",
+      "translation": "你的；你们的",
+      "partOfSpeech": "pron.",
+      "example": "What's your name?",
+      "exampleTranslation": "你叫什么名字？",
+      "unit": 0
+    },
+    {
+      "id": 7,
+      "word": "name",
+      "pronunciation": "",
+      "translation": "名字",
+      "partOfSpeech": "n.",
+      "example": "My name is Tom.",
+      "exampleTranslation": "我叫汤姆。",
+      "unit": 0
+    },
+    {
+      "id": 8,
+      "word": "hello",
+      "pronunciation": "",
+      "translation": "嗨，哈啰，你好",
+      "partOfSpeech": "interj.",
+      "example": "Hello, nice to meet you.",
+      "exampleTranslation": "你好，很高兴见到你。",
+      "unit": 0
+    },
+    {
+      "id": 9,
+      "word": "my",
+      "pronunciation": "",
+      "translation": "我的",
+      "partOfSpeech": "pron.",
+      "example": "This is my book.",
+      "exampleTranslation": "这是我的书。",
+      "unit": 0
+    },
+    {
+      "id": 10,
+      "word": "goodbye",
+      "pronunciation": "",
+      "translation": "再见",
+      "partOfSpeech": "interj.",
+      "example": "Goodbye, see you tomorrow.",
+      "exampleTranslation": "再见，明天见。",
+      "unit": 0
+    },
+    {
+      "id": 11,
+      "word": "have",
+      "pronunciation": "",
+      "translation": "有，拥有",
+      "partOfSpeech": "v.",
+      "example": "I have a book.",
+      "exampleTranslation": "我有一本书。",
+      "unit": 0
+    },
+    {
+      "id": 12,
+      "word": "a (an)",
+      "pronunciation": "",
+      "translation": "一（个）",
+      "partOfSpeech": "art.",
+      "example": "I have an apple.",
+      "exampleTranslation": "我有一个苹果。",
+      "unit": 0
+    },
+    {
+      "id": 13,
+      "word": "nice",
+      "pronunciation": "",
+      "translation": "令人愉快的",
+      "partOfSpeech": "adj.",
+      "example": "Have a nice day!",
+      "exampleTranslation": "祝你愉快！",
+      "unit": 0
+    },
+    {
+      "id": 14,
+      "word": "day",
+      "pronunciation": "",
+      "translation": "一天",
+      "partOfSpeech": "n.",
+      "example": "Today is a good day.",
+      "exampleTranslation": "今天是美好的一天。",
+      "unit": 0
+    },
+    {
+      "id": 15,
+      "word": "good",
+      "pronunciation": "",
+      "translation": "好的",
+      "partOfSpeech": "adj.",
+      "example": "Good morning!",
+      "exampleTranslation": "早上好！",
+      "unit": 0
+    },
+    {
+      "id": 16,
+      "word": "morning",
+      "pronunciation": "",
+      "translation": "早晨，上午",
+      "partOfSpeech": "n.",
+      "example": "Good morning, teacher.",
+      "exampleTranslation": "老师早上好。",
+      "unit": 0
+    },
+    {
+      "id": 17,
+      "word": "Ms",
+      "pronunciation": "",
+      "translation": "女士",
+      "partOfSpeech": "n.",
+      "example": "Good morning, Ms Wang.",
+      "exampleTranslation": "王老师早上好。",
+      "unit": 0
+    },
+    {
+      "id": 18,
+      "word": "stand",
+      "pronunciation": "",
+      "translation": "站立",
+      "partOfSpeech": "v.",
+      "example": "Please stand up.",
+      "exampleTranslation": "请起立。",
+      "unit": 0
+    },
+    {
+      "id": 19,
+      "word": "stand up",
+      "pronunciation": "",
+      "translation": "站起来",
+      "partOfSpeech": "",
+      "example": "Stand up, please.",
+      "exampleTranslation": "请起立。",
+      "unit": 0
+    },
+    {
+      "id": 20,
+      "word": "sit",
+      "pronunciation": "",
+      "translation": "坐",
+      "partOfSpeech": "v.",
+      "example": "Please sit down.",
+      "exampleTranslation": "请坐下。",
+      "unit": 0
+    },
+    {
+      "id": 21,
+      "word": "sit down",
+      "pronunciation": "",
+      "translation": "坐下",
+      "partOfSpeech": "",
+      "example": "Sit down, please.",
+      "exampleTranslation": "请坐下。",
+      "unit": 0
+    },
+    {
+      "id": 22,
+      "word": "open",
+      "pronunciation": "",
+      "translation": "打开",
+      "partOfSpeech": "v.",
+      "example": "Open your book.",
+      "exampleTranslation": "打开你的书。",
+      "unit": 0
+    },
+    {
+      "id": 23,
+      "word": "book",
+      "pronunciation": "",
+      "translation": "书",
+      "partOfSpeech": "n.",
+      "example": "This is my book.",
+      "exampleTranslation": "这是我的书。",
+      "unit": 0
+    },
+    {
+      "id": 24,
+      "word": "close",
+      "pronunciation": "",
+      "translation": "合上",
+      "partOfSpeech": "v.",
+      "example": "Close the door.",
+      "exampleTranslation": "关上门。",
+      "unit": 0
+    },
+    {
+      "id": 25,
+      "word": "point",
+      "pronunciation": "",
+      "translation": "指",
+      "partOfSpeech": "v.",
+      "example": "Point to the picture.",
+      "exampleTranslation": "指着图片。",
+      "unit": 0
+    },
+    {
+      "id": 26,
+      "word": "say",
+      "pronunciation": "",
+      "translation": "说",
+      "partOfSpeech": "v.",
+      "example": "Say hello.",
+      "exampleTranslation": "说你好。",
+      "unit": 0
+    },
+    {
+      "id": 27,
+      "word": "read",
+      "pronunciation": "",
+      "translation": "阅读",
+      "partOfSpeech": "v.",
+      "example": "Read this book.",
+      "exampleTranslation": "读这本书。",
+      "unit": 0
+    },
+    {
+      "id": 28,
+      "word": "listen",
+      "pronunciation": "",
+      "translation": "听",
+      "partOfSpeech": "v.",
+      "example": "Listen to me.",
+      "exampleTranslation": "听我说。",
+      "unit": 0
+    },
+    {
+      "id": 29,
+      "word": "write",
+      "pronunciation": "",
+      "translation": "写",
+      "partOfSpeech": "v.",
+      "example": "Write your name.",
+      "exampleTranslation": "写下你的名字。",
+      "unit": 0
+    },
+    {
+      "id": 30,
+      "word": "let's = let us",
+      "pronunciation": "",
+      "translation": "让我们",
+      "partOfSpeech": "",
+      "example": "Let's go!",
+      "exampleTranslation": "让我们走吧！",
+      "unit": 1
+    },
+    {
+      "id": 31,
+      "word": "friend",
+      "pronunciation": "",
+      "translation": "朋友",
+      "partOfSpeech": "n.",
+      "example": "She is my friend.",
+      "exampleTranslation": "她是我的朋友。",
+      "unit": 1
+    },
+    {
+      "id": 32,
+      "word": "to",
+      "pronunciation": "",
+      "translation": "（用于动词、名词或形容词后，使意思完整）；向，到，往",
+      "partOfSpeech": "prep.",
+      "example": "Go to school.",
+      "exampleTranslation": "去上学。",
+      "unit": 1
+    },
+    {
+      "id": 33,
+      "word": "meet",
+      "pronunciation": "",
+      "translation": "认识，结识",
+      "partOfSpeech": "v.",
+      "example": "Nice to meet you.",
+      "exampleTranslation": "很高兴见到你。",
+      "unit": 1
+    },
+    {
+      "id": 34,
+      "word": "you",
+      "pronunciation": "",
+      "translation": "你；你们",
+      "partOfSpeech": "pron.",
+      "example": "How are you?",
+      "exampleTranslation": "你好吗？",
+      "unit": 1
+    },
+    {
+      "id": 35,
+      "word": "play",
+      "pronunciation": "",
+      "translation": "玩，玩耍",
+      "partOfSpeech": "v.",
+      "example": "Let's play together.",
+      "exampleTranslation": "让我们一起玩吧。",
+      "unit": 1
+    },
+    {
+      "id": 36,
+      "word": "happy",
+      "pronunciation": "",
+      "translation": "高兴的，快乐的",
+      "partOfSpeech": "adj.",
+      "example": "I'm very happy.",
+      "exampleTranslation": "我很高兴。",
+      "unit": 1
+    },
+    {
+      "id": 37,
+      "word": "new",
+      "pronunciation": "",
+      "translation": "新的",
+      "partOfSpeech": "adj.",
+      "example": "I have a new book.",
+      "exampleTranslation": "我有一本新书。",
+      "unit": 1
+    },
+    {
+      "id": 38,
+      "word": "do",
+      "pronunciation": "",
+      "translation": "（构成疑问句或否定句）；做",
+      "partOfSpeech": "v.",
+      "example": "Do you like it?",
+      "exampleTranslation": "你喜欢它吗？",
+      "unit": 1
+    },
+    {
+      "id": 39,
+      "word": "they",
+      "pronunciation": "",
+      "translation": "他们",
+      "partOfSpeech": "pron.",
+      "example": "They are my friends.",
+      "exampleTranslation": "他们是我的朋友。",
+      "unit": 1
+    },
+    {
+      "id": 40,
+      "word": "welcome",
+      "pronunciation": "",
+      "translation": "欢迎",
+      "partOfSpeech": "v.",
+      "example": "Welcome to China.",
+      "exampleTranslation": "欢迎来到中国。",
+      "unit": 1
+    },
+    {
+      "id": 41,
+      "word": "everyone",
+      "pronunciation": "",
+      "translation": "每个人，人人",
+      "partOfSpeech": "pron.",
+      "example": "Hello, everyone!",
+      "exampleTranslation": "大家好！",
+      "unit": 1
+    },
+    {
+      "id": 42,
+      "word": "nine",
+      "pronunciation": "",
+      "translation": "九",
+      "partOfSpeech": "num.",
+      "example": "I am nine years old.",
+      "exampleTranslation": "我九岁了。",
+      "unit": 1
+    },
+    {
+      "id": 43,
+      "word": "she",
+      "pronunciation": "",
+      "translation": "她",
+      "partOfSpeech": "pron.",
+      "example": "She is my teacher.",
+      "exampleTranslation": "她是我的老师。",
+      "unit": 1
+    },
+    {
+      "id": 44,
+      "word": "too",
+      "pronunciation": "",
+      "translation": "也",
+      "partOfSpeech": "adv.",
+      "example": "I like it too.",
+      "exampleTranslation": "我也喜欢它。",
+      "unit": 1
+    },
+    {
+      "id": 45,
+      "word": "we",
+      "pronunciation": "",
+      "translation": "我们",
+      "partOfSpeech": "pron.",
+      "example": "We are friends.",
+      "exampleTranslation": "我们是朋友。",
+      "unit": 1
+    },
+    {
+      "id": 46,
+      "word": "from",
+      "pronunciation": "",
+      "translation": "从",
+      "partOfSpeech": "prep.",
+      "example": "I'm from China.",
+      "exampleTranslation": "我来自中国。",
+      "unit": 1
+    },
+    {
+      "id": 47,
+      "word": "the",
+      "pronunciation": "",
+      "translation": "（用于表示正在谈论一个已经提到过已经知道，或是唯一存在的人或物）",
+      "partOfSpeech": "art.",
+      "example": "The book is on the table.",
+      "exampleTranslation": "书在桌子上。",
+      "unit": 1
+    },
+    {
+      "id": 48,
+      "word": "twin",
+      "pronunciation": "",
+      "translation": "双胞胎中的一个",
+      "partOfSpeech": "n.",
+      "example": "She is my twin sister.",
+      "exampleTranslation": "她是我的双胞胎姐妹。",
+      "unit": 1
+    },
+    {
+      "id": 49,
+      "word": "he",
+      "pronunciation": "",
+      "translation": "他",
+      "partOfSpeech": "pron.",
+      "example": "He is my brother.",
+      "exampleTranslation": "他是我的兄弟。",
+      "unit": 1
+    },
+    {
+      "id": 50,
+      "word": "come",
+      "pronunciation": "",
+      "translation": "来；来到",
+      "partOfSpeech": "v.",
+      "example": "Come here, please.",
+      "exampleTranslation": "请到这里来。",
+      "unit": 1
+    },
+    {
+      "id": 51,
+      "word": "and",
+      "pronunciation": "",
+      "translation": "然后，接着；和",
+      "partOfSpeech": "conj.",
+      "example": "You and I.",
+      "exampleTranslation": "你和我。",
+      "unit": 1
+    },
+    {
+      "id": 52,
+      "word": "oh",
+      "pronunciation": "",
+      "translation": "哦",
+      "partOfSpeech": "interj.",
+      "example": "Oh, I see.",
+      "exampleTranslation": "哦，我明白了。",
+      "unit": 1
+    },
+    {
+      "id": 53,
+      "word": "no",
+      "pronunciation": "",
+      "translation": "不，不行",
+      "partOfSpeech": "interj.",
+      "example": "No, thank you.",
+      "exampleTranslation": "不，谢谢。",
+      "unit": 1
+    },
+    {
+      "id": 54,
+      "word": "help",
+      "pronunciation": "",
+      "translation": "帮助，帮忙",
+      "partOfSpeech": "v.",
+      "example": "Can you help me?",
+      "exampleTranslation": "你能帮我吗？",
+      "unit": 1
+    },
+    {
+      "id": 55,
+      "word": "here",
+      "pronunciation": "",
+      "translation": "在这里",
+      "partOfSpeech": "adv.",
+      "example": "Come here!",
+      "exampleTranslation": "到这里来！",
+      "unit": 1
+    },
+    {
+      "id": 56,
+      "word": "here you are",
+      "pronunciation": "",
+      "translation": "给你",
+      "partOfSpeech": "",
+      "example": "Here you are.",
+      "exampleTranslation": "给你。",
+      "unit": 1
+    },
+    {
+      "id": 57,
+      "word": "thank",
+      "pronunciation": "",
+      "translation": "感谢，向......表示谢意",
+      "partOfSpeech": "v.",
+      "example": "Thank you very much.",
+      "exampleTranslation": "非常感谢你。",
+      "unit": 1
+    },
+    {
+      "id": 58,
+      "word": "together",
+      "pronunciation": "",
+      "translation": "一起，一块儿",
+      "partOfSpeech": "adv.",
+      "example": "Let's go together.",
+      "exampleTranslation": "让我们一起去吧。",
+      "unit": 1
+    },
+    {
+      "id": 59,
+      "word": "OK",
+      "pronunciation": "",
+      "translation": "行，可以",
+      "partOfSpeech": "interj.",
+      "example": "OK, let's go.",
+      "exampleTranslation": "好的，我们走吧。",
+      "unit": 1
+    },
+    {
+      "id": 60,
+      "word": "great",
+      "pronunciation": "",
+      "translation": "极棒的，极好的",
+      "partOfSpeech": "adj.",
+      "example": "That's great!",
+      "exampleTranslation": "太好了！",
+      "unit": 1
+    },
+    {
+      "id": 61,
+      "word": "song",
+      "pronunciation": "",
+      "translation": "歌曲",
+      "partOfSpeech": "n.",
+      "example": "Sing a song.",
+      "exampleTranslation": "唱首歌。",
+      "unit": 1
+    },
+    {
+      "id": 62,
+      "word": "dear",
+      "pronunciation": "",
+      "translation": "亲爱的",
+      "partOfSpeech": "adj.",
+      "example": "Dear friend.",
+      "exampleTranslation": "亲爱的朋友。",
+      "unit": 1
+    },
+    {
+      "id": 63,
+      "word": "sing",
+      "pronunciation": "",
+      "translation": "唱，歌唱",
+      "partOfSpeech": "v.",
+      "example": "Let's sing together.",
+      "exampleTranslation": "让我们一起唱歌。",
+      "unit": 1
+    },
+    {
+      "id": 64,
+      "word": "now",
+      "pronunciation": "",
+      "translation": "现在",
+      "partOfSpeech": "adv.",
+      "example": "Let's go now.",
+      "exampleTranslation": "现在我们走吧。",
+      "unit": 1
+    },
+    {
+      "id": 65,
+      "word": "know",
+      "pronunciation": "",
+      "translation": "认识",
+      "partOfSpeech": "v.",
+      "example": "I know you.",
+      "exampleTranslation": "我认识你。",
+      "unit": 1
+    },
+    {
+      "id": 66,
+      "word": "our",
+      "pronunciation": "",
+      "translation": "我们的",
+      "partOfSpeech": "pron.",
+      "example": "This is our school.",
+      "exampleTranslation": "这是我们的学校。",
+      "unit": 1
+    },
+    {
+      "id": 67,
+      "word": "everybody",
+      "pronunciation": "",
+      "translation": "每个人，人人",
+      "partOfSpeech": "pron.",
+      "example": "Hello, everybody!",
+      "exampleTranslation": "大家好！",
+      "unit": 1
+    },
+    {
+      "id": 68,
+      "word": "with",
+      "pronunciation": "",
+      "translation": "和......一起",
+      "partOfSpeech": "prep.",
+      "example": "Come with me.",
+      "exampleTranslation": "跟我来。",
+      "unit": 1
+    },
+    {
+      "id": 69,
+      "word": "me",
+      "pronunciation": "",
+      "translation": "我",
+      "partOfSpeech": "pron.",
+      "example": "Look at me.",
+      "exampleTranslation": "看着我。",
+      "unit": 1
+    },
+    {
+      "id": 70,
+      "word": "school",
+      "pronunciation": "",
+      "translation": "学校",
+      "partOfSpeech": "n.",
+      "example": "I go to school every day.",
+      "exampleTranslation": "我每天去上学。",
+      "unit": 2
+    },
+    {
+      "id": 71,
+      "word": "thing",
+      "pronunciation": "",
+      "translation": "东西",
+      "partOfSpeech": "n.",
+      "example": "What's this thing?",
+      "exampleTranslation": "这是什么东西？",
+      "unit": 2
+    },
+    {
+      "id": 72,
+      "word": "pack",
+      "pronunciation": "",
+      "translation": "收拾好",
+      "partOfSpeech": "v.",
+      "example": "Pack your bag.",
+      "exampleTranslation": "收拾你的包。",
+      "unit": 2
+    },
+    {
+      "id": 73,
+      "word": "pen",
+      "pronunciation": "",
+      "translation": "钢笔",
+      "partOfSpeech": "n.",
+      "example": "This is my pen.",
+      "exampleTranslation": "这是我的钢笔。",
+      "unit": 2
+    },
+    {
+      "id": 74,
+      "word": "pencil",
+      "pronunciation": "",
+      "translation": "铅笔",
+      "partOfSpeech": "n.",
+      "example": "I have a pencil.",
+      "exampleTranslation": "我有一支铅笔。",
+      "unit": 2
+    },
+    {
+      "id": 75,
+      "word": "pencil case",
+      "pronunciation": "",
+      "translation": "笔袋；铅笔盒",
+      "partOfSpeech": "n.",
+      "example": "Put it in your pencil case.",
+      "exampleTranslation": "把它放进你的笔袋里。",
+      "unit": 2
+    },
+    {
+      "id": 76,
+      "word": "bag",
+      "pronunciation": "",
+      "translation": "袋；包",
+      "partOfSpeech": "n.",
+      "example": "This is my bag.",
+      "exampleTranslation": "这是我的包。",
+      "unit": 2
+    },
+    {
+      "id": 77,
+      "word": "for",
+      "pronunciation": "",
+      "translation": "为了",
+      "partOfSpeech": "prep.",
+      "example": "This is for you.",
+      "exampleTranslation": "这是给你的。",
+      "unit": 2
+    },
+    {
+      "id": 78,
+      "word": "ruler",
+      "pronunciation": "",
+      "translation": "尺子，直尺",
+      "partOfSpeech": "n.",
+      "example": "I need a ruler.",
+      "exampleTranslation": "我需要一把尺子。",
+      "unit": 2
+    },
+    {
+      "id": 79,
+      "word": "eraser",
+      "pronunciation": "",
+      "translation": "橡皮",
+      "partOfSpeech": "n.",
+      "example": "Can I use your eraser?",
+      "exampleTranslation": "我能用你的橡皮吗？",
+      "unit": 2
+    },
+    {
+      "id": 80,
+      "word": "this",
+      "pronunciation": "",
+      "translation": "这，这个",
+      "partOfSpeech": "pron.",
+      "example": "This is my book.",
+      "exampleTranslation": "这是我的书。",
+      "unit": 2
+    },
+    {
+      "id": 81,
+      "word": "in",
+      "pronunciation": "",
+      "translation": "在......里",
+      "partOfSpeech": "prep.",
+      "example": "It's in the bag.",
+      "exampleTranslation": "它在包里。",
+      "unit": 2
+    },
+    {
+      "id": 82,
+      "word": "schoolbag",
+      "pronunciation": "",
+      "translation": "书包",
+      "partOfSpeech": "n.",
+      "example": "I have a new schoolbag.",
+      "exampleTranslation": "我有一个新书包。",
+      "unit": 2
+    },
+    {
+      "id": 83,
+      "word": "it",
+      "pronunciation": "",
+      "translation": "它",
+      "partOfSpeech": "pron.",
+      "example": "What is it?",
+      "exampleTranslation": "它是什么？",
+      "unit": 2
+    },
+    {
+      "id": 84,
+      "word": "not",
+      "pronunciation": "",
+      "translation": "不，不是",
+      "partOfSpeech": "adv.",
+      "example": "It's not mine.",
+      "exampleTranslation": "它不是我的。",
+      "unit": 2
+    },
+    {
+      "id": 85,
+      "word": "that",
+      "pronunciation": "",
+      "translation": "那，那个",
+      "partOfSpeech": "pron.",
+      "example": "That is my desk.",
+      "exampleTranslation": "那是我的桌子。",
+      "unit": 2
+    },
+    {
+      "id": 86,
+      "word": "yes",
+      "pronunciation": "",
+      "translation": "是，对",
+      "partOfSpeech": "interj.",
+      "example": "Yes, I do.",
+      "exampleTranslation": "是的，我做。",
+      "unit": 2
+    },
+    {
+      "id": 87,
+      "word": "guess",
+      "pronunciation": "",
+      "translation": "猜，猜测",
+      "partOfSpeech": "v.",
+      "example": "Can you guess?",
+      "exampleTranslation": "你能猜吗？",
+      "unit": 2
+    },
+    {
+      "id": 88,
+      "word": "find",
+      "pronunciation": "",
+      "translation": "发现，找到",
+      "partOfSpeech": "v.",
+      "example": "I can't find my book.",
+      "exampleTranslation": "我找不到我的书。",
+      "unit": 2
+    },
+    {
+      "id": 89,
+      "word": "lost and found",
+      "pronunciation": "",
+      "translation": "失物招领",
+      "partOfSpeech": "",
+      "example": "Go to the lost and found.",
+      "exampleTranslation": "去失物招领处。",
+      "unit": 2
+    },
+    {
+      "id": 90,
+      "word": "bye",
+      "pronunciation": "",
+      "translation": "再见，拜拜",
+      "partOfSpeech": "interj.",
+      "example": "Bye, see you later.",
+      "exampleTranslation": "再见，待会儿见。",
+      "unit": 2
+    },
+    {
+      "id": 91,
+      "word": "kid",
+      "pronunciation": "",
+      "translation": "小孩，儿童",
+      "partOfSpeech": "n.",
+      "example": "The kid is playing.",
+      "exampleTranslation": "这个小孩在玩耍。",
+      "unit": 2
+    },
+    {
+      "id": 92,
+      "word": "take care of sb / sth",
+      "pronunciation": "",
+      "translation": "照看（照料）某人/某物",
+      "partOfSpeech": "",
+      "example": "Take care of yourself.",
+      "exampleTranslation": "照顾好你自己。",
+      "unit": 2
+    },
+    {
+      "id": 93,
+      "word": "there",
+      "pronunciation": "",
+      "translation": "在那里",
+      "partOfSpeech": "adv.",
+      "example": "Look over there.",
+      "exampleTranslation": "看那边。",
+      "unit": 2
+    },
+    {
+      "id": 94,
+      "word": "please",
+      "pronunciation": "",
+      "translation": "请",
+      "partOfSpeech": "interj.",
+      "example": "Come here, please.",
+      "exampleTranslation": "请到这里来。",
+      "unit": 2
+    },
+    {
+      "id": 95,
+      "word": "back",
+      "pronunciation": "",
+      "translation": "回到原处",
+      "partOfSpeech": "adv.",
+      "example": "Come back soon.",
+      "exampleTranslation": "快点回来。",
+      "unit": 2
+    },
+    {
+      "id": 96,
+      "word": "come back",
+      "pronunciation": "",
+      "translation": "回来",
+      "partOfSpeech": "",
+      "example": "Come back home.",
+      "exampleTranslation": "回家来。",
+      "unit": 2
+    },
+    {
+      "id": 97,
+      "word": "look",
+      "pronunciation": "",
+      "translation": "看，瞧，望",
+      "partOfSpeech": "v.",
+      "example": "Look at me.",
+      "exampleTranslation": "看着我。",
+      "unit": 2
+    },
+    {
+      "id": 98,
+      "word": "look at sb / sth",
+      "pronunciation": "",
+      "translation": "看某人/某物",
+      "partOfSpeech": "",
+      "example": "Look at the picture.",
+      "exampleTranslation": "看这张图片。",
+      "unit": 2
+    },
+    {
+      "id": 99,
+      "word": "colourful",
+      "pronunciation": "",
+      "translation": "颜色鲜艳的；色彩丰富的",
+      "partOfSpeech": "adj.",
+      "example": "The flowers are colourful.",
+      "exampleTranslation": "花儿色彩鲜艳。",
+      "unit": 3
+    },
+    {
+      "id": 100,
+      "word": "world",
+      "pronunciation": "",
+      "translation": "世界",
+      "partOfSpeech": "n.",
+      "example": "The world is big.",
+      "exampleTranslation": "世界很大。",
+      "unit": 3
+    },
+    {
+      "id": 101,
+      "word": "hooray",
+      "pronunciation": "",
+      "translation": "好哇",
+      "partOfSpeech": "interj.",
+      "example": "Hooray! We won!",
+      "exampleTranslation": "好哇！我们赢了！",
+      "unit": 3
+    },
+    {
+      "id": 102,
+      "word": "umbrella",
+      "pronunciation": "",
+      "translation": "伞；雨伞",
+      "partOfSpeech": "n.",
+      "example": "Take an umbrella.",
+      "exampleTranslation": "带把伞。",
+      "unit": 3
+    },
+    {
+      "id": 103,
+      "word": "clothes",
+      "pronunciation": "",
+      "translation": "衣服",
+      "partOfSpeech": "n.",
+      "example": "Wash your clothes.",
+      "exampleTranslation": "洗你的衣服。",
+      "unit": 3
+    },
+    {
+      "id": 104,
+      "word": "red",
+      "pronunciation": "",
+      "translation": "红色（的）",
+      "partOfSpeech": "adj./n.",
+      "example": "I like red.",
+      "exampleTranslation": "我喜欢红色。",
+      "unit": 3
+    },
+    {
+      "id": 105,
+      "word": "pink",
+      "pronunciation": "",
+      "translation": "粉红色（的）",
+      "partOfSpeech": "adj./n.",
+      "example": "The flower is pink.",
+      "exampleTranslation": "这花是粉红色的。",
+      "unit": 3
+    },
+    {
+      "id": 106,
+      "word": "green",
+      "pronunciation": "",
+      "translation": "绿色（的）",
+      "partOfSpeech": "adj./n.",
+      "example": "The grass is green.",
+      "exampleTranslation": "草是绿色的。",
+      "unit": 3
+    },
+    {
+      "id": 107,
+      "word": "yellow",
+      "pronunciation": "",
+      "translation": "黄色（的）",
+      "partOfSpeech": "adj./n.",
+      "example": "The banana is yellow.",
+      "exampleTranslation": "香蕉是黄色的。",
+      "unit": 3
+    },
+    {
+      "id": 108,
+      "word": "orange",
+      "pronunciation": "",
+      "translation": "橙色（的）",
+      "partOfSpeech": "adj./n.",
+      "example": "The orange is orange.",
+      "exampleTranslation": "橙子是橙色的。",
+      "unit": 3
+    },
+    {
+      "id": 109,
+      "word": "blue",
+      "pronunciation": "",
+      "translation": "蓝色（的）",
+      "partOfSpeech": "adj./n.",
+      "example": "The sky is blue.",
+      "exampleTranslation": "天空是蓝色的。",
+      "unit": 3
+    },
+    {
+      "id": 110,
+      "word": "purple",
+      "pronunciation": "",
+      "translation": "紫色（的）",
+      "partOfSpeech": "adj./n.",
+      "example": "I like purple flowers.",
+      "exampleTranslation": "我喜欢紫色的花。",
+      "unit": 3
+    },
+    {
+      "id": 111,
+      "word": "rainbow",
+      "pronunciation": "",
+      "translation": "彩虹",
+      "partOfSpeech": "n.",
+      "example": "Look at the rainbow!",
+      "exampleTranslation": "看那彩虹！",
+      "unit": 3
+    },
+    {
+      "id": 112,
+      "word": "want",
+      "pronunciation": "",
+      "translation": "想要",
+      "partOfSpeech": "v.",
+      "example": "I want an apple.",
+      "exampleTranslation": "我想要一个苹果。",
+      "unit": 3
+    },
+    {
+      "id": 113,
+      "word": "balloon",
+      "pronunciation": "",
+      "translation": "气球",
+      "partOfSpeech": "n.",
+      "example": "I have a red balloon.",
+      "exampleTranslation": "我有一个红气球。",
+      "unit": 3
+    },
+    {
+      "id": 114,
+      "word": "colour",
+      "pronunciation": "",
+      "translation": "颜色",
+      "partOfSpeech": "n.",
+      "example": "What colour is it?",
+      "exampleTranslation": "它是什么颜色？",
+      "unit": 3
+    },
+    {
+      "id": 115,
+      "word": "can",
+      "pronunciation": "",
+      "translation": "能，会",
+      "partOfSpeech": "modal v.",
+      "example": "I can swim.",
+      "exampleTranslation": "我会游泳。",
+      "unit": 3
+    },
+    {
+      "id": 116,
+      "word": "see",
+      "pronunciation": "",
+      "translation": "看见，看到",
+      "partOfSpeech": "v.",
+      "example": "I can see a bird.",
+      "exampleTranslation": "我能看到一只鸟。",
+      "unit": 3
+    },
+    {
+      "id": 117,
+      "word": "right",
+      "pronunciation": "",
+      "translation": "正确的，对的",
+      "partOfSpeech": "adj.",
+      "example": "That's right.",
+      "exampleTranslation": "那是对的。",
+      "unit": 3
+    },
+    {
+      "id": 118,
+      "word": "first",
+      "pronunciation": "",
+      "translation": "第一的；首先；最初",
+      "partOfSpeech": "adj./adv.",
+      "example": "I'm first!",
+      "exampleTranslation": "我是第一名！",
+      "unit": 3
+    },
+    {
+      "id": 119,
+      "word": "magical",
+      "pronunciation": "",
+      "translation": "美妙的；有魔力的",
+      "partOfSpeech": "adj.",
+      "example": "It's magical!",
+      "exampleTranslation": "太美妙了！",
+      "unit": 3
+    },
+    {
+      "id": 120,
+      "word": "fun",
+      "pronunciation": "",
+      "translation": "有趣的，逗乐的",
+      "partOfSpeech": "adj.",
+      "example": "It's fun!",
+      "exampleTranslation": "很有趣！",
+      "unit": 3
+    },
+    {
+      "id": 121,
+      "word": "black",
+      "pronunciation": "",
+      "translation": "黑色（的）",
+      "partOfSpeech": "adj./n.",
+      "example": "The cat is black.",
+      "exampleTranslation": "这只猫是黑色的。",
+      "unit": 3
+    },
+    {
+      "id": 122,
+      "word": "so",
+      "pronunciation": "",
+      "translation": "这么，如此",
+      "partOfSpeech": "adv.",
+      "example": "It's so beautiful!",
+      "exampleTranslation": "太美了！",
+      "unit": 3
+    },
+    {
+      "id": 123,
+      "word": "many",
+      "pronunciation": "",
+      "translation": "许多；大量",
+      "partOfSpeech": "adj.",
+      "example": "I have many books.",
+      "exampleTranslation": "我有很多书。",
+      "unit": 3
+    },
+    {
+      "id": 124,
+      "word": "picture",
+      "pronunciation": "",
+      "translation": "画，图画",
+      "partOfSpeech": "n.",
+      "example": "Look at this picture.",
+      "exampleTranslation": "看这张图画。",
+      "unit": 3
+    },
+    {
+      "id": 125,
+      "word": "today",
+      "pronunciation": "",
+      "translation": "今天",
+      "partOfSpeech": "adv.",
+      "example": "Today is Monday.",
+      "exampleTranslation": "今天是星期一。",
+      "unit": 3
+    },
+    {
+      "id": 126,
+      "word": "paint",
+      "pronunciation": "",
+      "translation": "画，作画",
+      "partOfSpeech": "v.",
+      "example": "I like to paint.",
+      "exampleTranslation": "我喜欢画画。",
+      "unit": 3
+    },
+    {
+      "id": 127,
+      "word": "number",
+      "pronunciation": "",
+      "translation": "数，数字",
+      "partOfSpeech": "n.",
+      "example": "What's your number?",
+      "exampleTranslation": "你的号码是多少？",
+      "unit": 4
+    },
+    {
+      "id": 128,
+      "word": "count",
+      "pronunciation": "",
+      "translation": "数数",
+      "partOfSpeech": "v.",
+      "example": "Count to ten.",
+      "exampleTranslation": "数到十。",
+      "unit": 4
+    },
+    {
+      "id": 129,
+      "word": "how",
+      "pronunciation": "",
+      "translation": "多少；怎样，如何",
+      "partOfSpeech": "adv.",
+      "example": "How many books?",
+      "exampleTranslation": "多少本书？",
+      "unit": 4
+    },
+    {
+      "id": 130,
+      "word": "bird",
+      "pronunciation": "",
+      "translation": "鸟",
+      "partOfSpeech": "n.",
+      "example": "I see a bird.",
+      "exampleTranslation": "我看见一只鸟。",
+      "unit": 4
+    },
+    {
+      "id": 131,
+      "word": "one",
+      "pronunciation": "",
+      "translation": "一",
+      "partOfSpeech": "num.",
+      "example": "I have one apple.",
+      "exampleTranslation": "我有一个苹果。",
+      "unit": 4
+    },
+    {
+      "id": 132,
+      "word": "two",
+      "pronunciation": "",
+      "translation": "二",
+      "partOfSpeech": "num.",
+      "example": "I have two books.",
+      "exampleTranslation": "我有两本书。",
+      "unit": 4
+    },
+    {
+      "id": 133,
+      "word": "three",
+      "pronunciation": "",
+      "translation": "三",
+      "partOfSpeech": "num.",
+      "example": "I have three pens.",
+      "exampleTranslation": "我有三支笔。",
+      "unit": 4
+    },
+    {
+      "id": 134,
+      "word": "four",
+      "pronunciation": "",
+      "translation": "四",
+      "partOfSpeech": "num.",
+      "example": "I have four pencils.",
+      "exampleTranslation": "我有四支铅笔。",
+      "unit": 4
+    },
+    {
+      "id": 135,
+      "word": "five",
+      "pronunciation": "",
+      "translation": "五",
+      "partOfSpeech": "num.",
+      "example": "I have five erasers.",
+      "exampleTranslation": "我有五块橡皮。",
+      "unit": 4
+    },
+    {
+      "id": 136,
+      "word": "six",
+      "pronunciation": "",
+      "translation": "六",
+      "partOfSpeech": "num.",
+      "example": "I'm six years old.",
+      "exampleTranslation": "我六岁了。",
+      "unit": 4
+    },
+    {
+      "id": 137,
+      "word": "seven",
+      "pronunciation": "",
+      "translation": "七",
+      "partOfSpeech": "num.",
+      "example": "I have seven books.",
+      "exampleTranslation": "我有七本书。",
+      "unit": 4
+    },
+    {
+      "id": 138,
+      "word": "eight",
+      "pronunciation": "",
+      "translation": "八",
+      "partOfSpeech": "num.",
+      "example": "I'm eight years old.",
+      "exampleTranslation": "我八岁了。",
+      "unit": 4
+    },
+    {
+      "id": 139,
+      "word": "ten",
+      "pronunciation": "",
+      "translation": "十",
+      "partOfSpeech": "num.",
+      "example": "I have ten fingers.",
+      "exampleTranslation": "我有十根手指。",
+      "unit": 4
+    },
+    {
+      "id": 140,
+      "word": "eleven",
+      "pronunciation": "",
+      "translation": "十一",
+      "partOfSpeech": "num.",
+      "example": "I have eleven pencils.",
+      "exampleTranslation": "我有十一支铅笔。",
+      "unit": 4
+    },
+    {
+      "id": 141,
+      "word": "twelve",
+      "pronunciation": "",
+      "translation": "十二",
+      "partOfSpeech": "num.",
+      "example": "There are twelve months.",
+      "exampleTranslation": "有十二个月。",
+      "unit": 4
+    },
+    {
+      "id": 142,
+      "word": "rope",
+      "pronunciation": "",
+      "translation": "绳",
+      "partOfSpeech": "n.",
+      "example": "Jump rope.",
+      "exampleTranslation": "跳绳。",
+      "unit": 4
+    },
+    {
+      "id": 143,
+      "word": "who",
+      "pronunciation": "",
+      "translation": "谁，什么人",
+      "partOfSpeech": "pron.",
+      "example": "Who is that?",
+      "exampleTranslation": "那是谁？",
+      "unit": 4
+    },
+    {
+      "id": 144,
+      "word": "make",
+      "pronunciation": "",
+      "translation": "制作",
+      "partOfSpeech": "v.",
+      "example": "Let's make a cake.",
+      "exampleTranslation": "让我们做个蛋糕。",
+      "unit": 4
+    },
+    {
+      "id": 145,
+      "word": "Chinese knot",
+      "pronunciation": "",
+      "translation": "中国结",
+      "partOfSpeech": "",
+      "example": "Make a Chinese knot.",
+      "exampleTranslation": "做一个中国结。",
+      "unit": 4
+    },
+    {
+      "id": 146,
+      "word": "beautiful",
+      "pronunciation": "",
+      "translation": "美丽的",
+      "partOfSpeech": "adj.",
+      "example": "The flower is beautiful.",
+      "exampleTranslation": "这花很美。",
+      "unit": 4
+    },
+    {
+      "id": 147,
+      "word": "only",
+      "pronunciation": "",
+      "translation": "仅仅",
+      "partOfSpeech": "adv.",
+      "example": "I have only one.",
+      "exampleTranslation": "我只有一个。",
+      "unit": 4
+    },
+    {
+      "id": 148,
+      "word": "amazing",
+      "pronunciation": "",
+      "translation": "令人惊讶的",
+      "partOfSpeech": "adj.",
+      "example": "That's amazing!",
+      "exampleTranslation": "太惊人了！",
+      "unit": 4
+    },
+    {
+      "id": 149,
+      "word": "show",
+      "pronunciation": "",
+      "translation": "给......看",
+      "partOfSpeech": "v.",
+      "example": "Show me your book.",
+      "exampleTranslation": "给我看看你的书。",
+      "unit": 4
+    },
+    {
+      "id": 150,
+      "word": "baby",
+      "pronunciation": "",
+      "translation": "幼崽；雏鸟",
+      "partOfSpeech": "n.",
+      "example": "The baby is cute.",
+      "exampleTranslation": "这个宝宝很可爱。",
+      "unit": 4
+    },
+    {
+      "id": 151,
+      "word": "cheep",
+      "pronunciation": "",
+      "translation": "吱吱（或唧唧唧）的叫声",
+      "partOfSpeech": "n.",
+      "example": "The bird says cheep.",
+      "exampleTranslation": "鸟叫吱吱。",
+      "unit": 4
+    },
+    {
+      "id": 152,
+      "word": "egg",
+      "pronunciation": "",
+      "translation": "蛋",
+      "partOfSpeech": "n.",
+      "example": "I eat an egg for breakfast.",
+      "exampleTranslation": "我早餐吃一个鸡蛋。",
+      "unit": 4
+    },
+    {
+      "id": 153,
+      "word": "hungry",
+      "pronunciation": "",
+      "translation": "饥饿的",
+      "partOfSpeech": "adj.",
+      "example": "I'm hungry.",
+      "exampleTranslation": "我饿了。",
+      "unit": 4
+    },
+    {
+      "id": 154,
+      "word": "around",
+      "pronunciation": "",
+      "translation": "环绕，在（......）周围",
+      "partOfSpeech": "prep.",
+      "example": "Look around.",
+      "exampleTranslation": "看看周围。",
+      "unit": 4
+    },
+    {
+      "id": 155,
+      "word": "all",
+      "pronunciation": "",
+      "translation": "全部，所有",
+      "partOfSpeech": "adj.",
+      "example": "All the students are here.",
+      "exampleTranslation": "所有学生都在这里。",
+      "unit": 4
+    },
+    {
+      "id": 156,
+      "word": "all around",
+      "pronunciation": "",
+      "translation": "处处，到处",
+      "partOfSpeech": "",
+      "example": "Look all around.",
+      "exampleTranslation": "四处看看。",
+      "unit": 4
+    },
+    {
+      "id": 157,
+      "word": "big",
+      "pronunciation": "",
+      "translation": "大的",
+      "partOfSpeech": "adj.",
+      "example": "This is a big house.",
+      "exampleTranslation": "这是一座大房子。",
+      "unit": 4
+    },
+    {
+      "id": 158,
+      "word": "little",
+      "pronunciation": "",
+      "translation": "小的",
+      "partOfSpeech": "adj.",
+      "example": "This is a little cat.",
+      "exampleTranslation": "这是一只小猫。",
+      "unit": 4
+    },
+    {
+      "id": 159,
+      "word": "everywhere",
+      "pronunciation": "",
+      "translation": "在各个地方；处处",
+      "partOfSpeech": "adv.",
+      "example": "Flowers are everywhere.",
+      "exampleTranslation": "到处都是花。",
+      "unit": 4
+    },
+    {
+      "id": 160,
+      "word": "family",
+      "pronunciation": "",
+      "translation": "家庭；家人",
+      "partOfSpeech": "n.",
+      "example": "I love my family.",
+      "exampleTranslation": "我爱我的家人。",
+      "unit": 5
+    },
+    {
+      "id": 161,
+      "word": "dad (father)",
+      "pronunciation": "",
+      "translation": "爸爸",
+      "partOfSpeech": "n.",
+      "example": "My dad is tall.",
+      "exampleTranslation": "我爸爸很高。",
+      "unit": 5
+    },
+    {
+      "id": 162,
+      "word": "mum (mother)",
+      "pronunciation": "",
+      "translation": "妈妈",
+      "partOfSpeech": "n.",
+      "example": "My mum is kind.",
+      "exampleTranslation": "我妈妈很善良。",
+      "unit": 5
+    },
+    {
+      "id": 163,
+      "word": "brother",
+      "pronunciation": "",
+      "translation": "哥哥；弟弟",
+      "partOfSpeech": "n.",
+      "example": "I have a brother.",
+      "exampleTranslation": "我有一个兄弟。",
+      "unit": 5
+    },
+    {
+      "id": 164,
+      "word": "sister",
+      "pronunciation": "",
+      "translation": "姐姐；妹妹",
+      "partOfSpeech": "n.",
+      "example": "My sister is a teacher.",
+      "exampleTranslation": "我姐姐是一名教师。",
+      "unit": 5
+    },
+    {
+      "id": 165,
+      "word": "grandpa (grandfather)",
+      "pronunciation": "",
+      "translation": "祖父；外祖父",
+      "partOfSpeech": "n.",
+      "example": "My grandpa is old.",
+      "exampleTranslation": "我爷爷年纪大了。",
+      "unit": 5
+    },
+    {
+      "id": 166,
+      "word": "grandma (grandmother)",
+      "pronunciation": "",
+      "translation": "祖母；外祖母",
+      "partOfSpeech": "n.",
+      "example": "My grandma is kind.",
+      "exampleTranslation": "我奶奶很和蔼。",
+      "unit": 5
+    },
+    {
+      "id": 167,
+      "word": "but",
+      "pronunciation": "",
+      "translation": "但是，然而",
+      "partOfSpeech": "conj.",
+      "example": "I like it, but it's expensive.",
+      "exampleTranslation": "我喜欢它，但它很贵。",
+      "unit": 5
+    },
+    {
+      "id": 168,
+      "word": "people",
+      "pronunciation": "",
+      "translation": "人；人们",
+      "partOfSpeech": "n.",
+      "example": "Many people are here.",
+      "exampleTranslation": "很多人在这里。",
+      "unit": 5
+    },
+    {
+      "id": 169,
+      "word": "story",
+      "pronunciation": "",
+      "translation": "故事",
+      "partOfSpeech": "n.",
+      "example": "Tell me a story.",
+      "exampleTranslation": "给我讲个故事。",
+      "unit": 5
+    },
+    {
+      "id": 170,
+      "word": "cap",
+      "pronunciation": "",
+      "translation": "帽子",
+      "partOfSpeech": "n.",
+      "example": "I like this cap.",
+      "exampleTranslation": "我喜欢这顶帽子。",
+      "unit": 5
+    },
+    {
+      "id": 171,
+      "word": "worry",
+      "pronunciation": "",
+      "translation": "担心",
+      "partOfSpeech": "v.",
+      "example": "Don't worry.",
+      "exampleTranslation": "别担心。",
+      "unit": 5
+    },
+    {
+      "id": 172,
+      "word": "on",
+      "pronunciation": "",
+      "translation": "在......上面",
+      "partOfSpeech": "prep.",
+      "example": "The book is on the table.",
+      "exampleTranslation": "书在桌子上。",
+      "unit": 5
+    },
+    {
+      "id": 173,
+      "word": "come on",
+      "pronunciation": "",
+      "translation": "快点；加油",
+      "partOfSpeech": "",
+      "example": "Come on! Let's go!",
+      "exampleTranslation": "快点！我们走吧！",
+      "unit": 5
+    },
+    {
+      "id": 174,
+      "word": "photo",
+      "pronunciation": "",
+      "translation": "照片，相片",
+      "partOfSpeech": "n.",
+      "example": "This is a family photo.",
+      "exampleTranslation": "这是一张家庭照片。",
+      "unit": 5
+    },
+    {
+      "id": 175,
+      "word": "love",
+      "pronunciation": "",
+      "translation": "爱，关爱",
+      "partOfSpeech": "v.",
+      "example": "I love my family.",
+      "exampleTranslation": "我爱我的家人。",
+      "unit": 5
+    },
+    {
+      "id": 176,
+      "word": "daddy",
+      "pronunciation": "",
+      "translation": "爸爸",
+      "partOfSpeech": "n.",
+      "example": "My daddy is strong.",
+      "exampleTranslation": "我爸爸很强壮。",
+      "unit": 5
+    },
+    {
+      "id": 177,
+      "word": "mummy",
+      "pronunciation": "",
+      "translation": "妈妈",
+      "partOfSpeech": "n.",
+      "example": "My mummy is beautiful.",
+      "exampleTranslation": "我妈妈很美。",
+      "unit": 5
+    },
+    {
+      "id": 178,
+      "word": "where",
+      "pronunciation": "",
+      "translation": "在哪里",
+      "partOfSpeech": "adv.",
+      "example": "Where is my book?",
+      "exampleTranslation": "我的书在哪里？",
+      "unit": 5
+    },
+    {
+      "id": 179,
+      "word": "dog",
+      "pronunciation": "",
+      "translation": "狗",
+      "partOfSpeech": "n.",
+      "example": "I have a dog.",
+      "exampleTranslation": "我有一只狗。",
+      "unit": 5
+    },
+    {
+      "id": 180,
+      "word": "box",
+      "pronunciation": "",
+      "translation": "盒；箱",
+      "partOfSpeech": "n.",
+      "example": "Put it in the box.",
+      "exampleTranslation": "把它放进盒子里。",
+      "unit": 5
+    },
+    {
+      "id": 181,
+      "word": "sweet",
+      "pronunciation": "",
+      "translation": "甜蜜的",
+      "partOfSpeech": "adj.",
+      "example": "The cake is sweet.",
+      "exampleTranslation": "蛋糕很甜。",
+      "unit": 6
+    },
+    {
+      "id": 182,
+      "word": "home",
+      "pronunciation": "",
+      "translation": "家",
+      "partOfSpeech": "n.",
+      "example": "I'm at home.",
+      "exampleTranslation": "我在家。",
+      "unit": 6
+    },
+    {
+      "id": 183,
+      "word": "game",
+      "pronunciation": "",
+      "translation": "游戏",
+      "partOfSpeech": "n.",
+      "example": "Let's play a game.",
+      "exampleTranslation": "让我们玩个游戏。",
+      "unit": 6
+    },
+    {
+      "id": 184,
+      "word": "room",
+      "pronunciation": "",
+      "translation": "房间",
+      "partOfSpeech": "n.",
+      "example": "This is my room.",
+      "exampleTranslation": "这是我的房间。",
+      "unit": 6
+    },
+    {
+      "id": 185,
+      "word": "living room",
+      "pronunciation": "",
+      "translation": "客厅",
+      "partOfSpeech": "",
+      "example": "We watch TV in the living room.",
+      "exampleTranslation": "我们在客厅看电视。",
+      "unit": 6
+    },
+    {
+      "id": 186,
+      "word": "bedroom",
+      "pronunciation": "",
+      "translation": "卧室",
+      "partOfSpeech": "n.",
+      "example": "I sleep in the bedroom.",
+      "exampleTranslation": "我在卧室里睡觉。",
+      "unit": 6
+    },
+    {
+      "id": 187,
+      "word": "bathroom",
+      "pronunciation": "",
+      "translation": "浴室，卫生间",
+      "partOfSpeech": "n.",
+      "example": "The bathroom is clean.",
+      "exampleTranslation": "浴室很干净。",
+      "unit": 6
+    },
+    {
+      "id": 188,
+      "word": "kitchen",
+      "pronunciation": "",
+      "translation": "厨房",
+      "partOfSpeech": "n.",
+      "example": "Mum is in the kitchen.",
+      "exampleTranslation": "妈妈在厨房里。",
+      "unit": 6
+    },
+    {
+      "id": 189,
+      "word": "dining room",
+      "pronunciation": "",
+      "translation": "餐厅",
+      "partOfSpeech": "",
+      "example": "We eat in the dining room.",
+      "exampleTranslation": "我们在餐厅吃饭。",
+      "unit": 6
+    },
+    {
+      "id": 190,
+      "word": "door",
+      "pronunciation": "",
+      "translation": "门",
+      "partOfSpeech": "n.",
+      "example": "Close the door.",
+      "exampleTranslation": "关上门。",
+      "unit": 6
+    },
+    {
+      "id": 191,
+      "word": "chair",
+      "pronunciation": "",
+      "translation": "椅子",
+      "partOfSpeech": "n.",
+      "example": "Sit on the chair.",
+      "exampleTranslation": "坐在椅子上。",
+      "unit": 6
+    },
+    {
+      "id": 192,
+      "word": "think",
+      "pronunciation": "",
+      "translation": "想，认为",
+      "partOfSpeech": "v.",
+      "example": "I think so.",
+      "exampleTranslation": "我这样认为。",
+      "unit": 6
+    },
+    {
+      "id": 193,
+      "word": "under",
+      "pronunciation": "",
+      "translation": "在......下面；在......底下",
+      "partOfSpeech": "prep.",
+      "example": "The cat is under the table.",
+      "exampleTranslation": "猫在桌子下面。",
+      "unit": 6
+    },
+    {
+      "id": 194,
+      "word": "bed",
+      "pronunciation": "",
+      "translation": "床",
+      "partOfSpeech": "n.",
+      "example": "Sleep in the bed.",
+      "exampleTranslation": "在床上睡觉。",
+      "unit": 6
+    },
+    {
+      "id": 195,
+      "word": "toy",
+      "pronunciation": "",
+      "translation": "玩具",
+      "partOfSpeech": "n.",
+      "example": "I have many toys.",
+      "exampleTranslation": "我有很多玩具。",
+      "unit": 6
+    },
+    {
+      "id": 196,
+      "word": "miaow",
+      "pronunciation": "",
+      "translation": "咪，喵（猫叫声）",
+      "partOfSpeech": "n.",
+      "example": "The cat says miaow.",
+      "exampleTranslation": "猫叫喵喵。",
+      "unit": 6
+    },
+    {
+      "id": 197,
+      "word": "table",
+      "pronunciation": "",
+      "translation": "桌子",
+      "partOfSpeech": "n.",
+      "example": "Put it on the table.",
+      "exampleTranslation": "把它放在桌子上。",
+      "unit": 6
+    },
+    {
+      "id": 198,
+      "word": "cat",
+      "pronunciation": "",
+      "translation": "猫",
+      "partOfSpeech": "n.",
+      "example": "I have a cat.",
+      "exampleTranslation": "我有一只猫。",
+      "unit": 6
+    },
+    {
+      "id": 199,
+      "word": "ball",
+      "pronunciation": "",
+      "translation": "球",
+      "partOfSpeech": "n.",
+      "example": "Throw the ball.",
+      "exampleTranslation": "扔球。",
+      "unit": 6
+    },
+    {
+      "id": 200,
+      "word": "their",
+      "pronunciation": "",
+      "translation": "他们的",
+      "partOfSpeech": "pron.",
+      "example": "This is their house.",
+      "exampleTranslation": "这是他们的房子。",
+      "unit": 6
+    },
+    {
+      "id": 201,
+      "word": "apple",
+      "pronunciation": "",
+      "translation": "苹果",
+      "partOfSpeech": "n.",
+      "example": "I like apples.",
+      "exampleTranslation": "我喜欢苹果。",
+      "unit": 6
+    },
+    {
+      "id": 202,
+      "word": "share",
+      "pronunciation": "",
+      "translation": "共用；分享",
+      "partOfSpeech": "v.",
+      "example": "Let's share.",
+      "exampleTranslation": "让我们分享吧。",
+      "unit": 6
+    },
+    {
+      "id": 203,
+      "word": "put",
+      "pronunciation": "",
+      "translation": "放",
+      "partOfSpeech": "v.",
+      "example": "Put it here.",
+      "exampleTranslation": "把它放这里。",
+      "unit": 6
+    },
+    {
+      "id": 204,
+      "word": "cooking",
+      "pronunciation": "",
+      "translation": "做饭",
+      "partOfSpeech": "n.",
+      "example": "I like cooking.",
+      "exampleTranslation": "我喜欢做饭。",
+      "unit": 6
+    },
+    {
+      "id": 205,
+      "word": "sun",
+      "pronunciation": "",
+      "translation": "太阳",
+      "partOfSpeech": "n.",
+      "example": "The sun is bright.",
+      "exampleTranslation": "太阳很明亮。",
+      "unit": 6
+    },
+    {
+      "id": 206,
+      "word": "like",
+      "pronunciation": "",
+      "translation": "喜欢",
+      "partOfSpeech": "v.",
+      "example": "I like you.",
+      "exampleTranslation": "我喜欢你。",
+      "unit": 6
+    },
+    {
+      "id": 207,
+      "word": "run",
+      "pronunciation": "",
+      "translation": "跑",
+      "partOfSpeech": "v.",
+      "example": "Run fast!",
+      "exampleTranslation": "快跑！",
+      "unit": 6
+    },
+    {
+      "id": 208,
+      "word": "lucky",
+      "pronunciation": "",
+      "translation": "幸运的",
+      "partOfSpeech": "adj.",
+      "example": "I'm so lucky!",
+      "exampleTranslation": "我真幸运！",
+      "unit": 6
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "grade": "6",
+  "term": "1",
+  "title": "六年级上学期",
+  "description": "Grade 6 Term 1 Vocabulary",
+  "words": [
+    {
+      "id": 1,
+      "word": "environment",
+      "pronunciation": "/ɪnˈvaɪrənmənt/",
+      "translation": "环境",
+      "example": "We should protect the environment.",
+      "exampleTranslation": "我们应该保护环境。"
+    },
+    {
+      "id": 2,
+      "word": "science",
+      "pronunciation": "/ˈsaɪəns/",
+      "translation": "科学",
+      "example": "Science is very interesting.",
+      "exampleTranslation": "科学非常有趣。"
+    },
+    {
+      "id": 3,
+      "word": "experiment",
+      "pronunciation": "/ɪkˈsperɪmənt/",
+      "translation": "实验",
+      "example": "We did an experiment in class.",
+      "exampleTranslation": "我们在课堂上做了一个实验。"
+    },
+    {
+      "id": 4,
+      "word": "technology",
+      "pronunciation": "/tekˈnɒlədʒi/",
+      "translation": "技术",
+      "example": "Technology is changing our lives.",
+      "exampleTranslation": "技术正在改变我们的生活。"
+    },
+    {
+      "id": 5,
+      "word": "future",
+      "pronunciation": "/ˈfjuːtʃə(r)/",
+      "translation": "未来",
+      "example": "What will the future be like?",
+      "exampleTranslation": "未来会是什么样子？"
+    }
+  ]
+}

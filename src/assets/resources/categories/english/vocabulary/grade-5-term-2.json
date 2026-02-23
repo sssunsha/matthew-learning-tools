@@ -1,0 +1,48 @@
+{
+  "grade": "5",
+  "term": "2",
+  "title": "五年级下学期",
+  "description": "Grade 5 Term 2 Vocabulary",
+  "words": [
+    {
+      "id": 1,
+      "word": "weather",
+      "pronunciation": "/ˈweðə(r)/",
+      "translation": "天气",
+      "example": "The weather is nice today.",
+      "exampleTranslation": "今天天气很好。"
+    },
+    {
+      "id": 2,
+      "word": "season",
+      "pronunciation": "/ˈsiːzn/",
+      "translation": "季节",
+      "example": "Spring is my favorite season.",
+      "exampleTranslation": "春天是我最喜欢的季节。"
+    },
+    {
+      "id": 3,
+      "word": "vacation",
+      "pronunciation": "/vəˈkeɪʃn/",
+      "translation": "假期",
+      "example": "We will go on vacation next week.",
+      "exampleTranslation": "我们下周要去度假。"
+    },
+    {
+      "id": 4,
+      "word": "travel",
+      "pronunciation": "/ˈtrævl/",
+      "translation": "旅行",
+      "example": "I love to travel around the world.",
+      "exampleTranslation": "我喜欢周游世界。"
+    },
+    {
+      "id": 5,
+      "word": "adventure",
+      "pronunciation": "/ədˈventʃə(r)/",
+      "translation": "冒险",
+      "example": "This is an exciting adventure.",
+      "exampleTranslation": "这是一次令人兴奋的冒险。"
+    }
+  ]
+}

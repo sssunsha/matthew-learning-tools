@@ -1,0 +1,48 @@
+{
+  "grade": "4",
+  "term": "1",
+  "title": "四年级上学期",
+  "description": "Grade 4 Term 1 Vocabulary",
+  "words": [
+    {
+      "id": 1,
+      "word": "classroom",
+      "pronunciation": "/ˈklɑːsruːm/",
+      "translation": "教室",
+      "example": "Our classroom is very big.",
+      "exampleTranslation": "我们的教室很大。"
+    },
+    {
+      "id": 2,
+      "word": "teacher",
+      "pronunciation": "/ˈtiːtʃə(r)/",
+      "translation": "老师",
+      "example": "My teacher is very kind.",
+      "exampleTranslation": "我的老师很和蔼。"
+    },
+    {
+      "id": 3,
+      "word": "student",
+      "pronunciation": "/ˈstjuːdnt/",
+      "translation": "学生",
+      "example": "I am a student.",
+      "exampleTranslation": "我是一名学生。"
+    },
+    {
+      "id": 4,
+      "word": "book",
+      "pronunciation": "/bʊk/",
+      "translation": "书",
+      "example": "This is an English book.",
+      "exampleTranslation": "这是一本英语书。"
+    },
+    {
+      "id": 5,
+      "word": "pencil",
+      "pronunciation": "/ˈpensl/",
+      "translation": "铅笔",
+      "example": "I need a pencil.",
+      "exampleTranslation": "我需要一支铅笔。"
+    }
+  ]
+}

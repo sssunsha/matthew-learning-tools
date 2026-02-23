@@ -1,0 +1,230 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+// Metro风格深蓝色主题配色
+$metro-deep-blue: #0078d4;
+$metro-dark-blue: #005a9e;
+$metro-light-blue: #50a0d8;
+$metro-accent-blue: #00b7c3;
+$metro-dark-bg: #1a1a1a;
+$metro-card-bg: #2d2d30;
+$metro-text-white: #ffffff;
+$metro-text-gray: #cccccc;
+
+html {
+  height: 100%;
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: 'Segoe UI',
+    density: 0,
+  ));
+}
+
+body {
+  color-scheme: light;
+  background: linear-gradient(135deg, #0d3b66 0%, #0a1f3d 100%);
+  color: $metro-text-white;
+  font-family: 'Segoe UI', 'Microsoft YaHei', '微软雅黑', sans-serif;
+  margin: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* Metro风格全局样式 */
+* {
+  box-sizing: border-box;
+}
+
+// Metro风格字体设置
+body {
+  font-family: 'Segoe UI', 'Microsoft YaHei', '微软雅黑', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+// 移除数字输入框的箭头
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+// Metro风格滚动条
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: $metro-deep-blue;
+  border-radius: 0;
+
+  &:hover {
+    background: $metro-light-blue;
+  }
+}
+
+// Metro风格全局动画
+@keyframes metro-flip-in {
+  0% {
+    transform: perspective(400px) rotateY(90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: perspective(400px) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes metro-flip-out {
+  0% {
+    transform: perspective(400px) rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: perspective(400px) rotateY(-90deg);
+    opacity: 0;
+  }
+}
+
+// Metro风格卡片基础样式
+.metro-tile {
+  background: $metro-deep-blue;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Metro风格按钮
+.metro-button {
+  background: $metro-deep-blue;
+  color: $metro-text-white;
+  border: none;
+  border-radius: 0;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+  }
+
+  &:hover {
+    background: $metro-light-blue;
+
+    &::after {
+      width: 200%;
+      height: 200%;
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// 覆盖Angular Material样式以适配Metro风格
+.mat-mdc-card {
+  background: $metro-deep-blue !important;
+  color: $metro-text-white !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.mat-mdc-raised-button {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: 'Segoe UI', 'Microsoft YaHei', '微软雅黑', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+
+  &.mat-primary {
+    background: $metro-deep-blue !important;
+
+    &:hover {
+      background: $metro-light-blue !important;
+    }
+  }
+}
+
+.mat-mdc-form-field {
+  .mat-mdc-text-field-wrapper {
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background: $metro-deep-blue !important;
+  }
+}
+
+.mat-mdc-progress-bar {
+  border-radius: 0 !important;
+
+  .mdc-linear-progress__bar-inner {
+    background: $metro-deep-blue !important;
+  }
+}
+
+.mat-mdc-icon-button {
+  border-radius: 0 !important;
+}
