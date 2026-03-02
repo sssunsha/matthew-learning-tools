@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "deploy": "npm run build -- --configuration production && node scripts/deploy-to-pages.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "electron .",

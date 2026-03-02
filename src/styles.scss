@@ -27,6 +27,16 @@ html {
   ));
 }
 
+:root {
+  --app-height: 100vh;
+}
+
+@supports (height: 100svh) {
+  :root {
+    --app-height: 100svh;
+  }
+}
+
 body {
   color-scheme: light;
   background: linear-gradient(135deg, #0d3b66 0%, #0a1f3d 100%);
@@ -40,6 +50,31 @@ body {
 /* Metro风格全局样式 */
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.category-container,
+.metro-home-container,
+.multiplication-table-container,
+.note-editor-container,
+.parrot-training-container,
+.tetris-container,
+.test-container {
+  min-height: var(--app-height);
+  height: var(--app-height);
+}
+
+button,
+[role='button'],
+.metro-tile,
+.phonics-tile,
+.key-btn,
+.control-btn,
+.tab-btn,
+.back-btn,
+.next-btn,
+.confirm-btn {
+  touch-action: manipulation;
 }
 
 // Metro风格字体设置
@@ -136,6 +171,21 @@ input[type='number'] {
 
   &:active {
     transform: scale(0.98);
+  }
+}
+
+@media (hover: none) {
+  .metro-tile:hover {
+    transform: none;
+    box-shadow: none;
+
+    &::before {
+      left: -100%;
+    }
+  }
+
+  .metro-button:hover {
+    background: $metro-deep-blue;
   }
 }
 

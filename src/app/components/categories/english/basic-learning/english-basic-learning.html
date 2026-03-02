@@ -1,0 +1,33 @@
+<div class="category-container english-theme">
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="category-title">基础学习</h1>
+    <p class="category-subtitle">Basic Learning</p>
+  </div>
+
+  <div class="metro-grid">
+    <!-- 字母学习磁贴 -->
+    <div class="metro-tile tile-medium" (click)="openAlphabetLearning()">
+      <div class="tile-content">
+        <mat-icon class="tile-icon">text_fields</mat-icon>
+        <div class="tile-text">
+          <h2>字母学习</h2>
+          <p>Alphabet Learning</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 自然拼读学习磁贴 -->
+    <div class="metro-tile tile-medium" (click)="openPhonicsLearning()">
+      <div class="tile-content">
+        <mat-icon class="tile-icon">record_voice_over</mat-icon>
+        <div class="tile-text">
+          <h2>自然拼读学习</h2>
+          <p>Phonics Learning</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

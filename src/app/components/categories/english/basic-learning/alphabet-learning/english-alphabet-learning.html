@@ -1,0 +1,143 @@
+<div class="category-container english-theme">
+  <div class="category-header">
+    <div class="header-left">
+      <button mat-icon-button class="back-btn" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="header-titles">
+        <h1 class="category-title">字母学习</h1>
+        <p class="category-subtitle">Alphabet Learning</p>
+      </div>
+    </div>
+
+    <div class="header-tabs">
+      <button
+        mat-button
+        class="tab-btn"
+        [class.active]="activeTab === 'alphabet'"
+        (click)="setTab('alphabet')"
+      >
+        字母表
+      </button>
+      <button
+        mat-button
+        class="tab-btn"
+        [class.active]="activeTab === 'dictation'"
+        (click)="setTab('dictation')"
+      >
+        听写
+      </button>
+    </div>
+  </div>
+
+  <div class="content-area" [class.no-scroll]="activeTab === 'dictation'">
+    <div class="alphabet-grid" *ngIf="activeTab === 'alphabet'">
+      <button
+        class="alphabet-tile"
+        type="button"
+        *ngFor="let letter of letters"
+        (click)="speakLetter(letter)"
+      >
+        <span class="letter-upper">{{ letter }}</span>
+        <span class="letter-lower">{{ letter.toLowerCase() }}</span>
+      </button>
+    </div>
+
+    <div class="dictation-placeholder" *ngIf="activeTab === 'dictation'">
+      <div class="dictation-card">
+        <div class="dictation-header">
+          <div class="dictation-title">听写</div>
+          <div class="dictation-progress">
+            {{ currentIndex + 1 }}/{{ dictationLetters.length || letters.length }}
+          </div>
+        </div>
+
+        <div class="dictation-controls">
+          <button mat-stroked-button class="control-btn" type="button" (click)="playCurrent()">
+            播放
+          </button>
+        </div>
+
+        <div class="dictation-hint">先选大写，再选小写</div>
+
+        <div class="dictation-boards">
+          <div class="dictation-section">
+            <div class="section-title">大写</div>
+            <div class="dictation-rows">
+              <div class="dictation-row" *ngFor="let row of keyboardRows">
+                <button
+                  class="dictation-tile"
+                  type="button"
+                  *ngFor="let letter of row.split('')"
+                  (click)="selectTile(letter, 'upper')"
+                  [class.selected]="selectedUpper === letter"
+                  [class.correct]="dictationAnswered && letter === currentLetter"
+                  [disabled]="dictationAnswered"
+                >
+                  <span class="letter-upper">{{ letter }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="dictation-section">
+            <div class="section-title">小写</div>
+            <div class="dictation-rows">
+              <div class="dictation-row" *ngFor="let row of keyboardRows">
+                <button
+                  class="dictation-tile"
+                  type="button"
+                  *ngFor="let letter of row.split('')"
+                  (click)="selectTile(letter.toLowerCase(), 'lower')"
+                  [class.selected]="selectedLower === letter.toLowerCase()"
+                  [class.correct]="
+                    dictationAnswered && letter.toLowerCase() === currentLetter.toLowerCase()
+                  "
+                  [disabled]="dictationAnswered"
+                >
+                  <span class="letter-lower">{{ letter.toLowerCase() }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button
+          mat-raised-button
+          color="primary"
+          class="confirm-btn"
+          type="button"
+          (click)="confirmAnswer()"
+          [disabled]="dictationFinished || !selectedUpper || !selectedLower || dictationAnswered"
+        >
+          确定
+        </button>
+
+        <div class="dictation-result" *ngIf="dictationResult">
+          {{ dictationResult }}
+        </div>
+
+        <button
+          mat-stroked-button
+          class="next-btn"
+          type="button"
+          (click)="nextLetter()"
+          *ngIf="dictationAnswered && !dictationFinished"
+        >
+          下一题
+        </button>
+      </div>
+
+      <div class="dictation-summary" *ngIf="dictationFinished">
+        <div>全部完成！</div>
+        <div>正确率：{{ accuracy }}%</div>
+        <div>得分：{{ correctCount }}/{{ dictationLetters.length }}</div>
+        <div *ngIf="wrongLetters.length">错误字母：{{ wrongLetters.join('、') }}</div>
+        <div *ngIf="!wrongLetters.length">太棒了，全部正确！</div>
+        <button mat-stroked-button class="next-btn" type="button" (click)="continueTraining()">
+          继续训练
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

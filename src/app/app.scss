@@ -1,6 +1,6 @@
 // 全局应用样式
 :host {
   display: block;
-  min-height: 100vh;
+  min-height: var(--app-height, 100vh);
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }

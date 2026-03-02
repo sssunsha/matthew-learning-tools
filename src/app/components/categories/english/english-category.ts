@@ -8,13 +8,17 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [MatIconModule, MatButtonModule],
   templateUrl: './english-category.html',
-  styleUrl: './english-category.scss'
+  styleUrl: './english-category.scss',
 })
 export class EnglishCategoryComponent {
   constructor(private router: Router) {}
 
   goBack() {
     this.router.navigate(['/']);
+  }
+
+  openBasicLearning() {
+    this.router.navigate(['/category/english/basic-learning']);
   }
 
   openVocabulary() {
