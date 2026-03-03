@@ -65,9 +65,10 @@
 .content-layout {
   flex: 1;
   display: flex;
-  gap: 20px;
+  gap: 0;
   padding: 20px;
   overflow: hidden;
+  position: relative;
 }
 
 .left-panel {
@@ -78,6 +79,16 @@
   overflow-y: auto;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin-right: 10px;
+  transition: all 0.3s ease-in-out;
+
+  &.hidden {
+    flex: 0 0 0;
+    padding: 0;
+    margin-right: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
 
   .panel-content {
     color: black;
@@ -163,8 +174,46 @@
   }
 }
 
+.toggle-panel-btn {
+  position: absolute;
+  left: calc(25% + 5px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  background: rgba(129, 199, 132, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  color: white;
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    background: rgba(129, 199, 132, 1);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  &.panel-hidden {
+    left: 5px;
+  }
+}
+
 .right-panel {
   flex: 1;
+  margin-left: 10px;
+  transition: margin-left 0.3s ease-in-out;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 10px;
   overflow: hidden;

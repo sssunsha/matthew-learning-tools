@@ -29,6 +29,7 @@ export class Grade3Term2LearnTextsComponent {
   units: Unit[] = [];
   currentMedia: { type: 'audio' | 'video' | null; url: string | null } = { type: null, url: null };
   activeTab: 'pdf' | 'media' = 'pdf';
+  isLeftPanelHidden: boolean = false;
 
   constructor(
     private router: Router,
@@ -142,6 +143,10 @@ export class Grade3Term2LearnTextsComponent {
 
   switchTab(tab: 'pdf' | 'media') {
     this.activeTab = tab;
+  }
+
+  toggleLeftPanel() {
+    this.isLeftPanelHidden = !this.isLeftPanelHidden;
   }
 
   goBack() {

@@ -9,7 +9,7 @@
 
   <div class="content-layout">
     <!-- 左侧内容区域 (3/12) - 单元导航 -->
-    <div class="left-panel">
+    <div class="left-panel" [class.hidden]="isLeftPanelHidden">
       <div class="panel-content">
         <h3>课文目录</h3>
         
@@ -33,6 +33,11 @@
         </div>
       </div>
     </div>
+
+    <!-- 切换按钮 -->
+    <button class="toggle-panel-btn" (click)="toggleLeftPanel()" [class.panel-hidden]="isLeftPanelHidden">
+      <mat-icon>{{ isLeftPanelHidden ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+    </button>
 
     <!-- 右侧内容区域 (8/12) - Tab控件 -->
     <div class="right-panel">
