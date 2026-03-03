@@ -20,4 +20,8 @@ export class ChineseCategoryComponent {
   navigateToCharacterTable() {
     this.router.navigate(['/category/chinese/grade3-term2-characters']);
   }
+
+  navigateToMorningReading() {
+    this.router.navigate(['/category/chinese/grade3-term2-morning-reading']);
+  }
 }
