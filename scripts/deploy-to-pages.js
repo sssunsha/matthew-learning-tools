@@ -2,11 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const sourceDir = path.resolve(__dirname, '../dist/matthew-learning-tools/browser');
-const targetDir = path.resolve(
-  __dirname,
-  '../../sssunsha.github.io'
-);
+const sourceDir = path.resolve(__dirname, '../dist/Matthew-learning-tools/browser/browser');
+const targetDir = path.resolve(__dirname, '../../sssunsha.github.io');
 
 function ensureDir(dirPath) {
   if (!fs.existsSync(dirPath)) {

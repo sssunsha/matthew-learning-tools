@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -108,6 +109,7 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private http: HttpClient,
   ) {}
 
@@ -817,7 +819,7 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
-    this.router.navigate(['/vocabulary']);
+    this.location.back();
   }
 
   // 朗读单词

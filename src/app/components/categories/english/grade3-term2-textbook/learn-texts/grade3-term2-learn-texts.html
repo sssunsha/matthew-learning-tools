@@ -1,0 +1,99 @@
+<div class="category-container english-theme">
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="category-title">学课文</h1>
+    <p class="category-subtitle">Learn Texts - Grade 3 Term 2</p>
+  </div>
+
+  <div class="content-layout">
+    <!-- 左侧内容区域 (3/12) - 单元导航 -->
+    <div class="left-panel">
+      <div class="panel-content">
+        <h3>课文目录</h3>
+        
+        <div class="units-list">
+          <div *ngFor="let unit of units" class="unit-item">
+            <div class="unit-header" (click)="toggleUnit(unit)">
+              <mat-icon class="expand-icon">{{ unit.expanded ? 'expand_more' : 'chevron_right' }}</mat-icon>
+              <span class="unit-name">{{ unit.name }}</span>
+            </div>
+            
+            <div class="unit-items" *ngIf="unit.expanded">
+              <div 
+                *ngFor="let item of unit.items" 
+                class="media-item"
+                (click)="playMedia(item)">
+                <mat-icon class="media-icon">{{ item.type === 'audio' ? 'music_note' : 'videocam' }}</mat-icon>
+                <span class="media-title">{{ item.title }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧内容区域 (8/12) - Tab控件 -->
+    <div class="right-panel">
+      <!-- Tab Headers -->
+      <div class="tab-headers">
+        <div 
+          class="tab-header" 
+          [class.active]="activeTab === 'pdf'"
+          (click)="switchTab('pdf')">
+          <mat-icon>picture_as_pdf</mat-icon>
+          <span>课文</span>
+        </div>
+        <div 
+          class="tab-header" 
+          [class.active]="activeTab === 'media'"
+          (click)="switchTab('media')">
+          <mat-icon>play_circle</mat-icon>
+          <span>视频/音频</span>
+        </div>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="tab-content">
+        <!-- PDF Tab -->
+        <div class="tab-pane" *ngIf="activeTab === 'pdf'">
+          <div class="pdf-container">
+            <iframe 
+              [src]="pdfUrl" 
+              type="application/pdf"
+              class="pdf-viewer">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Media Tab -->
+        <div class="tab-pane" *ngIf="activeTab === 'media'">
+          <div class="media-container">
+            <div class="media-player" *ngIf="currentMedia.url">
+              <audio 
+                *ngIf="currentMedia.type === 'audio'"
+                [src]="currentMedia.url"
+                controls
+                autoplay
+                class="audio-player">
+              </audio>
+              
+              <video 
+                *ngIf="currentMedia.type === 'video'"
+                [src]="currentMedia.url"
+                controls
+                autoplay
+                class="video-player">
+              </video>
+            </div>
+            <div class="no-media" *ngIf="!currentMedia.url">
+              <mat-icon>play_circle_outline</mat-icon>
+              <p>请从左侧菜单选择音频或视频</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

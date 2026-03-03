@@ -16,4 +16,8 @@ export class ChineseCategoryComponent {
   goBack() {
     this.router.navigate(['/']);
   }
+
+  navigateToCharacterTable() {
+    this.router.navigate(['/category/chinese/grade3-term2-characters']);
+  }
 }

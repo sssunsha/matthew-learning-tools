@@ -1,0 +1,150 @@
+// 学课文页面 - 沿用英语分类主题
+.english-theme {
+  --category-color: #81c784;
+  --category-dark: #66bb6a;
+  --category-light: #a5d6a7;
+}
+
+.category-container {
+  min-height: 100vh;
+  height: 100vh;
+  background: linear-gradient(135deg, #81c784 0%, #66bb6a 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--category-color);
+  flex-shrink: 0;
+
+  .back-btn {
+    background: rgba(129, 199, 132, 0.3);
+    color: var(--category-color);
+    transition: all 0.3s;
+    width: 40px;
+    height: 40px;
+
+    &:hover {
+      background: var(--category-color);
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .category-title {
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px var(--category-color);
+  }
+
+  .category-subtitle {
+    font-size: 0.9em;
+    color: var(--category-light);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+}
+
+.content-layout {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.left-panel {
+  flex: 0 0 25%; // 3/12 = 25%
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 20px;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  .panel-content {
+    color: white;
+
+    h3 {
+      font-size: 1.2em;
+      font-weight: 300;
+      margin: 0 0 15px 0;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 0.9em;
+      opacity: 0.9;
+      margin: 0;
+    }
+  }
+}
+
+.right-panel {
+  flex: 0 0 calc(75% - 20px); // 8/12 = 66.67%, but we want remaining space after gap
+  flex: 1; // Take remaining space
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 20px;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  .panel-content {
+    color: white;
+
+    h3 {
+      font-size: 1.2em;
+      font-weight: 300;
+      margin: 0 0 15px 0;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 0.9em;
+      opacity: 0.9;
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .category-header {
+    padding: 20px;
+
+    .category-title {
+      font-size: 2em;
+    }
+
+    .category-subtitle {
+      font-size: 1em;
+    }
+  }
+
+  .content-layout {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .left-panel,
+  .right-panel {
+    flex: 1;
+  }
+}

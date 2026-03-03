@@ -1,0 +1,33 @@
+<div class="category-container english-theme">
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="category-title">三年级下课本</h1>
+    <p class="category-subtitle">Grade 3 Term 2 Textbook</p>
+  </div>
+
+  <div class="metro-grid">
+    <!-- 学课文磁贴 -->
+    <div class="metro-tile tile-large" (click)="openLearnTexts()">
+      <div class="tile-content">
+        <mat-icon class="tile-icon">auto_stories</mat-icon>
+        <div class="tile-text">
+          <h2>学课文</h2>
+          <p>Learn Texts</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 背单词磁贴 -->
+    <div class="metro-tile tile-large" (click)="openLearnVocabulary()">
+      <div class="tile-content">
+        <mat-icon class="tile-icon">spellcheck</mat-icon>
+        <div class="tile-text">
+          <h2>背单词</h2>
+          <p>Learn Vocabulary</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

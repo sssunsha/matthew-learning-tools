@@ -24,4 +24,12 @@ export class EnglishCategoryComponent {
   openVocabulary() {
     this.router.navigate(['/vocabulary']);
   }
+
+  openGrade3Term2Textbook() {
+    this.router.navigate(['/category/english/grade3-term2-textbook']);
+  }
+
+  openGrade4Term1Textbook() {
+    this.router.navigate(['/category/english/grade4-term1-textbook']);
+  }
 }

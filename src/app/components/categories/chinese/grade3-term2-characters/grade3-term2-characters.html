@@ -1,0 +1,17 @@
+<div class="character-table-container">
+  <div class="page-header">
+    <button class="back-btn" (click)="goBack()">
+      <span class="back-icon">←</span>
+    </button>
+    <h1 class="page-title">三年级下册生字表</h1>
+    <p class="page-subtitle">Third Grade Character Table</p>
+  </div>
+  
+  <div class="pdf-viewer-container">
+    <iframe 
+      [src]="pdfUrl" 
+      class="pdf-iframe"
+      type="application/pdf">
+    </iframe>
+  </div>
+</div>

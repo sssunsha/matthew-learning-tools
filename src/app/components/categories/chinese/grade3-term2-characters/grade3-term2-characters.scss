@@ -1,0 +1,85 @@
+// 语文分类 - 柔和紫色主题
+.character-table-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, #9575cd 0%, #7e57c2 100%);
+  overflow: hidden;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid #9575cd;
+  flex-shrink: 0;
+
+  .back-btn {
+    background: rgba(149, 117, 205, 0.3);
+    color: #9575cd;
+    border: none;
+    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0;
+
+    &:hover {
+      background: #9575cd;
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .back-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .page-title {
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px #9575cd;
+  }
+
+  .page-subtitle {
+    font-size: 0.75em;
+    color: #b39ddb;
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+}
+
+.pdf-viewer-container {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  padding: 10px;
+  
+  .pdf-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media (max-width: 768px) {
+  .pdf-viewer-container {
+    padding: 5px;
+  }
+}
