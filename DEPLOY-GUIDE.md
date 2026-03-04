@@ -18,16 +18,36 @@
 
 ## 使用方法
 
-### 一键部署所有平台
+### 快速部署（仅 Web 应用）
 
 ```bash
 npm run deploy
 ```
 
 这会构建并部署：
-- Web 应用（主站点）
-- Android APK
-- macOS App
+- ✅ Web 应用（主站点）
+- ❌ 跳过 Android APK 构建
+- ❌ 跳过 macOS App 构建
+
+**适用场景**：快速部署 Web 更新，节省时间
+
+### 完整部署（所有平台）
+
+```bash
+npm run deploy:full
+```
+
+这会构建并部署：
+- ✅ Web 应用（主站点）
+- ✅ Android APK（部署到 GitHub Pages downloads/）
+- ✅ macOS App（仅本地构建，不部署）
+
+**适用场景**：发布新版本，需要所有平台的安装包
+
+**注意**：
+- Android APK 会被复制到 GitHub Pages 的 downloads/ 目录
+- macOS App 仅在本地 `release/` 目录生成，不会上传到 GitHub Pages
+- macOS App 文件较大（1.6GB+），不适合通过 GitHub Pages 分发
 
 ## 部署流程详解
 
@@ -90,8 +110,8 @@ release/MatthewTools-darwin-arm64/MatthewTools.app
 ### Step 6: 复制应用包
 
 创建 `downloads/` 目录并复制：
-- `MatthewTools-0.0.4.apk` - Android 安装包
-- `MatthewTools-0.0.4-macos.zip` - macOS 应用（已压缩）
+- `MatthewTools-0.0.4.apk` - Android 安装包（部署到 GitHub Pages）
+- macOS App - 仅本地生成，不复制到部署目录（文件过大）
 
 ### Step 7: 生成增强版本信息
 
@@ -107,11 +127,7 @@ release/MatthewTools-darwin-arm64/MatthewTools.app
       "size": "25.6 MB",
       "path": "downloads/MatthewTools-0.0.4.apk"
     },
-    "macos": {
-      "filename": "MatthewTools-0.0.4-macos.zip",
-      "size": "89.2 MB",
-      "path": "downloads/MatthewTools-0.0.4-macos.zip"
-    }
+    "macos": null
   }
 }
 ```
@@ -217,10 +233,18 @@ zipalign -v 4 \
 
 ### macOS App 安装
 
-1. 从下载页下载 ZIP 文件
-2. 解压 ZIP 文件
+**注意**：macOS App 不通过 GitHub Pages 分发，需要本地构建和安装。
+
+#### 本地构建和安装：
+1. 运行 `npm run deploy:full` 或 `npm run electron:pack`
+2. 构建完成后，App 位于 `release/MatthewTools-darwin-arm64/MatthewTools.app`
 3. 将 `.app` 文件拖到 Applications 文件夹
 4. 首次打开时，右键点击选择"打开"（跳过安全检查）
+
+#### 或者直接运行：
+```bash
+open release/MatthewTools-darwin-arm64/MatthewTools.app
+```
 
 ## 前置要求
 
@@ -289,9 +313,8 @@ sssunsha.github.io/
 ├── version.json           # 版本信息（会被覆盖）
 ├── downloads/             # 应用包目录
 │   ├── MatthewTools-0.0.4.apk（新）
-│   ├── MatthewTools-0.0.4-macos.zip（新）
 │   ├── MatthewTools-0.0.3.apk（保留）
-│   └── ... (旧版本保留)
+│   └── ... (旧版本保留，不含 macOS)
 ├── assets/                # 静态资源（会被覆盖）
 ├── styles.css             # (会被覆盖)
 ├── custom.html            # 自定义文件（保留）

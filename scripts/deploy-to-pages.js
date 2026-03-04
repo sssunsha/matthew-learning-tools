@@ -2,6 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
+// 从命令行参数获取是否为完整部署
+const isFullDeploy = process.argv.includes('--full');
+
 // 更新版本号
 function updateVersion() {
   const packagePath = path.join(__dirname, '../package.json');
@@ -122,17 +125,6 @@ function ensureDir(dirPath) {
   }
 }
 
-function clearTarget(dirPath) {
-  const entries = fs.readdirSync(dirPath, { withFileTypes: true });
-  for (const entry of entries) {
-    if (entry.name === '.git') {
-      continue;
-    }
-    const fullPath = path.join(dirPath, entry.name);
-    fs.rmSync(fullPath, { recursive: true, force: true });
-  }
-}
-
 function copyRecursive(src, dest) {
   const stats = fs.statSync(src);
   if (stats.isDirectory()) {
@@ -196,7 +188,8 @@ function commitChanges(repoDir) {
 
 // 主部署流程
 function deploy() {
-  console.log('Starting enhanced deployment process...\n');
+  const deployMode = isFullDeploy ? 'full' : 'web-only';
+  console.log(`Starting ${deployMode} deployment process...\n`);
   
   try {
     // 1. 更新版本号
@@ -207,16 +200,24 @@ function deploy() {
     console.log('\nStep 2: Creating timestamp commit in current project...');
     createTimestampCommit();
     
-    // 3. 构建 Android APK
-    console.log('\nStep 3: Building Android APK...');
-    const androidApkPath = buildAndroidApp(newVersion);
+    let androidApkPath = null;
+    let macOSAppPath = null;
     
-    // 4. 构建 macOS Electron App
-    console.log('\nStep 4: Building macOS Electron App...');
-    const macOSAppPath = buildMacOSApp(newVersion);
+    // 3. 构建 Android APK (仅完整部署)
+    if (isFullDeploy) {
+      console.log('\nStep 3: Building Android APK...');
+      androidApkPath = buildAndroidApp(newVersion);
+      
+      // 4. 构建 macOS Electron App (仅完整部署)
+      console.log('\nStep 4: Building macOS Electron App...');
+      macOSAppPath = buildMacOSApp(newVersion);
+    } else {
+      console.log('\nStep 3-4: Skipping Android and macOS builds (web-only deployment)');
+    }
     
     // 5. 部署文件到目标目录
-    console.log('\nStep 5: Deploying files to target directory...');
+    const stepNum = isFullDeploy ? 5 : 3;
+    console.log(`\nStep ${stepNum}: Deploying files to target directory...`);
     const sourceDir = path.resolve(__dirname, '../dist/matthew-learning-tools/browser/browser');
     const targetDir = '/Users/I340818/workspace/personal/workspace/sssunsha.github.io';
     
@@ -229,54 +230,40 @@ function deploy() {
     // 不清空目标目录，直接复制覆盖
     copyRecursive(sourceDir, targetDir);
     
-    // 6. 复制构建的应用包到 downloads 目录
-    console.log('\nStep 6: Copying built packages to downloads...');
-    const downloadsDir = path.join(targetDir, 'downloads');
-    ensureDir(downloadsDir);
-    
+    // 6. 复制构建的应用包到 downloads 目录 (仅完整部署)
     const packageInfo = {
       android: null,
       macos: null
     };
     
-    // 复制 Android APK
-    if (androidApkPath && fs.existsSync(androidApkPath)) {
-      const androidTarget = path.join(downloadsDir, `MatthewTools-${newVersion}.apk`);
-      fs.copyFileSync(androidApkPath, androidTarget);
-      packageInfo.android = {
-        filename: `MatthewTools-${newVersion}.apk`,
-        size: getFileSize(androidTarget),
-        path: `downloads/MatthewTools-${newVersion}.apk`
-      };
-      console.log(`✓ Android APK copied: ${packageInfo.android.filename} (${packageInfo.android.size})`);
-    }
-    
-    // 复制 macOS App (压缩为 zip)
-    if (macOSAppPath && fs.existsSync(macOSAppPath)) {
-      const macZipName = `MatthewTools-${newVersion}-macos.zip`;
-      const macZipPath = path.join(downloadsDir, macZipName);
+    if (isFullDeploy) {
+      console.log(`\nStep ${stepNum + 1}: Copying built packages to downloads...`);
+      const downloadsDir = path.join(targetDir, 'downloads');
+      ensureDir(downloadsDir);
       
-      try {
-        // 压缩 macOS app
-        const appParentDir = path.dirname(macOSAppPath);
-        const appName = path.basename(macOSAppPath);
-        execSync(`cd "${appParentDir}" && zip -r "${macZipPath}" "${appName}"`, { 
-          stdio: 'inherit' 
-        });
-        
-        packageInfo.macos = {
-          filename: macZipName,
-          size: getFileSize(macZipPath),
-          path: `downloads/${macZipName}`
+      // 复制 Android APK
+      if (androidApkPath && fs.existsSync(androidApkPath)) {
+        const androidTarget = path.join(downloadsDir, `MatthewTools-${newVersion}.apk`);
+        fs.copyFileSync(androidApkPath, androidTarget);
+        packageInfo.android = {
+          filename: `MatthewTools-${newVersion}.apk`,
+          size: getFileSize(androidTarget),
+          path: `downloads/MatthewTools-${newVersion}.apk`
         };
-        console.log(`✓ macOS App copied: ${packageInfo.macos.filename} (${packageInfo.macos.size})`);
-      } catch (error) {
-        console.error('Warning: Failed to zip macOS app:', error.message);
+        console.log(`✓ Android APK copied: ${packageInfo.android.filename} (${packageInfo.android.size})`);
       }
+      
+      // 跳过 macOS App 复制（不部署到 GitHub Pages）
+      if (macOSAppPath && fs.existsSync(macOSAppPath)) {
+        console.log(`✓ macOS App built successfully (not copied to deployment)`);
+        console.log(`  Location: ${macOSAppPath}`);
+      }
+    } else {
+      console.log(`\nStep ${stepNum + 1}: Skipping package copying (web-only deployment)`);
     }
     
     // 7. 创建增强的 version.json 文件
-    console.log('\nStep 7: Creating enhanced version info...');
+    console.log(`\nStep ${isFullDeploy ? stepNum + 2 : stepNum + 2}: Creating version info...`);
     const versionJson = {
       version: newVersion,
       timestamp: new Date().toISOString(),
@@ -288,25 +275,28 @@ function deploy() {
       path.join(targetDir, 'version.json'),
       JSON.stringify(versionJson, null, 2)
     );
-    console.log('✓ Enhanced version info file created');
+    console.log('✓ Version info file created');
     
     // 8. 创建下载页面
-    console.log('\nStep 8: Creating downloads page...');
+    console.log(`\nStep ${isFullDeploy ? stepNum + 3 : stepNum + 3}: Creating downloads page...`);
     createDownloadsPage(targetDir, newVersion, packageInfo);
     
     // 9. 提交到目标仓库
-    console.log('\nStep 9: Committing changes...');
+    console.log(`\nStep ${isFullDeploy ? stepNum + 4 : stepNum + 4}: Committing changes...`);
     commitChanges(targetDir);
     
     console.log(`\n✓ Deployed to ${targetDir}`);
     console.log(`✓ Version: ${newVersion}`);
-    if (packageInfo.android) {
-      console.log(`✓ Android APK: ${packageInfo.android.size}`);
+    console.log(`✓ Deployment mode: ${deployMode}`);
+    if (isFullDeploy) {
+      if (packageInfo.android) {
+        console.log(`✓ Android APK: ${packageInfo.android.size}`);
+      }
+      if (packageInfo.macos) {
+        console.log(`✓ macOS App: ${packageInfo.macos.size}`);
+      }
     }
-    if (packageInfo.macos) {
-      console.log(`✓ macOS App: ${packageInfo.macos.size}`);
-    }
-    console.log('\n✓ Enhanced deployment completed successfully!');
+    console.log(`\n✓ ${deployMode} deployment completed successfully!`);
   } catch (error) {
     console.error('\n✗ Deployment failed:', error.message);
     process.exit(1);
