@@ -1,0 +1,63 @@
+// 数学分类 - 柔和蓝色主题
+.math-theme {
+  --category-color: #5c9ce6;
+  --category-dark: #4a8fd9;
+  --category-light: #7cb3ed;
+}
+
+.category-container {
+  min-height: 100vh;
+  height: 100vh;
+  background: linear-gradient(135deg, #5c9ce6 0%, #4a8fd9 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--category-color);
+  flex-shrink: 0;
+
+  .back-btn {
+    background: rgba(92, 156, 230, 0.3);
+    color: var(--category-color);
+    transition: all 0.3s;
+    width: 40px;
+    height: 40px;
+
+    &:hover {
+      background: var(--category-color);
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .category-title {
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px var(--category-color);
+  }
+
+  .category-subtitle {
+    font-size: 0.9em;
+    color: var(--category-light);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+}

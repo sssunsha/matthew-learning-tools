@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home';
 import { MultiplicationTableComponent } from './components/multiplication-table/multiplication-table';
+import { QuickCalculationComponent } from './components/quick-calculation/quick-calculation';
 import { TetrisComponent } from './components/tetris/tetris';
 import { MathCategoryComponent } from './components/categories/math/math-category';
 import { EntertainmentCategoryComponent } from './components/categories/entertainment/entertainment-category';
@@ -25,6 +26,8 @@ import { NoteEditorComponent } from './components/note-editor/note-editor';
 import { VocabularyComponent } from './components/vocabulary/vocabulary';
 import { VocabularyTestComponent } from './components/vocabulary-test/vocabulary-test';
 import { ParrotTrainingComponent } from './components/parrot-training/parrot-training';
+import { SettingsComponent } from './components/settings/settings';
+import { StatisticsComponent } from './components/statistics/statistics';
 
 export const routes: Routes = [
   // Home route
@@ -143,6 +146,11 @@ export const routes: Routes = [
     title: '19×19 乘法运算表',
   },
   {
+    path: 'quick-calculation',
+    component: QuickCalculationComponent,
+    title: '快速计算',
+  },
+  {
     path: 'vocabulary',
     component: VocabularyComponent,
     title: '背单词 - Vocabulary Learning',
@@ -166,6 +174,16 @@ export const routes: Routes = [
     path: 'note-editor/:id',
     component: NoteEditorComponent,
     title: '编辑笔记',
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    title: '设置 - Settings',
+  },
+  {
+    path: 'statistics',
+    component: StatisticsComponent,
+    title: '统计 - Statistics',
   },
 
   // Catch-all redirect to home

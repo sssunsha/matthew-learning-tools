@@ -44,6 +44,17 @@ $metro-brown: #7e735f;
   border-bottom: 2px solid $metro-deep-blue;
   flex-shrink: 0;
 
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .header-text {
+    flex: 1;
+  }
+
   .metro-title {
     font-size: 1.5em;
     font-weight: 300;
@@ -60,6 +71,53 @@ $metro-brown: #7e735f;
     margin: 0;
     letter-spacing: 1px;
     text-transform: uppercase;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .icon-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      color: #ffffff;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &.schedule-button {
+      background: #DE2910;
+      border-color: #DE2910;
+      box-shadow: 0 2px 8px rgba(222, 41, 16, 0.4);
+
+      &:hover {
+        background: #c41e0b;
+        border-color: #c41e0b;
+        box-shadow: 0 4px 12px rgba(222, 41, 16, 0.6);
+      }
+    }
   }
 }
 
@@ -373,5 +431,58 @@ $metro-brown: #7e735f;
     .tile-text {
       text-align: left;
     }
+  }
+}
+
+// Schedule Modal
+.schedule-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  cursor: pointer;
+  animation: fadeIn 0.3s ease;
+
+  .schedule-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: zoomIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }

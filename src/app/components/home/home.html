@@ -1,7 +1,22 @@
 <div class="metro-home-container">
   <div class="metro-header">
-    <h1 class="metro-title">马修学习小工具</h1>
-    <p class="metro-subtitle">Matthew Learning Tools</p>
+    <div class="header-content">
+      <div class="header-text">
+        <h1 class="metro-title">马修学习小工具</h1>
+        <p class="metro-subtitle">Matthew Learning Tools</p>
+      </div>
+      <div class="header-actions">
+        <button class="icon-button schedule-button" (click)="openSchedule()" title="课程表">
+          <mat-icon>calendar_today</mat-icon>
+        </button>
+        <button class="icon-button" (click)="openStatistics()" title="统计">
+          <mat-icon>bar_chart</mat-icon>
+        </button>
+        <button class="icon-button" (click)="openSettings()" title="设置">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="metro-grid">
@@ -103,5 +118,12 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Schedule Modal -->
+<div class="schedule-modal" *ngIf="isScheduleVisible" (click)="closeSchedule()">
+  <div class="schedule-content">
+    <img src="assets/resources/others/课程表.jpg" alt="课程表" />
   </div>
 </div>

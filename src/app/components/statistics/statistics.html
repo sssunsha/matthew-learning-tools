@@ -1,0 +1,183 @@
+<div class="statistics-container">
+  <div class="statistics-header">
+    <button class="back-button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-text">
+      <h1 class="page-title">统计</h1>
+      <p class="page-subtitle">Statistics</p>
+    </div>
+  </div>
+
+  <div class="statistics-content">
+    <!-- 学习总览 -->
+    <div class="stats-section">
+      <h2 class="section-title">
+        <mat-icon>dashboard</mat-icon>
+        学习总览
+      </h2>
+      <div class="stats-cards">
+        <div class="stat-card card-blue">
+          <mat-icon class="card-icon">calendar_today</mat-icon>
+          <div class="card-content">
+            <h3>累计学习天数</h3>
+            <p class="stat-value">45 <span class="unit">天</span></p>
+          </div>
+        </div>
+
+        <div class="stat-card card-green">
+          <mat-icon class="card-icon">timer</mat-icon>
+          <div class="card-content">
+            <h3>总学习时长</h3>
+            <p class="stat-value">126 <span class="unit">小时</span></p>
+          </div>
+        </div>
+
+        <div class="stat-card card-orange">
+          <mat-icon class="card-icon">school</mat-icon>
+          <div class="card-content">
+            <h3>完成课程</h3>
+            <p class="stat-value">28 <span class="unit">个</span></p>
+          </div>
+        </div>
+
+        <div class="stat-card card-purple">
+          <mat-icon class="card-icon">emoji_events</mat-icon>
+          <div class="card-content">
+            <h3>获得成就</h3>
+            <p class="stat-value">15 <span class="unit">个</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 学科统计 -->
+    <div class="stats-section">
+      <h2 class="section-title">
+        <mat-icon>auto_stories</mat-icon>
+        学科统计
+      </h2>
+      <div class="subject-stats">
+        <div class="subject-item">
+          <div class="subject-header">
+            <mat-icon class="subject-icon" style="color: #9575cd;">translate</mat-icon>
+            <div class="subject-info">
+              <h3>英语</h3>
+              <p>English</p>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 85%; background: linear-gradient(90deg, #9575cd, #7e57c2);"></div>
+          </div>
+          <div class="subject-details">
+            <span>已学习: 42小时</span>
+            <span>完成度: 85%</span>
+          </div>
+        </div>
+
+        <div class="subject-item">
+          <div class="subject-header">
+            <mat-icon class="subject-icon" style="color: #81c784;">menu_book</mat-icon>
+            <div class="subject-info">
+              <h3>语文</h3>
+              <p>Chinese</p>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 72%; background: linear-gradient(90deg, #81c784, #66bb6a);"></div>
+          </div>
+          <div class="subject-details">
+            <span>已学习: 35小时</span>
+            <span>完成度: 72%</span>
+          </div>
+        </div>
+
+        <div class="subject-item">
+          <div class="subject-header">
+            <mat-icon class="subject-icon" style="color: #5c9ce6;">calculate</mat-icon>
+            <div class="subject-info">
+              <h3>数学</h3>
+              <p>Mathematics</p>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 68%; background: linear-gradient(90deg, #5c9ce6, #4a8fd9);"></div>
+          </div>
+          <div class="subject-details">
+            <span>已学习: 32小时</span>
+            <span>完成度: 68%</span>
+          </div>
+        </div>
+
+        <div class="subject-item">
+          <div class="subject-header">
+            <mat-icon class="subject-icon" style="color: #4db6ac;">science</mat-icon>
+            <div class="subject-info">
+              <h3>科学</h3>
+              <p>Science</p>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 56%; background: linear-gradient(90deg, #4db6ac, #26a69a);"></div>
+          </div>
+          <div class="subject-details">
+            <span>已学习: 17小时</span>
+            <span>完成度: 56%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 本周学习时间 -->
+    <div class="stats-section">
+      <h2 class="section-title">
+        <mat-icon>date_range</mat-icon>
+        本周学习时间
+      </h2>
+      <div class="weekly-chart">
+        <div class="chart-bar" *ngFor="let day of weeklyData">
+          <div class="bar-fill" [style.height.%]="day.percentage">
+            <span class="bar-value">{{ day.hours }}h</span>
+          </div>
+          <span class="bar-label">{{ day.day }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 最近成就 -->
+    <div class="stats-section">
+      <h2 class="section-title">
+        <mat-icon>military_tech</mat-icon>
+        最近成就
+      </h2>
+      <div class="achievements">
+        <div class="achievement-item achievement-gold">
+          <mat-icon>emoji_events</mat-icon>
+          <div class="achievement-info">
+            <h3>词汇大师</h3>
+            <p>掌握500个单词</p>
+          </div>
+          <span class="achievement-date">2天前</span>
+        </div>
+
+        <div class="achievement-item achievement-silver">
+          <mat-icon>workspace_premium</mat-icon>
+          <div class="achievement-info">
+            <h3>连续学习</h3>
+            <p>连续学习7天</p>
+          </div>
+          <span class="achievement-date">5天前</span>
+        </div>
+
+        <div class="achievement-item achievement-bronze">
+          <mat-icon>star</mat-icon>
+          <div class="achievement-info">
+            <h3>快速进步</h3>
+            <p>单周学习10小时</p>
+          </div>
+          <span class="achievement-date">1周前</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

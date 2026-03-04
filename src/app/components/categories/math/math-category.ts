@@ -20,4 +20,8 @@ export class MathCategoryComponent {
   openMultiplicationTable() {
     this.router.navigate(['/multiplication-table']);
   }
+
+  openQuickCalculation() {
+    this.router.navigate(['/quick-calculation']);
+  }
 }

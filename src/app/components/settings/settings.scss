@@ -1,0 +1,328 @@
+// Metro风格配色变量
+$metro-deep-blue: #0078d4;
+$metro-dark-blue: #005a9e;
+$metro-light-blue: #50a0d8;
+
+.settings-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  animation: fade-in 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 头部区域
+.settings-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid $metro-deep-blue;
+  flex-shrink: 0;
+
+  .back-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      color: #ffffff;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .header-text {
+    flex: 1;
+  }
+
+  .page-title {
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 0px;
+  }
+
+  .page-subtitle {
+    font-size: 1.125em;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+}
+
+// 内容区域
+.settings-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.settings-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4em;
+    font-weight: 400;
+    color: $metro-deep-blue;
+    margin: 0 0 20px 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(0, 120, 212, 0.2);
+
+    mat-icon {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+.settings-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: rgba(0, 120, 212, 0.05);
+  border-radius: 6px;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    background: rgba(0, 120, 212, 0.1);
+  }
+
+  .setting-info {
+    flex: 1;
+
+    h3 {
+      font-size: 1.1em;
+      font-weight: 500;
+      color: #333;
+      margin: 0 0 5px 0;
+    }
+
+    p {
+      font-size: 0.9em;
+      color: #666;
+      margin: 0;
+    }
+  }
+
+  .setting-control {
+    flex-shrink: 0;
+    margin-left: 20px;
+  }
+}
+
+// 下拉选择框样式
+.setting-select {
+  padding: 8px 32px 8px 12px;
+  font-size: 1em;
+  border: 2px solid $metro-light-blue;
+  border-radius: 4px;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230078d4' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+
+  &:hover {
+    border-color: $metro-deep-blue;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $metro-deep-blue;
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
+  }
+}
+
+// 开关按钮样式
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .toggle-slider {
+      background-color: $metro-deep-blue;
+
+      &::before {
+        transform: translateX(24px);
+      }
+    }
+
+    &:focus + .toggle-slider {
+      box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
+    }
+  }
+
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 26px;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &::before {
+      position: absolute;
+      content: '';
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+}
+
+// 音量滑块样式
+.volume-slider {
+  width: 150px;
+  height: 6px;
+  border-radius: 3px;
+  background: #ddd;
+  outline: none;
+  appearance: none;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: $metro-deep-blue;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 8px rgba(0, 120, 212, 0.5);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: $metro-deep-blue;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 8px rgba(0, 120, 212, 0.5);
+    }
+  }
+}
+
+// 滚动条样式
+.settings-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.settings-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.settings-content::-webkit-scrollbar-thumb {
+  background: $metro-deep-blue;
+  border-radius: 5px;
+
+  &:hover {
+    background: $metro-light-blue;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .settings-content {
+    padding: 20px 15px;
+  }
+
+  .settings-section {
+    padding: 20px 15px;
+  }
+
+  .setting-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+
+    .setting-control {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    .setting-select,
+    .volume-slider {
+      width: 100%;
+    }
+  }
+}

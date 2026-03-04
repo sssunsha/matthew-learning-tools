@@ -1,0 +1,137 @@
+<div class="settings-container">
+  <div class="settings-header">
+    <button class="back-button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-text">
+      <h1 class="page-title">设置</h1>
+      <p class="page-subtitle">Settings</p>
+    </div>
+  </div>
+
+  <div class="settings-content">
+    <div class="settings-section">
+      <h2 class="section-title">
+        <mat-icon>display_settings</mat-icon>
+        显示设置
+      </h2>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <div class="setting-info">
+            <h3>主题模式</h3>
+            <p>选择应用的主题外观</p>
+          </div>
+          <div class="setting-control">
+            <select class="setting-select">
+              <option value="auto">自动</option>
+              <option value="light">浅色</option>
+              <option value="dark">深色</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <h3>字体大小</h3>
+            <p>调整界面文字大小</p>
+          </div>
+          <div class="setting-control">
+            <select class="setting-select">
+              <option value="small">小</option>
+              <option value="medium" selected>中</option>
+              <option value="large">大</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h2 class="section-title">
+        <mat-icon>volume_up</mat-icon>
+        音频设置
+      </h2>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <div class="setting-info">
+            <h3>自动播放</h3>
+            <p>自动播放音频内容</p>
+          </div>
+          <div class="setting-control">
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <h3>音量</h3>
+            <p>调整音频播放音量</p>
+          </div>
+          <div class="setting-control">
+            <input type="range" class="volume-slider" min="0" max="100" value="80">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h2 class="section-title">
+        <mat-icon>school</mat-icon>
+        学习设置
+      </h2>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <div class="setting-info">
+            <h3>学习提醒</h3>
+            <p>开启每日学习提醒</p>
+          </div>
+          <div class="setting-control">
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <h3>练习难度</h3>
+            <p>设置练习题目难度</p>
+          </div>
+          <div class="setting-control">
+            <select class="setting-select">
+              <option value="easy">简单</option>
+              <option value="medium" selected>中等</option>
+              <option value="hard">困难</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h2 class="section-title">
+        <mat-icon>info</mat-icon>
+        关于
+      </h2>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <div class="setting-info">
+            <h3>应用版本</h3>
+            <p>当前版本: 1.0.0</p>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <h3>开发者</h3>
+            <p>马修学习小工具团队</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
