@@ -1,6 +1,6 @@
 {
   "name": "matthew-learning-tools",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "electron.js",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,7 @@
     "build": "ng build",
     "build:compress": "ng build --configuration production && node scripts/compress-build.js",
     "deploy": "npm run build:compress && node scripts/deploy-to-pages.js",
-    "deploy:full": "npm run build:compress && node scripts/deploy-to-pages.js",
+    "deploy:full": "npm run build:compress && node scripts/deploy-to-pages.js --full",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "electron .",
