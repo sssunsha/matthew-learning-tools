@@ -81,14 +81,25 @@ function createWindow(useRemote = false) {
       mainWindow.loadURL('http://localhost:4200');
       mainWindow.webContents.openDevTools();
     } else {
-      // 生产环境
-      const indexPath = path.join(__dirname, 'dist/matthew-learning-tools/browser/index.html');
+      // 生产环境 - 修正路径
+      const indexPath = path.join(__dirname, 'dist/matthew-learning-tools/browser/browser/index.html');
+      console.log(`Loading local file: ${indexPath}`);
+      console.log(`File exists: ${require('fs').existsSync(indexPath)}`);
       mainWindow.loadFile(indexPath);
     }
   }
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+  });
+
+  // 添加调试信息
+  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription) => {
+    console.error('Failed to load:', errorCode, errorDescription);
+  });
+
+  mainWindow.webContents.on('dom-ready', () => {
+    console.log('DOM ready');
   });
 }
 

@@ -11,7 +11,7 @@
 3. ✅ 构建 Angular Web 应用
 4. ✅ 构建 Android APK（Release 版本）
 5. ✅ 构建 macOS Electron 应用
-6. ✅ 压缩并部署所有文件到 GitHub Pages
+6. ✅ 部署所有文件到 GitHub Pages（覆盖模式）
 7. ✅ 生成包含下载链接的版本信息
 8. ✅ 创建精美的下载页面
 9. ✅ 提交到部署仓库
@@ -76,10 +76,16 @@ release/MatthewTools-darwin-arm64/MatthewTools.app
 
 ### Step 5: 部署到 GitHub Pages
 
-复制所有文件到：
+复制并覆盖文件到：
 ```
 /Users/I340818/workspace/personal/workspace/sssunsha.github.io/
 ```
+
+**重要说明**：
+- ✅ 部署过程**不会删除**目标目录中的现有文件
+- ✅ 只会**覆盖同名文件**
+- ✅ 你可以在 sssunsha.github.io 目录中添加其他自定义文件，它们不会被删除
+- ✅ 这样可以保留你手动添加的其他网页、资源或配置文件
 
 ### Step 6: 复制应用包
 
@@ -131,7 +137,7 @@ git commit -m "Deploy 2026-03-04 16:30:45"
 **注意**：需要手动推送到远程：
 ```bash
 cd /Users/I340818/workspace/personal/workspace/sssunsha.github.io
-git push
+git push origin main
 ```
 
 ## 部署后操作
@@ -151,6 +157,37 @@ git push origin main
 - 主站：https://sssunsha.github.io/
 - 下载页：https://sssunsha.github.io/downloads.html
 - 版本信息：https://sssunsha.github.io/version.json
+
+## 自定义文件管理
+
+由于部署不会删除现有文件，你可以：
+
+### 添加自定义文件
+```bash
+cd /Users/I340818/workspace/personal/workspace/sssunsha.github.io
+
+# 添加自定义页面
+echo "<h1>Custom Page</h1>" > custom.html
+
+# 添加自定义资源
+mkdir custom-assets
+cp my-file.pdf custom-assets/
+
+# 这些文件不会被 npm run deploy 删除
+```
+
+### 管理旧版本
+```bash
+# 下载目录中的旧版本不会被自动删除
+# 你可以手动清理旧版本
+cd /Users/I340818/workspace/personal/workspace/sssunsha.github.io/downloads
+rm MatthewTools-0.0.3-*  # 删除旧版本
+```
+
+### 注意事项
+- 同名文件会被覆盖（如 `index.html`, `version.json`, `downloads.html`）
+- Web 应用的资源文件会被覆盖（如 JS、CSS、assets 等）
+- 其他自定义文件保持不变
 
 ## 下载安装
 
@@ -236,20 +273,30 @@ npm run build:compress
 npm version patch  # 0.0.3 → 0.0.4
 ```
 
+### 自定义文件被覆盖
+如果你的自定义文件与构建输出同名，它们会被覆盖。解决方法：
+- 使用不同的文件名
+- 将自定义文件放在单独的子目录中
+- 在部署后手动恢复这些文件
+
 ## 文件结构
 
 部署后的 GitHub Pages 目录结构：
 ```
 sssunsha.github.io/
-├── index.html              # 主应用
-├── downloads.html          # 下载页面
-├── version.json           # 版本信息
+├── index.html              # 主应用（会被覆盖）
+├── downloads.html          # 下载页面（会被覆盖）
+├── version.json           # 版本信息（会被覆盖）
 ├── downloads/             # 应用包目录
-│   ├── MatthewTools-0.0.4.apk
-│   └── MatthewTools-0.0.4-macos.zip
-├── assets/                # 静态资源
-├── styles.css
-└── ... (其他 Web 文件)
+│   ├── MatthewTools-0.0.4.apk（新）
+│   ├── MatthewTools-0.0.4-macos.zip（新）
+│   ├── MatthewTools-0.0.3.apk（保留）
+│   └── ... (旧版本保留)
+├── assets/                # 静态资源（会被覆盖）
+├── styles.css             # (会被覆盖)
+├── custom.html            # 自定义文件（保留）
+├── custom-assets/         # 自定义目录（保留）
+└── ... (其他自定义文件保留)
 ```
 
 ## 版本管理
@@ -274,6 +321,8 @@ npm version major   # 0.0.3 → 1.0.0
 3. **定期备份**：备份重要的配置文件
 4. **签名 APK**：生产环境使用签名的 APK
 5. **推送更改**：部署后记得推送到远程仓库
+6. **清理旧版本**：定期删除 downloads/ 中的旧版本文件
+7. **文档化自定义**：记录你添加的自定义文件，避免混淆
 
 ## CI/CD 集成（未来）
 

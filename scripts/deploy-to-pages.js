@@ -226,7 +226,7 @@ function deploy() {
     }
     
     ensureDir(targetDir);
-    clearTarget(targetDir);
+    // 不清空目标目录，直接复制覆盖
     copyRecursive(sourceDir, targetDir);
     
     // 6. 复制构建的应用包到 downloads 目录
