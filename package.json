@@ -1,6 +1,6 @@
 {
   "name": "matthew-learning-tools",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "electron.js",
   "scripts": {
     "ng": "ng",
@@ -12,7 +12,11 @@
     "test": "ng test",
     "electron": "electron .",
     "electron:dev": "concurrently \"ng serve\" \"wait-on http://localhost:4200 && cross-env NODE_ENV=development electron .\"",
-    "electron:pack": "ng build --configuration production && electron-packager . MatthewTools --platform=darwin --arch=arm64 --out=release --overwrite --icon=public/app_icon.jpg"
+    "electron:pack": "ng build --configuration production && electron-packager . MatthewTools --platform=darwin --arch=arm64 --out=release --overwrite --icon=public/app_icon.jpg",
+    "android:debug": "node scripts/build-android.js debug",
+    "android:release": "node scripts/build-android.js release",
+    "android:run": "cd cordova-app && npx cordova run android",
+    "android:emulate": "cd cordova-app && npx cordova emulate android"
   },
   "prettier": {
     "printWidth": 100,
@@ -85,6 +89,7 @@
     "@angular/material": "^21.1.2",
     "compression-webpack-plugin": "^12.0.0",
     "concurrently": "^9.2.1",
+    "cordova": "^13.0.0",
     "cross-env": "^7.0.3",
     "electron": "^40.1.0",
     "electron-builder": "^26.7.0",

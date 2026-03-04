@@ -52,6 +52,13 @@ testem.log
 /typings
 __screenshots__/
 
+# Cordova
+cordova-app/platforms/
+cordova-app/plugins/
+cordova-app/www/
+*.keystore
+*.jks
+
 # System files
 .DS_Store
 Thumbs.db

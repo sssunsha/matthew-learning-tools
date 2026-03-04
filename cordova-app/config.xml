@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.matthew.learningtools" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>MatthewTools</name>
+    <description>Matthew Learning Tools - Educational App for Kids</description>
+    <author email="your-email@example.com" href="https://github.com/sssunsha/matthew-learning-tools">
+        Matthew Tools Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <!-- Android specific configurations -->
+        <preference name="android-minSdkVersion" value="24" />
+        <preference name="android-targetSdkVersion" value="34" />
+        <preference name="android-compileSdkVersion" value="34" />
+        
+        <!-- Tablet optimizations -->
+        <preference name="Orientation" value="landscape" />
+        <preference name="Fullscreen" value="false" />
+        
+        <!-- Performance settings -->
+        <preference name="LoadUrlTimeoutValue" value="700000" />
+        <preference name="SplashScreenDelay" value="3000" />
+        <preference name="AutoHideSplashScreen" value="true" />
+        
+        <!-- Permissions -->
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+        </config-file>
+        
+        <!-- Icon configurations for different densities -->
+        <icon density="ldpi" src="res/icon/android/ldpi.png" />
+        <icon density="mdpi" src="res/icon/android/mdpi.png" />
+        <icon density="hdpi" src="res/icon/android/hdpi.png" />
+        <icon density="xhdpi" src="res/icon/android/xhdpi.png" />
+        <icon density="xxhdpi" src="res/icon/android/xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png" />
+    </platform>
+    
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="BackgroundColor" value="0xffffffff" />
+</widget>
