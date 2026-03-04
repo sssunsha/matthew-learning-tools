@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const sourceDir = path.resolve(__dirname, '../dist/Matthew-learning-tools/browser/browser');
-const targetDir = path.resolve(__dirname, '../../sssunsha.github.io');
+const sourceDir = path.resolve(__dirname, '../dist/matthew-learning-tools/browser/browser');
+const targetDir = '/Users/I340818/workspace/personal/workspace/sssunsha.github.io';
 
 function ensureDir(dirPath) {
   if (!fs.existsSync(dirPath)) {
@@ -50,7 +50,19 @@ function commitChanges(repoDir) {
     .replace(' ', ' ');
 
   execSync('git add -A', { cwd: repoDir, stdio: 'inherit' });
-  execSync(`git commit -m "Deploy ${timestamp}"`, { cwd: repoDir, stdio: 'inherit' });
+  
+  // Check if there are changes to commit
+  try {
+    const status = execSync('git status --porcelain', { cwd: repoDir, encoding: 'utf8' });
+    if (status.trim()) {
+      execSync(`git commit -m "Deploy ${timestamp}"`, { cwd: repoDir, stdio: 'inherit' });
+      console.log(`Changes committed with timestamp: ${timestamp}`);
+    } else {
+      console.log('No changes to commit - files are already up to date');
+    }
+  } catch (error) {
+    console.error('Error checking git status:', error.message);
+  }
 }
 
 if (!fs.existsSync(sourceDir)) {
