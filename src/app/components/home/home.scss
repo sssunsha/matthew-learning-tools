@@ -62,6 +62,14 @@ $metro-brown: #7e735f;
     margin: 0;
     letter-spacing: 0px;
     text-transform: none;
+
+    .version {
+      font-size: 0.6em; // 比标题小约两号字体
+      font-weight: 300;
+      opacity: 0.7;
+      margin-left: 8px;
+      letter-spacing: 0.5px;
+    }
   }
 
   .metro-subtitle {
