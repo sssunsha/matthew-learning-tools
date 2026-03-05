@@ -2,8 +2,8 @@ import { Component, Input, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewIn
 import { CommonModule } from '@angular/common';
 import * as pdfjsLib from 'pdfjs-dist';
 
-// 配置PDF.js worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = '/assets/pdfjs/pdf.worker.mjs';
+// 配置PDF.js worker - 使用相对路径以兼容不同环境
+pdfjsLib.GlobalWorkerOptions.workerSrc = './assets/pdfjs/pdf.worker.mjs';
 
 @Component({
   selector: 'app-pdf-viewer',
