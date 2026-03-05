@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { SafePipe } from '../../../../../pipes/safe.pipe';
+import { PdfViewerComponent } from '../../../../shared/pdf-viewer/pdf-viewer.component';
 
 interface MediaItem {
   title: string;
@@ -20,7 +20,7 @@ interface Unit {
 @Component({
   selector: 'app-grade3-term2-learn-texts',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, SafePipe],
+  imports: [CommonModule, MatIconModule, MatButtonModule, PdfViewerComponent],
   templateUrl: './grade3-term2-learn-texts.html',
   styleUrl: './grade3-term2-learn-texts.scss',
 })

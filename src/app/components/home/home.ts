@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './home.scss'
 })
 export class HomeComponent {
-  version = '0.0.19'; // 手动更新版本号
+  version = '0.0.22'; // 手动更新版本号
   isScheduleVisible = false;
 
   constructor(private router: Router) {}

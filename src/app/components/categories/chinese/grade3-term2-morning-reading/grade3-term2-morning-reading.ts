@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { SafePipe } from '../../../../pipes/safe.pipe';
+import { PdfViewerComponent } from '../../../shared/pdf-viewer/pdf-viewer.component';
 
 @Component({
   selector: 'app-grade3-term2-morning-reading',
   standalone: true,
-  imports: [CommonModule, SafePipe],
+  imports: [CommonModule, PdfViewerComponent],
   templateUrl: './grade3-term2-morning-reading.html',
   styleUrl: './grade3-term2-morning-reading.scss',
 })
