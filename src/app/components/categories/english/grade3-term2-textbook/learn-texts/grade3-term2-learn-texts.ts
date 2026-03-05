@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SafePipe } from '../../../../../pipes/safe.pipe';
 
 interface MediaItem {
   title: string;
@@ -20,12 +21,13 @@ interface Unit {
 @Component({
   selector: 'app-grade3-term2-learn-texts',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, NgxExtendedPdfViewerModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, NgxExtendedPdfViewerModule, SafePipe],
   templateUrl: './grade3-term2-learn-texts.html',
   styleUrl: './grade3-term2-learn-texts.scss',
 })
 export class Grade3Term2LearnTextsComponent {
   pdfPath: string;
+  isMobile: boolean;
   units: Unit[] = [];
   currentMedia: { type: 'audio' | 'video' | null; url: string | null } = { type: null, url: null };
   activeTab: 'pdf' | 'media' = 'pdf';
@@ -33,6 +35,7 @@ export class Grade3Term2LearnTextsComponent {
 
   constructor(private router: Router) {
     this.pdfPath = '/assets/resources/categories/english/grade-3-2/小学英语外研版（三起）（孙有中）（2024）三年级下册 电子课本.pdf';
+    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
     this.initializeUnits();
   }
 

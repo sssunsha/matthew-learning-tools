@@ -67,6 +67,7 @@
   display: flex;
   overflow: hidden;
   padding: 10px;
+  position: relative;
 
   ngx-extended-pdf-viewer {
     width: 100%;
@@ -74,6 +75,21 @@
     border-radius: 8px;
     background: white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: none;
+  }
+
+  .pdf-iframe {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: none;
   }
 }
 
