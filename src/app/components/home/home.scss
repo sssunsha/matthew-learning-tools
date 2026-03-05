@@ -347,7 +347,7 @@ $metro-brown: #7e735f;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1410px) {
   .metro-header {
     padding: 15px 20px;
 
@@ -361,19 +361,20 @@ $metro-brown: #7e735f;
   }
 
   .metro-grid {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 8px;
     padding: 8px;
   }
 
-  .tile-large {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  .tile-wide {
-    grid-column: span 2;
-    grid-row: span 1;
+  .tile-large,
+  .tile-wide,
+  .tile-medium,
+  .tile-small {
+    grid-column: auto;
+    grid-row: auto;
+    width: 100%;
+    min-height: 100px;
   }
 
   .metro-tile {
@@ -405,9 +406,38 @@ $metro-brown: #7e735f;
   }
 }
 
-@media (max-width: 480px) {
+// 手机显示模式 - 屏幕宽度小于750px
+@media (max-width: 750px) {
+  .metro-header {
+    padding: 7.5px 10px; // 原来15px 20px的50%
+
+    .header-content {
+      gap: 10px; // 原来20px的50%
+    }
+
+    .metro-title {
+      font-size: 0.75em; // 原来1.5em的50%
+    }
+
+    .metro-subtitle-desktop {
+      display: none; // 隐藏英文副标题
+    }
+
+    .icon-button {
+      padding: 4px; // 原来8px的50%
+
+      mat-icon {
+        font-size: 12px; // 原来24px的50%
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
   .metro-grid {
     grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 6px;
   }
 
   .tile-large,
@@ -416,20 +446,43 @@ $metro-brown: #7e735f;
   .tile-small {
     grid-column: span 1;
     grid-row: span 1;
+    min-height: 80px;
   }
 
   .metro-tile {
-    min-height: 100px;
-
     .tile-content {
       flex-direction: row;
       justify-content: flex-start;
-      padding: 15px;
-      gap: 15px;
+      padding: 12px;
+      gap: 12px;
+    }
+
+    .tile-icon {
+      font-size: 36px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .tile-icon-small {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
     }
 
     .tile-text {
       text-align: left;
+
+      h2 {
+        font-size: 1.2em;
+      }
+
+      h3 {
+        font-size: 1em;
+      }
+
+      p {
+        font-size: 0.7em;
+      }
     }
   }
 }
