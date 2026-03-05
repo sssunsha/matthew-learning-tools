@@ -1,25 +1,20 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-grade3-term2-characters',
-  templateUrl: './grade3-term2-characters.html',
-  styleUrls: ['./grade3-term2-characters.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, NgxExtendedPdfViewerModule],
+  templateUrl: './grade3-term2-characters.html',
+  styleUrl: './grade3-term2-characters.scss',
 })
 export class Grade3Term2CharactersComponent {
-  pdfUrl: SafeResourceUrl;
+  pdfPath: string;
 
-  constructor(
-    private router: Router,
-    private sanitizer: DomSanitizer
-  ) {
-    // Sanitize the PDF URL for safe embedding
-    const pdfPath = 'assets/resources/categories/chinese/grade3-term2-characters/三年级下册语文生字预习.pdf';
-    this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(pdfPath);
+  constructor(private router: Router) {
+    this.pdfPath = '/assets/resources/categories/chinese/grade3-term2-characters/三年级下册语文生字预习.pdf';
   }
 
   goBack() {

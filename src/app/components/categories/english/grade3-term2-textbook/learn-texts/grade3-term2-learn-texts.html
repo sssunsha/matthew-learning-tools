@@ -64,11 +64,25 @@
         <!-- PDF Tab -->
         <div class="tab-pane" *ngIf="activeTab === 'pdf'">
           <div class="pdf-container">
-            <iframe 
-              [src]="pdfUrl" 
-              type="application/pdf"
-              class="pdf-viewer">
-            </iframe>
+            <ngx-extended-pdf-viewer
+              [src]="pdfPath"
+              [textLayer]="false"
+              [height]="'100%'"
+              [zoom]="'page-width'"
+              [showToolbar]="true"
+              [showSidebarButton]="false"
+              [showFindButton]="false"
+              [showPagingButtons]="true"
+              [showZoomButtons]="true"
+              [showPresentationModeButton]="false"
+              [showOpenFileButton]="false"
+              [showPrintButton]="false"
+              [showDownloadButton]="false"
+              [showSecondaryToolbarButton]="false"
+              [showRotateButton]="false"
+              [showHandToolButton]="false"
+              [showPropertiesButton]="false">
+            </ngx-extended-pdf-viewer>
           </div>
         </div>
 

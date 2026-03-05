@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 interface MediaItem {
   title: string;
@@ -20,24 +20,19 @@ interface Unit {
 @Component({
   selector: 'app-grade3-term2-learn-texts',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, NgxExtendedPdfViewerModule],
   templateUrl: './grade3-term2-learn-texts.html',
   styleUrl: './grade3-term2-learn-texts.scss',
 })
 export class Grade3Term2LearnTextsComponent {
-  pdfUrl: SafeResourceUrl;
+  pdfPath: string;
   units: Unit[] = [];
   currentMedia: { type: 'audio' | 'video' | null; url: string | null } = { type: null, url: null };
   activeTab: 'pdf' | 'media' = 'pdf';
   isLeftPanelHidden: boolean = false;
 
-  constructor(
-    private router: Router,
-    private sanitizer: DomSanitizer
-  ) {
-    this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-      '/assets/resources/categories/english/grade-3-2/小学英语外研版（三起）（孙有中）（2024）三年级下册 电子课本.pdf'
-    );
+  constructor(private router: Router) {
+    this.pdfPath = '/assets/resources/categories/english/grade-3-2/小学英语外研版（三起）（孙有中）（2024）三年级下册 电子课本.pdf';
     this.initializeUnits();
   }
 
