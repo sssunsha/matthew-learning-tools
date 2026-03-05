@@ -64,11 +64,7 @@
         <!-- PDF Tab -->
         <div class="tab-pane" *ngIf="activeTab === 'pdf'">
           <div class="pdf-container">
-            <iframe 
-              [src]="pdfPath | safe: 'resourceUrl'"
-              class="pdf-iframe"
-              type="application/pdf">
-            </iframe>
+            <app-pdf-viewer [pdfUrl]="pdfPath"></app-pdf-viewer>
           </div>
         </div>
 
