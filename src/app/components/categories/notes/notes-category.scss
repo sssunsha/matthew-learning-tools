@@ -315,16 +315,31 @@
   }
 }
 
-@media (max-width: 768px) {
+// 手机显示模式 - 屏幕宽度小于750px
+@media (max-width: 750px) {
   .category-header {
-    padding: 10px 15px;
+    padding: 4px 7.5px; // 原来8px 15px的50%
+    gap: 4px; // 原来8px的50%
+
+    .back-btn,
+    .add-btn,
+    .delete-mode-btn {
+      width: 18px; // 原来36px的50%
+      height: 18px;
+
+      mat-icon {
+        font-size: 10px; // 原来20px的50%
+        width: 10px;
+        height: 10px;
+      }
+    }
 
     .category-title {
-      font-size: 1.1em;
+      font-size: 0.6em; // 原来1.2em的50%
     }
 
     .category-subtitle {
-      font-size: 0.7em;
+      font-size: 0.5625em; // 原来1.125em的50%
     }
   }
 

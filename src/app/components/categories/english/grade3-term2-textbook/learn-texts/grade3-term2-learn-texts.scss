@@ -348,16 +348,28 @@
   }
 }
 
-@media (max-width: 768px) {
+// 手机显示模式 - 屏幕宽度小于750px
+@media (max-width: 750px) {
   .category-header {
-    padding: 20px;
+    padding: 7.5px 10px; // 原来15px 20px的50%
+
+    .back-btn {
+      width: 20px; // 原来40px的50%
+      height: 20px;
+
+      mat-icon {
+        font-size: 12px; // 原来24px的50%
+        width: 12px;
+        height: 12px;
+      }
+    }
 
     .category-title {
-      font-size: 2em;
+      font-size: 0.75em; // 原来1.5em的50%
     }
 
     .category-subtitle {
-      font-size: 1em;
+      font-size: 0.45em; // 原来0.9em的50%
     }
   }
 

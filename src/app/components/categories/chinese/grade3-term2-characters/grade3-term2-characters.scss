@@ -78,7 +78,31 @@
   }
 }
 
-@media (max-width: 768px) {
+// 手机显示模式 - 屏幕宽度小于750px
+@media (max-width: 750px) {
+  .page-header {
+    padding: 4px 7.5px; // 原来8px 15px的50%
+
+    .back-btn {
+      width: 18px; // 原来36px的50%
+      height: 18px;
+
+      .back-icon {
+        font-size: 10px; // 原来20px的50%
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    .page-title {
+      font-size: 0.75em; // 原来1.5em的50%
+    }
+
+    .page-subtitle {
+      font-size: 0.5625em; // 原来1.125em的50%
+    }
+  }
+
   .pdf-viewer-container {
     padding: 5px;
   }
