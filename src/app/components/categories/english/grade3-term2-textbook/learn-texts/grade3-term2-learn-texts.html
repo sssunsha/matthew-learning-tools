@@ -64,31 +64,7 @@
         <!-- PDF Tab -->
         <div class="tab-pane" *ngIf="activeTab === 'pdf'">
           <div class="pdf-container">
-            <!-- 移动端使用ngx-extended-pdf-viewer -->
-            <ngx-extended-pdf-viewer
-              *ngIf="isMobile"
-              [src]="pdfPath"
-              [textLayer]="false"
-              [height]="'100%'"
-              [zoom]="'page-width'"
-              [showToolbar]="true"
-              [showSidebarButton]="false"
-              [showFindButton]="false"
-              [showPagingButtons]="true"
-              [showZoomButtons]="true"
-              [showPresentationModeButton]="false"
-              [showOpenFileButton]="false"
-              [showPrintButton]="false"
-              [showDownloadButton]="false"
-              [showSecondaryToolbarButton]="false"
-              [showRotateButton]="false"
-              [showHandToolButton]="false"
-              [showPropertiesButton]="false">
-            </ngx-extended-pdf-viewer>
-            
-            <!-- 桌面端使用iframe -->
             <iframe 
-              *ngIf="!isMobile"
               [src]="pdfPath | safe: 'resourceUrl'"
               class="pdf-iframe"
               type="application/pdf">
