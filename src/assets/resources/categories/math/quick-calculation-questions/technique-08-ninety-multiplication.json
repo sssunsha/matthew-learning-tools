@@ -1,0 +1,259 @@
+{
+  "id": "technique-08",
+  "category": "技巧篇",
+  "lesson": "第8讲",
+  "title": "九十几乘九十几",
+  "description": "九十几乘九十几的练习题库",
+  "questions": [
+    {
+      "question": "99 × 97 = ?",
+      "answer": 9603,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "95 × 96 = ?",
+      "answer": 9120,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "93 × 91 = ?",
+      "answer": 8463,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "92 × 93 = ?",
+      "answer": 8556,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "92 × 98 = ?",
+      "answer": 9016,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "91 × 96 = ?",
+      "answer": 8736,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "97 × 93 = ?",
+      "answer": 9021,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "93 × 97 = ?",
+      "answer": 9021,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "92 × 97 = ?",
+      "answer": 8924,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "91 × 97 = ?",
+      "answer": 8827,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "93 × 93 = ?",
+      "answer": 8649,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "97 × 94 = ?",
+      "answer": 9118,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "94 × 96 = ?",
+      "answer": 9024,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "96 × 95 = ?",
+      "answer": 9120,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "92 × 96 = ?",
+      "answer": 8832,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "95 × 92 = ?",
+      "answer": 8740,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "97 × 92 = ?",
+      "answer": 8924,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "91 × 93 = ?",
+      "answer": 8463,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "94 × 99 = ?",
+      "answer": 9306,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "97 × 97 = ?",
+      "answer": 9409,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "94 × 96 = ?",
+      "answer": 9024,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "98 × 96 = ?",
+      "answer": 9408,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "95 × 97 = ?",
+      "answer": 9215,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "99 × 99 = ?",
+      "answer": 9801,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "99 × 92 = ?",
+      "answer": 9108,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "92 × 95 = ?",
+      "answer": 8740,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "94 × 94 = ?",
+      "answer": 8836,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "95 × 97 = ?",
+      "answer": 9215,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "96 × 99 = ?",
+      "answer": 9504,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "92 × 91 = ?",
+      "answer": 8372,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "99 × 97 = ?",
+      "answer": 9603,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "94 × 93 = ?",
+      "answer": 8742,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "99 × 93 = ?",
+      "answer": 9207,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "94 × 94 = ?",
+      "answer": 8836,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "93 × 95 = ?",
+      "answer": 8835,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "98 × 96 = ?",
+      "answer": 9408,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "98 × 96 = ?",
+      "answer": 9408,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "93 × 95 = ?",
+      "answer": 8835,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "94 × 96 = ?",
+      "answer": 9024,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "95 × 97 = ?",
+      "answer": 9215,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "91 × 96 = ?",
+      "answer": 8736,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "95 × 94 = ?",
+      "answer": 8930,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "96 × 93 = ?",
+      "answer": 8928,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "95 × 98 = ?",
+      "answer": 9310,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "96 × 94 = ?",
+      "answer": 9024,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "98 × 96 = ?",
+      "answer": 9408,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "93 × 95 = ?",
+      "answer": 8835,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "95 × 91 = ?",
+      "answer": 8645,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "96 × 97 = ?",
+      "answer": 9312,
+      "explanation": "九十几乘九十几速算法"
+    },
+    {
+      "question": "99 × 95 = ?",
+      "answer": 9405,
+      "explanation": "九十几乘九十几速算法"
+    }
+  ]
+}

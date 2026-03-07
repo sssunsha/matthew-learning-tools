@@ -278,3 +278,317 @@ input[type='number'] {
 .mat-mdc-icon-button {
   border-radius: 0 !important;
 }
+
+// Photo Dialog Styles
+.photo-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.photo-dialog {
+  background: $metro-card-bg;
+  padding: 24px;
+  max-width: 90%;
+  width: 360px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.photo-dialog-title {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: $metro-text-white;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.photo-dialog-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.photo-dialog-btn {
+  flex: 1;
+  background: $metro-deep-blue;
+  color: $metro-text-white;
+  border: none;
+  padding: 16px 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Segoe UI', 'Microsoft YaHei', '微软雅黑', sans-serif;
+
+  &:hover {
+    background: $metro-light-blue;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &.camera-btn {
+    background: $metro-deep-blue;
+  }
+
+  &.library-btn {
+    background: $metro-accent-blue;
+  }
+
+  &.cancel-btn {
+    background: rgba(255, 255, 255, 0.1);
+    flex-direction: row;
+    justify-content: center;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+.photo-dialog-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+// Camera button in header
+.camera-btn-header {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  transition: all 0.3s;
+  width: 40px;
+  height: 40px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+  }
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+// Camera Preview Overlay Styles
+.camera-preview-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.camera-preview-container {
+  width: 100%;
+  max-width: 800px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+#camera-preview {
+  width: 100%;
+  max-height: calc(90vh - 100px);
+  object-fit: contain;
+  background: #000;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.camera-controls {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.camera-capture-btn,
+.camera-cancel-btn {
+  background: $metro-deep-blue;
+  color: $metro-text-white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 8px;
+  font-family: 'Segoe UI', 'Microsoft YaHei', '微软雅黑', sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.camera-capture-btn {
+  background: $metro-deep-blue;
+
+  &:hover {
+    background: $metro-light-blue;
+  }
+}
+
+.camera-cancel-btn {
+  background: rgba(255, 255, 255, 0.15);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+
+.camera-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .camera-preview-container {
+    padding: 10px;
+    height: 95vh;
+  }
+
+  #camera-preview {
+    max-height: calc(95vh - 80px);
+  }
+
+  .camera-controls {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .camera-capture-btn,
+  .camera-cancel-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 16px;
+  }
+}
+
+// Photo Success Toast
+.photo-success-toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10002;
+  animation: slideDown 0.3s ease-out;
+
+  &.hiding {
+    animation: slideUp 0.3s ease-out;
+    opacity: 0;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+
+.toast-content {
+  background: #4caf50;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-family: 'Segoe UI', 'Microsoft YaHei', '微软雅黑', sans-serif;
+}
+
+.toast-icon {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.toast-message {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.toast-link {
+  margin-left: 8px;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

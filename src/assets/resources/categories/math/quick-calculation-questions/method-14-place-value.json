@@ -1,0 +1,259 @@
+{
+  "id": "method-14",
+  "category": "方法篇",
+  "lesson": "第14讲",
+  "title": "位值原理",
+  "description": "位值原理的练习题库",
+  "questions": [
+    {
+      "question": "11 + 55 = ?",
+      "answer": 66,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "94 - 71 = ?",
+      "answer": 23,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "60 + 95 = ?",
+      "answer": 155,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "47 × 99 = ?",
+      "answer": 4653,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "16 ÷ 80 = ?",
+      "answer": 0,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "81 × 61 = ?",
+      "answer": 4941,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "11 × 58 = ?",
+      "answer": 638,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "45 + 98 = ?",
+      "answer": 143,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "62 - 46 = ?",
+      "answer": 16,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "45 + 36 = ?",
+      "answer": 81,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "34 - 44 = ?",
+      "answer": -10,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "35 × 99 = ?",
+      "answer": 3465,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "81 ÷ 66 = ?",
+      "answer": 1,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "66 × 93 = ?",
+      "answer": 6138,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "42 + 13 = ?",
+      "answer": 55,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "65 + 31 = ?",
+      "answer": 96,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "98 - 36 = ?",
+      "answer": 62,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "61 + 50 = ?",
+      "answer": 111,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "40 × 21 = ?",
+      "answer": 840,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "71 × 90 = ?",
+      "answer": 6390,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "57 + 44 = ?",
+      "answer": 101,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "46 ÷ 41 = ?",
+      "answer": 1,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "39 - 58 = ?",
+      "answer": -19,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "31 - 21 = ?",
+      "answer": 10,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "94 × 58 = ?",
+      "answer": 5452,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "48 × 42 = ?",
+      "answer": 2016,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "93 × 87 = ?",
+      "answer": 8091,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "24 - 56 = ?",
+      "answer": -32,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "30 × 42 = ?",
+      "answer": 1260,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "42 + 50 = ?",
+      "answer": 92,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "60 × 30 = ?",
+      "answer": 1800,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "33 × 32 = ?",
+      "answer": 1056,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "36 - 82 = ?",
+      "answer": -46,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "90 + 79 = ?",
+      "answer": 169,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "20 × 26 = ?",
+      "answer": 520,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "80 ÷ 34 = ?",
+      "answer": 2,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "63 - 31 = ?",
+      "answer": 32,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "47 ÷ 64 = ?",
+      "answer": 0,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "94 ÷ 68 = ?",
+      "answer": 1,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "22 - 43 = ?",
+      "answer": -21,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "14 - 74 = ?",
+      "answer": -60,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "71 + 84 = ?",
+      "answer": 155,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "81 + 88 = ?",
+      "answer": 169,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "63 ÷ 78 = ?",
+      "answer": 0,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "17 × 92 = ?",
+      "answer": 1564,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "54 + 46 = ?",
+      "answer": 100,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "10 - 90 = ?",
+      "answer": -80,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "14 ÷ 34 = ?",
+      "answer": 0,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "81 - 19 = ?",
+      "answer": 62,
+      "explanation": "位值原理练习题"
+    },
+    {
+      "question": "15 × 67 = ?",
+      "answer": 1005,
+      "explanation": "位值原理练习题"
+    }
+  ]
+}

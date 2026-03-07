@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { PhotoCaptureService } from '../../../services/photo-capture.service';
 
 @Component({
   selector: 'app-chinese-category',
@@ -11,7 +12,10 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './chinese-category.scss'
 })
 export class ChineseCategoryComponent {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private photoCaptureService: PhotoCaptureService
+  ) {}
 
   goBack() {
     this.router.navigate(['/']);
@@ -23,5 +27,15 @@ export class ChineseCategoryComponent {
 
   navigateToMorningReading() {
     this.router.navigate(['/category/chinese/grade3-term2-morning-reading']);
+  }
+
+  async openCamera(): Promise<void> {
+    const options = await this.photoCaptureService.showPhotoSourceDialog();
+    if (options) {
+      const photo = await this.photoCaptureService.capturePhoto(options.source);
+      if (photo) {
+        console.log('Photo captured successfully');
+      }
+    }
   }
 }

@@ -1,0 +1,259 @@
+{
+  "id": "technique-07",
+  "category": "技巧篇",
+  "lesson": "第7讲",
+  "title": "十几乘十几",
+  "description": "十几乘十几的练习题库",
+  "questions": [
+    {
+      "question": "13 × 16 = ?",
+      "answer": 208,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "19 × 12 = ?",
+      "answer": 228,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "17 × 19 = ?",
+      "answer": 323,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "12 × 17 = ?",
+      "answer": 204,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "18 × 17 = ?",
+      "answer": 306,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "13 × 12 = ?",
+      "answer": 156,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "16 × 14 = ?",
+      "answer": 224,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "16 × 17 = ?",
+      "answer": 272,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "16 × 17 = ?",
+      "answer": 272,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "18 × 15 = ?",
+      "answer": 270,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "11 × 15 = ?",
+      "answer": 165,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "11 × 19 = ?",
+      "answer": 209,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "14 × 19 = ?",
+      "answer": 266,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "13 × 19 = ?",
+      "answer": 247,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "14 × 19 = ?",
+      "answer": 266,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "18 × 14 = ?",
+      "answer": 252,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "11 × 19 = ?",
+      "answer": 209,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "16 × 13 = ?",
+      "answer": 208,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "15 × 19 = ?",
+      "answer": 285,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "11 × 18 = ?",
+      "answer": 198,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "18 × 16 = ?",
+      "answer": 288,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "16 × 14 = ?",
+      "answer": 224,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "13 × 16 = ?",
+      "answer": 208,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "18 × 17 = ?",
+      "answer": 306,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "13 × 16 = ?",
+      "answer": 208,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "17 × 17 = ?",
+      "answer": 289,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "11 × 12 = ?",
+      "answer": 132,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "14 × 16 = ?",
+      "answer": 224,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "16 × 13 = ?",
+      "answer": 208,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "17 × 18 = ?",
+      "answer": 306,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "14 × 18 = ?",
+      "answer": 252,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "18 × 11 = ?",
+      "answer": 198,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "15 × 13 = ?",
+      "answer": 195,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "12 × 16 = ?",
+      "answer": 192,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "18 × 18 = ?",
+      "answer": 324,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "19 × 14 = ?",
+      "answer": 266,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "14 × 19 = ?",
+      "answer": 266,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "12 × 12 = ?",
+      "answer": 144,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "16 × 14 = ?",
+      "answer": 224,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "16 × 17 = ?",
+      "answer": 272,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "19 × 12 = ?",
+      "answer": 228,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "13 × 11 = ?",
+      "answer": 143,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "11 × 12 = ?",
+      "answer": 132,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "14 × 15 = ?",
+      "answer": 210,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "16 × 14 = ?",
+      "answer": 224,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "11 × 17 = ?",
+      "answer": 187,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "11 × 18 = ?",
+      "answer": 198,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "14 × 13 = ?",
+      "answer": 182,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "18 × 16 = ?",
+      "answer": 288,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    },
+    {
+      "question": "11 × 15 = ?",
+      "answer": 165,
+      "explanation": "十几乘十几：头乘头，尾加尾，尾乘尾"
+    }
+  ]
+}

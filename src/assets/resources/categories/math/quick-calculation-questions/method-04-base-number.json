@@ -1,0 +1,259 @@
+{
+  "id": "method-04",
+  "category": "方法篇",
+  "lesson": "第4讲",
+  "title": "基准数法",
+  "description": "基准数法的练习题库",
+  "questions": [
+    {
+      "question": "88 + 18 = ?",
+      "answer": 106,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "10 + 50 = ?",
+      "answer": 60,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "38 + 96 = ?",
+      "answer": 134,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "13 × 80 = ?",
+      "answer": 1040,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "35 × 17 = ?",
+      "answer": 595,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "73 × 53 = ?",
+      "answer": 3869,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "39 × 68 = ?",
+      "answer": 2652,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "63 × 44 = ?",
+      "answer": 2772,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "19 × 43 = ?",
+      "answer": 817,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "68 ÷ 35 = ?",
+      "answer": 1,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "49 - 93 = ?",
+      "answer": -44,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "85 × 26 = ?",
+      "answer": 2210,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "67 ÷ 89 = ?",
+      "answer": 0,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "47 - 33 = ?",
+      "answer": 14,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "10 + 52 = ?",
+      "answer": 62,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "94 ÷ 55 = ?",
+      "answer": 1,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "30 - 28 = ?",
+      "answer": 2,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "77 ÷ 90 = ?",
+      "answer": 0,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "28 ÷ 14 = ?",
+      "answer": 2,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "50 ÷ 87 = ?",
+      "answer": 0,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "31 + 51 = ?",
+      "answer": 82,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "60 - 35 = ?",
+      "answer": 25,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "20 + 21 = ?",
+      "answer": 41,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "25 + 24 = ?",
+      "answer": 49,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "58 + 68 = ?",
+      "answer": 126,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "72 × 71 = ?",
+      "answer": 5112,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "92 ÷ 50 = ?",
+      "answer": 1,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "35 × 78 = ?",
+      "answer": 2730,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "16 × 61 = ?",
+      "answer": 976,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "31 + 11 = ?",
+      "answer": 42,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "67 ÷ 67 = ?",
+      "answer": 1,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "66 - 29 = ?",
+      "answer": 37,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "22 - 30 = ?",
+      "answer": -8,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "30 × 84 = ?",
+      "answer": 2520,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "91 - 27 = ?",
+      "answer": 64,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "61 × 54 = ?",
+      "answer": 3294,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "76 ÷ 21 = ?",
+      "answer": 3,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "48 × 17 = ?",
+      "answer": 816,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "82 × 65 = ?",
+      "answer": 5330,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "31 × 10 = ?",
+      "answer": 310,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "53 ÷ 77 = ?",
+      "answer": 0,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "79 ÷ 41 = ?",
+      "answer": 1,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "13 + 49 = ?",
+      "answer": 62,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "97 ÷ 66 = ?",
+      "answer": 1,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "81 × 34 = ?",
+      "answer": 2754,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "63 - 65 = ?",
+      "answer": -2,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "55 ÷ 73 = ?",
+      "answer": 0,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "84 ÷ 18 = ?",
+      "answer": 4,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "80 + 66 = ?",
+      "answer": 146,
+      "explanation": "基准数法练习题"
+    },
+    {
+      "question": "45 ÷ 84 = ?",
+      "answer": 0,
+      "explanation": "基准数法练习题"
+    }
+  ]
+}

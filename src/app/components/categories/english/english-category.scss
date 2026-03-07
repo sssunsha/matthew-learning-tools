@@ -60,6 +60,26 @@
     font-weight: 300;
     letter-spacing: 1px;
   }
+
+  .camera-btn-header {
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transition: all 0.3s;
+    width: 40px;
+    height: 40px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
 }
 
 .metro-grid {

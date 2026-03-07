@@ -3,7 +3,73 @@
     <button mat-icon-button class="back-btn" (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <h1 class="category-title">快速计算</h1>
-    <p class="category-subtitle">Quick Calculation</p>
+    <div class="header-left">
+      <h1 class="category-title">快速计算</h1>
+      <p class="category-subtitle">{{ selectedLesson ? selectedLesson.title + ' - ' + selectedLesson.subtitle : 'Quick Calculation' }}</p>
+    </div>
+    <button mat-icon-button class="explain-btn" (click)="toggleExplanation()" [disabled]="!selectedLesson">
+      <mat-icon>lightbulb</mat-icon>
+    </button>
+    <div class="header-right">
+      <span class="technique-label">技巧篇</span>
+    <button mat-icon-button [matMenuTriggerFor]="techniqueMenu" class="menu-btn">
+      <mat-icon>menu_book</mat-icon>
+    </button>
+    <span class="technique-label">方法篇</span>
+    <button mat-icon-button [matMenuTriggerFor]="methodMenu" class="menu-btn">
+      <mat-icon>book</mat-icon>
+    </button>
+  </div>
+
+  <mat-menu #techniqueMenu="matMenu" class="technique-menu">
+    <button mat-menu-item *ngFor="let lesson of techniques" (click)="selectLesson(lesson)" class="lesson-item">
+      <span class="lesson-number">{{ lesson.title }}</span>
+      <span class="lesson-title">—— {{ lesson.subtitle }}</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu #methodMenu="matMenu" class="technique-menu">
+    <button mat-menu-item *ngFor="let lesson of methods" (click)="selectLesson(lesson)" class="lesson-item">
+      <span class="lesson-number">{{ lesson.title }}</span>
+      <span class="lesson-title">—— {{ lesson.subtitle }}</span>
+    </button>
+  </mat-menu>
+
+  <!-- 讲解浮动窗口 -->
+  <div class="explanation-panel" [class.show]="showExplanation">
+    <div class="explanation-content" *ngIf="selectedLesson && lessonData">
+      <button mat-icon-button class="close-btn" (click)="toggleExplanation()">
+        <mat-icon>close</mat-icon>
+      </button>
+      
+      <h2 class="explanation-title">{{ selectedLesson.title }} - {{ selectedLesson.subtitle }}</h2>
+      
+      <div class="explanation-section">
+        <h3><mat-icon>description</mat-icon> 方法讲解</h3>
+        <p class="explanation-text">{{ lessonData.explanation }}</p>
+      </div>
+      
+      <div class="explanation-section">
+        <h3><mat-icon>tips_and_updates</mat-icon> 技巧要点</h3>
+        <ul class="tips-list">
+          <li *ngFor="let tip of lessonData.tips">{{ tip }}</li>
+        </ul>
+      </div>
+      
+      <div class="explanation-section">
+        <h3><mat-icon>calculate</mat-icon> 范例解答</h3>
+        <div class="examples">
+          <div class="example-item" *ngFor="let example of lessonData.examples">
+            <div class="example-question">{{ example.question }}</div>
+            <div class="example-solution">
+              <strong>解：</strong>{{ example.solution }}
+            </div>
+            <div class="example-answer">
+              <strong>答案：</strong>{{ example.answer }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

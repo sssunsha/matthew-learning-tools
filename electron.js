@@ -1,9 +1,36 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
+const os = require('os');
 
 let mainWindow;
+
+// 照片保存目录
+const PHOTOS_DIR = path.join(os.homedir(), 'MatthewTools');
+
+// 确保照片目录存在
+function ensurePhotosDir() {
+  if (!fs.existsSync(PHOTOS_DIR)) {
+    fs.mkdirSync(PHOTOS_DIR, { recursive: true });
+    console.log(`Created photos directory: ${PHOTOS_DIR}`);
+  }
+}
+
+// 保存照片到文件系统
+ipcMain.handle('save-photo', async (event, filename, base64Data) => {
+  try {
+    ensurePhotosDir();
+    const filePath = path.join(PHOTOS_DIR, filename);
+    const buffer = Buffer.from(base64Data, 'base64');
+    fs.writeFileSync(filePath, buffer);
+    console.log(`Photo saved: ${filePath}`);
+    return { success: true, path: filePath };
+  } catch (error) {
+    console.error('Error saving photo:', error);
+    return { success: false, error: error.message };
+  }
+});
 
 // 获取本地版本
 function getLocalVersion() {
@@ -65,6 +92,7 @@ function createWindow(useRemote = false) {
       nodeIntegration: false,
       contextIsolation: true,
       webSecurity: true,
+      preload: path.join(__dirname, 'preload.js')
     },
     icon: path.join(__dirname, 'public/app_icon.jpg')
   });

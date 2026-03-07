@@ -1,0 +1,259 @@
+{
+  "id": "technique-02",
+  "category": "技巧篇",
+  "lesson": "第2讲",
+  "title": "颠倒数的减法",
+  "description": "颠倒数的减法的练习题库",
+  "questions": [
+    {
+      "question": "26 - 62 = ?",
+      "answer": 36,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "75 - 57 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "97 - 79 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "43 - 34 = ?",
+      "answer": 9,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "66 - 66 = ?",
+      "answer": 0,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "60 - 6 = ?",
+      "answer": 54,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "25 - 52 = ?",
+      "answer": 27,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "84 - 48 = ?",
+      "answer": 36,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "96 - 69 = ?",
+      "answer": 27,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "85 - 58 = ?",
+      "answer": 27,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "73 - 37 = ?",
+      "answer": 36,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "96 - 69 = ?",
+      "answer": 27,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "23 - 32 = ?",
+      "answer": 9,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "27 - 72 = ?",
+      "answer": 45,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "95 - 59 = ?",
+      "answer": 36,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "53 - 35 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "58 - 85 = ?",
+      "answer": 27,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "36 - 63 = ?",
+      "answer": 27,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "99 - 99 = ?",
+      "answer": 0,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "59 - 95 = ?",
+      "answer": 36,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "36 - 63 = ?",
+      "answer": 27,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "53 - 35 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "38 - 83 = ?",
+      "answer": 45,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "95 - 59 = ?",
+      "answer": 36,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "97 - 79 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "79 - 97 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "68 - 86 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "80 - 8 = ?",
+      "answer": 72,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "47 - 74 = ?",
+      "answer": 27,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "48 - 84 = ?",
+      "answer": 36,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "86 - 68 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "39 - 93 = ?",
+      "answer": 54,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "55 - 55 = ?",
+      "answer": 0,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "78 - 87 = ?",
+      "answer": 9,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "32 - 23 = ?",
+      "answer": 9,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "89 - 98 = ?",
+      "answer": 9,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "49 - 94 = ?",
+      "answer": 45,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "24 - 42 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "75 - 57 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "74 - 47 = ?",
+      "answer": 27,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "73 - 37 = ?",
+      "answer": 36,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "49 - 94 = ?",
+      "answer": 45,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "29 - 92 = ?",
+      "answer": 63,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "35 - 53 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "99 - 99 = ?",
+      "answer": 0,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "93 - 39 = ?",
+      "answer": 54,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "29 - 92 = ?",
+      "answer": 63,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "31 - 13 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "93 - 39 = ?",
+      "answer": 54,
+      "explanation": "颠倒数相减"
+    },
+    {
+      "question": "75 - 57 = ?",
+      "answer": 18,
+      "explanation": "颠倒数相减"
+    }
+  ]
+}

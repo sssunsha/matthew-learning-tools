@@ -2,152 +2,307 @@ import { Component, Input, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewIn
 import { CommonModule } from '@angular/common';
 import * as pdfjsLib from 'pdfjs-dist';
 
-// 配置PDF.js worker - 使用相对路径以兼容不同环境
-pdfjsLib.GlobalWorkerOptions.workerSrc = './assets/pdfjs/pdf.worker.mjs';
+// Monkey-patch Worker constructor to use type:'classic' instead of type:'module'.
+// pdfjs v4 hardcodes {type:'module'} which throws on Android WebViews older than Chrome 80.
+if (typeof Worker !== 'undefined') {
+  const _OriginalWorker = Worker;
+  (window as any).Worker = function PatchedWorker(url: string | URL, opts?: WorkerOptions) {
+    const patchedOpts = opts ? { ...opts, type: 'classic' as WorkerType } : undefined;
+    return new _OriginalWorker(url, patchedOpts);
+  };
+  (window as any).Worker.prototype = _OriginalWorker.prototype;
+}
+
+// IIFE classic-script bundle, compatible with all WebViews
+pdfjsLib.GlobalWorkerOptions.workerSrc = './assets/pdfjs/pdf.worker.js';
 
 @Component({
   selector: 'app-pdf-viewer',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="pdf-viewer-container">
-      <div class="pdf-controls" *ngIf="totalPages > 0">
-        <button (click)="previousPage()" [disabled]="currentPage === 1">
-          ← 上一页
+    <div class="pdf-root">
+
+      <!-- ── Toolbar ── -->
+      <div class="pdf-toolbar">
+        <button class="tool-btn" (click)="toggleSidebar()" [class.active]="sidebarOpen" title="页面导航">
+          <span class="icon">☰</span>
         </button>
-        <span class="page-info">
-          第 {{ currentPage }} / {{ totalPages }} 页
-        </span>
-        <button (click)="nextPage()" [disabled]="currentPage === totalPages">
-          下一页 →
-        </button>
-        <div class="zoom-controls">
-          <button (click)="zoomOut()" [disabled]="scale <= 0.5">-</button>
-          <span>{{ Math.round(scale * 100) }}%</span>
-          <button (click)="zoomIn()" [disabled]="scale >= 3">+</button>
+        <span class="page-info" *ngIf="totalPages > 0">共 {{ totalPages }} 页</span>
+        <div class="spacer"></div>
+        <div class="zoom-row" *ngIf="totalPages > 0">
+          <button class="tool-btn" (click)="zoomOut()" [disabled]="scale <= 0.3">−</button>
+          <span class="zoom-label">{{ Math.round(scale * 100) }}%</span>
+          <button class="tool-btn" (click)="zoomIn()" [disabled]="scale >= 3">+</button>
+          <button class="tool-btn fit-btn" (click)="fitWidth()">适宽</button>
         </div>
       </div>
-      <div class="pdf-canvas-container" #canvasContainer>
-        <canvas #pdfCanvas></canvas>
+
+      <!-- ── Body ── -->
+      <div class="pdf-body">
+
+        <!-- Left sidebar: page thumbnails -->
+        <div class="pdf-sidebar" [class.open]="sidebarOpen">
+          <div class="thumb-list" #thumbList>
+            <div
+              *ngFor="let thumb of thumbnails; let i = index"
+              class="thumb-item"
+              [class.current]="currentPage === i + 1"
+              (click)="scrollToPage(i + 1)">
+              <canvas
+                [id]="'thumb-' + (i + 1)"
+                class="thumb-canvas">
+              </canvas>
+              <span class="thumb-label">{{ i + 1 }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main scroll area -->
+        <div class="pdf-scroll" #canvasContainer (scroll)="onScroll()">
+          <!-- Page canvases injected here dynamically -->
+        </div>
       </div>
+
+      <!-- Overlay spinner -->
       <div class="pdf-loading" *ngIf="loading">
-        加载中...
+        <div class="spinner"></div>
+        <span>加载中...</span>
       </div>
-      <div class="pdf-error" *ngIf="error">
-        {{ error }}
-      </div>
+      <div class="pdf-error" *ngIf="error">{{ error }}</div>
     </div>
   `,
   styles: [`
-    .pdf-viewer-container {
+    :host {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+    }
+
+    .pdf-root {
       display: flex;
       flex-direction: column;
       height: 100%;
       width: 100%;
       background: #525659;
+      overflow: hidden;
+      position: relative;
     }
 
-    .pdf-controls {
+    /* ── Toolbar ── */
+    .pdf-toolbar {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 15px;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.8);
+      padding: 4px 12px;
+      background: rgba(0,0,0,0.8);
       color: white;
       flex-shrink: 0;
+      gap: 8px;
+      min-height: 40px;
     }
 
-    .pdf-controls button {
-      padding: 5px 15px;
-      background: #4285f4;
+    .spacer { flex: 1; }
+
+    .page-info {
+      font-size: 13px;
+      white-space: nowrap;
+      color: #ccc;
+    }
+
+    .zoom-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .zoom-label {
+      font-size: 13px;
+      min-width: 44px;
+      text-align: center;
+      color: white;
+    }
+
+    .tool-btn {
+      background: rgba(255,255,255,0.12);
       color: white;
       border: none;
       border-radius: 4px;
+      padding: 4px 10px;
       cursor: pointer;
       font-size: 14px;
+      min-width: 32px;
+      transition: background 0.15s;
+
+      &:hover, &:active { background: rgba(255,255,255,0.25); }
+      &:disabled { opacity: 0.4; cursor: not-allowed; }
+      &.active { background: rgba(255,255,255,0.3); }
+
+      .icon { font-size: 16px; }
     }
 
-    .pdf-controls button:hover:not(:disabled) {
-      background: #357ae8;
+    .fit-btn { font-size: 12px; padding: 4px 8px; }
+
+    /* ── Body ── */
+    .pdf-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
     }
 
-    .pdf-controls button:disabled {
-      background: #666;
-      cursor: not-allowed;
-      opacity: 0.5;
+    /* ── Sidebar ── */
+    .pdf-sidebar {
+      width: 0;
+      overflow: hidden;
+      background: #3a3d41;
+      flex-shrink: 0;
+      transition: width 0.2s ease;
+      border-right: 1px solid rgba(255,255,255,0.08);
+
+      &.open { width: 110px; }
     }
 
-    .page-info {
-      font-size: 14px;
-      min-width: 120px;
+    .thumb-list {
+      width: 110px;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 8px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .thumb-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      border: 2px solid transparent;
+      transition: border-color 0.15s, background 0.15s;
+
+      &:hover, &:active { background: rgba(255,255,255,0.1); }
+
+      &.current {
+        border-color: #4285f4;
+        background: rgba(66,133,244,0.15);
+      }
+    }
+
+    .thumb-canvas {
+      width: 86px;
+      height: auto;
+      display: block;
+      background: white;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    .thumb-label {
+      font-size: 11px;
+      color: #bbb;
       text-align: center;
     }
 
-    .zoom-controls {
+    .thumb-item.current .thumb-label {
+      color: #4285f4;
+      font-weight: 600;
+    }
+
+    /* ── Main scroll area ── */
+    .pdf-scroll {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 12px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 10px;
     }
 
-    .zoom-controls button {
-      width: 30px;
-      padding: 5px;
-    }
-
-    .pdf-canvas-container {
-      flex: 1;
-      overflow: auto;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 20px;
-    }
-
-    canvas {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    .pdf-scroll canvas {
+      display: block;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
       background: white;
+      max-width: 100%;
     }
 
-    .pdf-loading, .pdf-error {
+    /* ── Overlays ── */
+    .pdf-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: white;
+      font-size: 16px;
+      background: rgba(0,0,0,0.35);
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .pdf-error {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: white;
-      font-size: 18px;
-      text-align: center;
-    }
-
-    .pdf-error {
       color: #ff6b6b;
+      font-size: 16px;
+      text-align: center;
+      padding: 16px;
     }
   `]
 })
 export class PdfViewerComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() pdfUrl: string = '';
-  @ViewChild('pdfCanvas') canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('canvasContainer') canvasContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild('thumbList') thumbList!: ElementRef<HTMLDivElement>;
 
   Math = Math;
-  
+
   loading = false;
   error: string | null = null;
   pdfDocument: any = null;
-  currentPage = 1;
   totalPages = 0;
   scale = 1.0;
-  rendering = false;
+  sidebarOpen = false;
+  currentPage = 1;
+  thumbnails: number[] = []; // array of page numbers for *ngFor
 
-  ngOnInit() {
-    if (this.pdfUrl) {
-      this.loadPdf();
-    }
-  }
+  private containerWidth = 0;
+  private pageCanvases: HTMLCanvasElement[] = [];
+
+  ngOnInit() {}
 
   ngAfterViewInit() {
-    // Adjust initial scale based on container width
-    setTimeout(() => this.adjustScale(), 100);
+    const tryLoad = (attempt = 0) => {
+      const w = this.canvasContainer.nativeElement.clientWidth;
+      if (w > 0) {
+        this.containerWidth = w - 24;
+        if (this.pdfUrl) this.loadPdf();
+      } else if (attempt < 10) {
+        setTimeout(() => tryLoad(attempt + 1), 150);
+      }
+    };
+    setTimeout(() => tryLoad(), 100);
   }
 
   ngOnDestroy() {
@@ -156,16 +311,24 @@ export class PdfViewerComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
+
   async loadPdf() {
     this.loading = true;
     this.error = null;
+    this.pageCanvases = [];
 
     try {
       const loadingTask = pdfjsLib.getDocument(this.pdfUrl);
       this.pdfDocument = await loadingTask.promise;
       this.totalPages = this.pdfDocument.numPages;
+      this.thumbnails = Array.from({ length: this.totalPages }, (_, i) => i + 1);
       this.loading = false;
-      await this.renderPage(this.currentPage);
+      await this.renderAllPages();
+      // Render thumbnails after main pages load
+      await this.renderThumbnails();
     } catch (err: any) {
       this.loading = false;
       this.error = `加载PDF失败: ${err.message || '未知错误'}`;
@@ -173,77 +336,120 @@ export class PdfViewerComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  async renderPage(pageNumber: number) {
-    if (this.rendering || !this.pdfDocument) return;
+  async renderAllPages() {
+    const container = this.canvasContainer.nativeElement;
+    container.innerHTML = '';
+    this.pageCanvases = [];
 
-    this.rendering = true;
+    const liveWidth = container.clientWidth - 24;
+    const availableWidth = Math.max(liveWidth, this.containerWidth, 200);
 
-    try {
-      const page = await this.pdfDocument.getPage(pageNumber);
-      const viewport = page.getViewport({ scale: this.scale });
+    for (let pageNum = 1; pageNum <= this.totalPages; pageNum++) {
+      try {
+        const page = await this.pdfDocument.getPage(pageNum);
+        const baseViewport = page.getViewport({ scale: 1 });
+        const fitScale = availableWidth / baseViewport.width;
+        const finalScale = fitScale * this.scale;
+        const viewport = page.getViewport({ scale: finalScale });
 
-      const canvas = this.canvas.nativeElement;
-      const context = canvas.getContext('2d');
+        const canvas = document.createElement('canvas');
+        canvas.id = `pdf-page-${pageNum}`;
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        canvas.dataset['page'] = String(pageNum);
 
-      if (!context) {
-        throw new Error('无法获取canvas context');
+        const context = canvas.getContext('2d');
+        if (!context) continue;
+
+        container.appendChild(canvas);
+        this.pageCanvases.push(canvas);
+        await page.render({ canvasContext: context, viewport }).promise;
+      } catch (err: any) {
+        console.error(`渲染第${pageNum}页失败:`, err);
       }
-
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
-
-      const renderContext = {
-        canvasContext: context,
-        viewport: viewport
-      };
-
-      await page.render(renderContext).promise;
-      this.rendering = false;
-    } catch (err: any) {
-      this.rendering = false;
-      this.error = `渲染页面失败: ${err.message || '未知错误'}`;
-      console.error('PDF渲染错误:', err);
     }
   }
 
-  async previousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      await this.renderPage(this.currentPage);
+  async renderThumbnails() {
+    if (!this.pdfDocument) return;
+    const thumbWidth = 86; // px
+
+    for (let pageNum = 1; pageNum <= this.totalPages; pageNum++) {
+      try {
+        const thumbCanvas = document.getElementById(`thumb-${pageNum}`) as HTMLCanvasElement;
+        if (!thumbCanvas) continue;
+
+        const page = await this.pdfDocument.getPage(pageNum);
+        const baseViewport = page.getViewport({ scale: 1 });
+        const thumbScale = thumbWidth / baseViewport.width;
+        const viewport = page.getViewport({ scale: thumbScale });
+
+        thumbCanvas.width = viewport.width;
+        thumbCanvas.height = viewport.height;
+
+        const ctx = thumbCanvas.getContext('2d');
+        if (!ctx) continue;
+
+        await page.render({ canvasContext: ctx, viewport }).promise;
+      } catch (err: any) {
+        console.error(`渲染缩略图第${pageNum}页失败:`, err);
+      }
     }
   }
 
-  async nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      await this.renderPage(this.currentPage);
+  scrollToPage(pageNum: number) {
+    this.currentPage = pageNum;
+    const canvas = document.getElementById(`pdf-page-${pageNum}`);
+    canvas?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Also scroll sidebar thumb into view
+    const thumb = document.getElementById(`thumb-${pageNum}`);
+    thumb?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  onScroll() {
+    // Update currentPage based on which page canvas is most visible
+    const container = this.canvasContainer.nativeElement;
+    const scrollTop = container.scrollTop;
+    const containerHeight = container.clientHeight;
+
+    let bestPage = 1;
+    let bestVisibility = 0;
+
+    for (const canvas of this.pageCanvases) {
+      const offsetTop = canvas.offsetTop;
+      const height = canvas.offsetHeight;
+      const visibleTop = Math.max(scrollTop, offsetTop);
+      const visibleBottom = Math.min(scrollTop + containerHeight, offsetTop + height);
+      const visible = Math.max(0, visibleBottom - visibleTop);
+
+      if (visible > bestVisibility) {
+        bestVisibility = visible;
+        bestPage = parseInt(canvas.dataset['page'] ?? '1', 10);
+      }
+    }
+
+    if (this.currentPage !== bestPage) {
+      this.currentPage = bestPage;
     }
   }
 
   async zoomIn() {
     if (this.scale < 3) {
       this.scale += 0.25;
-      await this.renderPage(this.currentPage);
+      await this.renderAllPages();
     }
   }
 
   async zoomOut() {
-    if (this.scale > 0.5) {
+    if (this.scale > 0.3) {
       this.scale -= 0.25;
-      await this.renderPage(this.currentPage);
+      await this.renderAllPages();
     }
   }
 
-  private adjustScale() {
-    if (!this.canvasContainer) return;
-    
-    const containerWidth = this.canvasContainer.nativeElement.clientWidth;
-    // 对于移动设备，自动调整缩放以适应屏幕
-    if (containerWidth < 768) {
-      this.scale = containerWidth / 800; // 假设PDF原始宽度约800px
-      if (this.pdfDocument && this.currentPage === 1) {
-        this.renderPage(this.currentPage);
-      }
-    }
+  async fitWidth() {
+    this.scale = 1.0;
+    await this.renderAllPages();
   }
 }

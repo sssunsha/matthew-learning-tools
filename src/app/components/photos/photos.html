@@ -1,0 +1,31 @@
+<div class="photos-container">
+  <div class="photos-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="photos-title">我的照片</h1>
+    <button mat-icon-button class="clear-btn" (click)="clearAll()" *ngIf="photos.length > 0" title="清空所有照片">
+      <mat-icon>delete_sweep</mat-icon>
+    </button>
+  </div>
+
+  <div class="photos-content">
+    <div class="empty-state" *ngIf="photos.length === 0">
+      <mat-icon class="empty-icon">photo_library</mat-icon>
+      <p class="empty-text">还没有照片</p>
+      <p class="empty-hint">点击页面标题栏的相机图标开始拍照</p>
+    </div>
+
+    <div class="photos-grid" *ngIf="photos.length > 0">
+      <div class="photo-card" *ngFor="let photo of photos">
+        <img [src]="photo.dataUrl" [alt]="'照片 ' + photo.id" class="photo-image" />
+        <div class="photo-info">
+          <span class="photo-date">{{ formatDate(photo.timestamp) }}</span>
+          <button mat-icon-button class="delete-btn" (click)="deletePhoto(photo.id)" title="删除照片">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

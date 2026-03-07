@@ -1,0 +1,259 @@
+{
+  "id": "method-12",
+  "category": "方法篇",
+  "lesson": "第12讲",
+  "title": "等差数列求和",
+  "description": "等差数列求和的练习题库",
+  "questions": [
+    {
+      "question": "5 + 6 + ... + 16 = ?",
+      "answer": 126,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "15 + 16 + ... + 19 = ?",
+      "answer": 85,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "18 + 19 + ... + 35 = ?",
+      "answer": 477,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "12 + 13 + ... + 17 = ?",
+      "answer": 87,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "13 + 14 + ... + 20 = ?",
+      "answer": 132,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "9 + 10 + ... + 16 = ?",
+      "answer": 100,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "9 + 10 + ... + 19 = ?",
+      "answer": 154,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "6 + 7 + ... + 13 = ?",
+      "answer": 76,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "19 + 20 + ... + 28 = ?",
+      "answer": 235,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "8 + 9 + ... + 22 = ?",
+      "answer": 225,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "18 + 19 + ... + 29 = ?",
+      "answer": 282,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "11 + 12 + ... + 21 = ?",
+      "answer": 176,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "18 + 19 + ... + 26 = ?",
+      "answer": 198,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "18 + 19 + ... + 33 = ?",
+      "answer": 408,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "1 + 2 + ... + 18 = ?",
+      "answer": 171,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "4 + 5 + ... + 11 = ?",
+      "answer": 60,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "11 + 12 + ... + 15 = ?",
+      "answer": 65,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "18 + 19 + ... + 23 = ?",
+      "answer": 123,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "8 + 9 + ... + 20 = ?",
+      "answer": 182,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "8 + 9 + ... + 24 = ?",
+      "answer": 272,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "7 + 8 + ... + 14 = ?",
+      "answer": 84,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "14 + 15 + ... + 21 = ?",
+      "answer": 140,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "11 + 12 + ... + 25 = ?",
+      "answer": 270,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "19 + 20 + ... + 28 = ?",
+      "answer": 235,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "8 + 9 + ... + 12 = ?",
+      "answer": 50,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "19 + 20 + ... + 37 = ?",
+      "answer": 532,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "12 + 13 + ... + 23 = ?",
+      "answer": 210,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "8 + 9 + ... + 12 = ?",
+      "answer": 50,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "5 + 6 + ... + 14 = ?",
+      "answer": 95,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "20 + 21 + ... + 33 = ?",
+      "answer": 371,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "4 + 5 + ... + 9 = ?",
+      "answer": 39,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "8 + 9 + ... + 15 = ?",
+      "answer": 92,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "15 + 16 + ... + 33 = ?",
+      "answer": 456,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "8 + 9 + ... + 13 = ?",
+      "answer": 63,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "14 + 15 + ... + 25 = ?",
+      "answer": 234,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "15 + 16 + ... + 22 = ?",
+      "answer": 148,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "1 + 2 + ... + 5 = ?",
+      "answer": 15,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "19 + 20 + ... + 27 = ?",
+      "answer": 207,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "8 + 9 + ... + 16 = ?",
+      "answer": 108,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "14 + 15 + ... + 18 = ?",
+      "answer": 80,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "7 + 8 + ... + 24 = ?",
+      "answer": 279,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "18 + 19 + ... + 28 = ?",
+      "answer": 253,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "20 + 21 + ... + 38 = ?",
+      "answer": 551,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "1 + 2 + ... + 17 = ?",
+      "answer": 153,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "20 + 21 + ... + 37 = ?",
+      "answer": 513,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "4 + 5 + ... + 10 = ?",
+      "answer": 49,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "6 + 7 + ... + 16 = ?",
+      "answer": 121,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "13 + 14 + ... + 17 = ?",
+      "answer": 75,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "15 + 16 + ... + 31 = ?",
+      "answer": 391,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    },
+    {
+      "question": "10 + 11 + ... + 14 = ?",
+      "answer": 60,
+      "explanation": "等差数列求和：(首项+末项)×项数÷2"
+    }
+  ]
+}

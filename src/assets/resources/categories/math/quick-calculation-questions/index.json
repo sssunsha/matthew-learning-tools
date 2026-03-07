@@ -1,0 +1,198 @@
+{
+  "techniques": [
+    {
+      "id": "technique-01",
+      "lesson": "第1讲",
+      "title": "颠倒数的加法",
+      "file": "technique-01-reversed-addition.json"
+    },
+    {
+      "id": "technique-02",
+      "lesson": "第2讲",
+      "title": "颠倒数的减法",
+      "file": "technique-02-reversed-subtraction.json"
+    },
+    {
+      "id": "technique-03",
+      "lesson": "第3讲",
+      "title": "被减数为100、1000……的减法",
+      "file": "technique-03-minuend-100-1000.json"
+    },
+    {
+      "id": "technique-04",
+      "lesson": "第4讲",
+      "title": "任意数乘5的速算",
+      "file": "technique-04-multiply-by-5.json"
+    },
+    {
+      "id": "technique-05",
+      "lesson": "第5讲",
+      "title": "一个数除以5的速算",
+      "file": "technique-05-divide-by-5.json"
+    },
+    {
+      "id": "technique-06",
+      "lesson": "第6讲",
+      "title": "交叉相乘法速算两位数乘法",
+      "file": "technique-06-cross-multiplication.json"
+    },
+    {
+      "id": "technique-07",
+      "lesson": "第7讲",
+      "title": "十几乘十几",
+      "file": "technique-07-teens-multiplication.json"
+    },
+    {
+      "id": "technique-08",
+      "lesson": "第8讲",
+      "title": "九十几乘九十几",
+      "file": "technique-08-ninety-multiplication.json"
+    },
+    {
+      "id": "technique-09",
+      "lesson": "第9讲",
+      "title": "速算数11",
+      "file": "technique-09-multiply-by-11.json"
+    },
+    {
+      "id": "technique-10",
+      "lesson": "第10讲",
+      "title": "个位数相同的两位数相乘",
+      "file": "technique-10-same-ones-digit.json"
+    },
+    {
+      "id": "technique-11",
+      "lesson": "第11讲",
+      "title": "十位数相同的两位数相乘",
+      "file": "technique-11-same-tens-digit.json"
+    },
+    {
+      "id": "technique-12",
+      "lesson": "第12讲",
+      "title": "多位数乘9的重复数",
+      "file": "technique-12-multiply-by-9-repeating.json"
+    },
+    {
+      "id": "technique-13",
+      "lesson": "第13讲",
+      "title": "重复数除9",
+      "file": "technique-13-repeating-divide-9.json"
+    },
+    {
+      "id": "technique-14",
+      "lesson": "第14讲",
+      "title": "头同尾合十",
+      "file": "technique-14-head-same-tail-10.json"
+    },
+    {
+      "id": "technique-15",
+      "lesson": "第15讲",
+      "title": "尾同头合十",
+      "file": "technique-15-tail-same-head-10.json"
+    },
+    {
+      "id": "technique-16",
+      "lesson": "第16讲",
+      "title": "合十数重复数",
+      "file": "technique-16-sum-10-repeating.json"
+    }
+  ],
+  "methods": [
+    {
+      "id": "method-01",
+      "lesson": "第1讲",
+      "title": "拆补凑整法",
+      "file": "method-01-split-complement.json"
+    },
+    {
+      "id": "method-02",
+      "lesson": "第2讲",
+      "title": "带符号搬家（1）",
+      "file": "method-02-move-with-signs-1.json"
+    },
+    {
+      "id": "method-03",
+      "lesson": "第3讲",
+      "title": "添去括号法（1）",
+      "file": "method-03-add-remove-brackets-1.json"
+    },
+    {
+      "id": "method-04",
+      "lesson": "第4讲",
+      "title": "基准数法",
+      "file": "method-04-base-number.json"
+    },
+    {
+      "id": "method-05",
+      "lesson": "第5讲",
+      "title": "连续自然数求和",
+      "file": "method-05-consecutive-sum.json"
+    },
+    {
+      "id": "method-06",
+      "lesson": "第6讲",
+      "title": "分组法",
+      "file": "method-06-grouping.json"
+    },
+    {
+      "id": "method-07",
+      "lesson": "第7讲",
+      "title": "带符号搬家（2）",
+      "file": "method-07-move-with-signs-2.json"
+    },
+    {
+      "id": "method-08",
+      "lesson": "第8讲",
+      "title": "乘法分配律",
+      "file": "method-08-distributive-law.json"
+    },
+    {
+      "id": "method-09",
+      "lesson": "第9讲",
+      "title": "转化法算乘除法",
+      "file": "method-09-transform-multiply-divide.json"
+    },
+    {
+      "id": "method-10",
+      "lesson": "第10讲",
+      "title": "添去括号法（2）",
+      "file": "method-10-add-remove-brackets-2.json"
+    },
+    {
+      "id": "method-11",
+      "lesson": "第11讲",
+      "title": "乘除法混合巧算",
+      "file": "method-11-mixed-multiply-divide.json"
+    },
+    {
+      "id": "method-12",
+      "lesson": "第12讲",
+      "title": "等差数列求和",
+      "file": "method-12-arithmetic-sequence.json"
+    },
+    {
+      "id": "method-13",
+      "lesson": "第13讲",
+      "title": "提取公因数法（1）",
+      "file": "method-13-common-factor-1.json"
+    },
+    {
+      "id": "method-14",
+      "lesson": "第14讲",
+      "title": "位值原理",
+      "file": "method-14-place-value.json"
+    },
+    {
+      "id": "method-15",
+      "lesson": "第15讲",
+      "title": "商不变",
+      "file": "method-15-quotient-invariant.json"
+    },
+    {
+      "id": "method-16",
+      "lesson": "第16讲",
+      "title": "平方差公式",
+      "file": "method-16-difference-of-squares.json"
+    }
+  ]
+}

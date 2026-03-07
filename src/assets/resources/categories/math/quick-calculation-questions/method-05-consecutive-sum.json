@@ -1,0 +1,259 @@
+{
+  "id": "method-05",
+  "category": "方法篇",
+  "lesson": "第5讲",
+  "title": "连续自然数求和",
+  "description": "连续自然数求和的练习题库",
+  "questions": [
+    {
+      "question": "47 × 63 = ?",
+      "answer": 2961,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "41 ÷ 86 = ?",
+      "answer": 0,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "78 - 80 = ?",
+      "answer": -2,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "34 × 76 = ?",
+      "answer": 2584,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "67 + 77 = ?",
+      "answer": 144,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "83 + 71 = ?",
+      "answer": 154,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "10 ÷ 57 = ?",
+      "answer": 0,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "90 - 73 = ?",
+      "answer": 17,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "12 ÷ 22 = ?",
+      "answer": 0,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "54 ÷ 37 = ?",
+      "answer": 1,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "34 ÷ 86 = ?",
+      "answer": 0,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "55 ÷ 15 = ?",
+      "answer": 3,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "35 × 72 = ?",
+      "answer": 2520,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "22 - 37 = ?",
+      "answer": -15,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "27 × 66 = ?",
+      "answer": 1782,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "35 ÷ 82 = ?",
+      "answer": 0,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "17 - 20 = ?",
+      "answer": -3,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "58 - 32 = ?",
+      "answer": 26,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "39 × 90 = ?",
+      "answer": 3510,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "12 + 66 = ?",
+      "answer": 78,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "98 - 19 = ?",
+      "answer": 79,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "20 ÷ 65 = ?",
+      "answer": 0,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "24 ÷ 40 = ?",
+      "answer": 0,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "67 + 14 = ?",
+      "answer": 81,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "48 + 20 = ?",
+      "answer": 68,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "44 - 45 = ?",
+      "answer": -1,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "56 × 90 = ?",
+      "answer": 5040,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "59 + 68 = ?",
+      "answer": 127,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "27 × 97 = ?",
+      "answer": 2619,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "23 + 24 = ?",
+      "answer": 47,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "88 × 44 = ?",
+      "answer": 3872,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "79 + 34 = ?",
+      "answer": 113,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "56 × 84 = ?",
+      "answer": 4704,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "37 - 37 = ?",
+      "answer": 0,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "86 + 76 = ?",
+      "answer": 162,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "17 - 80 = ?",
+      "answer": -63,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "65 + 53 = ?",
+      "answer": 118,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "29 × 42 = ?",
+      "answer": 1218,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "80 × 58 = ?",
+      "answer": 4640,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "30 + 38 = ?",
+      "answer": 68,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "61 × 27 = ?",
+      "answer": 1647,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "11 + 35 = ?",
+      "answer": 46,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "43 + 75 = ?",
+      "answer": 118,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "63 × 49 = ?",
+      "answer": 3087,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "67 ÷ 92 = ?",
+      "answer": 0,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "30 - 21 = ?",
+      "answer": 9,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "62 × 17 = ?",
+      "answer": 1054,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "71 × 30 = ?",
+      "answer": 2130,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "10 ÷ 94 = ?",
+      "answer": 0,
+      "explanation": "连续自然数求和练习题"
+    },
+    {
+      "question": "28 - 36 = ?",
+      "answer": -8,
+      "explanation": "连续自然数求和练习题"
+    }
+  ]
+}

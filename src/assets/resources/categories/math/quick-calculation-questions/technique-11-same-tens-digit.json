@@ -1,0 +1,259 @@
+{
+  "id": "technique-11",
+  "category": "技巧篇",
+  "lesson": "第11讲",
+  "title": "十位数相同的两位数相乘",
+  "description": "十位数相同的两位数相乘的练习题库",
+  "questions": [
+    {
+      "question": "50 + 83 = ?",
+      "answer": 133,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "37 ÷ 69 = ?",
+      "answer": 0,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "21 ÷ 64 = ?",
+      "answer": 0,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "54 + 21 = ?",
+      "answer": 75,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "54 ÷ 14 = ?",
+      "answer": 3,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "63 - 83 = ?",
+      "answer": -20,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "94 × 72 = ?",
+      "answer": 6768,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "52 ÷ 78 = ?",
+      "answer": 0,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "47 × 71 = ?",
+      "answer": 3337,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "64 - 73 = ?",
+      "answer": -9,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "91 + 88 = ?",
+      "answer": 179,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "78 × 20 = ?",
+      "answer": 1560,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "10 - 52 = ?",
+      "answer": -42,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "23 × 73 = ?",
+      "answer": 1679,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "20 - 48 = ?",
+      "answer": -28,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "45 + 64 = ?",
+      "answer": 109,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "90 × 53 = ?",
+      "answer": 4770,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "55 ÷ 82 = ?",
+      "answer": 0,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "26 + 25 = ?",
+      "answer": 51,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "91 + 56 = ?",
+      "answer": 147,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "59 - 52 = ?",
+      "answer": 7,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "93 ÷ 70 = ?",
+      "answer": 1,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "75 + 37 = ?",
+      "answer": 112,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "81 + 64 = ?",
+      "answer": 145,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "51 - 48 = ?",
+      "answer": 3,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "77 ÷ 26 = ?",
+      "answer": 2,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "24 + 11 = ?",
+      "answer": 35,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "31 ÷ 16 = ?",
+      "answer": 1,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "35 - 73 = ?",
+      "answer": -38,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "47 ÷ 92 = ?",
+      "answer": 0,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "33 ÷ 24 = ?",
+      "answer": 1,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "45 + 77 = ?",
+      "answer": 122,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "21 × 72 = ?",
+      "answer": 1512,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "47 + 54 = ?",
+      "answer": 101,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "30 × 68 = ?",
+      "answer": 2040,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "85 ÷ 47 = ?",
+      "answer": 1,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "66 ÷ 86 = ?",
+      "answer": 0,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "69 - 59 = ?",
+      "answer": 10,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "95 + 88 = ?",
+      "answer": 183,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "11 - 91 = ?",
+      "answer": -80,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "52 + 22 = ?",
+      "answer": 74,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "25 ÷ 74 = ?",
+      "answer": 0,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "37 - 12 = ?",
+      "answer": 25,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "60 × 19 = ?",
+      "answer": 1140,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "76 + 11 = ?",
+      "answer": 87,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "61 ÷ 84 = ?",
+      "answer": 0,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "65 ÷ 13 = ?",
+      "answer": 5,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "67 + 34 = ?",
+      "answer": 101,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "81 × 12 = ?",
+      "answer": 972,
+      "explanation": "十位数相同的两位数相乘练习题"
+    },
+    {
+      "question": "86 ÷ 80 = ?",
+      "answer": 1,
+      "explanation": "十位数相同的两位数相乘练习题"
+    }
+  ]
+}

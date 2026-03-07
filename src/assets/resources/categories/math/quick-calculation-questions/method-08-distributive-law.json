@@ -1,0 +1,259 @@
+{
+  "id": "method-08",
+  "category": "方法篇",
+  "lesson": "第8讲",
+  "title": "乘法分配律",
+  "description": "乘法分配律的练习题库",
+  "questions": [
+    {
+      "question": "25 × 2 + 25 × 5 = ?",
+      "answer": 175,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "57 × 5 + 57 × 3 = ?",
+      "answer": 456,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "85 × 6 + 85 × 8 = ?",
+      "answer": 1190,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "60 × 2 + 60 × 3 = ?",
+      "answer": 300,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "73 × 5 + 73 × 9 = ?",
+      "answer": 1022,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "22 × 3 + 22 × 5 = ?",
+      "answer": 176,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "87 × 5 + 87 × 9 = ?",
+      "answer": 1218,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "79 × 5 + 79 × 3 = ?",
+      "answer": 632,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "24 × 4 + 24 × 3 = ?",
+      "answer": 168,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "13 × 1 + 13 × 2 = ?",
+      "answer": 39,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "89 × 5 + 89 × 4 = ?",
+      "answer": 801,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "60 × 3 + 60 × 9 = ?",
+      "answer": 720,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "65 × 7 + 65 × 3 = ?",
+      "answer": 650,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "35 × 1 + 35 × 9 = ?",
+      "answer": 350,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "84 × 8 + 84 × 7 = ?",
+      "answer": 1260,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "17 × 1 + 17 × 2 = ?",
+      "answer": 51,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "61 × 6 + 61 × 1 = ?",
+      "answer": 427,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "64 × 7 + 64 × 1 = ?",
+      "answer": 512,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "25 × 3 + 25 × 9 = ?",
+      "answer": 300,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "77 × 4 + 77 × 3 = ?",
+      "answer": 539,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "89 × 2 + 89 × 1 = ?",
+      "answer": 267,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "24 × 6 + 24 × 4 = ?",
+      "answer": 240,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "36 × 3 + 36 × 9 = ?",
+      "answer": 432,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "60 × 3 + 60 × 9 = ?",
+      "answer": 720,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "37 × 7 + 37 × 7 = ?",
+      "answer": 518,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "85 × 8 + 85 × 3 = ?",
+      "answer": 935,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "52 × 3 + 52 × 1 = ?",
+      "answer": 208,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "30 × 2 + 30 × 1 = ?",
+      "answer": 90,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "60 × 8 + 60 × 4 = ?",
+      "answer": 720,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "76 × 1 + 76 × 8 = ?",
+      "answer": 684,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "28 × 8 + 28 × 6 = ?",
+      "answer": 392,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "67 × 9 + 67 × 2 = ?",
+      "answer": 737,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "72 × 4 + 72 × 7 = ?",
+      "answer": 792,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "62 × 9 + 62 × 8 = ?",
+      "answer": 1054,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "65 × 1 + 65 × 3 = ?",
+      "answer": 260,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "42 × 7 + 42 × 7 = ?",
+      "answer": 588,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "15 × 3 + 15 × 5 = ?",
+      "answer": 120,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "51 × 1 + 51 × 7 = ?",
+      "answer": 408,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "84 × 3 + 84 × 7 = ?",
+      "answer": 840,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "18 × 2 + 18 × 4 = ?",
+      "answer": 108,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "95 × 6 + 95 × 4 = ?",
+      "answer": 950,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "76 × 3 + 76 × 1 = ?",
+      "answer": 304,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "58 × 5 + 58 × 5 = ?",
+      "answer": 580,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "59 × 6 + 59 × 5 = ?",
+      "answer": 649,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "29 × 6 + 29 × 6 = ?",
+      "answer": 348,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "13 × 2 + 13 × 2 = ?",
+      "answer": 52,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "97 × 2 + 97 × 7 = ?",
+      "answer": 873,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "62 × 5 + 62 × 6 = ?",
+      "answer": 682,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "14 × 1 + 14 × 7 = ?",
+      "answer": 112,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    },
+    {
+      "question": "44 × 9 + 44 × 2 = ?",
+      "answer": 484,
+      "explanation": "乘法分配律：a×b + a×c = a×(b+c)"
+    }
+  ]
+}

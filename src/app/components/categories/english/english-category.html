@@ -5,6 +5,9 @@
     </button>
     <h1 class="category-title">英语</h1>
     <p class="category-subtitle">English</p>
+    <button mat-icon-button class="camera-btn-header" (click)="openCamera()" title="拍照">
+      <mat-icon>photo_camera</mat-icon>
+    </button>
   </div>
 
   <div class="metro-grid">
@@ -19,13 +22,13 @@
       </div>
     </div>
 
-    <!-- 四年级上课本磁贴 -->
-    <div class="metro-tile tile-large" (click)="openGrade4Term1Textbook()">
+    <!-- 三年级下知识清单磁贴 -->
+    <div class="metro-tile tile-large" (click)="openGrade3Term2KnowledgeList()">
       <div class="tile-content">
-        <mat-icon class="tile-icon">import_contacts</mat-icon>
+        <mat-icon class="tile-icon">checklist</mat-icon>
         <div class="tile-text">
-          <h2>四年级上课本</h2>
-          <p>Grade 4 Term 1</p>
+          <h2>三年级下知识清单</h2>
+          <p>Knowledge List</p>
         </div>
       </div>
     </div>

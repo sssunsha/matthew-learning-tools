@@ -1,0 +1,259 @@
+{
+  "id": "technique-06",
+  "category": "技巧篇",
+  "lesson": "第6讲",
+  "title": "交叉相乘法速算两位数乘法",
+  "description": "交叉相乘法速算两位数乘法的练习题库",
+  "questions": [
+    {
+      "question": "28 - 48 = ?",
+      "answer": -20,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "57 + 56 = ?",
+      "answer": 113,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "28 ÷ 15 = ?",
+      "answer": 1,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "45 ÷ 61 = ?",
+      "answer": 0,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "30 + 54 = ?",
+      "answer": 84,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "88 × 28 = ?",
+      "answer": 2464,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "46 + 80 = ?",
+      "answer": 126,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "34 × 73 = ?",
+      "answer": 2482,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "81 ÷ 43 = ?",
+      "answer": 1,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "85 - 26 = ?",
+      "answer": 59,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "28 + 62 = ?",
+      "answer": 90,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "37 ÷ 48 = ?",
+      "answer": 0,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "27 - 68 = ?",
+      "answer": -41,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "10 ÷ 12 = ?",
+      "answer": 0,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "73 ÷ 85 = ?",
+      "answer": 0,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "27 × 37 = ?",
+      "answer": 999,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "33 - 37 = ?",
+      "answer": -4,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "31 - 44 = ?",
+      "answer": -13,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "63 ÷ 47 = ?",
+      "answer": 1,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "87 + 68 = ?",
+      "answer": 155,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "12 - 43 = ?",
+      "answer": -31,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "28 - 73 = ?",
+      "answer": -45,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "73 - 36 = ?",
+      "answer": 37,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "49 - 48 = ?",
+      "answer": 1,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "24 + 83 = ?",
+      "answer": 107,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "87 - 25 = ?",
+      "answer": 62,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "23 ÷ 64 = ?",
+      "answer": 0,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "21 ÷ 48 = ?",
+      "answer": 0,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "50 + 35 = ?",
+      "answer": 85,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "28 + 54 = ?",
+      "answer": 82,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "85 + 27 = ?",
+      "answer": 112,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "33 × 24 = ?",
+      "answer": 792,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "41 × 38 = ?",
+      "answer": 1558,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "14 - 73 = ?",
+      "answer": -59,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "91 - 55 = ?",
+      "answer": 36,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "95 - 22 = ?",
+      "answer": 73,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "70 × 15 = ?",
+      "answer": 1050,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "98 - 66 = ?",
+      "answer": 32,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "38 - 66 = ?",
+      "answer": -28,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "10 - 41 = ?",
+      "answer": -31,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "28 + 59 = ?",
+      "answer": 87,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "76 - 82 = ?",
+      "answer": -6,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "23 + 63 = ?",
+      "answer": 86,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "89 + 99 = ?",
+      "answer": 188,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "43 ÷ 70 = ?",
+      "answer": 0,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "67 + 66 = ?",
+      "answer": 133,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "52 ÷ 81 = ?",
+      "answer": 0,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "84 + 59 = ?",
+      "answer": 143,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "78 × 39 = ?",
+      "answer": 3042,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    },
+    {
+      "question": "48 ÷ 70 = ?",
+      "answer": 0,
+      "explanation": "交叉相乘法速算两位数乘法练习题"
+    }
+  ]
+}

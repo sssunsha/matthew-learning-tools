@@ -22,7 +22,7 @@ function updateVersion() {
 
 // 复制构建文件到 Cordova www 目录
 function copyBuildToCordova() {
-  const sourceDir = path.join(__dirname, '../dist/matthew-learning-tools/browser');
+  const sourceDir = path.join(__dirname, '../dist/matthew-learning-tools/browser/browser');
   const targetDir = path.join(__dirname, '../cordova-app/www');
   
   if (!fs.existsSync(sourceDir)) {

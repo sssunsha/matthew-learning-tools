@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,9 +27,28 @@ interface Unit {
 export class Grade3Term2LearnTextsComponent {
   pdfPath: string;
   units: Unit[] = [];
-  currentMedia: { type: 'audio' | 'video' | null; url: string | null } = { type: null, url: null };
+  currentMedia: { type: 'audio' | 'video' | null; url: string | null; title: string } = {
+    type: null,
+    url: null,
+    title: ''
+  };
   activeTab: 'pdf' | 'media' = 'pdf';
-  isLeftPanelHidden: boolean = false;
+  menuOpen = false;
+
+  @ViewChild('audioPlayer') audioPlayerRef?: ElementRef<HTMLAudioElement>;
+  @ViewChild('videoPlayer') videoPlayerRef?: ElementRef<HTMLVideoElement>;
+
+  get currentMediaTitle(): string {
+    return this.currentMedia.title || '';
+  }
+
+  get audioSrc(): string {
+    return this.currentMedia.type === 'audio' ? (this.currentMedia.url ?? '') : '';
+  }
+
+  get videoSrc(): string {
+    return this.currentMedia.type === 'video' ? (this.currentMedia.url ?? '') : '';
+  }
 
   constructor(private router: Router) {
     this.pdfPath = '/assets/resources/categories/english/grade-3-2/小学英语外研版（三起）（孙有中）（2024）三年级下册 电子课本.pdf';
@@ -38,7 +57,7 @@ export class Grade3Term2LearnTextsComponent {
 
   initializeUnits() {
     const basePath = '/assets/resources/categories/english/grade-3-2';
-    
+
     this.units = [
       {
         name: 'Unit 1 Animal friends',
@@ -126,22 +145,29 @@ export class Grade3Term2LearnTextsComponent {
   }
 
   playMedia(item: MediaItem) {
-    this.currentMedia = {
-      type: item.type,
-      url: item.url
-    };
-    // Switch to media tab when playing video
-    if (item.type === 'video') {
-      this.activeTab = 'media';
-    }
+    this.currentMedia = { type: item.type, url: item.url, title: item.title };
+    // Switch to media tab and close dropdown menu
+    this.activeTab = 'media';
+    this.menuOpen = false;
+    // Trigger play after Angular updates the src binding
+    setTimeout(() => {
+      const el = item.type === 'audio'
+        ? this.audioPlayerRef?.nativeElement
+        : this.videoPlayerRef?.nativeElement;
+      el?.play().catch(() => {/* autoplay blocked, user can press play manually */});
+    }, 100);
   }
 
   switchTab(tab: 'pdf' | 'media') {
     this.activeTab = tab;
   }
 
-  toggleLeftPanel() {
-    this.isLeftPanelHidden = !this.isLeftPanelHidden;
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
   }
 
   goBack() {

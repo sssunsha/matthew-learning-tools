@@ -16,7 +16,7 @@ import { EnglishTextbookLearningComponent } from './components/categories/englis
 import { EnglishLearnTextsComponent } from './components/categories/english/textbook-learning/learn-texts/english-learn-texts';
 import { Grade3Term2TextbookComponent } from './components/categories/english/grade3-term2-textbook/grade3-term2-textbook';
 import { Grade3Term2LearnTextsComponent } from './components/categories/english/grade3-term2-textbook/learn-texts/grade3-term2-learn-texts';
-import { Grade4Term1TextbookComponent } from './components/categories/english/grade4-term1-textbook/grade4-term1-textbook';
+import { Grade3Term2KnowledgeListComponent } from './components/categories/english/grade3-term2-knowledge-list/grade3-term2-knowledge-list';
 import { ScienceCategoryComponent } from './components/categories/science/science-category';
 import { AiCategoryComponent } from './components/categories/ai/ai-category';
 import { NotesCategoryComponent } from './components/categories/notes/notes-category';
@@ -28,6 +28,7 @@ import { VocabularyTestComponent } from './components/vocabulary-test/vocabulary
 import { ParrotTrainingComponent } from './components/parrot-training/parrot-training';
 import { SettingsComponent } from './components/settings/settings';
 import { StatisticsComponent } from './components/statistics/statistics';
+import { PhotosComponent } from './components/photos/photos';
 
 export const routes: Routes = [
   // Home route
@@ -94,14 +95,9 @@ export const routes: Routes = [
     title: '学课文 - Grade 3 Term 2',
   },
   {
-    path: 'category/english/grade4-term1-textbook',
-    component: Grade4Term1TextbookComponent,
-    title: '四年级上课本 - Grade 4 Term 1 Textbook',
-  },
-  {
-    path: 'category/english/grade4-term1-textbook/learn-texts',
-    component: EnglishLearnTextsComponent,
-    title: '学课文 - Learn Texts',
+    path: 'category/english/grade3-term2-knowledge-list',
+    component: Grade3Term2KnowledgeListComponent,
+    title: '三年级下知识清单 - Grade 3 Term 2 Knowledge List',
   },
   {
     path: 'category/math',
@@ -184,6 +180,11 @@ export const routes: Routes = [
     path: 'statistics',
     component: StatisticsComponent,
     title: '统计 - Statistics',
+  },
+  {
+    path: 'photos',
+    component: PhotosComponent,
+    title: '我的照片 - My Photos',
   },
 
   // Catch-all redirect to home

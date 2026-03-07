@@ -1,0 +1,13 @@
+<div class="category-container english-theme">
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="category-title">三年级下知识清单</h1>
+    <p class="category-subtitle">Grade 3 Term 2 Knowledge List</p>
+  </div>
+
+  <div class="pdf-container">
+    <app-pdf-viewer [pdfUrl]="pdfUrl"></app-pdf-viewer>
+  </div>
+</div>

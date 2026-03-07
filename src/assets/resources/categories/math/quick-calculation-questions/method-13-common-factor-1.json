@@ -1,0 +1,259 @@
+{
+  "id": "method-13",
+  "category": "方法篇",
+  "lesson": "第13讲",
+  "title": "提取公因数法（1）",
+  "description": "提取公因数法（1）的练习题库",
+  "questions": [
+    {
+      "question": "33 + 95 = ?",
+      "answer": 128,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "16 + 71 = ?",
+      "answer": 87,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "28 × 63 = ?",
+      "answer": 1764,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "94 - 50 = ?",
+      "answer": 44,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "64 - 43 = ?",
+      "answer": 21,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "95 - 62 = ?",
+      "answer": 33,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "94 + 99 = ?",
+      "answer": 193,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "96 + 34 = ?",
+      "answer": 130,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "79 + 54 = ?",
+      "answer": 133,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "72 ÷ 72 = ?",
+      "answer": 1,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "11 ÷ 37 = ?",
+      "answer": 0,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "29 × 14 = ?",
+      "answer": 406,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "56 + 36 = ?",
+      "answer": 92,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "65 + 28 = ?",
+      "answer": 93,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "27 + 75 = ?",
+      "answer": 102,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "75 - 98 = ?",
+      "answer": -23,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "32 + 27 = ?",
+      "answer": 59,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "81 ÷ 37 = ?",
+      "answer": 2,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "30 × 25 = ?",
+      "answer": 750,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "81 ÷ 66 = ?",
+      "answer": 1,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "56 - 76 = ?",
+      "answer": -20,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "99 - 72 = ?",
+      "answer": 27,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "72 + 95 = ?",
+      "answer": 167,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "93 × 68 = ?",
+      "answer": 6324,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "32 ÷ 22 = ?",
+      "answer": 1,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "60 + 80 = ?",
+      "answer": 140,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "76 ÷ 78 = ?",
+      "answer": 0,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "33 × 64 = ?",
+      "answer": 2112,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "18 × 21 = ?",
+      "answer": 378,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "51 - 20 = ?",
+      "answer": 31,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "57 - 42 = ?",
+      "answer": 15,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "61 - 34 = ?",
+      "answer": 27,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "37 + 42 = ?",
+      "answer": 79,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "81 - 71 = ?",
+      "answer": 10,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "86 × 79 = ?",
+      "answer": 6794,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "64 + 79 = ?",
+      "answer": 143,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "91 - 46 = ?",
+      "answer": 45,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "77 ÷ 18 = ?",
+      "answer": 4,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "86 × 31 = ?",
+      "answer": 2666,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "32 + 63 = ?",
+      "answer": 95,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "75 - 51 = ?",
+      "answer": 24,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "17 + 77 = ?",
+      "answer": 94,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "79 ÷ 97 = ?",
+      "answer": 0,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "47 + 16 = ?",
+      "answer": 63,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "83 ÷ 54 = ?",
+      "answer": 1,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "40 + 49 = ?",
+      "answer": 89,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "71 - 39 = ?",
+      "answer": 32,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "17 + 36 = ?",
+      "answer": 53,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "36 + 11 = ?",
+      "answer": 47,
+      "explanation": "提取公因数法（1）练习题"
+    },
+    {
+      "question": "35 ÷ 57 = ?",
+      "answer": 0,
+      "explanation": "提取公因数法（1）练习题"
+    }
+  ]
+}

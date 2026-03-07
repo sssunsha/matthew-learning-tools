@@ -1,0 +1,259 @@
+{
+  "id": "method-10",
+  "category": "方法篇",
+  "lesson": "第10讲",
+  "title": "添去括号法（2）",
+  "description": "添去括号法（2）的练习题库",
+  "questions": [
+    {
+      "question": "48 - 69 = ?",
+      "answer": -21,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "39 ÷ 34 = ?",
+      "answer": 1,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "58 - 70 = ?",
+      "answer": -12,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "17 × 23 = ?",
+      "answer": 391,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "64 × 19 = ?",
+      "answer": 1216,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "46 ÷ 92 = ?",
+      "answer": 0,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "31 - 50 = ?",
+      "answer": -19,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "27 × 50 = ?",
+      "answer": 1350,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "19 ÷ 68 = ?",
+      "answer": 0,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "27 - 79 = ?",
+      "answer": -52,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "83 ÷ 12 = ?",
+      "answer": 6,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "84 ÷ 11 = ?",
+      "answer": 7,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "53 × 10 = ?",
+      "answer": 530,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "58 ÷ 19 = ?",
+      "answer": 3,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "26 + 75 = ?",
+      "answer": 101,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "45 + 98 = ?",
+      "answer": 143,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "98 ÷ 58 = ?",
+      "answer": 1,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "42 × 40 = ?",
+      "answer": 1680,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "44 ÷ 58 = ?",
+      "answer": 0,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "34 ÷ 70 = ?",
+      "answer": 0,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "10 - 33 = ?",
+      "answer": -23,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "89 ÷ 63 = ?",
+      "answer": 1,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "93 × 79 = ?",
+      "answer": 7347,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "40 ÷ 27 = ?",
+      "answer": 1,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "76 + 89 = ?",
+      "answer": 165,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "76 - 64 = ?",
+      "answer": 12,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "14 - 42 = ?",
+      "answer": -28,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "13 ÷ 36 = ?",
+      "answer": 0,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "62 - 19 = ?",
+      "answer": 43,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "41 + 31 = ?",
+      "answer": 72,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "64 ÷ 46 = ?",
+      "answer": 1,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "22 × 65 = ?",
+      "answer": 1430,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "68 + 63 = ?",
+      "answer": 131,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "28 + 18 = ?",
+      "answer": 46,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "56 ÷ 37 = ?",
+      "answer": 1,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "14 + 29 = ?",
+      "answer": 43,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "97 × 92 = ?",
+      "answer": 8924,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "96 + 48 = ?",
+      "answer": 144,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "30 - 81 = ?",
+      "answer": -51,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "81 - 37 = ?",
+      "answer": 44,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "47 ÷ 80 = ?",
+      "answer": 0,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "66 ÷ 79 = ?",
+      "answer": 0,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "40 × 38 = ?",
+      "answer": 1520,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "67 + 11 = ?",
+      "answer": 78,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "18 - 35 = ?",
+      "answer": -17,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "84 - 90 = ?",
+      "answer": -6,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "36 × 34 = ?",
+      "answer": 1224,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "41 × 21 = ?",
+      "answer": 861,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "62 + 51 = ?",
+      "answer": 113,
+      "explanation": "添去括号法（2）练习题"
+    },
+    {
+      "question": "35 ÷ 94 = ?",
+      "answer": 0,
+      "explanation": "添去括号法（2）练习题"
+    }
+  ]
+}

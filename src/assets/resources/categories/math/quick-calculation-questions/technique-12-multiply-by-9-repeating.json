@@ -1,0 +1,259 @@
+{
+  "id": "technique-12",
+  "category": "技巧篇",
+  "lesson": "第12讲",
+  "title": "多位数乘9的重复数",
+  "description": "多位数乘9的重复数的练习题库",
+  "questions": [
+    {
+      "question": "26 + 36 = ?",
+      "answer": 62,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "87 - 47 = ?",
+      "answer": 40,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "98 × 94 = ?",
+      "answer": 9212,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "11 ÷ 62 = ?",
+      "answer": 0,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "40 + 63 = ?",
+      "answer": 103,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "73 × 87 = ?",
+      "answer": 6351,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "27 + 73 = ?",
+      "answer": 100,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "78 ÷ 81 = ?",
+      "answer": 0,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "64 + 52 = ?",
+      "answer": 116,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "51 + 32 = ?",
+      "answer": 83,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "16 ÷ 62 = ?",
+      "answer": 0,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "46 + 84 = ?",
+      "answer": 130,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "99 × 32 = ?",
+      "answer": 3168,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "81 ÷ 88 = ?",
+      "answer": 0,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "60 + 48 = ?",
+      "answer": 108,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "71 + 26 = ?",
+      "answer": 97,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "69 - 56 = ?",
+      "answer": 13,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "25 - 19 = ?",
+      "answer": 6,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "55 ÷ 61 = ?",
+      "answer": 0,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "98 - 69 = ?",
+      "answer": 29,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "70 - 63 = ?",
+      "answer": 7,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "35 - 40 = ?",
+      "answer": -5,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "34 × 87 = ?",
+      "answer": 2958,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "80 + 23 = ?",
+      "answer": 103,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "18 - 32 = ?",
+      "answer": -14,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "51 + 99 = ?",
+      "answer": 150,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "76 + 28 = ?",
+      "answer": 104,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "57 - 23 = ?",
+      "answer": 34,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "81 ÷ 66 = ?",
+      "answer": 1,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "95 - 64 = ?",
+      "answer": 31,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "97 × 61 = ?",
+      "answer": 5917,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "29 × 87 = ?",
+      "answer": 2523,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "79 - 86 = ?",
+      "answer": -7,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "51 + 91 = ?",
+      "answer": 142,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "19 + 56 = ?",
+      "answer": 75,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "20 × 64 = ?",
+      "answer": 1280,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "20 + 38 = ?",
+      "answer": 58,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "57 × 46 = ?",
+      "answer": 2622,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "95 + 15 = ?",
+      "answer": 110,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "76 ÷ 45 = ?",
+      "answer": 1,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "55 + 71 = ?",
+      "answer": 126,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "24 ÷ 84 = ?",
+      "answer": 0,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "35 - 30 = ?",
+      "answer": 5,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "21 + 19 = ?",
+      "answer": 40,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "31 × 72 = ?",
+      "answer": 2232,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "33 × 81 = ?",
+      "answer": 2673,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "84 × 93 = ?",
+      "answer": 7812,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "43 × 96 = ?",
+      "answer": 4128,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "77 ÷ 92 = ?",
+      "answer": 0,
+      "explanation": "多位数乘9的重复数练习题"
+    },
+    {
+      "question": "40 - 58 = ?",
+      "answer": -18,
+      "explanation": "多位数乘9的重复数练习题"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "name": "matthew-learning-tools",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "main": "electron.js",
   "scripts": {
     "ng": "ng",
@@ -16,6 +16,8 @@
     "electron:pack": "ng build --configuration production && electron-packager . MatthewTools --platform=darwin --arch=arm64 --out=release --overwrite --icon=public/app_icon.jpg",
     "android:debug": "node scripts/build-android.js debug",
     "android:release": "node scripts/build-android.js release",
+    "android:install": "/Users/I340818/Library/Android/sdk/platform-tools/adb install -r cordova-app/platforms/android/app/build/outputs/apk/debug/app-debug.apk",
+    "android:deploy": "npm run android:debug && npm run android:install",
     "android:run": "cd cordova-app && npx cordova run android",
     "android:emulate": "cd cordova-app && npx cordova emulate android"
   },
@@ -79,7 +81,7 @@
     "@angular/platform-browser": "^21.1.2",
     "@angular/router": "^21.1.0",
     "ngx-quill": "^30.0.1",
-    "pdfjs-dist": "^4.0.379",
+    "pdfjs-dist": "^4.10.38",
     "quill": "^2.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
