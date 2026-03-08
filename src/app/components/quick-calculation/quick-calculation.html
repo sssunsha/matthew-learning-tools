@@ -5,35 +5,129 @@
     </button>
     <div class="header-left">
       <h1 class="category-title">快速计算</h1>
-      <p class="category-subtitle">{{ selectedLesson ? selectedLesson.title + ' - ' + selectedLesson.subtitle : 'Quick Calculation' }}</p>
+      <p class="category-subtitle">
+        {{
+          selectedLesson
+            ? selectedLesson.title + ' - ' + selectedLesson.subtitle
+            : 'Quick Calculation'
+        }}
+      </p>
     </div>
-    <button mat-icon-button class="explain-btn" (click)="toggleExplanation()" [disabled]="!selectedLesson">
+    <button
+      mat-icon-button
+      class="explain-btn"
+      (click)="toggleExplanation()"
+      [disabled]="!selectedLesson"
+    >
       <mat-icon>lightbulb</mat-icon>
     </button>
     <div class="header-right">
       <span class="technique-label">技巧篇</span>
-    <button mat-icon-button [matMenuTriggerFor]="techniqueMenu" class="menu-btn">
-      <mat-icon>menu_book</mat-icon>
-    </button>
-    <span class="technique-label">方法篇</span>
-    <button mat-icon-button [matMenuTriggerFor]="methodMenu" class="menu-btn">
-      <mat-icon>book</mat-icon>
-    </button>
+      <button mat-icon-button [matMenuTriggerFor]="techniqueMenu" class="menu-btn">
+        <mat-icon>menu_book</mat-icon>
+      </button>
+      <span class="technique-label">方法篇</span>
+      <button mat-icon-button [matMenuTriggerFor]="methodMenu" class="menu-btn">
+        <mat-icon>book</mat-icon>
+      </button>
+    </div>
   </div>
 
   <mat-menu #techniqueMenu="matMenu" class="technique-menu">
-    <button mat-menu-item *ngFor="let lesson of techniques" (click)="selectLesson(lesson)" class="lesson-item">
+    <button
+      mat-menu-item
+      *ngFor="let lesson of techniques"
+      (click)="selectLesson(lesson)"
+      class="lesson-item"
+      [class.not-recommended]="lesson.id === 6 || lesson.id === 10 || lesson.id === 11"
+    >
       <span class="lesson-number">{{ lesson.title }}</span>
       <span class="lesson-title">—— {{ lesson.subtitle }}</span>
     </button>
   </mat-menu>
 
   <mat-menu #methodMenu="matMenu" class="technique-menu">
-    <button mat-menu-item *ngFor="let lesson of methods" (click)="selectLesson(lesson)" class="lesson-item">
+    <button
+      mat-menu-item
+      *ngFor="let lesson of methods"
+      (click)="selectLesson(lesson)"
+      class="lesson-item"
+    >
       <span class="lesson-number">{{ lesson.title }}</span>
       <span class="lesson-title">—— {{ lesson.subtitle }}</span>
     </button>
   </mat-menu>
+
+  <!-- Main Quiz Content Area -->
+  <div class="main-content">
+    @if (selectedLesson && currentQuestions.length > 0) {
+      <div class="questions-container">
+        <h3>{{ selectedLesson.subtitle }}</h3>
+
+        <div class="questions-list">
+          @for (question of currentQuestions; track question; let i = $index) {
+            <div
+              class="question-item"
+              [class.correct]="isCorrect(i)"
+              [class.incorrect]="isIncorrect(i)"
+            >
+              <div class="question-number">题目 {{ i + 1 }}:</div>
+              <div class="question-content">
+                <span class="question-text">{{ question.question }} = </span>
+                <input
+                  type="text"
+                  class="answer-input"
+                  [(ngModel)]="userAnswers[i]"
+                  [disabled]="showResults"
+                  placeholder="答案"
+                />
+                @if (showResults) {
+                  <span class="correct-answer"> (正确答案: {{ question.answer }}) </span>
+                }
+              </div>
+              @if (question.explanation && showResults) {
+                <div class="explanation"><strong>解析:</strong> {{ question.explanation }}</div>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn btn-primary" (click)="nextSet()">下一组题</button>
+          <button class="btn btn-success" (click)="checkAnswers()" [disabled]="showResults">
+            批改
+          </button>
+        </div>
+
+        @if (showResults) {
+          <div class="results-summary">
+            <p>正确: {{ getCorrectCount() }} / {{ currentQuestions.length }}</p>
+          </div>
+        }
+      </div>
+    } @else if (selectedLesson) {
+      <div class="loading-message">
+        <mat-icon class="loading-icon">hourglass_empty</mat-icon>
+        <p>正在加载题目...</p>
+      </div>
+    } @else {
+      <div class="welcome-message">
+        <mat-icon class="welcome-icon">calculate</mat-icon>
+        <h2>欢迎使用快速计算练习</h2>
+        <p>请从上方菜单选择一个速算技巧开始练习</p>
+        <div class="instructions">
+          <h3>使用说明：</h3>
+          <ul>
+            <li>点击"技巧篇"或"方法篇"菜单选择课程</li>
+            <li>系统会随机生成3道练习题</li>
+            <li>输入答案后点击"批改"查看结果</li>
+            <li>点击"下一组题"继续练习</li>
+            <li>点击灯泡图标查看解题技巧</li>
+          </ul>
+        </div>
+      </div>
+    }
+  </div>
 
   <!-- 讲解浮动窗口 -->
   <div class="explanation-panel" [class.show]="showExplanation">
@@ -41,32 +135,28 @@
       <button mat-icon-button class="close-btn" (click)="toggleExplanation()">
         <mat-icon>close</mat-icon>
       </button>
-      
+
       <h2 class="explanation-title">{{ selectedLesson.title }} - {{ selectedLesson.subtitle }}</h2>
-      
+
       <div class="explanation-section">
         <h3><mat-icon>description</mat-icon> 方法讲解</h3>
         <p class="explanation-text">{{ lessonData.explanation }}</p>
       </div>
-      
+
       <div class="explanation-section">
         <h3><mat-icon>tips_and_updates</mat-icon> 技巧要点</h3>
         <ul class="tips-list">
           <li *ngFor="let tip of lessonData.tips">{{ tip }}</li>
         </ul>
       </div>
-      
+
       <div class="explanation-section">
         <h3><mat-icon>calculate</mat-icon> 范例解答</h3>
         <div class="examples">
           <div class="example-item" *ngFor="let example of lessonData.examples">
             <div class="example-question">{{ example.question }}</div>
-            <div class="example-solution">
-              <strong>解：</strong>{{ example.solution }}
-            </div>
-            <div class="example-answer">
-              <strong>答案：</strong>{{ example.answer }}
-            </div>
+            <div class="example-solution"><strong>解：</strong>{{ example.solution }}</div>
+            <div class="example-answer"><strong>答案：</strong>{{ example.answer }}</div>
           </div>
         </div>
       </div>

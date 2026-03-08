@@ -3,257 +3,257 @@
   "category": "技巧篇",
   "lesson": "第3讲",
   "title": "被减数为100、1000……的减法",
-  "description": "被减数为100、1000……的减法的练习题库",
+  "description": "被减数为整百、整千等数字的减法速算：十位减1，个位用10减",
   "questions": [
     {
-      "question": "11 + 58 = ?",
-      "answer": 69,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 58",
+      "answer": 42,
+      "explanation": "十位：5-1=4，个位：10-8=2，答案是42"
     },
     {
-      "question": "18 + 23 = ?",
-      "answer": 41,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 37",
+      "answer": 63,
+      "explanation": "十位：3-1=2，个位：10-7=3，答案是63"
     },
     {
-      "question": "90 - 50 = ?",
-      "answer": 40,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 42",
+      "answer": 58,
+      "explanation": "十位：4-1=3，个位：10-2=8，答案是58"
     },
     {
-      "question": "91 ÷ 53 = ?",
-      "answer": 1,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 25",
+      "answer": 75,
+      "explanation": "十位：2-1=1，个位：10-5=5，答案是75"
     },
     {
-      "question": "43 ÷ 30 = ?",
-      "answer": 1,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "56 ÷ 41 = ?",
-      "answer": 1,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "88 ÷ 56 = ?",
-      "answer": 1,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "46 × 61 = ?",
-      "answer": 2806,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "38 - 35 = ?",
-      "answer": 3,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "11 ÷ 53 = ?",
-      "answer": 0,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "42 - 59 = ?",
-      "answer": -17,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "79 - 99 = ?",
-      "answer": -20,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "83 ÷ 53 = ?",
-      "answer": 1,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "63 - 99 = ?",
-      "answer": -36,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "45 + 95 = ?",
-      "answer": 140,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "89 ÷ 69 = ?",
-      "answer": 1,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "19 - 85 = ?",
-      "answer": -66,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "16 - 20 = ?",
-      "answer": -4,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "22 + 48 = ?",
-      "answer": 70,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "58 × 85 = ?",
-      "answer": 4930,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "35 - 83 = ?",
-      "answer": -48,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "21 × 78 = ?",
-      "answer": 1638,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "22 + 72 = ?",
-      "answer": 94,
-      "explanation": "被减数为100、1000……的减法练习题"
-    },
-    {
-      "question": "47 - 14 = ?",
+      "question": "100 - 67",
       "answer": 33,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "explanation": "十位：6-1=5，个位：10-7=3，答案是33"
     },
     {
-      "question": "32 ÷ 40 = ?",
-      "answer": 0,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 89",
+      "answer": 11,
+      "explanation": "十位：8-1=7，个位：10-9=1，答案是11"
     },
     {
-      "question": "96 - 58 = ?",
-      "answer": 38,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 14",
+      "answer": 86,
+      "explanation": "十位：1-1=0，个位：10-4=6，答案是86"
     },
     {
-      "question": "54 - 84 = ?",
-      "answer": -30,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 73",
+      "answer": 27,
+      "explanation": "十位：7-1=6，个位：10-3=7，答案是27"
     },
     {
-      "question": "88 + 38 = ?",
-      "answer": 126,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 56",
+      "answer": 44,
+      "explanation": "十位：5-1=4，个位：10-6=4，答案是44"
     },
     {
-      "question": "30 + 68 = ?",
-      "answer": 98,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 91",
+      "answer": 9,
+      "explanation": "十位：9-1=8，个位：10-1=9，答案是9"
     },
     {
-      "question": "32 ÷ 43 = ?",
-      "answer": 0,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 28",
+      "answer": 72,
+      "explanation": "十位：2-1=1，个位：10-8=2，答案是72"
     },
     {
-      "question": "21 ÷ 69 = ?",
-      "answer": 0,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 45",
+      "answer": 55,
+      "explanation": "十位：4-1=3，个位：10-5=5，答案是55"
     },
     {
-      "question": "26 × 18 = ?",
-      "answer": 468,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 82",
+      "answer": 18,
+      "explanation": "十位：8-1=7，个位：10-2=8，答案是18"
     },
     {
-      "question": "38 + 71 = ?",
+      "question": "100 - 36",
+      "answer": 64,
+      "explanation": "十位：3-1=2，个位：10-6=4，答案是64"
+    },
+    {
+      "question": "100 - 19",
+      "answer": 81,
+      "explanation": "十位：1-1=0，个位：10-9=1，答案是81"
+    },
+    {
+      "question": "100 - 54",
+      "answer": 46,
+      "explanation": "十位：5-1=4，个位：10-4=6，答案是46"
+    },
+    {
+      "question": "100 - 77",
+      "answer": 23,
+      "explanation": "十位：7-1=6，个位：10-7=3，答案是23"
+    },
+    {
+      "question": "100 - 63",
+      "answer": 37,
+      "explanation": "十位：6-1=5，个位：10-3=7，答案是37"
+    },
+    {
+      "question": "100 - 48",
+      "answer": 52,
+      "explanation": "十位：4-1=3，个位：10-8=2，答案是52"
+    },
+    {
+      "question": "100 - 95",
+      "answer": 5,
+      "explanation": "十位：9-1=8，个位：10-5=5，答案是5"
+    },
+    {
+      "question": "1000 - 234",
+      "answer": 766,
+      "explanation": "百位：2-1=1，十位：10-3=7，个位：10-4=6，答案是766"
+    },
+    {
+      "question": "1000 - 567",
+      "answer": 433,
+      "explanation": "百位：5-1=4，十位：10-6=3，个位：10-7=3，答案是433"
+    },
+    {
+      "question": "1000 - 789",
+      "answer": 211,
+      "explanation": "百位：7-1=6，十位：10-8=1，个位：10-9=1，答案是211"
+    },
+    {
+      "question": "1000 - 123",
+      "answer": 877,
+      "explanation": "百位：1-1=0，十位：10-2=8，个位：10-3=7，答案是877"
+    },
+    {
+      "question": "1000 - 456",
+      "answer": 544,
+      "explanation": "百位：4-1=3，十位：10-5=5，个位：10-6=4，答案是544"
+    },
+    {
+      "question": "1000 - 678",
+      "answer": 322,
+      "explanation": "百位：6-1=5，十位：10-7=3，个位：10-8=2，答案是322"
+    },
+    {
+      "question": "1000 - 345",
+      "answer": 655,
+      "explanation": "百位：3-1=2，十位：10-4=6，个位：10-5=5，答案是655"
+    },
+    {
+      "question": "1000 - 891",
       "answer": 109,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "explanation": "百位：8-1=7，十位：10-9=1，个位：10-1=9，答案是109"
     },
     {
-      "question": "13 × 41 = ?",
-      "answer": 533,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "1000 - 276",
+      "answer": 724,
+      "explanation": "百位：2-1=1，十位：10-7=3，个位：10-6=4，答案是724"
     },
     {
-      "question": "85 ÷ 12 = ?",
-      "answer": 7,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "1000 - 512",
+      "answer": 488,
+      "explanation": "百位：5-1=4，十位：10-1=9，个位：10-2=8，答案是488"
     },
     {
-      "question": "10 × 54 = ?",
-      "answer": 540,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 21",
+      "answer": 79,
+      "explanation": "十位：2-1=1，个位：10-1=9，答案是79"
     },
     {
-      "question": "44 - 49 = ?",
-      "answer": -5,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 34",
+      "answer": 66,
+      "explanation": "十位：3-1=2，个位：10-4=6，答案是66"
     },
     {
-      "question": "93 - 96 = ?",
-      "answer": -3,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 59",
+      "answer": 41,
+      "explanation": "十位：5-1=4，个位：10-9=1，答案是41"
     },
     {
-      "question": "39 × 66 = ?",
-      "answer": 2574,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 76",
+      "answer": 24,
+      "explanation": "十位：7-1=6，个位：10-6=4，答案是24"
     },
     {
-      "question": "90 × 20 = ?",
-      "answer": 1800,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 83",
+      "answer": 17,
+      "explanation": "十位：8-1=7，个位：10-3=7，答案是17"
     },
     {
-      "question": "52 + 54 = ?",
-      "answer": 106,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 47",
+      "answer": 53,
+      "explanation": "十位：4-1=3，个位：10-7=3，答案是53"
     },
     {
-      "question": "78 + 80 = ?",
-      "answer": 158,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 62",
+      "answer": 38,
+      "explanation": "十位：6-1=5，个位：10-2=8，答案是38"
     },
     {
-      "question": "40 × 68 = ?",
-      "answer": 2720,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 38",
+      "answer": 62,
+      "explanation": "十位：3-1=2，个位：10-8=2，答案是62"
     },
     {
-      "question": "81 + 36 = ?",
-      "answer": 117,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 94",
+      "answer": 6,
+      "explanation": "十位：9-1=8，个位：10-4=6，答案是6"
     },
     {
-      "question": "82 - 11 = ?",
+      "question": "100 - 16",
+      "answer": 84,
+      "explanation": "十位：1-1=0，个位：10-6=4，答案是84"
+    },
+    {
+      "question": "100 - 71",
+      "answer": 29,
+      "explanation": "十位：7-1=6，个位：10-1=9，答案是29"
+    },
+    {
+      "question": "100 - 55",
+      "answer": 45,
+      "explanation": "十位：5-1=4，个位：10-5=5，答案是45"
+    },
+    {
+      "question": "100 - 29",
       "answer": 71,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "explanation": "十位：2-1=1，个位：10-9=1，答案是71"
     },
     {
-      "question": "57 - 83 = ?",
-      "answer": -26,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 84",
+      "answer": 16,
+      "explanation": "十位：8-1=7，个位：10-4=6，答案是16"
     },
     {
-      "question": "32 + 95 = ?",
-      "answer": 127,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 41",
+      "answer": 59,
+      "explanation": "十位：4-1=3，个位：10-1=9，答案是59"
     },
     {
-      "question": "61 ÷ 30 = ?",
-      "answer": 2,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 68",
+      "answer": 32,
+      "explanation": "十位：6-1=5，个位：10-8=2，答案是32"
     },
     {
-      "question": "83 × 99 = ?",
-      "answer": 8217,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 92",
+      "answer": 8,
+      "explanation": "十位：9-1=8，个位：10-2=8，答案是8"
     },
     {
-      "question": "61 ÷ 85 = ?",
-      "answer": 0,
-      "explanation": "被减数为100、1000……的减法练习题"
+      "question": "100 - 13",
+      "answer": 87,
+      "explanation": "十位：1-1=0，个位：10-3=7，答案是87"
+    },
+    {
+      "question": "100 - 26",
+      "answer": 74,
+      "explanation": "十位：2-1=1，个位：10-6=4，答案是74"
+    },
+    {
+      "question": "100 - 79",
+      "answer": 21,
+      "explanation": "十位：7-1=6，个位：10-9=1，答案是21"
     }
   ]
 }

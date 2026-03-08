@@ -3,257 +3,257 @@
   "category": "技巧篇",
   "lesson": "第11讲",
   "title": "十位数相同的两位数相乘",
-  "description": "十位数相同的两位数相乘的练习题库",
+  "description": "十位相同：十位乘比它大1为前，个位积为后",
   "questions": [
     {
-      "question": "50 + 83 = ?",
-      "answer": 133,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "61 × 63",
+      "answer": 3843,
+      "explanation": "前：6×7=42，后：1×3=03，答案3843"
     },
     {
-      "question": "37 ÷ 69 = ?",
-      "answer": 0,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "49 × 46",
+      "answer": 2254,
+      "explanation": "前：4×5=20，后：9×6=54，答案2254"
     },
     {
-      "question": "21 ÷ 64 = ?",
-      "answer": 0,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "52 × 58",
+      "answer": 3016,
+      "explanation": "前：5×6=30，后：2×8=16，答案3016"
     },
     {
-      "question": "54 + 21 = ?",
-      "answer": 75,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "31 × 39",
+      "answer": 1209,
+      "explanation": "前：3×4=12，后：1×9=09，答案1209"
     },
     {
-      "question": "54 ÷ 14 = ?",
-      "answer": 3,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "43 × 47",
+      "answer": 2021,
+      "explanation": "前：4×5=20，后：3×7=21，答案2021"
     },
     {
-      "question": "63 - 83 = ?",
-      "answer": -20,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "25 × 28",
+      "answer": 700,
+      "explanation": "前：2×3=6，后：5×8=40，答案700"
     },
     {
-      "question": "94 × 72 = ?",
-      "answer": 6768,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "71 × 78",
+      "answer": 5538,
+      "explanation": "前：7×8=56，后：1×8=08，答案5608"
     },
     {
-      "question": "52 ÷ 78 = ?",
-      "answer": 0,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "84 × 86",
+      "answer": 7224,
+      "explanation": "前：8×9=72，后：4×6=24，答案7224"
     },
     {
-      "question": "47 × 71 = ?",
-      "answer": 3337,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "92 × 97",
+      "answer": 8924,
+      "explanation": "前：9×10=90，后：2×7=14，答案9014"
     },
     {
-      "question": "64 - 73 = ?",
-      "answer": -9,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "13 × 17",
+      "answer": 221,
+      "explanation": "前：1×2=2，后：3×7=21，答案221"
     },
     {
-      "question": "91 + 88 = ?",
-      "answer": 179,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "34 × 38",
+      "answer": 1292,
+      "explanation": "前：3×4=12，后：4×8=32，答案1232"
     },
     {
-      "question": "78 × 20 = ?",
-      "answer": 1560,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "56 × 54",
+      "answer": 3024,
+      "explanation": "前：5×6=30，后：6×4=24，答案3024"
     },
     {
-      "question": "10 - 52 = ?",
-      "answer": -42,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "67 × 62",
+      "answer": 4154,
+      "explanation": "前：6×7=42，后：7×2=14，答案4214"
     },
     {
-      "question": "23 × 73 = ?",
-      "answer": 1679,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "75 × 79",
+      "answer": 5925,
+      "explanation": "前：7×8=56，后：5×9=45，答案5645"
     },
     {
-      "question": "20 - 48 = ?",
-      "answer": -28,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "81 × 89",
+      "answer": 7209,
+      "explanation": "前：8×9=72，后：1×9=09，答案7209"
     },
     {
-      "question": "45 + 64 = ?",
-      "answer": 109,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "22 × 27",
+      "answer": 594,
+      "explanation": "前：2×3=6，后：2×7=14，答案614"
     },
     {
-      "question": "90 × 53 = ?",
-      "answer": 4770,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "36 × 33",
+      "answer": 1188,
+      "explanation": "前：3×4=12，后：6×3=18，答案1218"
     },
     {
-      "question": "55 ÷ 82 = ?",
-      "answer": 0,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "45 × 48",
+      "answer": 2160,
+      "explanation": "前：4×5=20，后：5×8=40，答案2040"
     },
     {
-      "question": "26 + 25 = ?",
-      "answer": 51,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "53 × 59",
+      "answer": 3127,
+      "explanation": "前：5×6=30，后：3×9=27，答案3027"
     },
     {
-      "question": "91 + 56 = ?",
-      "answer": 147,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "64 × 68",
+      "answer": 4352,
+      "explanation": "前：6×7=42，后：4×8=32，答案4232"
     },
     {
-      "question": "59 - 52 = ?",
-      "answer": 7,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "72 × 76",
+      "answer": 5472,
+      "explanation": "前：7×8=56，后：2×6=12，答案5612"
     },
     {
-      "question": "93 ÷ 70 = ?",
-      "answer": 1,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "83 × 87",
+      "answer": 7221,
+      "explanation": "前：8×9=72，后：3×7=21，答案7221"
     },
     {
-      "question": "75 + 37 = ?",
-      "answer": 112,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "91 × 94",
+      "answer": 8554,
+      "explanation": "前：9×10=90，后：1×4=04，答案9004"
     },
     {
-      "question": "81 + 64 = ?",
-      "answer": 145,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "14 × 18",
+      "answer": 252,
+      "explanation": "前：1×2=2，后：4×8=32，答案232"
     },
     {
-      "question": "51 - 48 = ?",
-      "answer": 3,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "26 × 23",
+      "answer": 598,
+      "explanation": "前：2×3=6，后：6×3=18，答案618"
     },
     {
-      "question": "77 ÷ 26 = ?",
-      "answer": 2,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "37 × 34",
+      "answer": 1258,
+      "explanation": "前：3×4=12，后：7×4=28，答案1228"
     },
     {
-      "question": "24 + 11 = ?",
-      "answer": 35,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "48 × 42",
+      "answer": 2016,
+      "explanation": "前：4×5=20，后：8×2=16，答案2016"
     },
     {
-      "question": "31 ÷ 16 = ?",
-      "answer": 1,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "55 × 59",
+      "answer": 3245,
+      "explanation": "前：5×6=30，后：5×9=45，答案3045"
     },
     {
-      "question": "35 - 73 = ?",
-      "answer": -38,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "66 × 69",
+      "answer": 4554,
+      "explanation": "前：6×7=42，后：6×9=54，答案4254"
     },
     {
-      "question": "47 ÷ 92 = ?",
-      "answer": 0,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "77 × 73",
+      "answer": 5621,
+      "explanation": "前：7×8=56，后：7×3=21，答案5621"
     },
     {
-      "question": "33 ÷ 24 = ?",
-      "answer": 1,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "88 × 82",
+      "answer": 7216,
+      "explanation": "前：8×9=72，后：8×2=16，答案7216"
     },
     {
-      "question": "45 + 77 = ?",
-      "answer": 122,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "99 × 96",
+      "answer": 9504,
+      "explanation": "前：9×10=90，后：9×6=54，答案9054"
     },
     {
-      "question": "21 × 72 = ?",
-      "answer": 1512,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "11 × 19",
+      "answer": 209,
+      "explanation": "前：1×2=2，后：1×9=09，答案209"
     },
     {
-      "question": "47 + 54 = ?",
-      "answer": 101,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "24 × 29",
+      "answer": 696,
+      "explanation": "前：2×3=6，后：4×9=36，答案636"
     },
     {
-      "question": "30 × 68 = ?",
-      "answer": 2040,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "35 × 32",
+      "answer": 1120,
+      "explanation": "前：3×4=12，后：5×2=10，答案1210"
     },
     {
-      "question": "85 ÷ 47 = ?",
-      "answer": 1,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "46 × 49",
+      "answer": 2254,
+      "explanation": "前：4×5=20，后：6×9=54，答案2054"
     },
     {
-      "question": "66 ÷ 86 = ?",
-      "answer": 0,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "57 × 51",
+      "answer": 2907,
+      "explanation": "前：5×6=30，后：7×1=07，答案3007"
     },
     {
-      "question": "69 - 59 = ?",
-      "answer": 10,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "68 × 65",
+      "answer": 4420,
+      "explanation": "前：6×7=42，后：8×5=40，答案4240"
     },
     {
-      "question": "95 + 88 = ?",
-      "answer": 183,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "79 × 74",
+      "answer": 5846,
+      "explanation": "前：7×8=56，后：9×4=36，答案5636"
     },
     {
-      "question": "11 - 91 = ?",
-      "answer": -80,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "85 × 89",
+      "answer": 7565,
+      "explanation": "前：8×9=72，后：5×9=45，答案7245"
     },
     {
-      "question": "52 + 22 = ?",
-      "answer": 74,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "93 × 98",
+      "answer": 9114,
+      "explanation": "前：9×10=90，后：3×8=24，答案9024"
     },
     {
-      "question": "25 ÷ 74 = ?",
-      "answer": 0,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "12 × 16",
+      "answer": 192,
+      "explanation": "前：1×2=2，后：2×6=12，答案212"
     },
     {
-      "question": "37 - 12 = ?",
-      "answer": 25,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "21 × 25",
+      "answer": 525,
+      "explanation": "前：2×3=6，后：1×5=05，答案605"
     },
     {
-      "question": "60 × 19 = ?",
-      "answer": 1140,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "38 × 31",
+      "answer": 1178,
+      "explanation": "前：3×4=12，后：8×1=08，答案1208"
     },
     {
-      "question": "76 + 11 = ?",
-      "answer": 87,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "44 × 49",
+      "answer": 2156,
+      "explanation": "前：4×5=20，后：4×9=36，答案2036"
     },
     {
-      "question": "61 ÷ 84 = ?",
-      "answer": 0,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "51 × 56",
+      "answer": 2856,
+      "explanation": "前：5×6=30，后：1×6=06，答案3006"
     },
     {
-      "question": "65 ÷ 13 = ?",
-      "answer": 5,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "62 × 69",
+      "answer": 4278,
+      "explanation": "前：6×7=42，后：2×9=18，答案4218"
     },
     {
-      "question": "67 + 34 = ?",
-      "answer": 101,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "73 × 78",
+      "answer": 5694,
+      "explanation": "前：7×8=56，后：3×8=24，答案5624"
     },
     {
-      "question": "81 × 12 = ?",
-      "answer": 972,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "86 × 81",
+      "answer": 6966,
+      "explanation": "前：8×9=72，后：6×1=06，答案7206"
     },
     {
-      "question": "86 ÷ 80 = ?",
-      "answer": 1,
-      "explanation": "十位数相同的两位数相乘练习题"
+      "question": "94 × 99",
+      "answer": 9306,
+      "explanation": "前：9×10=90，后：4×9=36，答案9036"
     }
   ]
 }

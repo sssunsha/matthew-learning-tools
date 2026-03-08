@@ -51,7 +51,7 @@
     {
       "id": "technique-09",
       "lesson": "第9讲",
-      "title": "速算数11",
+      "title": "任意数乘11",
       "file": "technique-09-multiply-by-11.json"
     },
     {
@@ -93,7 +93,7 @@
     {
       "id": "technique-16",
       "lesson": "第16讲",
-      "title": "合十数重复数",
+      "title": "合十数乘重复数",
       "file": "technique-16-sum-10-repeating.json"
     }
   ],

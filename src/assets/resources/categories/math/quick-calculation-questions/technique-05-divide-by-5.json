@@ -3,257 +3,257 @@
   "category": "技巧篇",
   "lesson": "第5讲",
   "title": "一个数除以5的速算",
-  "description": "一个数除以5的速算的练习题库",
+  "description": "个位是0的数除以5：去0再乘2",
   "questions": [
     {
-      "question": "74 × 25 = ?",
-      "answer": 1850,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "420 ÷ 5",
+      "answer": 84,
+      "explanation": "去0得42，42×2=84"
     },
     {
-      "question": "46 - 94 = ?",
-      "answer": -48,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "350 ÷ 5",
+      "answer": 70,
+      "explanation": "去0得35，35×2=70"
     },
     {
-      "question": "84 × 21 = ?",
-      "answer": 1764,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "280 ÷ 5",
+      "answer": 56,
+      "explanation": "去0得28，28×2=56"
     },
     {
-      "question": "16 ÷ 40 = ?",
-      "answer": 0,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "150 ÷ 5",
+      "answer": 30,
+      "explanation": "去0得15，15×2=30"
     },
     {
-      "question": "85 + 36 = ?",
-      "answer": 121,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "560 ÷ 5",
+      "answer": 112,
+      "explanation": "去0得56，56×2=112"
     },
     {
-      "question": "67 × 73 = ?",
-      "answer": 4891,
-      "explanation": "一个数除以5的速算练习题"
-    },
-    {
-      "question": "45 - 30 = ?",
-      "answer": 15,
-      "explanation": "一个数除以5的速算练习题"
-    },
-    {
-      "question": "63 + 63 = ?",
-      "answer": 126,
-      "explanation": "一个数除以5的速算练习题"
-    },
-    {
-      "question": "76 - 39 = ?",
-      "answer": 37,
-      "explanation": "一个数除以5的速算练习题"
-    },
-    {
-      "question": "43 - 55 = ?",
-      "answer": -12,
-      "explanation": "一个数除以5的速算练习题"
-    },
-    {
-      "question": "85 - 42 = ?",
-      "answer": 43,
-      "explanation": "一个数除以5的速算练习题"
-    },
-    {
-      "question": "17 + 27 = ?",
-      "answer": 44,
-      "explanation": "一个数除以5的速算练习题"
-    },
-    {
-      "question": "38 + 96 = ?",
+      "question": "670 ÷ 5",
       "answer": 134,
-      "explanation": "一个数除以5的速算练习题"
+      "explanation": "去0得67，67×2=134"
     },
     {
-      "question": "12 ÷ 24 = ?",
-      "answer": 0,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "240 ÷ 5",
+      "answer": 48,
+      "explanation": "去0得24，24×2=48"
     },
     {
-      "question": "75 ÷ 69 = ?",
-      "answer": 1,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "390 ÷ 5",
+      "answer": 78,
+      "explanation": "去0得39，39×2=78"
     },
     {
-      "question": "52 ÷ 91 = ?",
-      "answer": 0,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "820 ÷ 5",
+      "answer": 164,
+      "explanation": "去0得82，82×2=164"
     },
     {
-      "question": "13 - 74 = ?",
-      "answer": -61,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "170 ÷ 5",
+      "answer": 34,
+      "explanation": "去0得17，17×2=34"
     },
     {
-      "question": "50 × 18 = ?",
-      "answer": 900,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "450 ÷ 5",
+      "answer": 90,
+      "explanation": "去0得45，45×2=90"
     },
     {
-      "question": "17 ÷ 93 = ?",
-      "answer": 0,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "730 ÷ 5",
+      "answer": 146,
+      "explanation": "去0得73，73×2=146"
     },
     {
-      "question": "93 + 74 = ?",
-      "answer": 167,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "260 ÷ 5",
+      "answer": 52,
+      "explanation": "去0得26，26×2=52"
     },
     {
-      "question": "29 + 94 = ?",
-      "answer": 123,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "590 ÷ 5",
+      "answer": 118,
+      "explanation": "去0得59，59×2=118"
     },
     {
-      "question": "78 - 69 = ?",
-      "answer": 9,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "310 ÷ 5",
+      "answer": 62,
+      "explanation": "去0得31，31×2=62"
     },
     {
-      "question": "85 ÷ 54 = ?",
-      "answer": 1,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "480 ÷ 5",
+      "answer": 96,
+      "explanation": "去0得48，48×2=96"
     },
     {
-      "question": "39 - 39 = ?",
-      "answer": 0,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "620 ÷ 5",
+      "answer": 124,
+      "explanation": "去0得62，62×2=124"
     },
     {
-      "question": "51 × 67 = ?",
-      "answer": 3417,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "190 ÷ 5",
+      "answer": 38,
+      "explanation": "去0得19，19×2=38"
     },
     {
-      "question": "52 + 55 = ?",
-      "answer": 107,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "750 ÷ 5",
+      "answer": 150,
+      "explanation": "去0得75，75×2=150"
     },
     {
-      "question": "11 - 12 = ?",
-      "answer": -1,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "340 ÷ 5",
+      "answer": 68,
+      "explanation": "去0得34，34×2=68"
     },
     {
-      "question": "54 + 34 = ?",
-      "answer": 88,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "860 ÷ 5",
+      "answer": 172,
+      "explanation": "去0得86，86×2=172"
     },
     {
-      "question": "32 + 43 = ?",
-      "answer": 75,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "210 ÷ 5",
+      "answer": 42,
+      "explanation": "去0得21，21×2=42"
     },
     {
-      "question": "22 - 41 = ?",
-      "answer": -19,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "930 ÷ 5",
+      "answer": 186,
+      "explanation": "去0得93，93×2=186"
     },
     {
-      "question": "46 - 62 = ?",
-      "answer": -16,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "120 ÷ 5",
+      "answer": 24,
+      "explanation": "去0得12，12×2=24"
     },
     {
-      "question": "56 × 28 = ?",
-      "answer": 1568,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "540 ÷ 5",
+      "answer": 108,
+      "explanation": "去0得54，54×2=108"
     },
     {
-      "question": "99 ÷ 87 = ?",
-      "answer": 1,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "680 ÷ 5",
+      "answer": 136,
+      "explanation": "去0得68，68×2=136"
     },
     {
-      "question": "91 - 24 = ?",
-      "answer": 67,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "370 ÷ 5",
+      "answer": 74,
+      "explanation": "去0得37，37×2=74"
     },
     {
-      "question": "17 + 47 = ?",
+      "question": "490 ÷ 5",
+      "answer": 98,
+      "explanation": "去0得49，49×2=98"
+    },
+    {
+      "question": "250 ÷ 5",
+      "answer": 50,
+      "explanation": "去0得25，25×2=50"
+    },
+    {
+      "question": "770 ÷ 5",
+      "answer": 154,
+      "explanation": "去0得77，77×2=154"
+    },
+    {
+      "question": "160 ÷ 5",
+      "answer": 32,
+      "explanation": "去0得16，16×2=32"
+    },
+    {
+      "question": "890 ÷ 5",
+      "answer": 178,
+      "explanation": "去0得89，89×2=178"
+    },
+    {
+      "question": "320 ÷ 5",
       "answer": 64,
-      "explanation": "一个数除以5的速算练习题"
+      "explanation": "去0得32，32×2=64"
     },
     {
-      "question": "43 ÷ 34 = ?",
-      "answer": 1,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "640 ÷ 5",
+      "answer": 128,
+      "explanation": "去0得64，64×2=128"
     },
     {
-      "question": "99 ÷ 64 = ?",
-      "answer": 1,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "510 ÷ 5",
+      "answer": 102,
+      "explanation": "去0得51，51×2=102"
     },
     {
-      "question": "99 ÷ 45 = ?",
-      "answer": 2,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "180 ÷ 5",
+      "answer": 36,
+      "explanation": "去0得18，18×2=36"
     },
     {
-      "question": "94 - 39 = ?",
-      "answer": 55,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "710 ÷ 5",
+      "answer": 142,
+      "explanation": "去0得71，71×2=142"
     },
     {
-      "question": "39 ÷ 62 = ?",
-      "answer": 0,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "430 ÷ 5",
+      "answer": 86,
+      "explanation": "去0得43，43×2=86"
     },
     {
-      "question": "73 × 40 = ?",
-      "answer": 2920,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "960 ÷ 5",
+      "answer": 192,
+      "explanation": "去0得96，96×2=192"
     },
     {
-      "question": "34 ÷ 92 = ?",
-      "answer": 0,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "230 ÷ 5",
+      "answer": 46,
+      "explanation": "去0得23，23×2=46"
     },
     {
-      "question": "30 - 17 = ?",
-      "answer": 13,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "580 ÷ 5",
+      "answer": 116,
+      "explanation": "去0得58，58×2=116"
     },
     {
-      "question": "17 - 32 = ?",
-      "answer": -15,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "410 ÷ 5",
+      "answer": 82,
+      "explanation": "去0得41，41×2=82"
     },
     {
-      "question": "54 - 62 = ?",
-      "answer": -8,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "790 ÷ 5",
+      "answer": 158,
+      "explanation": "去0得79，79×2=158"
     },
     {
-      "question": "44 ÷ 49 = ?",
-      "answer": 0,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "140 ÷ 5",
+      "answer": 28,
+      "explanation": "去0得14，14×2=28"
     },
     {
-      "question": "75 × 13 = ?",
-      "answer": 975,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "920 ÷ 5",
+      "answer": 184,
+      "explanation": "去0得92，92×2=184"
     },
     {
-      "question": "30 + 21 = ?",
-      "answer": 51,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "380 ÷ 5",
+      "answer": 76,
+      "explanation": "去0得38，38×2=76"
     },
     {
-      "question": "19 × 17 = ?",
-      "answer": 323,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "650 ÷ 5",
+      "answer": 130,
+      "explanation": "去0得65，65×2=130"
     },
     {
-      "question": "31 - 91 = ?",
-      "answer": -60,
-      "explanation": "一个数除以5的速算练习题"
+      "question": "200 ÷ 5",
+      "answer": 40,
+      "explanation": "去0得20，20×2=40"
+    },
+    {
+      "question": "840 ÷ 5",
+      "answer": 168,
+      "explanation": "去0得84，84×2=168"
+    },
+    {
+      "question": "520 ÷ 5",
+      "answer": 104,
+      "explanation": "去0得52，52×2=104"
     }
   ]
 }

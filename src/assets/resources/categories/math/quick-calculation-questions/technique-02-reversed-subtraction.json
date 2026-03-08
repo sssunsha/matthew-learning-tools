@@ -3,257 +3,257 @@
   "category": "技巧篇",
   "lesson": "第2讲",
   "title": "颠倒数的减法",
-  "description": "颠倒数的减法的练习题库",
+  "description": "颠倒数相减的速算方法：差 = (首位-尾位) × 9",
   "questions": [
     {
-      "question": "26 - 62 = ?",
-      "answer": 36,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "75 - 57 = ?",
-      "answer": 18,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "97 - 79 = ?",
-      "answer": 18,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "43 - 34 = ?",
-      "answer": 9,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "66 - 66 = ?",
-      "answer": 0,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "60 - 6 = ?",
-      "answer": 54,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "25 - 52 = ?",
-      "answer": 27,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "84 - 48 = ?",
-      "answer": 36,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "96 - 69 = ?",
-      "answer": 27,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "85 - 58 = ?",
-      "answer": 27,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "73 - 37 = ?",
-      "answer": 36,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "96 - 69 = ?",
-      "answer": 27,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "23 - 32 = ?",
-      "answer": 9,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "27 - 72 = ?",
+      "question": "72 - 27",
       "answer": 45,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：7-2=5，然后 5 × 9 = 45"
     },
     {
-      "question": "95 - 59 = ?",
-      "answer": 36,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "53 - 35 = ?",
-      "answer": 18,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "58 - 85 = ?",
-      "answer": 27,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "36 - 63 = ?",
-      "answer": 27,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "99 - 99 = ?",
-      "answer": 0,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "59 - 95 = ?",
-      "answer": 36,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "36 - 63 = ?",
-      "answer": 27,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "53 - 35 = ?",
-      "answer": 18,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "38 - 83 = ?",
-      "answer": 45,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "95 - 59 = ?",
-      "answer": 36,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "97 - 79 = ?",
-      "answer": 18,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "79 - 97 = ?",
-      "answer": 18,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "68 - 86 = ?",
-      "answer": 18,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "80 - 8 = ?",
+      "question": "91 - 19",
       "answer": 72,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：9-1=8，然后 8 × 9 = 72"
     },
     {
-      "question": "47 - 74 = ?",
-      "answer": 27,
-      "explanation": "颠倒数相减"
+      "question": "82 - 28",
+      "answer": 54,
+      "explanation": "首尾之差：8-2=6，然后 6 × 9 = 54"
     },
     {
-      "question": "48 - 84 = ?",
+      "question": "73 - 37",
       "answer": 36,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：7-3=4，然后 4 × 9 = 36"
     },
     {
-      "question": "86 - 68 = ?",
+      "question": "64 - 46",
       "answer": 18,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：6-4=2，然后 2 × 9 = 18"
     },
     {
-      "question": "39 - 93 = ?",
-      "answer": 54,
-      "explanation": "颠倒数相减"
+      "question": "81 - 18",
+      "answer": 63,
+      "explanation": "首尾之差：8-1=7，然后 7 × 9 = 63"
     },
     {
-      "question": "55 - 55 = ?",
-      "answer": 0,
-      "explanation": "颠倒数相减"
+      "question": "92 - 29",
+      "answer": 63,
+      "explanation": "首尾之差：9-2=7，然后 7 × 9 = 63"
     },
     {
-      "question": "78 - 87 = ?",
-      "answer": 9,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "32 - 23 = ?",
-      "answer": 9,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "89 - 98 = ?",
-      "answer": 9,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "49 - 94 = ?",
+      "question": "83 - 38",
       "answer": 45,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：8-3=5，然后 5 × 9 = 45"
     },
     {
-      "question": "24 - 42 = ?",
-      "answer": 18,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "75 - 57 = ?",
-      "answer": 18,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "74 - 47 = ?",
+      "question": "74 - 47",
       "answer": 27,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：7-4=3，然后 3 × 9 = 27"
     },
     {
-      "question": "73 - 37 = ?",
+      "question": "65 - 56",
+      "answer": 9,
+      "explanation": "首尾之差：6-5=1，然后 1 × 9 = 9"
+    },
+    {
+      "question": "71 - 17",
+      "answer": 54,
+      "explanation": "首尾之差：7-1=6，然后 6 × 9 = 54"
+    },
+    {
+      "question": "62 - 26",
       "answer": 36,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：6-2=4，然后 4 × 9 = 36"
     },
     {
-      "question": "49 - 94 = ?",
+      "question": "53 - 35",
+      "answer": 18,
+      "explanation": "首尾之差：5-3=2，然后 2 × 9 = 18"
+    },
+    {
+      "question": "84 - 48",
+      "answer": 36,
+      "explanation": "首尾之差：8-4=4，然后 4 × 9 = 36"
+    },
+    {
+      "question": "75 - 57",
+      "answer": 18,
+      "explanation": "首尾之差：7-5=2，然后 2 × 9 = 18"
+    },
+    {
+      "question": "93 - 39",
+      "answer": 54,
+      "explanation": "首尾之差：9-3=6，然后 6 × 9 = 54"
+    },
+    {
+      "question": "85 - 58",
+      "answer": 27,
+      "explanation": "首尾之差：8-5=3，然后 3 × 9 = 27"
+    },
+    {
+      "question": "76 - 67",
+      "answer": 9,
+      "explanation": "首尾之差：7-6=1，然后 1 × 9 = 9"
+    },
+    {
+      "question": "94 - 49",
       "answer": 45,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：9-4=5，然后 5 × 9 = 45"
     },
     {
-      "question": "29 - 92 = ?",
-      "answer": 63,
-      "explanation": "颠倒数相减"
-    },
-    {
-      "question": "35 - 53 = ?",
+      "question": "86 - 68",
       "answer": 18,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：8-6=2，然后 2 × 9 = 18"
     },
     {
-      "question": "99 - 99 = ?",
-      "answer": 0,
-      "explanation": "颠倒数相减"
+      "question": "95 - 59",
+      "answer": 36,
+      "explanation": "首尾之差：9-5=4，然后 4 × 9 = 36"
     },
     {
-      "question": "93 - 39 = ?",
+      "question": "87 - 78",
+      "answer": 9,
+      "explanation": "首尾之差：8-7=1，然后 1 × 9 = 9"
+    },
+    {
+      "question": "96 - 69",
+      "answer": 27,
+      "explanation": "首尾之差：9-6=3，然后 3 × 9 = 27"
+    },
+    {
+      "question": "97 - 79",
+      "answer": 18,
+      "explanation": "首尾之差：9-7=2，然后 2 × 9 = 18"
+    },
+    {
+      "question": "98 - 89",
+      "answer": 9,
+      "explanation": "首尾之差：9-8=1，然后 1 × 9 = 9"
+    },
+    {
+      "question": "31 - 13",
+      "answer": 18,
+      "explanation": "首尾之差：3-1=2，然后 2 × 9 = 18"
+    },
+    {
+      "question": "41 - 14",
+      "answer": 27,
+      "explanation": "首尾之差：4-1=3，然后 3 × 9 = 27"
+    },
+    {
+      "question": "51 - 15",
+      "answer": 36,
+      "explanation": "首尾之差：5-1=4，然后 4 × 9 = 36"
+    },
+    {
+      "question": "61 - 16",
+      "answer": 45,
+      "explanation": "首尾之差：6-1=5，然后 5 × 9 = 45"
+    },
+    {
+      "question": "42 - 24",
+      "answer": 18,
+      "explanation": "首尾之差：4-2=2，然后 2 × 9 = 18"
+    },
+    {
+      "question": "52 - 25",
+      "answer": 27,
+      "explanation": "首尾之差：5-2=3，然后 3 × 9 = 27"
+    },
+    {
+      "question": "63 - 36",
+      "answer": 27,
+      "explanation": "首尾之差：6-3=3，然后 3 × 9 = 27"
+    },
+    {
+      "question": "32 - 23",
+      "answer": 9,
+      "explanation": "首尾之差：3-2=1，然后 1 × 9 = 9"
+    },
+    {
+      "question": "43 - 34",
+      "answer": 9,
+      "explanation": "首尾之差：4-3=1，然后 1 × 9 = 9"
+    },
+    {
+      "question": "54 - 45",
+      "answer": 9,
+      "explanation": "首尾之差：5-4=1，然后 1 × 9 = 9"
+    },
+    {
+      "question": "21 - 12",
+      "answer": 9,
+      "explanation": "首尾之差：2-1=1，然后 1 × 9 = 9"
+    },
+    {
+      "question": "31 - 13",
+      "answer": 18,
+      "explanation": "首尾之差：3-1=2，然后 2 × 9 = 18"
+    },
+    {
+      "question": "41 - 14",
+      "answer": 27,
+      "explanation": "首尾之差：4-1=3，然后 3 × 9 = 27"
+    },
+    {
+      "question": "51 - 15",
+      "answer": 36,
+      "explanation": "首尾之差：5-1=4，然后 4 × 9 = 36"
+    },
+    {
+      "question": "61 - 16",
+      "answer": 45,
+      "explanation": "首尾之差：6-1=5，然后 5 × 9 = 45"
+    },
+    {
+      "question": "71 - 17",
       "answer": 54,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：7-1=6，然后 6 × 9 = 54"
     },
     {
-      "question": "29 - 92 = ?",
+      "question": "81 - 18",
       "answer": 63,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：8-1=7，然后 7 × 9 = 63"
     },
     {
-      "question": "31 - 13 = ?",
+      "question": "32 - 23",
+      "answer": 9,
+      "explanation": "首尾之差：3-2=1，然后 1 × 9 = 9"
+    },
+    {
+      "question": "42 - 24",
       "answer": 18,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：4-2=2，然后 2 × 9 = 18"
     },
     {
-      "question": "93 - 39 = ?",
+      "question": "52 - 25",
+      "answer": 27,
+      "explanation": "首尾之差：5-2=3，然后 3 × 9 = 27"
+    },
+    {
+      "question": "62 - 26",
+      "answer": 36,
+      "explanation": "首尾之差：6-2=4，然后 4 × 9 = 36"
+    },
+    {
+      "question": "72 - 27",
+      "answer": 45,
+      "explanation": "首尾之差：7-2=5，然后 5 × 9 = 45"
+    },
+    {
+      "question": "82 - 28",
       "answer": 54,
-      "explanation": "颠倒数相减"
+      "explanation": "首尾之差：8-2=6，然后 6 × 9 = 54"
     },
     {
-      "question": "75 - 57 = ?",
-      "answer": 18,
-      "explanation": "颠倒数相减"
+      "question": "92 - 29",
+      "answer": 63,
+      "explanation": "首尾之差：9-2=7，然后 7 × 9 = 63"
+    },
+    {
+      "question": "43 - 34",
+      "answer": 9,
+      "explanation": "首尾之差：4-3=1，然后 1 × 9 = 9"
     }
   ]
 }

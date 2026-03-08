@@ -3,251 +3,251 @@
   "category": "技巧篇",
   "lesson": "第8讲",
   "title": "九十几乘九十几",
-  "description": "九十几乘九十几的练习题库",
+  "description": "九十几乘九十几：一数加另一数个位×90，再加个位相乘",
   "questions": [
     {
-      "question": "99 × 97 = ?",
-      "answer": 9603,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "95 × 96 = ?",
-      "answer": 9120,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "93 × 91 = ?",
-      "answer": 8463,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "92 × 93 = ?",
-      "answer": 8556,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "92 × 98 = ?",
-      "answer": 9016,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "91 × 96 = ?",
-      "answer": 8736,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "97 × 93 = ?",
-      "answer": 9021,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "93 × 97 = ?",
-      "answer": 9021,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "92 × 97 = ?",
+      "question": "92 × 97",
       "answer": 8924,
-      "explanation": "九十几乘九十几速算法"
+      "explanation": "(92+7)×90 + 2×7 = 99×90 + 14 = 8924"
     },
     {
-      "question": "91 × 97 = ?",
-      "answer": 8827,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "93 × 93 = ?",
-      "answer": 8649,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "97 × 94 = ?",
-      "answer": 9118,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "94 × 96 = ?",
-      "answer": 9024,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "96 × 95 = ?",
-      "answer": 9120,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "92 × 96 = ?",
-      "answer": 8832,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "95 × 92 = ?",
-      "answer": 8740,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "97 × 92 = ?",
-      "answer": 8924,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "91 × 93 = ?",
-      "answer": 8463,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "94 × 99 = ?",
-      "answer": 9306,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "97 × 97 = ?",
-      "answer": 9409,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "94 × 96 = ?",
-      "answer": 9024,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "98 × 96 = ?",
-      "answer": 9408,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "95 × 97 = ?",
+      "question": "97 × 95",
       "answer": 9215,
-      "explanation": "九十几乘九十几速算法"
+      "explanation": "(97+5)×90 + 7×5 = 102×90 + 35 = 9215"
     },
     {
-      "question": "99 × 99 = ?",
-      "answer": 9801,
-      "explanation": "九十几乘九十几速算法"
+      "question": "94 × 98",
+      "answer": 9212,
+      "explanation": "(94+8)×90 + 4×8 = 102×90 + 32 = 9212"
     },
     {
-      "question": "99 × 92 = ?",
-      "answer": 9108,
-      "explanation": "九十几乘九十几速算法"
+      "question": "91 × 99",
+      "answer": 9009,
+      "explanation": "(91+9)×90 + 1×9 = 100×90 + 9 = 9009"
     },
     {
-      "question": "92 × 95 = ?",
-      "answer": 8740,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "94 × 94 = ?",
-      "answer": 8836,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "95 × 97 = ?",
-      "answer": 9215,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "96 × 99 = ?",
-      "answer": 9504,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "92 × 91 = ?",
-      "answer": 8372,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "99 × 97 = ?",
-      "answer": 9603,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "94 × 93 = ?",
-      "answer": 8742,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "99 × 93 = ?",
-      "answer": 9207,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "94 × 94 = ?",
-      "answer": 8836,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "93 × 95 = ?",
-      "answer": 8835,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "98 × 96 = ?",
-      "answer": 9408,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "98 × 96 = ?",
-      "answer": 9408,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "93 × 95 = ?",
-      "answer": 8835,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "94 × 96 = ?",
-      "answer": 9024,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "95 × 97 = ?",
-      "answer": 9215,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "91 × 96 = ?",
-      "answer": 8736,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "95 × 94 = ?",
-      "answer": 8930,
-      "explanation": "九十几乘九十几速算法"
-    },
-    {
-      "question": "96 × 93 = ?",
+      "question": "93 × 96",
       "answer": 8928,
-      "explanation": "九十几乘九十几速算法"
+      "explanation": "(93+6)×90 + 3×6 = 99×90 + 18 = 8928"
     },
     {
-      "question": "95 × 98 = ?",
-      "answer": 9310,
-      "explanation": "九十几乘九十几速算法"
+      "question": "95 × 95",
+      "answer": 9025,
+      "explanation": "(95+5)×90 + 5×5 = 100×90 + 25 = 9025"
     },
     {
-      "question": "96 × 94 = ?",
-      "answer": 9024,
-      "explanation": "九十几乘九十几速算法"
+      "question": "91 × 92",
+      "answer": 8372,
+      "explanation": "(91+2)×90 + 1×2 = 93×90 + 2 = 8372"
     },
     {
-      "question": "98 × 96 = ?",
+      "question": "98 × 99",
+      "answer": 9702,
+      "explanation": "(98+9)×90 + 8×9 = 107×90 + 72 = 9702"
+    },
+    {
+      "question": "93 × 97",
+      "answer": 9021,
+      "explanation": "(93+7)×90 + 3×7 = 100×90 + 21 = 9021"
+    },
+    {
+      "question": "96 × 98",
       "answer": 9408,
-      "explanation": "九十几乘九十几速算法"
+      "explanation": "(96+8)×90 + 6×8 = 104×90 + 48 = 9408"
     },
     {
-      "question": "93 × 95 = ?",
-      "answer": 8835,
-      "explanation": "九十几乘九十几速算法"
+      "question": "92 × 94",
+      "answer": 8648,
+      "explanation": "(92+4)×90 + 2×4 = 96×90 + 8 = 8648"
     },
     {
-      "question": "95 × 91 = ?",
+      "question": "91 × 93",
+      "answer": 8463,
+      "explanation": "(91+3)×90 + 1×3 = 94×90 + 3 = 8463"
+    },
+    {
+      "question": "99 × 99",
+      "answer": 9801,
+      "explanation": "(99+9)×90 + 9×9 = 108×90 + 81 = 9801"
+    },
+    {
+      "question": "95 × 97",
+      "answer": 9215,
+      "explanation": "(95+7)×90 + 5×7 = 102×90 + 35 = 9215"
+    },
+    {
+      "question": "94 × 96",
+      "answer": 9024,
+      "explanation": "(94+6)×90 + 4×6 = 100×90 + 24 = 9024"
+    },
+    {
+      "question": "91 × 94",
+      "answer": 8554,
+      "explanation": "(91+4)×90 + 1×4 = 95×90 + 4 = 8554"
+    },
+    {
+      "question": "92 × 95",
+      "answer": 8740,
+      "explanation": "(92+5)×90 + 2×5 = 97×90 + 10 = 8740"
+    },
+    {
+      "question": "93 × 98",
+      "answer": 9114,
+      "explanation": "(93+8)×90 + 3×8 = 101×90 + 24 = 9114"
+    },
+    {
+      "question": "96 × 99",
+      "answer": 9504,
+      "explanation": "(96+9)×90 + 6×9 = 105×90 + 54 = 9504"
+    },
+    {
+      "question": "97 × 98",
+      "answer": 9506,
+      "explanation": "(97+8)×90 + 7×8 = 105×90 + 56 = 9506"
+    },
+    {
+      "question": "91 × 95",
       "answer": 8645,
-      "explanation": "九十几乘九十几速算法"
+      "explanation": "(91+5)×90 + 1×5 = 96×90 + 5 = 8645"
     },
     {
-      "question": "96 × 97 = ?",
+      "question": "92 × 96",
+      "answer": 8832,
+      "explanation": "(92+6)×90 + 2×6 = 98×90 + 12 = 8832"
+    },
+    {
+      "question": "93 × 99",
+      "answer": 9207,
+      "explanation": "(93+9)×90 + 3×9 = 102×90 + 27 = 9207"
+    },
+    {
+      "question": "94 × 97",
+      "answer": 9118,
+      "explanation": "(94+7)×90 + 4×7 = 101×90 + 28 = 9118"
+    },
+    {
+      "question": "95 × 98",
+      "answer": 9310,
+      "explanation": "(95+8)×90 + 5×8 = 103×90 + 40 = 9310"
+    },
+    {
+      "question": "91 × 96",
+      "answer": 8736,
+      "explanation": "(91+6)×90 + 1×6 = 97×90 + 6 = 8736"
+    },
+    {
+      "question": "92 × 98",
+      "answer": 9016,
+      "explanation": "(92+8)×90 + 2×8 = 100×90 + 16 = 9016"
+    },
+    {
+      "question": "93 × 94",
+      "answer": 8742,
+      "explanation": "(93+4)×90 + 3×4 = 97×90 + 12 = 8742"
+    },
+    {
+      "question": "94 × 99",
+      "answer": 9306,
+      "explanation": "(94+9)×90 + 4×9 = 103×90 + 36 = 9306"
+    },
+    {
+      "question": "95 × 96",
+      "answer": 9120,
+      "explanation": "(95+6)×90 + 5×6 = 101×90 + 30 = 9120"
+    },
+    {
+      "question": "96 × 97",
       "answer": 9312,
+      "explanation": "(96+7)×90 + 6×7 = 103×90 + 42 = 9312"
+    },
+    {
+      "question": "97 × 99",
+      "answer": 9603,
+      "explanation": "(97+9)×90 + 7×9 = 106×90 + 63 = 9603"
+    },
+    {
+      "question": "98 × 98",
+      "answer": 9604,
+      "explanation": "(98+8)×90 + 8×8 = 106×90 + 64 = 9604"
+    },
+    {
+      "question": "91 × 97",
+      "answer": 8827,
+      "explanation": "(91+7)×90 + 1×7 = 98×90 + 7 = 8827"
+    },
+    {
+      "question": "92 × 93",
+      "answer": 8556,
+      "explanation": "(92+3)×90 + 2×3 = 95×90 + 6 = 8556"
+    },
+    {
+      "question": "93 × 95",
+      "answer": 8835,
+      "explanation": "(93+5)×90 + 3×5 = 98×90 + 15 = 8835"
+    },
+    {
+      "question": "94 × 95",
+      "answer": 8930,
+      "explanation": "(94+5)×90 + 4×5 = 99×90 + 20 = 8930"
+    },
+    {
+      "question": "95 × 99",
+      "answer": 9405,
+      "explanation": "(95+9)×90 + 5×9 = 104×90 + 45 = 9405"
+    },
+    {
+      "question": "96 × 96",
+      "answer": 9216,
+      "explanation": "(96+6)×90 + 6×6 = 102×90 + 36 = 9216"
+    },
+    {
+      "question": "97 × 97",
+      "answer": 9409,
+      "explanation": "(97+7)×90 + 7×7 = 104×90 + 49 = 9409"
+    },
+    {
+      "question": "91 × 98",
+      "answer": 8918,
+      "explanation": "(91+8)×90 + 1×8 = 99×90 + 8 = 8918"
+    },
+    {
+      "question": "92 × 99",
+      "answer": 9108,
+      "explanation": "(92+9)×90 + 2×9 = 101×90 + 18 = 9108"
+    },
+    {
+      "question": "93 × 93",
+      "answer": 8649,
+      "explanation": "(93+3)×90 + 3×3 = 96×90 + 9 = 8649"
+    },
+    {
+      "question": "94 × 94",
+      "answer": 8836,
+      "explanation": "(94+4)×90 + 4×4 = 98×90 + 16 = 8836"
+    },
+    {
+      "question": "98 × 97",
+      "answer": 9506,
+      "explanation": "(98+7)×90 + 8×7 = 105×90 + 56 = 9506"
+    },
+    {
+      "question": "91 × 91",
+      "answer": 8281,
+      "explanation": "(91+1)×90 + 1×1 = 92×90 + 1 = 8281"
+    },
+    {
+      "question": "99 × 98",
+      "answer": 9702,
+      "explanation": "(99+8)×90 + 9×8 = 107×90 + 72 = 9702"
+    },
+    {
+      "question": "99 × 97",
+      "answer": 9603,
+      "explanation": "(99+7)×90 + 9×7 = 106×90 + 63 = 9603"
+    },
+    {
+      "question": "99 × 96",
+      "answer": 9504,
       "explanation": "九十几乘九十几速算法"
     },
     {

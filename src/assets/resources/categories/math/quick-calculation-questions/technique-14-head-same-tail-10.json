@@ -3,257 +3,257 @@
   "category": "技巧篇",
   "lesson": "第14讲",
   "title": "头同尾合十",
-  "description": "头同尾合十的练习题库",
+  "description": "头同尾合十：头×(头+1)为前，尾×尾为后",
   "questions": [
     {
-      "question": "29 × 96 = ?",
-      "answer": 2784,
-      "explanation": "头同尾合十练习题"
+      "question": "24 × 26",
+      "answer": 624,
+      "explanation": "头同（2），尾合十（4+6=10），前：2×3=6，后：4×6=24，答案624"
     },
     {
-      "question": "63 ÷ 96 = ?",
-      "answer": 0,
-      "explanation": "头同尾合十练习题"
+      "question": "56 × 54",
+      "answer": 3024,
+      "explanation": "头同（5），尾合十（6+4=10），前：5×6=30，后：6×4=24，答案3024"
     },
     {
-      "question": "82 × 89 = ?",
-      "answer": 7298,
-      "explanation": "头同尾合十练习题"
+      "question": "48 × 42",
+      "answer": 2016,
+      "explanation": "头同（4），尾合十（8+2=10），前：4×5=20，后：8×2=16，答案2016"
     },
     {
-      "question": "28 + 21 = ?",
-      "answer": 49,
-      "explanation": "头同尾合十练习题"
+      "question": "31 × 39",
+      "answer": 1209,
+      "explanation": "头同（3），尾合十（1+9=10），前：3×4=12，后：1×9=09，答案1209"
     },
     {
-      "question": "67 + 79 = ?",
-      "answer": 146,
-      "explanation": "头同尾合十练习题"
+      "question": "73 × 77",
+      "answer": 5621,
+      "explanation": "头同（7），尾合十（3+7=10），前：7×8=56，后：3×7=21，答案5621"
     },
     {
-      "question": "75 × 21 = ?",
-      "answer": 1575,
-      "explanation": "头同尾合十练习题"
+      "question": "82 × 88",
+      "answer": 7216,
+      "explanation": "头同（8），尾合十（2+8=10），前：8×9=72，后：2×8=16，答案7216"
     },
     {
-      "question": "14 + 27 = ?",
-      "answer": 41,
-      "explanation": "头同尾合十练习题"
+      "question": "19 × 11",
+      "answer": 209,
+      "explanation": "头同（1），尾合十（9+1=10），前：1×2=2，后：9×1=09，答案209"
     },
     {
-      "question": "99 × 81 = ?",
-      "answer": 8019,
-      "explanation": "头同尾合十练习题"
+      "question": "64 × 66",
+      "answer": 4224,
+      "explanation": "头同（6），尾合十（4+6=10），前：6×7=42，后：4×6=24，答案4224"
     },
     {
-      "question": "39 ÷ 56 = ?",
-      "answer": 0,
-      "explanation": "头同尾合十练习题"
+      "question": "37 × 33",
+      "answer": 1221,
+      "explanation": "头同（3），尾合十（7+3=10），前：3×4=12，后：7×3=21，答案1221"
     },
     {
-      "question": "17 × 38 = ?",
-      "answer": 646,
-      "explanation": "头同尾合十练习题"
+      "question": "45 × 45",
+      "answer": 2025,
+      "explanation": "头同（4），尾合十（5+5=10），前：4×5=20，后：5×5=25，答案2025"
     },
     {
-      "question": "93 - 25 = ?",
-      "answer": 68,
-      "explanation": "头同尾合十练习题"
+      "question": "91 × 99",
+      "answer": 9009,
+      "explanation": "头同（9），尾合十（1+9=10），前：9×10=90，后：1×9=09，答案9009"
     },
     {
-      "question": "57 ÷ 64 = ?",
-      "answer": 0,
-      "explanation": "头同尾合十练习题"
+      "question": "28 × 22",
+      "answer": 616,
+      "explanation": "头同（2），尾合十（8+2=10），前：2×3=6，后：8×2=16，答案616"
     },
     {
-      "question": "48 × 57 = ?",
-      "answer": 2736,
-      "explanation": "头同尾合十练习题"
+      "question": "53 × 57",
+      "answer": 3021,
+      "explanation": "头同（5），尾合十（3+7=10），前：5×6=30，后：3×7=21，答案3021"
     },
     {
-      "question": "30 - 31 = ?",
-      "answer": -1,
-      "explanation": "头同尾合十练习题"
+      "question": "67 × 63",
+      "answer": 4221,
+      "explanation": "头同（6），尾合十（7+3=10），前：6×7=42，后：7×3=21，答案4221"
     },
     {
-      "question": "31 - 43 = ?",
-      "answer": -12,
-      "explanation": "头同尾合十练习题"
+      "question": "74 × 76",
+      "answer": 5624,
+      "explanation": "头同（7），尾合十（4+6=10），前：7×8=56，后：4×6=24，答案5624"
     },
     {
-      "question": "65 × 20 = ?",
-      "answer": 1300,
-      "explanation": "头同尾合十练习题"
+      "question": "89 × 81",
+      "answer": 7209,
+      "explanation": "头同（8），尾合十（9+1=10），前：8×9=72，后：9×1=09，答案7209"
     },
     {
-      "question": "24 × 80 = ?",
-      "answer": 1920,
-      "explanation": "头同尾合十练习题"
+      "question": "12 × 18",
+      "answer": 216,
+      "explanation": "头同（1），尾合十（2+8=10），前：1×2=2，后：2×8=16，答案216"
     },
     {
-      "question": "99 + 16 = ?",
-      "answer": 115,
-      "explanation": "头同尾合十练习题"
+      "question": "35 × 35",
+      "answer": 1225,
+      "explanation": "头同（3），尾合十（5+5=10），前：3×4=12，后：5×5=25，答案1225"
     },
     {
-      "question": "91 - 72 = ?",
-      "answer": 19,
-      "explanation": "头同尾合十练习题"
+      "question": "46 × 44",
+      "answer": 2024,
+      "explanation": "头同（4），尾合十（6+4=10），前：4×5=20，后：6×4=24，答案2024"
     },
     {
-      "question": "49 - 27 = ?",
-      "answer": 22,
-      "explanation": "头同尾合十练习题"
+      "question": "59 × 51",
+      "answer": 3009,
+      "explanation": "头同（5），尾合十（9+1=10），前：5×6=30，后：9×1=09，答案3009"
     },
     {
-      "question": "33 × 34 = ?",
-      "answer": 1122,
-      "explanation": "头同尾合十练习题"
+      "question": "62 × 68",
+      "answer": 4216,
+      "explanation": "头同（6），尾合十（2+8=10），前：6×7=42，后：2×8=16，答案4216"
     },
     {
-      "question": "21 ÷ 39 = ?",
-      "answer": 0,
-      "explanation": "头同尾合十练习题"
+      "question": "71 × 79",
+      "answer": 5609,
+      "explanation": "头同（7），尾合十（1+9=10），前：7×8=56，后：1×9=09，答案5609"
     },
     {
-      "question": "60 × 61 = ?",
-      "answer": 3660,
-      "explanation": "头同尾合十练习题"
+      "question": "83 × 87",
+      "answer": 7221,
+      "explanation": "头同（8），尾合十（3+7=10），前：8×9=72，后：3×7=21，答案7221"
     },
     {
-      "question": "68 × 58 = ?",
-      "answer": 3944,
-      "explanation": "头同尾合十练习题"
+      "question": "94 × 96",
+      "answer": 9024,
+      "explanation": "头同（9），尾合十（4+6=10），前：9×10=90，后：4×6=24，答案9024"
     },
     {
-      "question": "73 ÷ 33 = ?",
-      "answer": 2,
-      "explanation": "头同尾合十练习题"
+      "question": "13 × 17",
+      "answer": 221,
+      "explanation": "头同（1），尾合十（3+7=10），前：1×2=2，后：3×7=21，答案221"
     },
     {
-      "question": "69 + 30 = ?",
-      "answer": 99,
-      "explanation": "头同尾合十练习题"
+      "question": "25 × 25",
+      "answer": 625,
+      "explanation": "头同（2），尾合十（5+5=10），前：2×3=6，后：5×5=25，答案625"
     },
     {
-      "question": "64 - 30 = ?",
-      "answer": 34,
-      "explanation": "头同尾合十练习题"
+      "question": "36 × 34",
+      "answer": 1224,
+      "explanation": "头同（3），尾合十（6+4=10），前：3×4=12，后：6×4=24，答案1224"
     },
     {
-      "question": "15 - 66 = ?",
-      "answer": -51,
-      "explanation": "头同尾合十练习题"
+      "question": "47 × 43",
+      "answer": 2021,
+      "explanation": "头同（4），尾合十（7+3=10），前：4×5=20，后：7×3=21，答案2021"
     },
     {
-      "question": "60 - 10 = ?",
-      "answer": 50,
-      "explanation": "头同尾合十练习题"
+      "question": "58 × 52",
+      "answer": 3016,
+      "explanation": "头同（5），尾合十（8+2=10），前：5×6=30，后：8×2=16，答案3016"
     },
     {
-      "question": "59 + 15 = ?",
-      "answer": 74,
-      "explanation": "头同尾合十练习题"
+      "question": "61 × 69",
+      "answer": 4209,
+      "explanation": "头同（6），尾合十（1+9=10），前：6×7=42，后：1×9=09，答案4209"
     },
     {
-      "question": "99 × 17 = ?",
-      "answer": 1683,
-      "explanation": "头同尾合十练习题"
+      "question": "72 × 78",
+      "answer": 5616,
+      "explanation": "头同（7），尾合十（2+8=10），前：7×8=56，后：2×8=16，答案5616"
     },
     {
-      "question": "61 × 81 = ?",
-      "answer": 4941,
-      "explanation": "头同尾合十练习题"
+      "question": "84 × 86",
+      "answer": 7224,
+      "explanation": "头同（8），尾合十（4+6=10），前：8×9=72，后：4×6=24，答案7224"
     },
     {
-      "question": "67 × 50 = ?",
-      "answer": 3350,
-      "explanation": "头同尾合十练习题"
+      "question": "95 × 95",
+      "answer": 9025,
+      "explanation": "头同（9），尾合十（5+5=10），前：9×10=90，后：5×5=25，答案9025"
     },
     {
-      "question": "97 - 37 = ?",
-      "answer": 60,
-      "explanation": "头同尾合十练习题"
+      "question": "14 × 16",
+      "answer": 224,
+      "explanation": "头同（1），尾合十（4+6=10），前：1×2=2，后：4×6=24，答案224"
     },
     {
-      "question": "76 + 97 = ?",
-      "answer": 173,
-      "explanation": "头同尾合十练习题"
+      "question": "27 × 23",
+      "answer": 621,
+      "explanation": "头同（2），尾合十（7+3=10），前：2×3=6，后：7×3=21，答案621"
     },
     {
-      "question": "19 - 60 = ?",
-      "answer": -41,
-      "explanation": "头同尾合十练习题"
+      "question": "38 × 32",
+      "answer": 1216,
+      "explanation": "头同（3），尾合十（8+2=10），前：3×4=12，后：8×2=16，答案1216"
     },
     {
-      "question": "77 × 86 = ?",
-      "answer": 6622,
-      "explanation": "头同尾合十练习题"
+      "question": "41 × 49",
+      "answer": 2009,
+      "explanation": "头同（4），尾合十（1+9=10），前：4×5=20，后：1×9=09，答案2009"
     },
     {
-      "question": "74 × 58 = ?",
-      "answer": 4292,
-      "explanation": "头同尾合十练习题"
+      "question": "52 × 58",
+      "answer": 3016,
+      "explanation": "头同（5），尾合十（2+8=10），前：5×6=30，后：2×8=16，答案3016"
     },
     {
-      "question": "50 + 28 = ?",
-      "answer": 78,
-      "explanation": "头同尾合十练习题"
+      "question": "65 × 65",
+      "answer": 4225,
+      "explanation": "头同（6），尾合十（5+5=10），前：6×7=42，后：5×5=25，答案4225"
     },
     {
-      "question": "48 ÷ 89 = ?",
-      "answer": 0,
-      "explanation": "头同尾合十练习题"
+      "question": "76 × 74",
+      "answer": 5624,
+      "explanation": "头同（7），尾合十（6+4=10），前：7×8=56，后：6×4=24，答案5624"
     },
     {
-      "question": "17 × 24 = ?",
-      "answer": 408,
-      "explanation": "头同尾合十练习题"
+      "question": "87 × 83",
+      "answer": 7221,
+      "explanation": "头同（8），尾合十（7+3=10），前：8×9=72，后：7×3=21，答案7221"
     },
     {
-      "question": "98 + 17 = ?",
-      "answer": 115,
-      "explanation": "头同尾合十练习题"
+      "question": "93 × 97",
+      "answer": 9021,
+      "explanation": "头同（9），尾合十（3+7=10），前：9×10=90，后：3×7=21，答案9021"
     },
     {
-      "question": "65 ÷ 26 = ?",
-      "answer": 2,
-      "explanation": "头同尾合十练习题"
+      "question": "15 × 15",
+      "answer": 225,
+      "explanation": "头同（1），尾合十（5+5=10），前：1×2=2，后：5×5=25，答案225"
     },
     {
-      "question": "19 - 93 = ?",
-      "answer": -74,
-      "explanation": "头同尾合十练习题"
+      "question": "29 × 21",
+      "answer": 609,
+      "explanation": "头同（2），尾合十（9+1=10），前：2×3=6，后：9×1=09，答案609"
     },
     {
-      "question": "37 - 20 = ?",
-      "answer": 17,
-      "explanation": "头同尾合十练习题"
+      "question": "32 × 38",
+      "answer": 1216,
+      "explanation": "头同（3），尾合十（2+8=10），前：3×4=12，后：2×8=16，答案1216"
     },
     {
-      "question": "15 + 88 = ?",
-      "answer": 103,
-      "explanation": "头同尾合十练习题"
+      "question": "43 × 47",
+      "answer": 2021,
+      "explanation": "头同（4），尾合十（3+7=10），前：4×5=20，后：3×7=21，答案2021"
     },
     {
-      "question": "53 ÷ 86 = ?",
-      "answer": 0,
-      "explanation": "头同尾合十练习题"
+      "question": "51 × 59",
+      "answer": 3009,
+      "explanation": "头同（5），尾合十（1+9=10），前：5×6=30，后：1×9=09，答案3009"
     },
     {
-      "question": "72 + 40 = ?",
-      "answer": 112,
-      "explanation": "头同尾合十练习题"
+      "question": "68 × 62",
+      "answer": 4216,
+      "explanation": "头同（6），尾合十（8+2=10），前：6×7=42，后：8×2=16，答案4216"
     },
     {
-      "question": "31 ÷ 84 = ?",
-      "answer": 0,
-      "explanation": "头同尾合十练习题"
+      "question": "75 × 75",
+      "answer": 5625,
+      "explanation": "头同（7），尾合十（5+5=10），前：7×8=56，后：5×5=25，答案5625"
     },
     {
-      "question": "82 ÷ 54 = ?",
-      "answer": 1,
-      "explanation": "头同尾合十练习题"
+      "question": "81 × 89",
+      "answer": 7209,
+      "explanation": "头同（8），尾合十（1+9=10），前：8×9=72，后：1×9=09，答案7209"
     }
   ]
 }

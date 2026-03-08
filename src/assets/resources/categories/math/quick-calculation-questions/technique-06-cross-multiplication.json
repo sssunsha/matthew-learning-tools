@@ -3,257 +3,257 @@
   "category": "技巧篇",
   "lesson": "第6讲",
   "title": "交叉相乘法速算两位数乘法",
-  "description": "交叉相乘法速算两位数乘法的练习题库",
+  "description": "任意两位数乘法：竖着相乘算两边，对角相乘算中间",
   "questions": [
     {
-      "question": "28 - 48 = ?",
-      "answer": -20,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "14 × 12",
+      "answer": 168,
+      "explanation": "①4×2=8；②1×2+4×1=6；③1×1=1，答案168"
     },
     {
-      "question": "57 + 56 = ?",
-      "answer": 113,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "13 × 12",
+      "answer": 156,
+      "explanation": "①3×2=6；②1×2+3×1=5；③1×1=1，答案156"
     },
     {
-      "question": "28 ÷ 15 = ?",
-      "answer": 1,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "33 × 21",
+      "answer": 693,
+      "explanation": "①3×1=3；②3×2+3×1=9；③3×2=6，答案693"
     },
     {
-      "question": "45 ÷ 61 = ?",
-      "answer": 0,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "15 × 13",
+      "answer": 195,
+      "explanation": "①5×3=15，写5进1；②1×3+5×1+1=9；③1×1=1，答案195"
     },
     {
-      "question": "30 + 54 = ?",
-      "answer": 84,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "24 × 11",
+      "answer": 264,
+      "explanation": "①4×1=4；②2×1+4×1=6；③2×1=2，答案264"
     },
     {
-      "question": "88 × 28 = ?",
-      "answer": 2464,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "17 × 14",
+      "answer": 238,
+      "explanation": "①7×4=28，写8进2；②1×4+7×1+2=13，写3进1；③1×1+1=2，答案238"
     },
     {
-      "question": "46 + 80 = ?",
-      "answer": 126,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "22 × 13",
+      "answer": 286,
+      "explanation": "①2×3=6；②2×3+2×1=8；③2×1=2，答案286"
     },
     {
-      "question": "34 × 73 = ?",
-      "answer": 2482,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "16 × 15",
+      "answer": 240,
+      "explanation": "①6×5=30，写0进3；②1×5+6×1+3=14，写4进1；③1×1+1=2，答案240"
     },
     {
-      "question": "81 ÷ 43 = ?",
-      "answer": 1,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "25 × 12",
+      "answer": 300,
+      "explanation": "①5×2=10，写0进1；②2×2+5×1+1=10，写0进1；③2×1+1=3，答案300"
     },
     {
-      "question": "85 - 26 = ?",
-      "answer": 59,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "18 × 11",
+      "answer": 198,
+      "explanation": "①8×1=8；②1×1+8×1=9；③1×1=1，答案198"
     },
     {
-      "question": "28 + 62 = ?",
-      "answer": 90,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "23 × 14",
+      "answer": 322,
+      "explanation": "①3×4=12，写2进1；②2×4+3×1+1=12，写2进1；③2×1+1=3，答案322"
     },
     {
-      "question": "37 ÷ 48 = ?",
-      "answer": 0,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "19 × 12",
+      "answer": 228,
+      "explanation": "①9×2=18，写8进1；②1×2+9×1+1=12，写2进1；③1×1+1=2，答案228"
     },
     {
-      "question": "27 - 68 = ?",
-      "answer": -41,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "26 × 13",
+      "answer": 338,
+      "explanation": "①6×3=18，写8进1；②2×3+6×1+1=13，写3进1；③2×1+1=3，答案338"
     },
     {
-      "question": "10 ÷ 12 = ?",
-      "answer": 0,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "15 × 14",
+      "answer": 210,
+      "explanation": "①5×4=20，写0进2；②1×4+5×1+2=11，写1进1；③1×1+1=2，答案210"
     },
     {
-      "question": "73 ÷ 85 = ?",
-      "answer": 0,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "21 × 15",
+      "answer": 315,
+      "explanation": "①1×5=5；②2×5+1×1=11，写1进1；③2×1+1=3，答案315"
     },
     {
-      "question": "27 × 37 = ?",
-      "answer": 999,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "27 × 12",
+      "answer": 324,
+      "explanation": "①7×2=14，写4进1；②2×2+7×1+1=12，写2进1；③2×1+1=3，答案324"
     },
     {
-      "question": "33 - 37 = ?",
-      "answer": -4,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "16 × 13",
+      "answer": 208,
+      "explanation": "①6×3=18，写8进1；②1×3+6×1+1=10，写0进1；③1×1+1=2，答案208"
     },
     {
-      "question": "31 - 44 = ?",
-      "answer": -13,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "28 × 11",
+      "answer": 308,
+      "explanation": "①8×1=8；②2×1+8×1=10，写0进1；③2×1+1=3，答案308"
     },
     {
-      "question": "63 ÷ 47 = ?",
-      "answer": 1,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "17 × 15",
+      "answer": 255,
+      "explanation": "①7×5=35，写5进3；②1×5+7×1+3=15，写5进1；③1×1+1=2，答案255"
     },
     {
-      "question": "87 + 68 = ?",
-      "answer": 155,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "24 × 14",
+      "answer": 336,
+      "explanation": "①4×4=16，写6进1；②2×4+4×1+1=13，写3进1；③2×1+1=3，答案336"
     },
     {
-      "question": "12 - 43 = ?",
-      "answer": -31,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "19 × 13",
+      "answer": 247,
+      "explanation": "①9×3=27，写7进2；②1×3+9×1+2=14，写4进1；③1×1+1=2，答案247"
     },
     {
-      "question": "28 - 73 = ?",
-      "answer": -45,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "25 × 15",
+      "answer": 375,
+      "explanation": "①5×5=25，写5进2；②2×5+5×1+2=17，写7进1；③2×1+1=3，答案375"
     },
     {
-      "question": "73 - 36 = ?",
-      "answer": 37,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "18 × 14",
+      "answer": 252,
+      "explanation": "①8×4=32，写2进3；②1×4+8×1+3=15，写5进1；③1×1+1=2，答案252"
     },
     {
-      "question": "49 - 48 = ?",
-      "answer": 1,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "26 × 12",
+      "answer": 312,
+      "explanation": "①6×2=12，写2进1；②2×2+6×1+1=11，写1进1；③2×1+1=3，答案312"
     },
     {
-      "question": "24 + 83 = ?",
-      "answer": 107,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "22 × 15",
+      "answer": 330,
+      "explanation": "①2×5=10，写0进1；②2×5+2×1+1=13，写3进1；③2×1+1=3，答案330"
     },
     {
-      "question": "87 - 25 = ?",
-      "answer": 62,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "17 × 16",
+      "answer": 272,
+      "explanation": "①7×6=42，写2进4；②1×6+7×1+4=17，写7进1；③1×1+1=2，答案272"
     },
     {
-      "question": "23 ÷ 64 = ?",
-      "answer": 0,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "29 × 11",
+      "answer": 319,
+      "explanation": "①9×1=9；②2×1+9×1=11，写1进1；③2×1+1=3，答案319"
     },
     {
-      "question": "21 ÷ 48 = ?",
-      "answer": 0,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "23 × 13",
+      "answer": 299,
+      "explanation": "①3×3=9；②2×3+3×1=9；③2×1=2，答案299"
     },
     {
-      "question": "50 + 35 = ?",
-      "answer": 85,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "16 × 14",
+      "answer": 224,
+      "explanation": "①6×4=24，写4进2；②1×4+6×1+2=12，写2进1；③1×1+1=2，答案224"
     },
     {
-      "question": "28 + 54 = ?",
-      "answer": 82,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "27 × 13",
+      "answer": 351,
+      "explanation": "①7×3=21，写1进2；②2×3+7×1+2=15，写5进1；③2×1+1=3，答案351"
     },
     {
-      "question": "85 + 27 = ?",
-      "answer": 112,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "18 × 15",
+      "answer": 270,
+      "explanation": "①8×5=40，写0进4；②1×5+8×1+4=17，写7进1；③1×1+1=2，答案270"
     },
     {
-      "question": "33 × 24 = ?",
-      "answer": 792,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "24 × 13",
+      "answer": 312,
+      "explanation": "①4×3=12，写2进1；②2×3+4×1+1=11，写1进1；③2×1+1=3，答案312"
     },
     {
-      "question": "41 × 38 = ?",
-      "answer": 1558,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "19 × 14",
+      "answer": 266,
+      "explanation": "①9×4=36，写6进3；②1×4+9×1+3=16，写6进1；③1×1+1=2，答案266"
     },
     {
-      "question": "14 - 73 = ?",
-      "answer": -59,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "25 × 14",
+      "answer": 350,
+      "explanation": "①5×4=20，写0进2；②2×4+5×1+2=15，写5进1；③2×1+1=3，答案350"
     },
     {
-      "question": "91 - 55 = ?",
-      "answer": 36,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "21 × 16",
+      "answer": 336,
+      "explanation": "①1×6=6；②2×6+1×1=13，写3进1；③2×1+1=3，答案336"
     },
     {
-      "question": "95 - 22 = ?",
-      "answer": 73,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "28 × 12",
+      "answer": 336,
+      "explanation": "①8×2=16，写6进1；②2×2+8×1+1=13，写3进1；③2×1+1=3，答案336"
     },
     {
-      "question": "70 × 15 = ?",
-      "answer": 1050,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "17 × 13",
+      "answer": 221,
+      "explanation": "①7×3=21，写1进2；②1×3+7×1+2=12，写2进1；③1×1+1=2，答案221"
     },
     {
-      "question": "98 - 66 = ?",
-      "answer": 32,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "26 × 14",
+      "answer": 364,
+      "explanation": "①6×4=24，写4进2；②2×4+6×1+2=16，写6进1；③2×1+1=3，答案364"
     },
     {
-      "question": "38 - 66 = ?",
-      "answer": -28,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "19 × 15",
+      "answer": 285,
+      "explanation": "①9×5=45，写5进4；②1×5+9×1+4=18，写8进1；③1×1+1=2，答案285"
     },
     {
-      "question": "10 - 41 = ?",
-      "answer": -31,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "23 × 15",
+      "answer": 345,
+      "explanation": "①3×5=15，写5进1；②2×5+3×1+1=14，写4进1；③2×1+1=3，答案345"
     },
     {
-      "question": "28 + 59 = ?",
-      "answer": 87,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "18 × 16",
+      "answer": 288,
+      "explanation": "①8×6=48，写8进4；②1×6+8×1+4=18，写8进1；③1×1+1=2，答案288"
     },
     {
-      "question": "76 - 82 = ?",
-      "answer": -6,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "27 × 14",
+      "answer": 378,
+      "explanation": "①7×4=28，写8进2；②2×4+7×1+2=17，写7进1；③2×1+1=3，答案378"
     },
     {
-      "question": "23 + 63 = ?",
-      "answer": 86,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "22 × 16",
+      "answer": 352,
+      "explanation": "①2×6=12，写2进1；②2×6+2×1+1=15，写5进1；③2×1+1=3，答案352"
     },
     {
-      "question": "89 + 99 = ?",
-      "answer": 188,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "29 × 12",
+      "answer": 348,
+      "explanation": "①9×2=18，写8进1；②2×2+9×1+1=14，写4进1；③2×1+1=3，答案348"
     },
     {
-      "question": "43 ÷ 70 = ?",
-      "answer": 0,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "16 × 17",
+      "answer": 272,
+      "explanation": "①6×7=42，写2进4；②1×7+6×1+4=17，写7进1；③1×1+1=2，答案272"
     },
     {
-      "question": "67 + 66 = ?",
-      "answer": 133,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "24 × 15",
+      "answer": 360,
+      "explanation": "①4×5=20，写0进2；②2×5+4×1+2=16，写6进1；③2×1+1=3，答案360"
     },
     {
-      "question": "52 ÷ 81 = ?",
-      "answer": 0,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "21 × 17",
+      "answer": 357,
+      "explanation": "①1×7=7；②2×7+1×1=15，写5进1；③2×1+1=3，答案357"
     },
     {
-      "question": "84 + 59 = ?",
-      "answer": 143,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "28 × 13",
+      "answer": 364,
+      "explanation": "①8×3=24，写4进2；②2×3+8×1+2=16，写6进1；③2×1+1=3，答案364"
     },
     {
-      "question": "78 × 39 = ?",
-      "answer": 3042,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "19 × 16",
+      "answer": 304,
+      "explanation": "①9×6=54，写4进5；②1×6+9×1+5=20，写0进2；③1×1+2=3，答案304"
     },
     {
-      "question": "48 ÷ 70 = ?",
-      "answer": 0,
-      "explanation": "交叉相乘法速算两位数乘法练习题"
+      "question": "25 × 16",
+      "answer": 400,
+      "explanation": "①5×6=30，写0进3；②2×6+5×1+3=20，写0进2；③2×1+2=4，答案400"
     }
   ]
 }

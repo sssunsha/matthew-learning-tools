@@ -5,6 +5,7 @@
 ## 📚 题库结构
 
 ### 技巧篇（16讲）
+
 1. **颠倒数的加法** - `technique-01-reversed-addition.json`
 2. **颠倒数的减法** - `technique-02-reversed-subtraction.json`
 3. **被减数为100、1000……的减法** - `technique-03-minuend-100-1000.json`
@@ -13,16 +14,17 @@
 6. **交叉相乘法速算两位数乘法** - `technique-06-cross-multiplication.json`
 7. **十几乘十几** - `technique-07-teens-multiplication.json`
 8. **九十几乘九十几** - `technique-08-ninety-multiplication.json`
-9. **速算数11** - `technique-09-multiply-by-11.json`
+9. **任意数乘11** - `technique-09-multiply-by-11.json`
 10. **个位数相同的两位数相乘** - `technique-10-same-ones-digit.json`
 11. **十位数相同的两位数相乘** - `technique-11-same-tens-digit.json`
 12. **多位数乘9的重复数** - `technique-12-multiply-by-9-repeating.json`
 13. **重复数除9** - `technique-13-repeating-divide-9.json`
 14. **头同尾合十** - `technique-14-head-same-tail-10.json`
 15. **尾同头合十** - `technique-15-tail-same-head-10.json`
-16. **合十数重复数** - `technique-16-sum-10-repeating.json`
+16. **合十数乘重复数** - `technique-16-sum-10-repeating.json`
 
 ### 方法篇（16讲）
+
 1. **拆补凑整法** - `method-01-split-complement.json`
 2. **带符号搬家（1）** - `method-02-move-with-signs-1.json`
 3. **添去括号法（1）** - `method-03-add-remove-brackets-1.json`
@@ -62,6 +64,7 @@
 ```
 
 ### 字段说明
+
 - **id**: 题库唯一标识符
 - **category**: 所属分类（技巧篇/方法篇）
 - **lesson**: 课程编号
@@ -98,14 +101,18 @@
 import { HttpClient } from '@angular/common/http';
 
 // 加载索引
-this.http.get('/assets/resources/categories/math/quick-calculation-questions/index.json')
-  .subscribe(index => {
+this.http
+  .get('/assets/resources/categories/math/quick-calculation-questions/index.json')
+  .subscribe((index) => {
     console.log('题库索引:', index);
   });
 
 // 加载特定题库
-this.http.get('/assets/resources/categories/math/quick-calculation-questions/technique-01-reversed-addition.json')
-  .subscribe(questions => {
+this.http
+  .get(
+    '/assets/resources/categories/math/quick-calculation-questions/technique-01-reversed-addition.json',
+  )
+  .subscribe((questions) => {
     console.log('题目:', questions);
   });
 ```

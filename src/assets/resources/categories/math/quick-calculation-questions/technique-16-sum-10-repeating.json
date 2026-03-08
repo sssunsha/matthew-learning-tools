@@ -2,258 +2,258 @@
   "id": "technique-16",
   "category": "技巧篇",
   "lesson": "第16讲",
-  "title": "合十数重复数",
-  "description": "合十数重复数的练习题库",
+  "title": "合十数乘重复数",
+  "description": "合十重复数：个位相加等于10的重复数相加或相乘",
   "questions": [
     {
-      "question": "94 × 53 = ?",
-      "answer": 4982,
-      "explanation": "合十数重复数练习题"
+      "question": "11 + 99",
+      "answer": 110,
+      "explanation": "合十重复数：1+9=10，结果：110"
     },
     {
-      "question": "70 - 28 = ?",
-      "answer": 42,
-      "explanation": "合十数重复数练习题"
+      "question": "22 + 88",
+      "answer": 110,
+      "explanation": "合十重复数：2+8=10，结果：110"
     },
     {
-      "question": "58 - 38 = ?",
-      "answer": 20,
-      "explanation": "合十数重复数练习题"
+      "question": "33 + 77",
+      "answer": 110,
+      "explanation": "合十重复数：3+7=10，结果：110"
     },
     {
-      "question": "93 ÷ 27 = ?",
-      "answer": 3,
-      "explanation": "合十数重复数练习题"
+      "question": "44 + 66",
+      "answer": 110,
+      "explanation": "合十重复数：4+6=10，结果：110"
     },
     {
-      "question": "77 ÷ 36 = ?",
-      "answer": 2,
-      "explanation": "合十数重复数练习题"
+      "question": "55 + 55",
+      "answer": 110,
+      "explanation": "合十重复数：5+5=10，结果：110"
     },
     {
-      "question": "75 × 93 = ?",
-      "answer": 6975,
-      "explanation": "合十数重复数练习题"
+      "question": "11 + 55",
+      "answer": 66,
+      "explanation": "普通加法：11+55=66"
     },
     {
-      "question": "94 - 66 = ?",
-      "answer": 28,
-      "explanation": "合十数重复数练习题"
+      "question": "33 + 22",
+      "answer": 55,
+      "explanation": "普通加法：33+22=55"
     },
     {
-      "question": "39 + 56 = ?",
-      "answer": 95,
-      "explanation": "合十数重复数练习题"
+      "question": "62 + 44",
+      "answer": 106,
+      "explanation": "普通加法：62+44=106"
     },
     {
-      "question": "99 ÷ 30 = ?",
-      "answer": 3,
-      "explanation": "合十数重复数练习题"
+      "question": "33 × 66",
+      "answer": 2178,
+      "explanation": "重复数相乘：33×66=2178"
     },
     {
-      "question": "40 - 61 = ?",
-      "answer": -21,
-      "explanation": "合十数重复数练习题"
+      "question": "88 × 99",
+      "answer": 8712,
+      "explanation": "重复数相乘：88×99=8712"
     },
     {
-      "question": "64 - 58 = ?",
-      "answer": 6,
-      "explanation": "合十数重复数练习题"
+      "question": "11 × 99",
+      "answer": 1089,
+      "explanation": "合十重复数相乘：11×99=1089"
     },
     {
-      "question": "85 ÷ 71 = ?",
-      "answer": 1,
-      "explanation": "合十数重复数练习题"
+      "question": "22 × 88",
+      "answer": 1936,
+      "explanation": "合十重复数相乘：22×88=1936"
     },
     {
-      "question": "12 × 18 = ?",
-      "answer": 216,
-      "explanation": "合十数重复数练习题"
+      "question": "33 × 77",
+      "answer": 2541,
+      "explanation": "合十重复数相乘：33×77=2541"
     },
     {
-      "question": "23 - 77 = ?",
-      "answer": -54,
-      "explanation": "合十数重复数练习题"
+      "question": "44 × 66",
+      "answer": 2904,
+      "explanation": "合十重复数相乘：44×66=2904"
     },
     {
-      "question": "67 × 52 = ?",
-      "answer": 3484,
-      "explanation": "合十数重复数练习题"
+      "question": "55 × 55",
+      "answer": 3025,
+      "explanation": "合十重复数相乘：55×55=3025"
     },
     {
-      "question": "88 - 38 = ?",
-      "answer": 50,
-      "explanation": "合十数重复数练习题"
+      "question": "11 + 22",
+      "answer": 33,
+      "explanation": "普通加法：11+22=33"
     },
     {
-      "question": "58 × 53 = ?",
-      "answer": 3074,
-      "explanation": "合十数重复数练习题"
+      "question": "33 + 44",
+      "answer": 77,
+      "explanation": "普通加法：33+44=77"
     },
     {
-      "question": "95 + 78 = ?",
-      "answer": 173,
-      "explanation": "合十数重复数练习题"
+      "question": "55 + 66",
+      "answer": 121,
+      "explanation": "普通加法：55+66=121"
     },
     {
-      "question": "22 ÷ 67 = ?",
-      "answer": 0,
-      "explanation": "合十数重复数练习题"
+      "question": "77 + 88",
+      "answer": 165,
+      "explanation": "普通加法：77+88=165"
     },
     {
-      "question": "42 - 29 = ?",
-      "answer": 13,
-      "explanation": "合十数重复数练习题"
+      "question": "99 + 11",
+      "answer": 110,
+      "explanation": "合十重复数：9+1=10，结果：110"
     },
     {
-      "question": "17 - 91 = ?",
-      "answer": -74,
-      "explanation": "合十数重复数练习题"
+      "question": "88 + 22",
+      "answer": 110,
+      "explanation": "合十重复数：8+2=10，结果：110"
     },
     {
-      "question": "54 - 69 = ?",
-      "answer": -15,
-      "explanation": "合十数重复数练习题"
+      "question": "77 + 33",
+      "answer": 110,
+      "explanation": "合十重复数：7+3=10，结果：110"
     },
     {
-      "question": "27 × 47 = ?",
-      "answer": 1269,
-      "explanation": "合十数重复数练习题"
+      "question": "66 + 44",
+      "answer": 110,
+      "explanation": "合十重复数：6+4=10，结果：110"
     },
     {
-      "question": "83 - 10 = ?",
-      "answer": 73,
-      "explanation": "合十数重复数练习题"
+      "question": "11 × 22",
+      "answer": 242,
+      "explanation": "重复数相乘：11×22=242"
     },
     {
-      "question": "50 × 54 = ?",
-      "answer": 2700,
-      "explanation": "合十数重复数练习题"
+      "question": "33 × 44",
+      "answer": 1452,
+      "explanation": "重复数相乘：33×44=1452"
     },
     {
-      "question": "26 - 23 = ?",
-      "answer": 3,
-      "explanation": "合十数重复数练习题"
+      "question": "55 × 66",
+      "answer": 3630,
+      "explanation": "重复数相乘：55×66=3630"
     },
     {
-      "question": "91 - 90 = ?",
-      "answer": 1,
-      "explanation": "合十数重复数练习题"
+      "question": "77 × 88",
+      "answer": 6776,
+      "explanation": "重复数相乘：77×88=6776"
     },
     {
-      "question": "83 ÷ 20 = ?",
-      "answer": 4,
-      "explanation": "合十数重复数练习题"
+      "question": "99 × 11",
+      "answer": 1089,
+      "explanation": "合十重复数相乘：99×11=1089"
     },
     {
-      "question": "63 × 58 = ?",
-      "answer": 3654,
-      "explanation": "合十数重复数练习题"
+      "question": "88 × 22",
+      "answer": 1936,
+      "explanation": "合十重复数相乘：88×22=1936"
     },
     {
-      "question": "41 + 85 = ?",
-      "answer": 126,
-      "explanation": "合十数重复数练习题"
+      "question": "77 × 33",
+      "answer": 2541,
+      "explanation": "合十重复数相乘：77×33=2541"
     },
     {
-      "question": "51 ÷ 51 = ?",
-      "answer": 1,
-      "explanation": "合十数重复数练习题"
+      "question": "66 × 44",
+      "answer": 2904,
+      "explanation": "合十重复数相乘：66×44=2904"
     },
     {
-      "question": "90 × 45 = ?",
-      "answer": 4050,
-      "explanation": "合十数重复数练习题"
+      "question": "11 + 11",
+      "answer": 22,
+      "explanation": "普通加法：11+11=22"
     },
     {
-      "question": "62 ÷ 53 = ?",
-      "answer": 1,
-      "explanation": "合十数重复数练习题"
+      "question": "22 + 22",
+      "answer": 44,
+      "explanation": "普通加法：22+22=44"
     },
     {
-      "question": "59 + 17 = ?",
-      "answer": 76,
-      "explanation": "合十数重复数练习题"
+      "question": "33 + 33",
+      "answer": 66,
+      "explanation": "普通加法：33+33=66"
     },
     {
-      "question": "96 × 69 = ?",
-      "answer": 6624,
-      "explanation": "合十数重复数练习题"
+      "question": "44 + 44",
+      "answer": 88,
+      "explanation": "普通加法：44+44=88"
     },
     {
-      "question": "80 ÷ 85 = ?",
-      "answer": 0,
-      "explanation": "合十数重复数练习题"
+      "question": "55 + 77",
+      "answer": 132,
+      "explanation": "普通加法：55+77=132"
     },
     {
-      "question": "33 + 10 = ?",
-      "answer": 43,
-      "explanation": "合十数重复数练习题"
+      "question": "66 + 88",
+      "answer": 154,
+      "explanation": "普通加法：66+88=154"
     },
     {
-      "question": "21 × 32 = ?",
-      "answer": 672,
-      "explanation": "合十数重复数练习题"
+      "question": "77 + 99",
+      "answer": 176,
+      "explanation": "普通加法：77+99=176"
     },
     {
-      "question": "33 ÷ 67 = ?",
-      "answer": 0,
-      "explanation": "合十数重复数练习题"
+      "question": "11 × 33",
+      "answer": 363,
+      "explanation": "重复数相乘：11×33=363"
     },
     {
-      "question": "88 - 56 = ?",
-      "answer": 32,
-      "explanation": "合十数重复数练习题"
+      "question": "22 × 44",
+      "answer": 968,
+      "explanation": "重复数相乘：22×44=968"
     },
     {
-      "question": "20 ÷ 79 = ?",
-      "answer": 0,
-      "explanation": "合十数重复数练习题"
+      "question": "33 × 55",
+      "answer": 1815,
+      "explanation": "重复数相乘：33×55=1815"
     },
     {
-      "question": "31 × 50 = ?",
-      "answer": 1550,
-      "explanation": "合十数重复数练习题"
+      "question": "44 × 77",
+      "answer": 3388,
+      "explanation": "重复数相乘：44×77=3388"
     },
     {
-      "question": "83 + 66 = ?",
-      "answer": 149,
-      "explanation": "合十数重复数练习题"
+      "question": "55 × 88",
+      "answer": 4840,
+      "explanation": "重复数相乘：55×88=4840"
     },
     {
-      "question": "53 ÷ 87 = ?",
-      "answer": 0,
-      "explanation": "合十数重复数练习题"
+      "question": "66 × 99",
+      "answer": 6534,
+      "explanation": "重复数相乘：66×99=6534"
     },
     {
-      "question": "33 - 74 = ?",
-      "answer": -41,
-      "explanation": "合十数重复数练习题"
+      "question": "11 × 44",
+      "answer": 484,
+      "explanation": "重复数相乘：11×44=484"
     },
     {
-      "question": "93 + 24 = ?",
-      "answer": 117,
-      "explanation": "合十数重复数练习题"
+      "question": "22 × 55",
+      "answer": 1210,
+      "explanation": "重复数相乘：22×55=1210"
     },
     {
-      "question": "54 ÷ 65 = ?",
-      "answer": 0,
-      "explanation": "合十数重复数练习题"
+      "question": "33 × 88",
+      "answer": 2904,
+      "explanation": "重复数相乘：33×88=2904"
     },
     {
-      "question": "96 - 43 = ?",
-      "answer": 53,
-      "explanation": "合十数重复数练习题"
+      "question": "44 × 99",
+      "answer": 4356,
+      "explanation": "重复数相乘：44×99=4356"
     },
     {
-      "question": "57 - 18 = ?",
-      "answer": 39,
-      "explanation": "合十数重复数练习题"
+      "question": "11 × 55",
+      "answer": 605,
+      "explanation": "重复数相乘：11×55=605"
     },
     {
-      "question": "44 × 53 = ?",
-      "answer": 2332,
-      "explanation": "合十数重复数练习题"
+      "question": "22 × 66",
+      "answer": 1452,
+      "explanation": "重复数相乘：22×66=1452"
     }
   ]
 }

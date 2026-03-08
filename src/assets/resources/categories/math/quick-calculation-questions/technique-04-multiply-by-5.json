@@ -3,257 +3,257 @@
   "category": "技巧篇",
   "lesson": "第4讲",
   "title": "任意数乘5的速算",
-  "description": "任意数乘5的速算的练习题库",
+  "description": "任意数乘5：个位是偶数除以2后补0，个位是奇数减1除以2后补5",
   "questions": [
     {
-      "question": "75 - 51 = ?",
-      "answer": 24,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "42 × 5",
+      "answer": 210,
+      "explanation": "个位2是偶数，42÷2=21，后补0，答案210"
     },
     {
-      "question": "80 - 85 = ?",
-      "answer": -5,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "83 × 5",
+      "answer": 415,
+      "explanation": "个位3是奇数，(83-1)÷2=41，后补5，答案415"
     },
     {
-      "question": "19 + 56 = ?",
-      "answer": 75,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "62 × 5",
+      "answer": 310,
+      "explanation": "个位2是偶数，62÷2=31，后补0，答案310"
     },
     {
-      "question": "71 + 19 = ?",
-      "answer": 90,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "47 × 5",
+      "answer": 235,
+      "explanation": "个位7是奇数，(47-1)÷2=23，后补5，答案235"
     },
     {
-      "question": "99 ÷ 28 = ?",
-      "answer": 3,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "28 - 24 = ?",
-      "answer": 4,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "68 ÷ 54 = ?",
-      "answer": 1,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "67 × 78 = ?",
-      "answer": 5226,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "28 + 39 = ?",
-      "answer": 67,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "43 ÷ 78 = ?",
-      "answer": 0,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "28 - 45 = ?",
-      "answer": -17,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "92 - 89 = ?",
-      "answer": 3,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "10 × 55 = ?",
-      "answer": 550,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "22 ÷ 78 = ?",
-      "answer": 0,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "88 ÷ 31 = ?",
-      "answer": 2,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "76 - 82 = ?",
-      "answer": -6,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "31 - 32 = ?",
-      "answer": -1,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "49 - 47 = ?",
-      "answer": 2,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "68 + 51 = ?",
-      "answer": 119,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "32 × 75 = ?",
-      "answer": 2400,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "74 ÷ 56 = ?",
-      "answer": 1,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "81 - 11 = ?",
-      "answer": 70,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "97 ÷ 72 = ?",
-      "answer": 1,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "33 × 71 = ?",
-      "answer": 2343,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "79 × 28 = ?",
-      "answer": 2212,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "71 × 18 = ?",
-      "answer": 1278,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "53 - 10 = ?",
-      "answer": 43,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "51 × 77 = ?",
-      "answer": 3927,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "78 × 69 = ?",
-      "answer": 5382,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "28 - 57 = ?",
-      "answer": -29,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "36 × 68 = ?",
-      "answer": 2448,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "97 - 42 = ?",
-      "answer": 55,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "11 ÷ 46 = ?",
-      "answer": 0,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "25 - 67 = ?",
-      "answer": -42,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "24 - 86 = ?",
-      "answer": -62,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "30 - 23 = ?",
-      "answer": 7,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "67 × 19 = ?",
-      "answer": 1273,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "31 - 29 = ?",
-      "answer": 2,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "40 ÷ 87 = ?",
-      "answer": 0,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "75 ÷ 11 = ?",
-      "answer": 6,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "27 ÷ 66 = ?",
-      "answer": 0,
-      "explanation": "任意数乘5的速算练习题"
-    },
-    {
-      "question": "43 × 10 = ?",
+      "question": "86 × 5",
       "answer": 430,
-      "explanation": "任意数乘5的速算练习题"
+      "explanation": "个位6是偶数，86÷2=43，后补0，答案430"
     },
     {
-      "question": "85 - 76 = ?",
-      "answer": 9,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "21 × 5",
+      "answer": 105,
+      "explanation": "个位1是奇数，(21-1)÷2=10，后补5，答案105"
     },
     {
-      "question": "97 × 92 = ?",
-      "answer": 8924,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "54 × 5",
+      "answer": 270,
+      "explanation": "个位4是偶数，54÷2=27，后补0，答案270"
     },
     {
-      "question": "39 × 20 = ?",
-      "answer": 780,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "69 × 5",
+      "answer": 345,
+      "explanation": "个位9是奇数，(69-1)÷2=34，后补5，答案345"
     },
     {
-      "question": "71 ÷ 65 = ?",
-      "answer": 1,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "38 × 5",
+      "answer": 190,
+      "explanation": "个位8是偶数，38÷2=19，后补0，答案190"
     },
     {
-      "question": "75 - 90 = ?",
-      "answer": -15,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "75 × 5",
+      "answer": 375,
+      "explanation": "个位5是奇数，(75-1)÷2=37，后补5，答案375"
     },
     {
-      "question": "55 × 23 = ?",
-      "answer": 1265,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "94 × 5",
+      "answer": 470,
+      "explanation": "个位4是偶数，94÷2=47，后补0，答案470"
     },
     {
-      "question": "65 - 53 = ?",
-      "answer": 12,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "31 × 5",
+      "answer": 155,
+      "explanation": "个位1是奇数，(31-1)÷2=15，后补5，答案155"
     },
     {
-      "question": "84 ÷ 95 = ?",
-      "answer": 0,
-      "explanation": "任意数乘5的速算练习题"
+      "question": "76 × 5",
+      "answer": 380,
+      "explanation": "个位6是偶数，76÷2=38，后补0，答案380"
+    },
+    {
+      "question": "53 × 5",
+      "answer": 265,
+      "explanation": "个位3是奇数，(53-1)÷2=26，后补5，答案265"
+    },
+    {
+      "question": "28 × 5",
+      "answer": 140,
+      "explanation": "个位8是偶数，28÷2=14，后补0，答案140"
+    },
+    {
+      "question": "65 × 5",
+      "answer": 325,
+      "explanation": "个位5是奇数，(65-1)÷2=32，后补5，答案325"
+    },
+    {
+      "question": "92 × 5",
+      "answer": 460,
+      "explanation": "个位2是偶数，92÷2=46，后补0，答案460"
+    },
+    {
+      "question": "17 × 5",
+      "answer": 85,
+      "explanation": "个位7是奇数，(17-1)÷2=8，后补5，答案85"
+    },
+    {
+      "question": "64 × 5",
+      "answer": 320,
+      "explanation": "个位4是偶数，64÷2=32，后补0，答案320"
+    },
+    {
+      "question": "49 × 5",
+      "answer": 245,
+      "explanation": "个位9是奇数，(49-1)÷2=24，后补5，答案245"
+    },
+    {
+      "question": "82 × 5",
+      "answer": 410,
+      "explanation": "个位2是偶数，82÷2=41，后补0，答案410"
+    },
+    {
+      "question": "35 × 5",
+      "answer": 175,
+      "explanation": "个位5是奇数，(35-1)÷2=17，后补5，答案175"
+    },
+    {
+      "question": "58 × 5",
+      "answer": 290,
+      "explanation": "个位8是偶数，58÷2=29，后补0，答案290"
+    },
+    {
+      "question": "71 × 5",
+      "answer": 355,
+      "explanation": "个位1是奇数，(71-1)÷2=35，后补5，答案355"
+    },
+    {
+      "question": "46 × 5",
+      "answer": 230,
+      "explanation": "个位6是偶数，46÷2=23，后补0，答案230"
+    },
+    {
+      "question": "93 × 5",
+      "answer": 465,
+      "explanation": "个位3是奇数，(93-1)÷2=46，后补5，答案465"
+    },
+    {
+      "question": "24 × 5",
+      "answer": 120,
+      "explanation": "个位4是偶数，24÷2=12，后补0，答案120"
+    },
+    {
+      "question": "67 × 5",
+      "answer": 335,
+      "explanation": "个位7是奇数，(67-1)÷2=33，后补5，答案335"
+    },
+    {
+      "question": "88 × 5",
+      "answer": 440,
+      "explanation": "个位8是偶数，88÷2=44，后补0，答案440"
+    },
+    {
+      "question": "15 × 5",
+      "answer": 75,
+      "explanation": "个位5是奇数，(15-1)÷2=7，后补5，答案75"
+    },
+    {
+      "question": "72 × 5",
+      "answer": 360,
+      "explanation": "个位2是偶数，72÷2=36，后补0，答案360"
+    },
+    {
+      "question": "59 × 5",
+      "answer": 295,
+      "explanation": "个位9是奇数，(59-1)÷2=29，后补5，答案295"
+    },
+    {
+      "question": "36 × 5",
+      "answer": 180,
+      "explanation": "个位6是偶数，36÷2=18，后补0，答案180"
+    },
+    {
+      "question": "81 × 5",
+      "answer": 405,
+      "explanation": "个位1是奇数，(81-1)÷2=40，后补5，答案405"
+    },
+    {
+      "question": "48 × 5",
+      "answer": 240,
+      "explanation": "个位8是偶数，48÷2=24，后补0，答案240"
+    },
+    {
+      "question": "23 × 5",
+      "answer": 115,
+      "explanation": "个位3是奇数，(23-1)÷2=11，后补5，答案115"
+    },
+    {
+      "question": "96 × 5",
+      "answer": 480,
+      "explanation": "个位6是偶数，96÷2=48，后补0，答案480"
+    },
+    {
+      "question": "45 × 5",
+      "answer": 225,
+      "explanation": "个位5是奇数，(45-1)÷2=22，后补5，答案225"
+    },
+    {
+      "question": "52 × 5",
+      "answer": 260,
+      "explanation": "个位2是偶数，52÷2=26，后补0，答案260"
+    },
+    {
+      "question": "87 × 5",
+      "answer": 435,
+      "explanation": "个位7是奇数，(87-1)÷2=43，后补5，答案435"
+    },
+    {
+      "question": "34 × 5",
+      "answer": 170,
+      "explanation": "个位4是偶数，34÷2=17，后补0，答案170"
+    },
+    {
+      "question": "61 × 5",
+      "answer": 305,
+      "explanation": "个位1是奇数，(61-1)÷2=30，后补5，答案305"
+    },
+    {
+      "question": "78 × 5",
+      "answer": 390,
+      "explanation": "个位8是偶数，78÷2=39，后补0，答案390"
+    },
+    {
+      "question": "29 × 5",
+      "answer": 145,
+      "explanation": "个位9是奇数，(29-1)÷2=14，后补5，答案145"
+    },
+    {
+      "question": "56 × 5",
+      "answer": 280,
+      "explanation": "个位6是偶数，56÷2=28，后补0，答案280"
+    },
+    {
+      "question": "73 × 5",
+      "answer": 365,
+      "explanation": "个位3是奇数，(73-1)÷2=36，后补5，答案365"
+    },
+    {
+      "question": "98 × 5",
+      "answer": 490,
+      "explanation": "个位8是偶数，98÷2=49，后补0，答案490"
+    },
+    {
+      "question": "41 × 5",
+      "answer": 205,
+      "explanation": "个位1是奇数，(41-1)÷2=20，后补5，答案205"
+    },
+    {
+      "question": "84 × 5",
+      "answer": 420,
+      "explanation": "个位4是偶数，84÷2=42，后补0，答案420"
+    },
+    {
+      "question": "55 × 5",
+      "answer": 275,
+      "explanation": "个位5是奇数，(55-1)÷2=27，后补5，答案275"
     }
   ]
 }

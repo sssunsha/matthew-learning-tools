@@ -1,0 +1,254 @@
+{
+  "id": "technique-13",
+  "category": "技巧篇",
+  "lesson": "第13讲",
+  "title": "重复数乘9",
+  "description": "重复数乘9：从左往右依次加1，最后补9",
+  "questions": [
+    {
+      "question": "222 × 9",
+      "answer": 1998,
+      "explanation": "从左往右：2→3→4，最后补9，答案1998"
+    },
+    {
+      "question": "333 × 9",
+      "answer": 2997,
+      "explanation": "从左往右：3→4→5，最后补9，答案2997"
+    },
+    {
+      "question": "444 × 9",
+      "answer": 3996,
+      "explanation": "从左往右：4→5→6，最后补9，答案3996"
+    },
+    {
+      "question": "555 × 9",
+      "answer": 4995,
+      "explanation": "从左往右：5→6→7，最后补9，答案4995"
+    },
+    {
+      "question": "666 × 9",
+      "answer": 5994,
+      "explanation": "从左往右：6→7→8，最后补9，答案5994"
+    },
+    {
+      "question": "777 × 9",
+      "answer": 6993,
+      "explanation": "从左往右：7→8→9，最后补9，答案6993"
+    },
+    {
+      "question": "888 × 9",
+      "answer": 7992,
+      "explanation": "从左往右：8→9→10需进位，答案7992"
+    },
+    {
+      "question": "111 × 9",
+      "answer": 999,
+      "explanation": "从左往右：1→2→3，最后补9，答案999"
+    },
+    {
+      "question": "22 × 9",
+      "answer": 198,
+      "explanation": "从左往右：2→3，最后补9，答案198"
+    },
+    {
+      "question": "33 × 9",
+      "answer": 297,
+      "explanation": "从左往右：3→4，最后补9，答案297"
+    },
+    {
+      "question": "44 × 9",
+      "answer": 396,
+      "explanation": "从左往右：4→5，最后补9，答案396"
+    },
+    {
+      "question": "55 × 9",
+      "answer": 495,
+      "explanation": "从左往右：5→6，最后补9，答案495"
+    },
+    {
+      "question": "66 × 9",
+      "answer": 594,
+      "explanation": "从左往右：6→7，最后补9，答案594"
+    },
+    {
+      "question": "77 × 9",
+      "answer": 693,
+      "explanation": "从左往右：7→8，最后补9，答案693"
+    },
+    {
+      "question": "88 × 9",
+      "answer": 792,
+      "explanation": "从左往右：8→9，最后补9，答案792"
+    },
+    {
+      "question": "99 × 9",
+      "answer": 891,
+      "explanation": "从左往右：9→10需进位，答案891"
+    },
+    {
+      "question": "11 × 9",
+      "answer": 99,
+      "explanation": "从左往右：1→2，最后补9，答案99"
+    },
+    {
+      "question": "2222 × 9",
+      "answer": 19998,
+      "explanation": "从左往右：2→3→4→5，最后补9，答案19998"
+    },
+    {
+      "question": "3333 × 9",
+      "answer": 29997,
+      "explanation": "从左往右：3→4→5→6，最后补9，答案29997"
+    },
+    {
+      "question": "4444 × 9",
+      "answer": 39996,
+      "explanation": "从左往右：4→5→6→7，最后补9，答案39996"
+    },
+    {
+      "question": "5555 × 9",
+      "answer": 49995,
+      "explanation": "从左往右：5→6→7→8，最后补9，答案49995"
+    },
+    {
+      "question": "6666 × 9",
+      "answer": 59994,
+      "explanation": "从左往右：6→7→8→9，最后补9，答案59994"
+    },
+    {
+      "question": "7777 × 9",
+      "answer": 69993,
+      "explanation": "从左往右：7→8→9→10需进位，答案69993"
+    },
+    {
+      "question": "8888 × 9",
+      "answer": 79992,
+      "explanation": "从左往右：8→9→10→11需进位，答案79992"
+    },
+    {
+      "question": "9999 × 9",
+      "answer": 89991,
+      "explanation": "从左往右：9→10→11→12需进位，答案89991"
+    },
+    {
+      "question": "1111 × 9",
+      "answer": 9999,
+      "explanation": "从左往右：1→2→3→4，最后补9，答案9999"
+    },
+    {
+      "question": "123 × 9",
+      "answer": 1107,
+      "explanation": "普通计算：123×9=1107"
+    },
+    {
+      "question": "234 × 9",
+      "answer": 2106,
+      "explanation": "普通计算：234×9=2106"
+    },
+    {
+      "question": "345 × 9",
+      "answer": 3105,
+      "explanation": "普通计算：345×9=3105"
+    },
+    {
+      "question": "456 × 9",
+      "answer": 4104,
+      "explanation": "普通计算：456×9=4104"
+    },
+    {
+      "question": "567 × 9",
+      "answer": 5103,
+      "explanation": "普通计算：567×9=5103"
+    },
+    {
+      "question": "678 × 9",
+      "answer": 6102,
+      "explanation": "普通计算：678×9=6102"
+    },
+    {
+      "question": "789 × 9",
+      "answer": 7101,
+      "explanation": "普通计算：789×9=7101"
+    },
+    {
+      "question": "12 × 9",
+      "answer": 108,
+      "explanation": "普通计算：12×9=108"
+    },
+    {
+      "question": "23 × 9",
+      "answer": 207,
+      "explanation": "普通计算：23×9=207"
+    },
+    {
+      "question": "34 × 9",
+      "answer": 306,
+      "explanation": "普通计算：34×9=306"
+    },
+    {
+      "question": "45 × 9",
+      "answer": 405,
+      "explanation": "普通计算：45×9=405"
+    },
+    {
+      "question": "56 × 9",
+      "answer": 504,
+      "explanation": "普通计算：56×9=504"
+    },
+    {
+      "question": "67 × 9",
+      "answer": 603,
+      "explanation": "普通计算：67×9=603"
+    },
+    {
+      "question": "78 × 9",
+      "answer": 702,
+      "explanation": "普通计算：78×9=702"
+    },
+    {
+      "question": "89 × 9",
+      "answer": 801,
+      "explanation": "普通计算：89×9=801"
+    },
+    {
+      "question": "11111 × 9",
+      "answer": 99999,
+      "explanation": "从左往右：1→2→3→4→5，最后补9，答案99999"
+    },
+    {
+      "question": "22222 × 9",
+      "answer": 199998,
+      "explanation": "从左往右：2→3→4→5→6，最后补9，答案199998"
+    },
+    {
+      "question": "33333 × 9",
+      "answer": 299997,
+      "explanation": "从左往右：3→4→5→6→7，最后补9，答案299997"
+    },
+    {
+      "question": "44444 × 9",
+      "answer": 399996,
+      "explanation": "从左往右：4→5→6→7→8，最后补9，答案399996"
+    },
+    {
+      "question": "55555 × 9",
+      "answer": 499995,
+      "explanation": "从左往右：5→6→7→8→9，最后补9，答案499995"
+    },
+    {
+      "question": "66666 × 9",
+      "answer": 599994,
+      "explanation": "从左往右：6→7→8→9→10需进位，答案599994"
+    },
+    {
+      "question": "77777 × 9",
+      "answer": 699993,
+      "explanation": "从左往右：7→8→9→10→11需进位，答案699993"
+    },
+    {
+      "question": "88888 × 9",
+      "answer": 799992,
+      "explanation": "从左往右：8→9→10→11→12需进位，答案799992"
+    }
+  ]
+}

@@ -2,258 +2,258 @@
   "id": "technique-09",
   "category": "技巧篇",
   "lesson": "第9讲",
-  "title": "速算数11",
-  "description": "速算数11的练习题库",
+  "title": "任意数乘11",
+  "description": "任意数乘11：两头一拉，中间相加",
   "questions": [
     {
-      "question": "71 - 96 = ?",
-      "answer": -25,
-      "explanation": "速算数11练习题"
+      "question": "34 × 11",
+      "answer": 374,
+      "explanation": "两头3和4，中间3+4=7，答案374"
     },
     {
-      "question": "69 - 18 = ?",
-      "answer": 51,
-      "explanation": "速算数11练习题"
+      "question": "24 × 11",
+      "answer": 264,
+      "explanation": "两头2和4，中间2+4=6，答案264"
     },
     {
-      "question": "31 - 53 = ?",
-      "answer": -22,
-      "explanation": "速算数11练习题"
+      "question": "68 × 11",
+      "answer": 748,
+      "explanation": "两头6和8，中间6+8=14，进1，答案748"
     },
     {
-      "question": "10 - 15 = ?",
-      "answer": -5,
-      "explanation": "速算数11练习题"
+      "question": "23 × 11",
+      "answer": 253,
+      "explanation": "两头2和3，中间2+3=5，答案253"
     },
     {
-      "question": "64 + 89 = ?",
-      "answer": 153,
-      "explanation": "速算数11练习题"
+      "question": "45 × 11",
+      "answer": 495,
+      "explanation": "两头4和5，中间4+5=9，答案495"
     },
     {
-      "question": "50 + 40 = ?",
-      "answer": 90,
-      "explanation": "速算数11练习题"
+      "question": "56 × 11",
+      "answer": 616,
+      "explanation": "两头5和6，中间5+6=11，进1，答案616"
     },
     {
-      "question": "38 - 39 = ?",
-      "answer": -1,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "59 - 95 = ?",
-      "answer": -36,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "72 × 39 = ?",
-      "answer": 2808,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "31 - 88 = ?",
-      "answer": -57,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "21 ÷ 56 = ?",
-      "answer": 0,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "22 + 60 = ?",
-      "answer": 82,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "88 + 99 = ?",
-      "answer": 187,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "89 × 79 = ?",
-      "answer": 7031,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "37 - 28 = ?",
-      "answer": 9,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "43 + 47 = ?",
-      "answer": 90,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "14 + 32 = ?",
-      "answer": 46,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "20 - 43 = ?",
-      "answer": -23,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "43 × 34 = ?",
-      "answer": 1462,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "16 × 70 = ?",
-      "answer": 1120,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "86 + 10 = ?",
-      "answer": 96,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "13 - 26 = ?",
-      "answer": -13,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "24 ÷ 96 = ?",
-      "answer": 0,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "81 ÷ 18 = ?",
-      "answer": 4,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "26 + 65 = ?",
-      "answer": 91,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "95 + 17 = ?",
-      "answer": 112,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "83 + 49 = ?",
+      "question": "12 × 11",
       "answer": 132,
-      "explanation": "速算数11练习题"
+      "explanation": "两头1和2，中间1+2=3，答案132"
     },
     {
-      "question": "20 - 77 = ?",
-      "answer": -57,
-      "explanation": "速算数11练习题"
+      "question": "78 × 11",
+      "answer": 858,
+      "explanation": "两头7和8，中间7+8=15，进1，答案858"
     },
     {
-      "question": "37 - 88 = ?",
-      "answer": -51,
-      "explanation": "速算数11练习题"
+      "question": "35 × 11",
+      "answer": 385,
+      "explanation": "两头3和5，中间3+5=8，答案385"
     },
     {
-      "question": "88 + 21 = ?",
-      "answer": 109,
-      "explanation": "速算数11练习题"
+      "question": "67 × 11",
+      "answer": 737,
+      "explanation": "两头6和7，中间6+7=13，进1，答案737"
     },
     {
-      "question": "76 × 18 = ?",
-      "answer": 1368,
-      "explanation": "速算数11练习题"
+      "question": "19 × 11",
+      "answer": 209,
+      "explanation": "两头1和9，中间1+9=10，进1，答案209"
     },
     {
-      "question": "31 - 73 = ?",
-      "answer": -42,
-      "explanation": "速算数11练习题"
+      "question": "42 × 11",
+      "answer": 462,
+      "explanation": "两头4和2，中间4+2=6，答案462"
     },
     {
-      "question": "81 ÷ 54 = ?",
-      "answer": 1,
-      "explanation": "速算数11练习题"
+      "question": "54 × 11",
+      "answer": 594,
+      "explanation": "两头5和4，中间5+4=9，答案594"
     },
     {
-      "question": "85 + 75 = ?",
-      "answer": 160,
-      "explanation": "速算数11练习题"
+      "question": "81 × 11",
+      "answer": 891,
+      "explanation": "两头8和1，中间8+1=9，答案891"
     },
     {
-      "question": "95 ÷ 47 = ?",
-      "answer": 2,
-      "explanation": "速算数11练习题"
+      "question": "26 × 11",
+      "answer": 286,
+      "explanation": "两头2和6，中间2+6=8，答案286"
     },
     {
-      "question": "24 ÷ 55 = ?",
-      "answer": 0,
-      "explanation": "速算数11练习题"
+      "question": "73 × 11",
+      "answer": 803,
+      "explanation": "两头7和3，中间7+3=10，进1，答案803"
     },
     {
-      "question": "80 ÷ 76 = ?",
-      "answer": 1,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "98 + 34 = ?",
-      "answer": 132,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "98 × 11 = ?",
-      "answer": 1078,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "25 - 56 = ?",
-      "answer": -31,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "88 × 38 = ?",
-      "answer": 3344,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "42 × 46 = ?",
-      "answer": 1932,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "65 ÷ 10 = ?",
-      "answer": 6,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "14 + 80 = ?",
-      "answer": 94,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "14 × 26 = ?",
-      "answer": 364,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "41 - 18 = ?",
-      "answer": 23,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "79 ÷ 55 = ?",
-      "answer": 1,
-      "explanation": "速算数11练习题"
-    },
-    {
-      "question": "81 + 84 = ?",
+      "question": "15 × 11",
       "answer": 165,
-      "explanation": "速算数11练习题"
+      "explanation": "两头1和5，中间1+5=6，答案165"
     },
     {
-      "question": "72 - 13 = ?",
-      "answer": 59,
-      "explanation": "速算数11练习题"
+      "question": "89 × 11",
+      "answer": 979,
+      "explanation": "两头8和9，中间8+9=17，进1，答案979"
     },
     {
-      "question": "40 ÷ 86 = ?",
-      "answer": 0,
-      "explanation": "速算数11练习题"
+      "question": "37 × 11",
+      "answer": 407,
+      "explanation": "两头3和7，中间3+7=10，进1，答案407"
+    },
+    {
+      "question": "64 × 11",
+      "answer": 704,
+      "explanation": "两头6和4，中间6+4=10，进1，答案704"
+    },
+    {
+      "question": "21 × 11",
+      "answer": 231,
+      "explanation": "两头2和1，中间2+1=3，答案231"
+    },
+    {
+      "question": "58 × 11",
+      "answer": 638,
+      "explanation": "两头5和8，中间5+8=13，进1，答案638"
+    },
+    {
+      "question": "46 × 11",
+      "answer": 506,
+      "explanation": "两头4和6，中间4+6=10，进1，答案506"
+    },
+    {
+      "question": "92 × 11",
+      "answer": 1012,
+      "explanation": "两头9和2，中间9+2=11，进1，答案1012"
+    },
+    {
+      "question": "13 × 11",
+      "answer": 143,
+      "explanation": "两头1和3，中间1+3=4，答案143"
+    },
+    {
+      "question": "75 × 11",
+      "answer": 825,
+      "explanation": "两头7和5，中间7+5=12，进1，答案825"
+    },
+    {
+      "question": "28 × 11",
+      "answer": 308,
+      "explanation": "两头2和8，中间2+8=10，进1，答案308"
+    },
+    {
+      "question": "61 × 11",
+      "answer": 671,
+      "explanation": "两头6和1，中间6+1=7，答案671"
+    },
+    {
+      "question": "49 × 11",
+      "answer": 539,
+      "explanation": "两头4和9，中间4+9=13，进1，答案539"
+    },
+    {
+      "question": "82 × 11",
+      "answer": 902,
+      "explanation": "两头8和2，中间8+2=10，进1，答案902"
+    },
+    {
+      "question": "16 × 11",
+      "answer": 176,
+      "explanation": "两头1和6，中间1+6=7，答案176"
+    },
+    {
+      "question": "53 × 11",
+      "answer": 583,
+      "explanation": "两头5和3，中间5+3=8，答案583"
+    },
+    {
+      "question": "94 × 11",
+      "answer": 1034,
+      "explanation": "两头9和4，中间9+4=13，进1，答案1034"
+    },
+    {
+      "question": "27 × 11",
+      "answer": 297,
+      "explanation": "两头2和7，中间2+7=9，答案297"
+    },
+    {
+      "question": "65 × 11",
+      "answer": 715,
+      "explanation": "两头6和5，中间6+5=11，进1，答案715"
+    },
+    {
+      "question": "38 × 11",
+      "answer": 418,
+      "explanation": "两头3和8，中间3+8=11，进1，答案418"
+    },
+    {
+      "question": "71 × 11",
+      "answer": 781,
+      "explanation": "两头7和1，中间7+1=8，答案781"
+    },
+    {
+      "question": "14 × 11",
+      "answer": 154,
+      "explanation": "两头1和4，中间1+4=5，答案154"
+    },
+    {
+      "question": "86 × 11",
+      "answer": 946,
+      "explanation": "两头8和6，中间8+6=14，进1，答案946"
+    },
+    {
+      "question": "52 × 11",
+      "answer": 572,
+      "explanation": "两头5和2，中间5+2=7，答案572"
+    },
+    {
+      "question": "39 × 11",
+      "answer": 429,
+      "explanation": "两头3和9，中间3+9=12，进1，答案429"
+    },
+    {
+      "question": "76 × 11",
+      "answer": 836,
+      "explanation": "两头7和6，中间7+6=13，进1，答案836"
+    },
+    {
+      "question": "18 × 11",
+      "answer": 198,
+      "explanation": "两头1和8，中间1+8=9，答案198"
+    },
+    {
+      "question": "43 × 11",
+      "answer": 473,
+      "explanation": "两头4和3，中间4+3=7，答案473"
+    },
+    {
+      "question": "95 × 11",
+      "answer": 1045,
+      "explanation": "两头9和5，中间9+5=14，进1，答案1045"
+    },
+    {
+      "question": "22 × 11",
+      "answer": 242,
+      "explanation": "两头2和2，中间2+2=4，答案242"
+    },
+    {
+      "question": "69 × 11",
+      "answer": 759,
+      "explanation": "两头6和9，中间6+9=15，进1，答案759"
+    },
+    {
+      "question": "31 × 11",
+      "answer": 341,
+      "explanation": "两头3和1，中间3+1=4，答案341"
+    },
+    {
+      "question": "87 × 11",
+      "answer": 957,
+      "explanation": "两头8和7，中间8+7=15，进1，答案957"
+    },
+    {
+      "question": "55 × 11",
+      "answer": 605,
+      "explanation": "两头5和5，中间5+5=10，进1，答案605"
     }
   ]
 }

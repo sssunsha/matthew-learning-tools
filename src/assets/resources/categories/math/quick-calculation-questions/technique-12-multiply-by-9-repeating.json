@@ -3,257 +3,257 @@
   "category": "技巧篇",
   "lesson": "第12讲",
   "title": "多位数乘9的重复数",
-  "description": "多位数乘9的重复数的练习题库",
+  "description": "多位数乘99、999等：首不变，从后往前依次减1",
   "questions": [
     {
-      "question": "26 + 36 = ?",
-      "answer": 62,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "123 × 999",
+      "answer": 122877,
+      "explanation": "首1不变，从后往前：12→11→10，补3，答案122877"
     },
     {
-      "question": "87 - 47 = ?",
-      "answer": 40,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "46 × 99999",
+      "answer": 4599954,
+      "explanation": "首4不变，从后往前：4→3→2→1→0，补6，答案4599954"
     },
     {
-      "question": "98 × 94 = ?",
-      "answer": 9212,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "1637 × 99999",
+      "answer": 163698363,
+      "explanation": "首1不变，从后往前依次减1，补7，答案163698363"
     },
     {
-      "question": "11 ÷ 62 = ?",
-      "answer": 0,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "12 × 99",
+      "answer": 1188,
+      "explanation": "首1不变，后1减1=0，补2，答案1188"
     },
     {
-      "question": "40 + 63 = ?",
-      "answer": 103,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "34 × 99",
+      "answer": 3366,
+      "explanation": "首3不变，后3减1=2，补4，答案3366"
     },
     {
-      "question": "73 × 87 = ?",
-      "answer": 6351,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "56 × 99",
+      "answer": 5544,
+      "explanation": "首5不变，后5减1=4，补6，答案5544"
     },
     {
-      "question": "27 + 73 = ?",
-      "answer": 100,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "78 × 99",
+      "answer": 7722,
+      "explanation": "首7不变，后7减1=6，补8，答案7722"
     },
     {
-      "question": "78 ÷ 81 = ?",
-      "answer": 0,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "23 × 999",
+      "answer": 22977,
+      "explanation": "首2不变，从后往前：2→1→0，补3，答案22977"
     },
     {
-      "question": "64 + 52 = ?",
-      "answer": 116,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "45 × 999",
+      "answer": 44955,
+      "explanation": "首4不变，从后往前：4→3→2，补5，答案44955"
     },
     {
-      "question": "51 + 32 = ?",
-      "answer": 83,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "67 × 999",
+      "answer": 66933,
+      "explanation": "首6不变，从后往前：6→5→4，补7，答案66933"
     },
     {
-      "question": "16 ÷ 62 = ?",
-      "answer": 0,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "89 × 999",
+      "answer": 88911,
+      "explanation": "首8不变，从后往前：8→7→6，补9，答案88911"
     },
     {
-      "question": "46 + 84 = ?",
-      "answer": 130,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "234 × 999",
+      "answer": 233766,
+      "explanation": "首2不变，从后往前：23→22→21，补4，答案233766"
     },
     {
-      "question": "99 × 32 = ?",
-      "answer": 3168,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "456 × 999",
+      "answer": 455544,
+      "explanation": "首4不变，从后往前：45→44→43，补6，答案455544"
     },
     {
-      "question": "81 ÷ 88 = ?",
-      "answer": 0,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "678 × 999",
+      "answer": 677322,
+      "explanation": "首6不变，从后往前：67→66→65，补8，答案677322"
     },
     {
-      "question": "60 + 48 = ?",
-      "answer": 108,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "891 × 999",
+      "answer": 890109,
+      "explanation": "首8不变，从后往前：89→88→87，补1，答案890109"
     },
     {
-      "question": "71 + 26 = ?",
-      "answer": 97,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "12 × 9999",
+      "answer": 119988,
+      "explanation": "首1不变，从后往前：1→0→-1需借位，补2，答案119988"
     },
     {
-      "question": "69 - 56 = ?",
-      "answer": 13,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "34 × 9999",
+      "answer": 339966,
+      "explanation": "首3不变，从后往前依次减1，补4，答案339966"
     },
     {
-      "question": "25 - 19 = ?",
-      "answer": 6,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "56 × 9999",
+      "answer": 559944,
+      "explanation": "首5不变，从后往前依次减1，补6，答案559944"
     },
     {
-      "question": "55 ÷ 61 = ?",
-      "answer": 0,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "78 × 9999",
+      "answer": 779922,
+      "explanation": "首7不变，从后往前依次减1，补8，答案779922"
     },
     {
-      "question": "98 - 69 = ?",
-      "answer": 29,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "123 × 99",
+      "answer": 12177,
+      "explanation": "首1不变，后12减1=11，补3，答案12177"
     },
     {
-      "question": "70 - 63 = ?",
-      "answer": 7,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "234 × 99",
+      "answer": 23166,
+      "explanation": "首2不变，后23减1=22，补4，答案23166"
     },
     {
-      "question": "35 - 40 = ?",
-      "answer": -5,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "345 × 99",
+      "answer": 34155,
+      "explanation": "首3不变，后34减1=33，补5，答案34155"
     },
     {
-      "question": "34 × 87 = ?",
-      "answer": 2958,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "456 × 99",
+      "answer": 45144,
+      "explanation": "首4不变，后45减1=44，补6，答案45144"
     },
     {
-      "question": "80 + 23 = ?",
-      "answer": 103,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "567 × 99",
+      "answer": 56133,
+      "explanation": "首5不变，后56减1=55，补7，答案56133"
     },
     {
-      "question": "18 - 32 = ?",
-      "answer": -14,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "678 × 99",
+      "answer": 67122,
+      "explanation": "首6不变，后67减1=66，补8，答案67122"
     },
     {
-      "question": "51 + 99 = ?",
-      "answer": 150,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "789 × 99",
+      "answer": 78111,
+      "explanation": "首7不变，后78减1=77，补9，答案78111"
     },
     {
-      "question": "76 + 28 = ?",
-      "answer": 104,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "98 × 999",
+      "answer": 97902,
+      "explanation": "首9不变，从后往前：9→8→7，补8，答案97902"
     },
     {
-      "question": "57 - 23 = ?",
-      "answer": 34,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "87 × 999",
+      "answer": 86913,
+      "explanation": "首8不变，从后往前：8→7→6，补7，答案86913"
     },
     {
-      "question": "81 ÷ 66 = ?",
-      "answer": 1,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "76 × 999",
+      "answer": 75924,
+      "explanation": "首7不变，从后往前：7→6→5，补6，答案75924"
     },
     {
-      "question": "95 - 64 = ?",
-      "answer": 31,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "65 × 999",
+      "answer": 64935,
+      "explanation": "首6不变，从后往前：6→5→4，补5，答案64935"
     },
     {
-      "question": "97 × 61 = ?",
-      "answer": 5917,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "54 × 999",
+      "answer": 53946,
+      "explanation": "首5不变，从后往前：5→4→3，补4，答案53946"
     },
     {
-      "question": "29 × 87 = ?",
-      "answer": 2523,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "43 × 999",
+      "answer": 42957,
+      "explanation": "首4不变，从后往前：4→3→2，补3，答案42957"
     },
     {
-      "question": "79 - 86 = ?",
-      "answer": -7,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "32 × 999",
+      "answer": 31968,
+      "explanation": "首3不变，从后往前：3→2→1，补2，答案31968"
     },
     {
-      "question": "51 + 91 = ?",
-      "answer": 142,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "21 × 999",
+      "answer": 20979,
+      "explanation": "首2不变，从后往前：2→1→0，补1，答案20979"
     },
     {
-      "question": "19 + 56 = ?",
-      "answer": 75,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "135 × 999",
+      "answer": 134865,
+      "explanation": "首1不变，从后往前：13→12→11，补5，答案134865"
     },
     {
-      "question": "20 × 64 = ?",
-      "answer": 1280,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "246 × 999",
+      "answer": 245754,
+      "explanation": "首2不变，从后往前：24→23→22，补6，答案245754"
     },
     {
-      "question": "20 + 38 = ?",
-      "answer": 58,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "357 × 999",
+      "answer": 356643,
+      "explanation": "首3不变，从后往前：35→34→33，补7，答案356643"
     },
     {
-      "question": "57 × 46 = ?",
-      "answer": 2622,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "468 × 999",
+      "answer": 467532,
+      "explanation": "首4不变，从后往前：46→45→44，补8，答案467532"
     },
     {
-      "question": "95 + 15 = ?",
-      "answer": 110,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "579 × 999",
+      "answer": 578421,
+      "explanation": "首5不变，从后往前：57→56→55，补9，答案578421"
     },
     {
-      "question": "76 ÷ 45 = ?",
-      "answer": 1,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "24 × 9999",
+      "answer": 239976,
+      "explanation": "首2不变，从后往前依次减1，补4，答案239976"
     },
     {
-      "question": "55 + 71 = ?",
-      "answer": 126,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "36 × 9999",
+      "answer": 359964,
+      "explanation": "首3不变，从后往前依次减1，补6，答案359964"
     },
     {
-      "question": "24 ÷ 84 = ?",
-      "answer": 0,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "48 × 9999",
+      "answer": 479952,
+      "explanation": "首4不变，从后往前依次减1，补8，答案479952"
     },
     {
-      "question": "35 - 30 = ?",
-      "answer": 5,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "13 × 99",
+      "answer": 1287,
+      "explanation": "首1不变，后1减1=0，补3，答案1287"
     },
     {
-      "question": "21 + 19 = ?",
-      "answer": 40,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "25 × 99",
+      "answer": 2475,
+      "explanation": "首2不变，后2减1=1，补5，答案2475"
     },
     {
-      "question": "31 × 72 = ?",
-      "answer": 2232,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "37 × 99",
+      "answer": 3663,
+      "explanation": "首3不变，后3减1=2，补7，答案3663"
     },
     {
-      "question": "33 × 81 = ?",
-      "answer": 2673,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "49 × 99",
+      "answer": 4851,
+      "explanation": "首4不变，后4减1=3，补9，答案4851"
     },
     {
-      "question": "84 × 93 = ?",
-      "answer": 7812,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "15 × 999",
+      "answer": 14985,
+      "explanation": "首1不变，从后往前：1→0→-1需借位，补5，答案14985"
     },
     {
-      "question": "43 × 96 = ?",
-      "answer": 4128,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "27 × 999",
+      "answer": 26973,
+      "explanation": "首2不变，从后往前：2→1→0，补7，答案26973"
     },
     {
-      "question": "77 ÷ 92 = ?",
-      "answer": 0,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "39 × 999",
+      "answer": 38961,
+      "explanation": "首3不变，从后往前：3→2→1，补9，答案38961"
     },
     {
-      "question": "40 - 58 = ?",
-      "answer": -18,
-      "explanation": "多位数乘9的重复数练习题"
+      "question": "51 × 999",
+      "answer": 50949,
+      "explanation": "首5不变，从后往前：5→4→3，补1，答案50949"
     }
   ]
 }
