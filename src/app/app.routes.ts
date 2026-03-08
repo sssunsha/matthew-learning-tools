@@ -4,6 +4,7 @@ import { MultiplicationTableComponent } from './components/multiplication-table/
 import { QuickCalculationComponent } from './components/quick-calculation/quick-calculation';
 import { TetrisComponent } from './components/tetris/tetris';
 import { MathCategoryComponent } from './components/categories/math/math-category';
+import { BasicOperationsGameComponent } from './components/categories/math/basic-operations-game/basic-operations-game';
 import { EntertainmentCategoryComponent } from './components/categories/entertainment/entertainment-category';
 import { ChineseCategoryComponent } from './components/categories/chinese/chinese-category';
 import { Grade3Term2CharactersComponent } from './components/categories/chinese/grade3-term2-characters/grade3-term2-characters';
@@ -37,7 +38,7 @@ export const routes: Routes = [
     component: HomeComponent,
     title: '马修学习小工具 - 首页',
   },
-  
+
   // Category routes with /category prefix (maintains existing navigation compatibility)
   {
     path: 'category/chinese',
@@ -103,6 +104,11 @@ export const routes: Routes = [
     path: 'category/math',
     component: MathCategoryComponent,
     title: '数学 - Mathematics',
+  },
+  {
+    path: 'category/math/basic-operations-game',
+    component: BasicOperationsGameComponent,
+    title: '基础运算游戏 - Basic Operations Game',
   },
   {
     path: 'category/science',

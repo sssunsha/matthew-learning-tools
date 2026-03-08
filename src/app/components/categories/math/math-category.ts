@@ -9,12 +9,12 @@ import { PhotoCaptureService } from '../../../services/photo-capture.service';
   standalone: true,
   imports: [MatIconModule, MatButtonModule],
   templateUrl: './math-category.html',
-  styleUrl: './math-category.scss'
+  styleUrl: './math-category.scss',
 })
 export class MathCategoryComponent {
   constructor(
     private router: Router,
-    private photoCaptureService: PhotoCaptureService
+    private photoCaptureService: PhotoCaptureService,
   ) {}
 
   goBack() {
@@ -27,6 +27,10 @@ export class MathCategoryComponent {
 
   openQuickCalculation() {
     this.router.navigate(['/quick-calculation']);
+  }
+
+  openBasicOperationsGame() {
+    this.router.navigate(['/category/math/basic-operations-game']);
   }
 
   async openCamera(): Promise<void> {

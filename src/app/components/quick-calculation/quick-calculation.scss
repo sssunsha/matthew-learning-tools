@@ -553,9 +553,11 @@
   max-height: 70vh;
   overflow-y: auto;
   min-width: 450px;
+  background-color: white !important;
 
   .mat-mdc-menu-content {
     padding: 0 !important;
+    background-color: white !important;
   }
 
   .menu-header {

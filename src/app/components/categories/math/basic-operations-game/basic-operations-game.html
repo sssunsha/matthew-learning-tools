@@ -1,0 +1,101 @@
+<div class="basic-operations-container math-theme">
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-left">
+      <h1 class="category-title">基础运算游戏</h1>
+      <p class="category-subtitle">Basic Operations Game</p>
+    </div>
+    <div class="header-actions">
+      <button mat-raised-button class="header-btn" (click)="startGame()" [disabled]="isRunning">
+        开始
+      </button>
+      <button mat-raised-button class="header-btn" (click)="pauseGame()" [disabled]="!isRunning">
+        暂停
+      </button>
+      <button mat-raised-button class="header-btn" (click)="restartGame()">重开</button>
+    </div>
+  </div>
+
+  <div class="game-layout">
+    <div class="hud">
+      <div class="hud-item">
+        <span class="hud-label">难度</span>
+        <span class="hud-value">{{ currentLevel.label }}</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">分数</span>
+        <span class="hud-value">{{ score }}</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">速度</span>
+        <span class="hud-value">{{ speedLabel }}</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">答对</span>
+        <span class="hud-value">{{ totalCorrect }}</span>
+      </div>
+    </div>
+
+    <div class="game-area" #gameArea>
+      <div class="spawn-line"></div>
+      @for (question of fallingQuestions; track question.id) {
+        <div
+          class="question-tile"
+          [class.hit]="question.isHit"
+          [style.top.px]="question.y"
+          [style.left.%]="question.leftPercent"
+        >
+          {{ question.text }} = ?
+        </div>
+      }
+      @for (effect of hitEffects; track effect.id) {
+        <div class="hit-effect" [style.top.px]="effect.y" [style.left.%]="effect.leftPercent"></div>
+      }
+      <div class="ground-line"></div>
+
+      @if (isGameOver) {
+        <div class="game-over">
+          <div class="game-over-card">
+            <h2>游戏结束</h2>
+            <p>分数：{{ score }}</p>
+            <p>已答对：{{ totalCorrect }}</p>
+            <button mat-raised-button class="retry-btn" (click)="restartGame()">再来一次</button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="bottom-controls">
+      <div class="answer-panel" [class.error]="inputError">
+        <div class="answer-label">输入答案</div>
+        <div class="answer-value">{{ currentAnswer || '—' }}</div>
+      </div>
+
+      <div class="keypad-row">
+        @for (num of [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]; track num) {
+          <button mat-raised-button class="key-btn" (click)="onDigitClick(num)">{{ num }}</button>
+        }
+      </div>
+
+      <div class="action-row">
+        <button
+          mat-raised-button
+          class="action-btn"
+          (click)="confirmAnswer()"
+          [disabled]="!isRunning"
+        >
+          确定
+        </button>
+        <button mat-raised-button class="action-btn" (click)="onClear()">清空</button>
+        <button mat-raised-button class="action-btn" (click)="onDelete()">
+          <mat-icon>backspace</mat-icon>
+          删除
+        </button>
+      </div>
+
+      <div class="hint-text">每答对5题加速，30题升级难度</div>
+    </div>
+  </div>
+</div>
