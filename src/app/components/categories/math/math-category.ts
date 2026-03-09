@@ -33,6 +33,10 @@ export class MathCategoryComponent {
     this.router.navigate(['/category/math/basic-operations-game']);
   }
 
+  openSettings() {
+    this.router.navigate(['/settings']);
+  }
+
   async openCamera(): Promise<void> {
     const options = await this.photoCaptureService.showPhotoSourceDialog();
     if (options) {

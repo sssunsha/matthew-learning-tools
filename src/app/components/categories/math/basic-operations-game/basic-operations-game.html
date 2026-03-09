@@ -8,13 +8,35 @@
       <p class="category-subtitle">Basic Operations Game</p>
     </div>
     <div class="header-actions">
-      <button mat-raised-button class="header-btn" (click)="startGame()" [disabled]="isRunning">
-        开始
+      <button
+        mat-icon-button
+        class="header-btn"
+        (click)="startGame()"
+        [disabled]="isRunning"
+        title="开始"
+      >
+        <mat-icon>play_arrow</mat-icon>
       </button>
-      <button mat-raised-button class="header-btn" (click)="pauseGame()" [disabled]="!isRunning">
-        暂停
+      <button
+        mat-icon-button
+        class="header-btn"
+        (click)="pauseGame()"
+        [disabled]="!isRunning"
+        title="暂停"
+      >
+        <mat-icon>pause</mat-icon>
       </button>
-      <button mat-raised-button class="header-btn" (click)="restartGame()">重开</button>
+      <button mat-icon-button class="header-btn" (click)="restartGame()" title="重开">
+        <mat-icon>replay</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="header-btn settings-toggle"
+        (click)="openSettings()"
+        title="设置"
+      >
+        <mat-icon>settings</mat-icon>
+      </button>
     </div>
   </div>
 
@@ -40,14 +62,44 @@
 
     <div class="game-area" #gameArea>
       <div class="spawn-line"></div>
+
+      <div class="cannon-stage" aria-hidden="true">
+        <img
+          class="cannon-image"
+          [src]="cannonAssetPath"
+          alt="大炮"
+          [style.transform]="'rotate(' + cannonAngleDeg + 'deg)'"
+        />
+      </div>
+
+      @if (bulletVisible) {
+        <img
+          class="bullet-image"
+          [class.flying]="bulletFlying"
+          [src]="bulletAssetPath"
+          alt="子弹"
+          [style.left.px]="bulletX"
+          [style.top.px]="bulletY"
+          [style.transform]="'translate(-50%, -50%) rotate(' + bulletRotationDeg + 'deg)'"
+        />
+      }
+
       @for (question of fallingQuestions; track question.id) {
         <div
           class="question-tile"
+          [class.operation-add]="getOperationClass(question) === 'operation-add'"
+          [class.operation-sub]="getOperationClass(question) === 'operation-sub'"
+          [class.operation-mul]="getOperationClass(question) === 'operation-mul'"
+          [class.operation-div]="getOperationClass(question) === 'operation-div'"
+          [class.operation-mix-addsub]="getOperationClass(question) === 'operation-mix-addsub'"
+          [class.operation-mix-muldiv]="getOperationClass(question) === 'operation-mix-muldiv'"
+          [class.operation-mix-all]="getOperationClass(question) === 'operation-mix-all'"
           [class.hit]="question.isHit"
+          [style.width.px]="question.widthPx"
           [style.top.px]="question.y"
           [style.left.%]="question.leftPercent"
         >
-          {{ question.text }} = ?
+          {{ question.text }}
         </div>
       }
       @for (effect of hitEffects; track effect.id) {
@@ -80,22 +132,77 @@
       </div>
 
       <div class="action-row">
+        <button mat-icon-button class="action-btn" (click)="onClear()" title="清空">
+          <mat-icon>clear</mat-icon>
+        </button>
         <button
-          mat-raised-button
-          class="action-btn"
+          mat-icon-button
+          class="action-btn confirm-btn"
           (click)="confirmAnswer()"
           [disabled]="!isRunning"
+          title="确定"
         >
-          确定
+          <mat-icon>check_circle</mat-icon>
         </button>
-        <button mat-raised-button class="action-btn" (click)="onClear()">清空</button>
-        <button mat-raised-button class="action-btn" (click)="onDelete()">
+        <button mat-icon-button class="action-btn" (click)="onDelete()" title="删除">
           <mat-icon>backspace</mat-icon>
-          删除
         </button>
       </div>
 
       <div class="hint-text">每答对5题加速，30题升级难度</div>
     </div>
   </div>
+
+  <div class="settings-mask" [class.open]="showSettingsPanel" (click)="closeSettings()"></div>
+  <aside class="settings-panel" [class.open]="showSettingsPanel">
+    <div class="settings-header">
+      <h3>游戏设置</h3>
+      <button mat-icon-button class="close-btn" (click)="closeSettings()" title="关闭">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="setting-item">
+      <label for="initialSpeed">初始速度 (px/s)</label>
+      <input
+        id="initialSpeed"
+        type="range"
+        min="6"
+        max="28"
+        step="1"
+        [(ngModel)]="settings.initialSpeed"
+      />
+      <div class="setting-value">{{ settings.initialSpeed }}</div>
+    </div>
+
+    <div class="setting-item">
+      <label for="difficultyAcceleration">难度提升加速度 (px/s)</label>
+      <input
+        id="difficultyAcceleration"
+        type="range"
+        min="0"
+        max="12"
+        step="1"
+        [(ngModel)]="settings.difficultyAcceleration"
+      />
+      <div class="setting-value">{{ settings.difficultyAcceleration }}</div>
+    </div>
+
+    <div class="setting-item">
+      <label for="maxBlocks">最多积木数量</label>
+      <input
+        id="maxBlocks"
+        type="range"
+        min="2"
+        max="12"
+        step="1"
+        [(ngModel)]="settings.maxBlocksOnScreen"
+      />
+      <div class="setting-value">{{ settings.maxBlocksOnScreen }}</div>
+    </div>
+
+    <button mat-raised-button class="save-settings-btn" (click)="updateSettings(); closeSettings()">
+      保存设置
+    </button>
+  </aside>
 </div>

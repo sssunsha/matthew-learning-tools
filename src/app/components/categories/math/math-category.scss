@@ -60,6 +60,31 @@
     font-weight: 300;
     letter-spacing: 1px;
   }
+
+  .settings-btn-header,
+  .camera-btn-header {
+    background: rgba(92, 156, 230, 0.3);
+    color: var(--category-color);
+    transition: all 0.3s;
+    width: 40px;
+    height: 40px;
+
+    &:hover {
+      background: var(--category-color);
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  .settings-btn-header {
+    margin-left: auto;
+  }
 }
 
 .metro-grid {
@@ -126,7 +151,7 @@
 
   .tile-text {
     text-align: center;
-    
+
     h2 {
       font-size: 1.5em;
       margin: 10px 0 5px 0;

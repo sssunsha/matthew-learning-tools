@@ -10,18 +10,24 @@ import {
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+
+type OperationSymbol = '+' | '-' | 'x' | '÷';
 
 interface DifficultyLevel {
   id: string;
   label: string;
   maxValue: number;
-  operations: Array<'+' | '-' | 'x' | '÷'>;
+  operations: OperationSymbol[];
 }
 
 interface FallingQuestion {
   id: number;
   text: string;
   answer: number;
+  operation: OperationSymbol;
+  levelIndex: number;
+  widthPx: number;
   y: number;
   leftPercent: number;
   isHit: boolean;
@@ -33,10 +39,21 @@ interface HitEffect {
   leftPercent: number;
 }
 
+interface GameSettings {
+  initialSpeed: number;
+  difficultyAcceleration: number;
+  maxBlocksOnScreen: number;
+}
+
+interface Point2D {
+  x: number;
+  y: number;
+}
+
 @Component({
   selector: 'app-basic-operations-game',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule, FormsModule],
   templateUrl: './basic-operations-game.html',
   styleUrls: ['./basic-operations-game.scss'],
 })
@@ -63,6 +80,24 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   isRunning = false;
   isGameOver = false;
   inputError = false;
+  showSettingsPanel = false;
+  cannonAngleDeg = -90;
+  bulletVisible = false;
+  bulletFlying = false;
+  bulletX = 0;
+  bulletY = 0;
+  bulletRotationDeg = 0;
+
+  readonly cannonAssetPath =
+    'assets/resources/categories/math/quick-caculation-games/resources/大炮.svg';
+  readonly bulletAssetPath =
+    'assets/resources/categories/math/quick-caculation-games/resources/子弹.svg';
+
+  readonly settings: GameSettings = {
+    initialSpeed: 10,
+    difficultyAcceleration: 2,
+    maxBlocksOnScreen: 5,
+  };
 
   private gameAreaHeight = 0;
   private animationId: number | null = null;
@@ -70,8 +105,9 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   private lastSpawnTime = 0;
   private nextQuestionId = 1;
   private nextEffectId = 1;
-  private maxQuestions = 5;
   private audioContext: AudioContext | null = null;
+  private activeShotQuestionId: number | null = null;
+  private timeoutHandles: number[] = [];
 
   constructor(
     private router: Router,
@@ -93,6 +129,10 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.stopLoop();
+    for (const timeoutHandle of this.timeoutHandles) {
+      window.clearTimeout(timeoutHandle);
+    }
+    this.timeoutHandles = [];
   }
 
   @HostListener('window:resize')
@@ -100,7 +140,12 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     this.updateGameAreaSize();
   }
 
-  startGame(): void {
+  startGame(forceNew = false): void {
+    if (!forceNew && this.canResumeGame()) {
+      this.resumeGame();
+      return;
+    }
+
     this.resetGame();
     this.isRunning = true;
     this.isGameOver = false;
@@ -118,7 +163,56 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   }
 
   restartGame(): void {
-    this.startGame();
+    this.startGame(true);
+  }
+
+  openSettings(): void {
+    this.showSettingsPanel = true;
+  }
+
+  closeSettings(): void {
+    this.showSettingsPanel = false;
+  }
+
+  updateSettings(): void {
+    this.settings.initialSpeed = this.clamp(this.settings.initialSpeed, 6, 28);
+    this.settings.difficultyAcceleration = this.clamp(this.settings.difficultyAcceleration, 0, 12);
+    this.settings.maxBlocksOnScreen = Math.round(
+      this.clamp(this.settings.maxBlocksOnScreen, 2, 12),
+    );
+    if (this.fallingQuestions.length > this.settings.maxBlocksOnScreen) {
+      this.fallingQuestions = this.fallingQuestions.slice(0, this.settings.maxBlocksOnScreen);
+    }
+  }
+
+  getOperationClass(question: FallingQuestion): string {
+    const expressionOps = this.getOperationsFromExpression(question.text);
+
+    if (this.isSameOperations(expressionOps, ['+', '-'])) {
+      return 'operation-mix-addsub';
+    }
+
+    if (this.isSameOperations(expressionOps, ['x', '÷'])) {
+      return 'operation-mix-muldiv';
+    }
+
+    if (this.isSameOperations(expressionOps, ['+', '-', 'x', '÷'])) {
+      return 'operation-mix-all';
+    }
+
+    if (question.operation === '+') {
+      return 'operation-add';
+    }
+
+    if (question.operation === '-') {
+      return 'operation-sub';
+    }
+
+    if (question.operation === 'x') {
+      return 'operation-mul';
+    }
+
+    return 'operation-div';
   }
 
   onDigitClick(digit: number): void {
@@ -155,6 +249,10 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     if (!this.isRunning || this.isGameOver) {
       return;
     }
+    if (this.activeShotQuestionId !== null) {
+      return;
+    }
+
     const answer = Number(this.currentAnswer);
     if (!Number.isFinite(answer)) {
       this.triggerInputError();
@@ -169,7 +267,7 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    this.destroyQuestion(match);
+    this.launchCannonShot(match);
   }
 
   get currentLevel(): DifficultyLevel {
@@ -189,6 +287,10 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     this.levelIndex = 0;
     this.speedTier = 0;
     this.currentAnswer = '';
+    this.activeShotQuestionId = null;
+    this.cannonAngleDeg = -90;
+    this.bulletVisible = false;
+    this.bulletFlying = false;
   }
 
   private updateGameAreaSize(): void {
@@ -206,23 +308,48 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  private canResumeGame(): boolean {
+    return (
+      !this.isRunning &&
+      !this.isGameOver &&
+      this.fallingQuestions.length > 0 &&
+      this.animationId === null
+    );
+  }
+
+  private resumeGame(): void {
+    this.isRunning = true;
+    this.lastFrameTime = performance.now();
+    this.lastSpawnTime = performance.now();
+    this.ensureAudio();
+    this.animationId = requestAnimationFrame(this.gameLoop);
+  }
+
   private gameLoop = (time: number) => {
     if (!this.isRunning) {
       return;
     }
 
-    const deltaSeconds = Math.min(0.05, (time - this.lastFrameTime) / 1000);
-    this.lastFrameTime = time;
-
-    this.updateFallingQuestions(deltaSeconds, time);
-    this.cdr.detectChanges();
+    // Keep requesting next frame first so a transient render error does not freeze the game loop.
     this.animationId = requestAnimationFrame(this.gameLoop);
+
+    try {
+      const deltaSeconds = Math.min(0.05, (time - this.lastFrameTime) / 1000);
+      this.lastFrameTime = time;
+      this.updateFallingQuestions(deltaSeconds, time);
+      this.cdr.detectChanges();
+    } catch (error) {
+      console.error('basic-operations-game loop tick failed:', error);
+    }
   };
 
   private updateFallingQuestions(deltaSeconds: number, time: number): void {
+    this.updateGameAreaSize();
+    const effectiveGameAreaHeight = Math.max(this.gameAreaHeight, 280);
+
     const spawnInterval = this.getSpawnIntervalMs();
     if (
-      this.fallingQuestions.length < this.maxQuestions &&
+      this.fallingQuestions.length < this.settings.maxBlocksOnScreen &&
       time - this.lastSpawnTime >= spawnInterval
     ) {
       this.spawnQuestion();
@@ -231,11 +358,11 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
 
     const speed = this.getCurrentSpeed();
     for (const question of this.fallingQuestions) {
-      if (!question.isHit) {
+      if (!question.isHit && question.id !== this.activeShotQuestionId) {
         question.y += speed * deltaSeconds;
       }
 
-      if (question.y >= this.gameAreaHeight - 30) {
+      if (question.y >= effectiveGameAreaHeight - 30) {
         this.triggerGameOver();
         break;
       }
@@ -243,11 +370,15 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   }
 
   private getCurrentSpeed(): number {
-    return 10 + this.speedTier * 5;
+    return (
+      this.settings.initialSpeed +
+      this.speedTier * 5 +
+      this.levelIndex * this.settings.difficultyAcceleration
+    );
   }
 
   private getSpawnIntervalMs(): number {
-    const interval = 1400 - this.speedTier * 120;
+    const interval = 1400 - this.speedTier * 120 - this.levelIndex * 40;
     return Math.max(550, interval);
   }
 
@@ -257,13 +388,20 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
       id: this.nextQuestionId++,
       text: generated.text,
       answer: generated.answer,
+      operation: generated.operation,
+      levelIndex: this.levelIndex,
+      widthPx: this.getQuestionTileWidth(this.levelIndex),
       y: -20,
       leftPercent: this.randomBetween(8, 82),
       isHit: false,
     });
   }
 
-  private generateQuestion(level: DifficultyLevel): { text: string; answer: number } {
+  private generateQuestion(level: DifficultyLevel): {
+    text: string;
+    answer: number;
+    operation: OperationSymbol;
+  } {
     const operation = level.operations[Math.floor(Math.random() * level.operations.length)];
     const maxValue = level.maxValue;
     let a = 0;
@@ -272,33 +410,37 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     if (operation === '+') {
       a = this.randomInt(1, maxValue - 1);
       b = this.randomInt(1, maxValue - a);
-      return { text: `${a} + ${b}`, answer: a + b };
+      return { text: `${a} + ${b}`, answer: a + b, operation };
     }
 
     if (operation === '-') {
       a = this.randomInt(1, maxValue);
       b = this.randomInt(0, a);
-      return { text: `${a} - ${b}`, answer: a - b };
+      return { text: `${a} - ${b}`, answer: a - b, operation };
     }
 
     if (operation === 'x') {
       const maxFactor = Math.min(12, maxValue);
       a = this.randomInt(2, maxFactor);
       b = this.randomInt(2, Math.max(2, Math.floor(maxValue / a)));
-      return { text: `${a} × ${b}`, answer: a * b };
+      return { text: `${a} × ${b}`, answer: a * b, operation };
     }
 
     const divisor = this.randomInt(2, Math.min(12, maxValue));
     const quotientMax = Math.max(2, Math.floor(maxValue / divisor));
     const quotient = this.randomInt(2, quotientMax);
     const dividend = divisor * quotient;
-    return { text: `${dividend} ÷ ${divisor}`, answer: quotient };
+    return { text: `${dividend} ÷ ${divisor}`, answer: quotient, operation };
+  }
+
+  private getQuestionTileWidth(levelIndex: number): number {
+    return 108 + levelIndex * 14;
   }
 
   private destroyQuestion(question: FallingQuestion): void {
     question.isHit = true;
     this.createHitEffect(question);
-    this.playHitSound();
+    this.playExplosionSound();
     this.score += 10 * (this.levelIndex + 1);
     this.totalCorrect += 1;
     this.levelCorrect += 1;
@@ -316,6 +458,93 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.fallingQuestions = this.fallingQuestions.filter((item) => item.id !== question.id);
     }, 220);
+  }
+
+  private launchCannonShot(question: FallingQuestion): void {
+    this.activeShotQuestionId = question.id;
+
+    const cannonBase = this.getCannonBasePoint();
+    const targetPoint = this.getQuestionImpactPoint(question);
+    const shotAngleDeg = this.computeAngleDeg(cannonBase, targetPoint);
+    this.cannonAngleDeg = shotAngleDeg;
+
+    this.schedule(() => {
+      if (!this.isRunning || this.isGameOver) {
+        this.finishShotState();
+        return;
+      }
+
+      this.playShootSound();
+      const muzzlePoint = this.getCannonMuzzlePoint(cannonBase, targetPoint);
+      this.startBulletFlight(muzzlePoint, targetPoint);
+
+      this.schedule(() => {
+        this.bulletVisible = false;
+        this.bulletFlying = false;
+        this.destroyQuestion(question);
+        this.finishShotState();
+      }, 360);
+    }, 260);
+  }
+
+  private finishShotState(): void {
+    this.activeShotQuestionId = null;
+  }
+
+  private startBulletFlight(from: Point2D, to: Point2D): void {
+    this.bulletVisible = true;
+    this.bulletFlying = false;
+    this.bulletX = from.x;
+    this.bulletY = from.y;
+    this.bulletRotationDeg = this.computeAngleDeg(from, to) + 90;
+
+    requestAnimationFrame(() => {
+      this.bulletFlying = true;
+      this.bulletX = to.x;
+      this.bulletY = to.y;
+    });
+  }
+
+  private getQuestionImpactPoint(question: FallingQuestion): Point2D {
+    const gameRect = this.gameAreaRef.nativeElement.getBoundingClientRect();
+    const x = (gameRect.width * question.leftPercent) / 100;
+    const y = question.y + 22;
+    return {
+      x,
+      y: this.clamp(y, 24, gameRect.height - 24),
+    };
+  }
+
+  private getCannonBasePoint(): Point2D {
+    const gameRect = this.gameAreaRef.nativeElement.getBoundingClientRect();
+    return {
+      x: gameRect.width / 2,
+      y: gameRect.height - 20,
+    };
+  }
+
+  private getCannonMuzzlePoint(base: Point2D, target: Point2D): Point2D {
+    const dx = target.x - base.x;
+    const dy = target.y - base.y;
+    const magnitude = Math.hypot(dx, dy) || 1;
+    const barrelLength = 88;
+
+    return {
+      x: base.x + (dx / magnitude) * barrelLength,
+      y: base.y + (dy / magnitude) * barrelLength,
+    };
+  }
+
+  private computeAngleDeg(from: Point2D, to: Point2D): number {
+    return (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI;
+  }
+
+  private schedule(callback: () => void, delayMs: number): void {
+    const timeoutHandle = window.setTimeout(() => {
+      this.timeoutHandles = this.timeoutHandles.filter((id) => id !== timeoutHandle);
+      callback();
+    }, delayMs);
+    this.timeoutHandles.push(timeoutHandle);
   }
 
   private levelUp(): void {
@@ -404,9 +633,15 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     this.playTone(120, 0.12, 'triangle', 0.05);
   }
 
-  private playHitSound(): void {
-    this.playTone(520, 0.12, 'triangle', 0.08);
-    this.playTone(760, 0.1, 'sine', 0.06);
+  private playShootSound(): void {
+    this.playTone(260, 0.08, 'sawtooth', 0.08);
+    this.playTone(180, 0.12, 'square', 0.05);
+  }
+
+  private playExplosionSound(): void {
+    this.playTone(560, 0.1, 'triangle', 0.09);
+    this.playTone(310, 0.18, 'sawtooth', 0.08);
+    this.playTone(120, 0.2, 'square', 0.04);
   }
 
   private playErrorSound(): void {
@@ -423,5 +658,39 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
 
   private randomBetween(min: number, max: number): number {
     return Math.random() * (max - min) + min;
+  }
+
+  private clamp(value: number, min: number, max: number): number {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  private getOperationsFromExpression(expression: string): OperationSymbol[] {
+    const operators = new Set<OperationSymbol>();
+
+    if (expression.includes('+')) {
+      operators.add('+');
+    }
+    if (expression.includes('-')) {
+      operators.add('-');
+    }
+    if (expression.includes('×')) {
+      operators.add('x');
+    }
+    if (expression.includes('÷')) {
+      operators.add('÷');
+    }
+
+    return [...operators];
+  }
+
+  private isSameOperations(
+    levelOperations: OperationSymbol[],
+    expected: OperationSymbol[],
+  ): boolean {
+    if (levelOperations.length !== expected.length) {
+      return false;
+    }
+
+    return expected.every((operation) => levelOperations.includes(operation));
   }
 }
