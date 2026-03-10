@@ -4,10 +4,39 @@
       <mat-icon>arrow_back</mat-icon>
     </button>
     <h1 class="tetris-title">俄罗斯方块</h1>
+
+    <!-- Mobile quick controls (shown only on mobile) -->
+    <div class="mobile-header-controls">
+      <button mat-icon-button class="mobile-ctrl-btn" (click)="togglePause()" [disabled]="gameOver">
+        <mat-icon>{{ isPaused ? 'play_arrow' : 'pause' }}</mat-icon>
+      </button>
+      <button mat-icon-button class="mobile-ctrl-btn" (click)="toggleMusic()">
+        <mat-icon>{{ isMusicPlaying ? 'volume_off' : 'volume_up' }}</mat-icon>
+      </button>
+      <button mat-icon-button class="mobile-ctrl-btn" (click)="restart()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile-only compact stats strip -->
+  <div class="mobile-stats">
+    <div class="mobile-stat">
+      <span class="stat-label">分数</span>
+      <span class="stat-value">{{ score }}</span>
+    </div>
+    <div class="mobile-stat">
+      <span class="stat-label">等级</span>
+      <span class="stat-value">{{ level }}</span>
+    </div>
+    <div class="mobile-stat">
+      <span class="stat-label">行数</span>
+      <span class="stat-value">{{ lines }}</span>
+    </div>
   </div>
 
   <div class="game-wrapper">
-    <!-- 左侧：游戏信息 -->
+    <!-- 左侧：游戏信息 (desktop only) -->
     <div class="game-info">
       <div class="info-panel">
         <h3>分数</h3>
@@ -88,13 +117,14 @@
           <div class="pause-panel">
             <mat-icon>pause_circle</mat-icon>
             <h2>游戏暂停</h2>
-            <p>按 P 继续游戏</p>
+            <p class="desktop-hint">按 P 继续游戏</p>
+            <p class="mobile-hint">点击 ▶ 按钮继续</p>
           </div>
         </div>
       }
     </div>
 
-    <!-- 右侧：控制按钮 -->
+    <!-- 右侧：控制按钮 (desktop only) -->
     <div class="game-controls">
       <button mat-raised-button color="accent" (click)="togglePause()" [disabled]="gameOver">
         <mat-icon>{{ isPaused ? 'play_arrow' : 'pause' }}</mat-icon>
@@ -109,6 +139,32 @@
       <button mat-raised-button color="primary" (click)="restart()">
         <mat-icon>refresh</mat-icon>
         重新开始
+      </button>
+    </div>
+  </div>
+
+  <!-- Virtual D-pad controls (shown on mobile/tablet) -->
+  <div class="virtual-controls">
+    <div class="dpad-row dpad-top-row">
+      <div class="dpad-empty"></div>
+      <button class="dpad-btn dpad-rotate" (click)="rotate()" [disabled]="isPaused || gameOver">
+        <mat-icon>sync</mat-icon>
+        <span class="dpad-label">旋转</span>
+      </button>
+      <div class="dpad-empty"></div>
+    </div>
+    <div class="dpad-row dpad-main-row">
+      <button class="dpad-btn dpad-left" (click)="moveLeft()" [disabled]="isPaused || gameOver">
+        <mat-icon>arrow_back</mat-icon>
+        <span class="dpad-label">左</span>
+      </button>
+      <button class="dpad-btn dpad-drop" (click)="hardDrop()" [disabled]="isPaused || gameOver">
+        <mat-icon>vertical_align_bottom</mat-icon>
+        <span class="dpad-label">落下</span>
+      </button>
+      <button class="dpad-btn dpad-right" (click)="moveRight()" [disabled]="isPaused || gameOver">
+        <mat-icon>arrow_forward</mat-icon>
+        <span class="dpad-label">右</span>
       </button>
     </div>
   </div>

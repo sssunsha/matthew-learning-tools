@@ -603,7 +603,11 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     const maxValue = level.maxValue;
     const operations = level.operations;
     let current = this.randomInt(1, maxValue);
-    const tokens: string[] = [String(current)];
+    // Build the expression string progressively with explicit parentheses where needed.
+    let expr = String(current);
+    // Track the precedence of the top-level operator of the accumulated expression.
+    // A bare number is treated as "highest" (2) so the first operator never triggers wrapping.
+    let exprTopPrecedence = 2;
     let firstOperation: OperationSymbol = operations[0];
 
     for (let i = 0; i < operationCount; i += 1) {
@@ -622,13 +626,27 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
         return null;
       }
 
-      tokens.push(this.getOperationDisplay(operation));
-      tokens.push(String(finalStep.operand));
+      const opDisplay = this.getOperationDisplay(operation);
+      const opPrecedence = this.getOperatorPrecedence(operation);
+
+      // If the new operator has strictly higher precedence than the accumulated expression's
+      // top-level operator, wrap the accumulated part in parentheses so that the displayed
+      // expression — evaluated with standard order-of-operations (× and ÷ before + and −) —
+      // produces the same integer result as the intended left-to-right sequential computation.
+      // Example: sequential (11−2)÷9 must be shown as (11−2)÷9, not 11−2÷9.
+      if (opPrecedence > exprTopPrecedence) {
+        expr = `(${expr}) ${opDisplay} ${finalStep.operand}`;
+      } else {
+        expr = `${expr} ${opDisplay} ${finalStep.operand}`;
+      }
+
+      // The new expression's top-level operator is whichever has the lower precedence.
+      exprTopPrecedence = Math.min(exprTopPrecedence, opPrecedence);
       current = finalStep.nextValue;
     }
 
     return {
-      text: tokens.join(' '),
+      text: expr,
       answer: current,
       operation: firstOperation,
     };
@@ -999,6 +1017,7 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   private triggerInputError(): void {
     this.ensureAudio();
     this.playErrorSound();
+    this.currentAnswer = '';
     this.inputError = true;
     setTimeout(() => {
       this.inputError = false;
@@ -1063,14 +1082,124 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   }
 
   private playShootSound(): void {
-    this.playTone(260, 0.08, 'sawtooth', 0.08);
-    this.playTone(180, 0.12, 'square', 0.05);
+    if (!this.audioContext) {
+      return;
+    }
+    const ctx = this.audioContext;
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
+    const now = ctx.currentTime;
+
+    // Sharp bandpass noise burst — the "crack" of a cannon
+    const noiseBurst = this.createWhiteNoiseSource(0.18);
+    if (noiseBurst) {
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.value = 600;
+      filter.Q.value = 0.7;
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(1.0, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+      noiseBurst.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noiseBurst.start(now);
+      noiseBurst.stop(now + 0.18);
+    }
+
+    // Low-frequency "thump" — the physical kick of the cannon
+    const thump = ctx.createOscillator();
+    thump.type = 'sine';
+    thump.frequency.setValueAtTime(130, now);
+    thump.frequency.exponentialRampToValueAtTime(38, now + 0.1);
+    const thumpGain = ctx.createGain();
+    thumpGain.gain.setValueAtTime(0.55, now);
+    thumpGain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+    thump.connect(thumpGain);
+    thumpGain.connect(ctx.destination);
+    thump.start(now);
+    thump.stop(now + 0.13);
+
+    // Brief high-frequency ring — the metallic ring of the barrel
+    const ring = ctx.createOscillator();
+    ring.type = 'sine';
+    ring.frequency.setValueAtTime(3200, now);
+    ring.frequency.exponentialRampToValueAtTime(1800, now + 0.06);
+    const ringGain = ctx.createGain();
+    ringGain.gain.setValueAtTime(0.07, now);
+    ringGain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+    ring.connect(ringGain);
+    ringGain.connect(ctx.destination);
+    ring.start(now);
+    ring.stop(now + 0.07);
   }
 
   private playExplosionSound(): void {
-    this.playTone(560, 0.1, 'triangle', 0.09);
-    this.playTone(310, 0.18, 'sawtooth', 0.08);
-    this.playTone(120, 0.2, 'square', 0.04);
+    if (!this.audioContext) {
+      return;
+    }
+    const ctx = this.audioContext;
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
+    const now = ctx.currentTime;
+
+    // Wide noise burst — the body of the explosion
+    const noiseBurst = this.createWhiteNoiseSource(0.55);
+    if (noiseBurst) {
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(2400, now);
+      filter.frequency.exponentialRampToValueAtTime(180, now + 0.45);
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(1.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+      noiseBurst.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noiseBurst.start(now);
+      noiseBurst.stop(now + 0.55);
+    }
+
+    // Deep subsonic boom — the chest-punch of the explosion
+    const boom = ctx.createOscillator();
+    boom.type = 'sine';
+    boom.frequency.setValueAtTime(90, now);
+    boom.frequency.exponentialRampToValueAtTime(28, now + 0.35);
+    const boomGain = ctx.createGain();
+    boomGain.gain.setValueAtTime(0.75, now);
+    boomGain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+    boom.connect(boomGain);
+    boomGain.connect(ctx.destination);
+    boom.start(now);
+    boom.stop(now + 0.4);
+
+    // Midrange distorted crunch — debris / shockwave crack
+    const crunch = ctx.createOscillator();
+    crunch.type = 'sawtooth';
+    crunch.frequency.setValueAtTime(240, now);
+    crunch.frequency.exponentialRampToValueAtTime(70, now + 0.2);
+    const crunchGain = ctx.createGain();
+    crunchGain.gain.setValueAtTime(0.28, now);
+    crunchGain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+    crunch.connect(crunchGain);
+    crunchGain.connect(ctx.destination);
+    crunch.start(now);
+    crunch.stop(now + 0.22);
+
+    // Short high sparkle — bright flash pop at impact moment
+    const sparkle = ctx.createOscillator();
+    sparkle.type = 'sine';
+    sparkle.frequency.setValueAtTime(4000, now);
+    sparkle.frequency.exponentialRampToValueAtTime(1200, now + 0.05);
+    const sparkleGain = ctx.createGain();
+    sparkleGain.gain.setValueAtTime(0.1, now);
+    sparkleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+    sparkle.connect(sparkleGain);
+    sparkleGain.connect(ctx.destination);
+    sparkle.start(now);
+    sparkle.stop(now + 0.07);
   }
 
   private playErrorSound(): void {
@@ -1078,10 +1207,74 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   }
 
   private playFailSound(): void {
-    this.playTone(110, 0.35, 'sawtooth', 0.08);
+    if (!this.audioContext) {
+      return;
+    }
+    const ctx = this.audioContext;
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
+
+    // Descending "wah-wah-wah-waaah" — the classic failure fanfare in G4→E4→C4→G3
+    const notes = [392, 330, 261, 196];
+    const durations = [0.22, 0.22, 0.22, 0.55];
+    let startTime = ctx.currentTime;
+
+    for (let i = 0; i < notes.length; i += 1) {
+      const osc = ctx.createOscillator();
+      osc.type = 'sawtooth';
+      osc.frequency.value = notes[i];
+
+      // Slight vibrato to give it a "sad trombone" feel on the last note
+      if (i === notes.length - 1) {
+        const vibrato = ctx.createOscillator();
+        vibrato.type = 'sine';
+        vibrato.frequency.value = 5;
+        const vibratoDepth = ctx.createGain();
+        vibratoDepth.gain.value = 6;
+        vibrato.connect(vibratoDepth);
+        vibratoDepth.connect(osc.frequency);
+        vibrato.start(startTime);
+        vibrato.stop(startTime + durations[i]);
+      }
+
+      const noteGain = ctx.createGain();
+      noteGain.gain.setValueAtTime(0, startTime);
+      noteGain.gain.linearRampToValueAtTime(0.16, startTime + 0.018);
+      noteGain.gain.setValueAtTime(0.16, startTime + durations[i] - 0.04);
+      noteGain.gain.exponentialRampToValueAtTime(0.001, startTime + durations[i]);
+
+      osc.connect(noteGain);
+      noteGain.connect(ctx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + durations[i]);
+
+      startTime += durations[i] * 0.88;
+    }
   }
 
   // ─── Utility helpers ──────────────────────────────────────────────────────
+
+  /**
+   * Creates an AudioBufferSourceNode filled with white noise of the given duration (seconds).
+   * Returns null when audioContext is unavailable.
+   */
+  private createWhiteNoiseSource(durationSeconds: number): AudioBufferSourceNode | null {
+    if (!this.audioContext) {
+      return null;
+    }
+    const ctx = this.audioContext;
+    const sampleRate = ctx.sampleRate;
+    const frameCount = Math.ceil(sampleRate * durationSeconds);
+    const buffer = ctx.createBuffer(1, frameCount, sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < frameCount; i += 1) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    return source;
+  }
 
   private randomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -1093,6 +1286,14 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
 
   private clamp(value: number, min: number, max: number): number {
     return Math.max(min, Math.min(max, value));
+  }
+
+  /**
+   * Returns the arithmetic precedence of an operator:
+   * 2 for × and ÷ (higher), 1 for + and − (lower).
+   */
+  private getOperatorPrecedence(op: OperationSymbol): number {
+    return op === 'x' || op === '÷' ? 2 : 1;
   }
 
   private getOperationsFromExpression(expression: string): OperationSymbol[] {

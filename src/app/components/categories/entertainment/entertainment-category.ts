@@ -24,4 +24,8 @@ export class EntertainmentCategoryComponent {
   openParrotTraining() {
     this.router.navigate(['/parrot-training']);
   }
+
+  openPixabay() {
+    window.open('https://pixabay.com/zh/', '_blank');
+  }
 }

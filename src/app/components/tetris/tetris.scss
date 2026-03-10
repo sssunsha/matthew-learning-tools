@@ -19,13 +19,11 @@ $tetris-danger: #ff0055;
 }
 
 @keyframes bg-shift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
 }
+
+// ─── Header ──────────────────────────────────────────────────────────────────
 
 .tetris-header {
   display: flex;
@@ -48,14 +46,11 @@ $tetris-danger: #ff0055;
       transform: scale(1.1);
     }
 
-    mat-icon {
-      font-size: 28px;
-      width: 28px;
-      height: 28px;
-    }
+    mat-icon { font-size: 28px; width: 28px; height: 28px; }
   }
 
   .tetris-title {
+    flex: 1;
     font-size: 2em;
     font-weight: 300;
     color: #ffffff;
@@ -65,6 +60,58 @@ $tetris-danger: #ff0055;
   }
 }
 
+// Mobile quick-action buttons inside the header (hidden on desktop)
+.mobile-header-controls {
+  display: none;
+  gap: 4px;
+
+  .mobile-ctrl-btn {
+    color: rgba(255, 255, 255, 0.85);
+    width: 36px;
+    height: 36px;
+
+    mat-icon { font-size: 22px; width: 22px; height: 22px; }
+  }
+}
+
+// ─── Mobile-only stats strip ──────────────────────────────────────────────────
+
+.mobile-stats {
+  display: none; // shown only on mobile
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.55);
+  border-bottom: 1px solid rgba(0, 217, 255, 0.25);
+  padding: 6px 20px;
+  gap: 0;
+  justify-content: space-around;
+  align-items: center;
+
+  .mobile-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+
+    .stat-label {
+      font-size: 0.65em;
+      color: $tetris-accent;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      font-size: 1.4em;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 0 8px $tetris-accent;
+      min-width: 56px;
+      text-align: center;
+    }
+  }
+}
+
+// ─── Game wrapper ─────────────────────────────────────────────────────────────
+
 .game-wrapper {
   flex: 1;
   display: flex;
@@ -72,9 +119,11 @@ $tetris-danger: #ff0055;
   align-items: center;
   gap: 30px;
   padding: 30px;
+  min-height: 0; // allow flex child to shrink
 }
 
-// 左侧信息面板
+// ─── Left info panel ──────────────────────────────────────────────────────────
+
 .game-info {
   display: flex;
   flex-direction: column;
@@ -152,20 +201,18 @@ $tetris-danger: #ff0055;
 }
 
 @keyframes glow-pulse {
-  0%, 100% {
-    box-shadow: 0 0 5px $tetris-accent;
-  }
-  50% {
-    box-shadow: 0 0 20px $tetris-accent, 0 0 30px rgba(0, 217, 255, 0.5);
-  }
+  0%, 100% { box-shadow: 0 0 5px $tetris-accent; }
+  50%       { box-shadow: 0 0 20px $tetris-accent, 0 0 30px rgba(0, 217, 255, 0.5); }
 }
 
-// 游戏板区域
+// ─── Game board ───────────────────────────────────────────────────────────────
+
 .game-board-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .game-board {
@@ -195,17 +242,18 @@ $tetris-danger: #ff0055;
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-  20%, 40%, 60%, 80% { transform: translateX(5px); }
+  0%, 100%                      { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90%       { transform: translateX(-5px); }
+  20%, 40%, 60%, 80%            { transform: translateX(5px); }
 }
 
 .board-row {
   display: flex;
-  
+  transition: transform 0.05s linear;
+
   &.flashing {
     animation: flash-row 0.1s ease-in-out 5;
-    
+
     .board-cell.has-block {
       animation: flash-cell 0.1s ease-in-out 5;
     }
@@ -213,13 +261,8 @@ $tetris-danger: #ff0055;
 }
 
 @keyframes flash-row {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-    background: rgba(255, 215, 0, 0.3);
-  }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; background: rgba(255, 215, 0, 0.3); }
 }
 
 @keyframes flash-cell {
@@ -251,17 +294,13 @@ $tetris-danger: #ff0055;
                 inset 3px 3px 8px rgba(255, 255, 255, 0.2),
                 inset -3px -3px 8px rgba(0, 0, 0, 0.3);
     animation: block-appear 0.2s ease-out;
-    // 添加落下动画
     transition: background-color 0.1s ease, border 0.1s ease, box-shadow 0.1s ease;
 
     &::before {
       content: '';
       position: absolute;
-      top: 3px;
-      left: 3px;
-      right: 3px;
-      bottom: 3px;
-      background: linear-gradient(135deg, 
+      top: 3px; left: 3px; right: 3px; bottom: 3px;
+      background: linear-gradient(135deg,
                   rgba(255, 255, 255, 0.4) 0%,
                   rgba(255, 255, 255, 0.1) 50%,
                   transparent 100%);
@@ -272,10 +311,8 @@ $tetris-danger: #ff0055;
     &::after {
       content: '';
       position: absolute;
-      bottom: 2px;
-      right: 2px;
-      width: 8px;
-      height: 8px;
+      bottom: 2px; right: 2px;
+      width: 8px; height: 8px;
       background: rgba(255, 255, 255, 0.6);
       border-radius: 50%;
       box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
@@ -284,29 +321,16 @@ $tetris-danger: #ff0055;
   }
 }
 
-// 为当前下落中的方块添加平滑动画
-.board-row {
-  transition: transform 0.05s linear;
-}
-
 @keyframes block-appear {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
 }
 
-// 游戏结束覆盖层
+// ─── Overlays ─────────────────────────────────────────────────────────────────
+
 .game-over-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
@@ -335,11 +359,7 @@ $tetris-danger: #ff0055;
   .final-score {
     margin: 30px 0;
 
-    p {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 1.2em;
-      margin: 0 0 10px 0;
-    }
+    p { color: rgba(255, 255, 255, 0.7); font-size: 1.2em; margin: 0 0 10px 0; }
 
     .score {
       font-size: 3em;
@@ -356,33 +376,9 @@ $tetris-danger: #ff0055;
   }
 }
 
-@keyframes slide-down {
-  from {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-// 暂停覆盖层
 .pause-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
@@ -396,9 +392,7 @@ $tetris-danger: #ff0055;
   animation: slide-down 0.3s ease-out;
 
   mat-icon {
-    font-size: 100px;
-    width: 100px;
-    height: 100px;
+    font-size: 100px; width: 100px; height: 100px;
     color: $tetris-warning;
     animation: pulse 1.5s ease-in-out infinite;
   }
@@ -410,22 +404,14 @@ $tetris-danger: #ff0055;
     text-shadow: 0 0 20px $tetris-warning;
   }
 
-  p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1.2em;
-  }
+  p { color: rgba(255, 255, 255, 0.7); font-size: 1.2em; margin: 0; }
+
+  .desktop-hint { display: block; }
+  .mobile-hint  { display: none; }
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+// ─── Right controls (desktop) ─────────────────────────────────────────────────
 
-// 右侧控制按钮
 .game-controls {
   display: flex;
   flex-direction: column;
@@ -444,27 +430,120 @@ $tetris-danger: #ff0055;
       box-shadow: 0 6px 20px rgba(0, 217, 255, 0.5);
     }
 
-    &:active:not(:disabled) {
-      transform: translateY(0);
-    }
+    &:active:not(:disabled) { transform: translateY(0); }
 
-    mat-icon {
-      margin-right: 8px;
-    }
+    mat-icon { margin-right: 8px; }
   }
+}
+
+// ─── Virtual D-pad controls ───────────────────────────────────────────────────
+
+.virtual-controls {
+  display: none; // hidden on desktop, overridden below for mobile
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px 16px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 217, 255, 0.25);
+}
+
+.dpad-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dpad-empty {
+  width: 68px;
+  height: 68px;
+}
+
+.dpad-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 68px;
+  height: 68px;
+  border: 2px solid rgba(0, 217, 255, 0.45);
+  border-radius: 14px;
+  background: rgba(0, 217, 255, 0.08);
+  color: rgba(255, 255, 255, 0.92);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 0.12s, transform 0.1s, box-shadow 0.12s;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+
+  mat-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+  }
+
+  .dpad-label {
+    font-size: 0.6em;
+    letter-spacing: 0.5px;
+    color: rgba(0, 217, 255, 0.85);
+  }
+
+  &:active:not(:disabled),
+  &:focus:not(:disabled) {
+    background: rgba(0, 217, 255, 0.28);
+    transform: scale(0.93);
+    box-shadow: 0 0 12px rgba(0, 217, 255, 0.55);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+// Drop button has a slightly different accent to stand out
+.dpad-drop {
+  border-color: rgba(255, 170, 0, 0.55);
+  background: rgba(255, 170, 0, 0.08);
+  color: rgba(255, 255, 255, 0.92);
+
+  .dpad-label { color: rgba(255, 170, 0, 0.9); }
+
+  &:active:not(:disabled) {
+    background: rgba(255, 170, 0, 0.28);
+    box-shadow: 0 0 12px rgba(255, 170, 0, 0.55);
+  }
+}
+
+// ─── Animations ───────────────────────────────────────────────────────────────
+
+@keyframes slide-down {
+  from { transform: translateY(-50px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.05); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes button-glow {
-  0%, 100% {
-    box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.8),
-                0 0 30px rgba(0, 217, 255, 0.4);
-  }
+  0%, 100% { box-shadow: 0 0 10px rgba(0, 217, 255, 0.5); }
+  50%       { box-shadow: 0 0 20px rgba(0, 217, 255, 0.8), 0 0 30px rgba(0, 217, 255, 0.4); }
 }
 
-// 响应式设计
+// ─── Responsive: Tablet / Landscape ──────────────────────────────────────────
+
 @media (max-width: 1200px) {
   .game-wrapper {
     flex-direction: column;
@@ -485,31 +564,112 @@ $tetris-danger: #ff0055;
   }
 }
 
+// ─── Responsive: Mobile (portrait, ≤ 768px) ──────────────────────────────────
+
 @media (max-width: 768px) {
+  // Header: compact
   .tetris-header {
-    padding: 15px 20px;
+    padding: 8px 12px;
+    gap: 10px;
+    border-bottom-width: 1px;
 
-    .tetris-title {
-      font-size: 1.5em;
-    }
+    .tetris-title { font-size: 1.1em; letter-spacing: 1px; }
+    .back-btn mat-icon { font-size: 22px; width: 22px; height: 22px; }
   }
 
+  // Show mobile header controls
+  .mobile-header-controls {
+    display: flex;
+    margin-left: auto;
+  }
+
+  // Show stats strip
+  .mobile-stats {
+    display: flex;
+  }
+
+  // Game wrapper: just center the board, no padding
   .game-wrapper {
-    padding: 15px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0 4px;
+    gap: 0;
+    flex: 1;
+    min-height: 0;
   }
 
+  // Hide desktop side panels
+  .game-info,
+  .game-controls {
+    display: none !important;
+  }
+
+  // Board cell size for mobile
   .board-cell {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
   }
 
-  .game-info .info-panel {
-    padding: 15px;
-
-    .score-display,
-    .level-display,
-    .lines-display {
-      font-size: 2em;
-    }
+  // Show virtual D-pad
+  .virtual-controls {
+    display: flex;
   }
+
+  // Pause overlay hint text
+  .pause-panel {
+    .desktop-hint { display: none; }
+    .mobile-hint  { display: block; }
+
+    mat-icon { font-size: 64px; width: 64px; height: 64px; }
+    h2        { font-size: 1.5em; margin: 12px 0; }
+    p         { font-size: 1em; }
+  }
+}
+
+// ─── Responsive: Small phones (≤ 480px or short screens) ─────────────────────
+
+@media (max-width: 480px) {
+  .board-cell {
+    width: 22px;
+    height: 22px;
+  }
+
+  .dpad-btn {
+    width: 60px;
+    height: 60px;
+
+    mat-icon { font-size: 24px; width: 24px; height: 24px; }
+  }
+
+  .dpad-empty {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+// Short screens (landscape phone / small portrait)
+@media (max-height: 650px) and (max-width: 768px) {
+  .board-cell {
+    width: 19px;
+    height: 19px;
+  }
+
+  .dpad-btn {
+    width: 54px;
+    height: 54px;
+  }
+
+  .dpad-empty {
+    width: 54px;
+    height: 54px;
+  }
+
+  .virtual-controls {
+    padding: 6px 12px 10px;
+    gap: 4px;
+  }
+
+  .tetris-header { padding: 6px 10px; }
+  .mobile-stats  { padding: 4px 16px; }
 }
