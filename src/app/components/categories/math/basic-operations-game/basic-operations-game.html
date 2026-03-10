@@ -31,6 +31,14 @@
       </button>
       <button
         mat-icon-button
+        class="header-btn question-bank-toggle"
+        (click)="openQuestionBank()"
+        title="题库"
+      >
+        <mat-icon>menu_book</mat-icon>
+      </button>
+      <button
+        mat-icon-button
         class="header-btn settings-toggle"
         (click)="openSettings()"
         title="设置"
@@ -44,7 +52,9 @@
     <div class="hud">
       <div class="hud-item">
         <span class="hud-label">难度</span>
-        <span class="hud-value">{{ currentLevel.label }}</span>
+        <span class="hud-value">
+          {{ currentLevel ? currentLevel.label + ' ×' + currentLevel.operationsCount : '—' }}
+        </span>
       </div>
       <div class="hud-item">
         <span class="hud-label">分数</span>
@@ -132,9 +142,14 @@
       </div>
 
       <div class="action-row">
-        <button mat-icon-button class="action-btn" (click)="onClear()" title="清空">
-          <mat-icon>clear</mat-icon>
-        </button>
+        <div class="action-row-top">
+          <button mat-icon-button class="action-btn" (click)="onClear()" title="清空">
+            <mat-icon>clear</mat-icon>
+          </button>
+          <button mat-icon-button class="action-btn" (click)="onDelete()" title="删除">
+            <mat-icon>backspace</mat-icon>
+          </button>
+        </div>
         <button
           mat-icon-button
           class="action-btn confirm-btn"
@@ -144,12 +159,11 @@
         >
           <mat-icon>check_circle</mat-icon>
         </button>
-        <button mat-icon-button class="action-btn" (click)="onDelete()" title="删除">
-          <mat-icon>backspace</mat-icon>
-        </button>
       </div>
 
-      <div class="hint-text">每答对5题加速，30题升级难度</div>
+      <div class="hint-text">
+        每答对{{ settings.speedUpThreshold }}题加速，{{ settings.levelUpThreshold }}题升级难度
+      </div>
     </div>
   </div>
 
@@ -201,8 +215,110 @@
       <div class="setting-value">{{ settings.maxBlocksOnScreen }}</div>
     </div>
 
+    <div class="setting-item setting-toggle">
+      <label for="allowKeyboardShortcuts">允许键盘快捷键</label>
+      <div class="toggle-row">
+        <input
+          id="allowKeyboardShortcuts"
+          type="checkbox"
+          [(ngModel)]="settings.allowKeyboardShortcuts"
+        />
+        <span class="setting-value">
+          {{ settings.allowKeyboardShortcuts ? '已开启' : '已关闭' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <label for="speedUpThreshold">速度升级需要消灭 (小升级)</label>
+      <div class="number-row">
+        <input
+          id="speedUpThreshold"
+          type="number"
+          min="1"
+          max="20"
+          step="1"
+          [(ngModel)]="settings.speedUpThreshold"
+        />
+        <span class="setting-value">{{ settings.speedUpThreshold }}</span>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <label for="levelUpThreshold">题型升级需要消灭 (大升级)</label>
+      <div class="number-row">
+        <input
+          id="levelUpThreshold"
+          type="number"
+          min="5"
+          max="60"
+          step="1"
+          [(ngModel)]="settings.levelUpThreshold"
+        />
+        <span class="setting-value">{{ settings.levelUpThreshold }}</span>
+      </div>
+    </div>
+
     <button mat-raised-button class="save-settings-btn" (click)="updateSettings(); closeSettings()">
       保存设置
+    </button>
+  </aside>
+
+  <div
+    class="settings-mask"
+    [class.open]="showQuestionBankPanel"
+    (click)="closeQuestionBank()"
+  ></div>
+  <aside class="question-bank-panel" [class.open]="showQuestionBankPanel">
+    <div class="settings-header">
+      <h3>题库设置</h3>
+      <button mat-icon-button class="close-btn" (click)="closeQuestionBank()" title="关闭">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="question-bank-content">
+      <div class="setting-item difficulty-setting">
+        <label>题型与难度顺序 (大升级)</label>
+        <div class="setting-help">
+          拖拽调整顺序，勾选启用题型。当前共 {{ difficultyLevels.length }} 种题型（应为 39 种）。
+        </div>
+        <div class="difficulty-list">
+          @for (level of difficultyLevels; track level.id) {
+            <div
+              class="difficulty-item"
+              [class.is-dragging]="draggedDifficultyId === level.id"
+              draggable="true"
+              (dragstart)="onDifficultyDragStart(level.id)"
+              (dragover)="onDifficultyDragOver($event)"
+              (drop)="onDifficultyDrop(level.id)"
+              (dragend)="onDifficultyDragEnd()"
+            >
+              <mat-icon class="drag-handle">drag_indicator</mat-icon>
+              <div class="difficulty-info">
+                <div class="difficulty-name">
+                  {{ level.label }}<span class="ops-count-badge">×{{ level.operationsCount }}</span>
+                </div>
+                <div class="difficulty-meta">
+                  {{ formatOperations(level.operations) }} &nbsp;≤{{ level.maxValue }}
+                </div>
+              </div>
+              <label class="difficulty-toggle">
+                <input type="checkbox" [(ngModel)]="level.enabled" />
+                <span>{{ level.enabled ? '启用' : '停用' }}</span>
+              </label>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <button
+      mat-raised-button
+      class="save-settings-btn"
+      (click)="updateSettings(); closeQuestionBank()"
+    >
+      保存题库
     </button>
   </aside>
 </div>

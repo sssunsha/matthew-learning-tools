@@ -85,6 +85,11 @@
     background: rgba(255, 183, 77, 0.2);
     border-color: rgba(255, 183, 77, 0.5);
   }
+
+  &.question-bank-toggle {
+    background: rgba(129, 199, 132, 0.18);
+    border-color: rgba(129, 199, 132, 0.5);
+  }
 }
 
 .game-layout {
@@ -360,8 +365,16 @@
 }
 
 .action-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  align-items: center;
+}
+
+.action-row-top {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   width: 100%;
 }
@@ -389,6 +402,9 @@
 .action-btn.confirm-btn {
   background: #e74856;
   border-color: rgba(255, 181, 185, 0.7);
+  width: 50vw;
+  min-width: 220px;
+  max-width: 520px;
 }
 
 .hint-text {
@@ -412,7 +428,8 @@
   pointer-events: auto;
 }
 
-.settings-panel {
+.settings-panel,
+.question-bank-panel {
   position: fixed;
   top: 0;
   right: 0;
@@ -430,7 +447,29 @@
   gap: 12px;
 }
 
-.settings-panel.open {
+.question-bank-panel {
+  height: 100%;
+  overflow: hidden;
+}
+
+.question-bank-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 10px;
+}
+
+.question-bank-content .setting-item.difficulty-setting {
+  flex: none;
+  min-height: auto;
+}
+
+.settings-panel.open,
+.question-bank-panel.open {
   transform: translateX(0);
 }
 
@@ -470,6 +509,131 @@
   input[type='range'] {
     width: 100%;
     accent-color: #ffae62;
+  }
+}
+
+.setting-help {
+  font-size: 0.72em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.difficulty-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: none;
+  max-height: none;
+  height: auto;
+  min-height: auto;
+  overflow: visible;
+  padding-right: 4px;
+}
+
+.difficulty-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  cursor: grab;
+  transition:
+    border-color 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  touch-action: pan-y;
+}
+
+.difficulty-item.is-dragging {
+  opacity: 0.6;
+  border-style: solid;
+  transform: scale(0.99);
+}
+
+.drag-handle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.difficulty-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.difficulty-name {
+  color: #ffffff;
+  font-size: 0.9em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: nowrap;
+}
+
+.ops-count-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 5px;
+  background: rgba(255, 174, 98, 0.18);
+  border: 1px solid rgba(255, 174, 98, 0.45);
+  border-radius: 4px;
+  color: #ffcf8f;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0;
+  flex-shrink: 0;
+}
+
+.difficulty-meta {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.72em;
+}
+
+.difficulty-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78em;
+  color: #ffcf8f;
+
+  input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    accent-color: #ffae62;
+  }
+}
+
+.setting-item.setting-toggle {
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    accent-color: #ffae62;
+  }
+}
+
+.number-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  input[type='number'] {
+    width: 110px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    font-weight: 600;
   }
 }
 

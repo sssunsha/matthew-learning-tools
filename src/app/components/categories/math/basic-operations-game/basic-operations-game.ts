@@ -19,6 +19,8 @@ interface DifficultyLevel {
   label: string;
   maxValue: number;
   operations: OperationSymbol[];
+  operationsCount: number;
+  enabled: boolean;
 }
 
 interface FallingQuestion {
@@ -43,11 +45,20 @@ interface GameSettings {
   initialSpeed: number;
   difficultyAcceleration: number;
   maxBlocksOnScreen: number;
+  allowKeyboardShortcuts: boolean;
+  speedUpThreshold: number;
+  levelUpThreshold: number;
 }
 
 interface Point2D {
   x: number;
   y: number;
+}
+
+/** Persisted shape for difficulty levels in localStorage. */
+interface PersistedDifficultyState {
+  order: string[];
+  enabledMap: Record<string, boolean>;
 }
 
 @Component({
@@ -60,14 +71,11 @@ interface Point2D {
 export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   @ViewChild('gameArea') gameAreaRef!: ElementRef<HTMLDivElement>;
 
-  difficultyLevels: DifficultyLevel[] = [
-    { id: 'addsub-20', label: '20以内加减', maxValue: 20, operations: ['+', '-'] },
-    { id: 'addsub-50', label: '50以内加减', maxValue: 50, operations: ['+', '-'] },
-    { id: 'addsub-100', label: '100以内加减', maxValue: 100, operations: ['+', '-'] },
-    { id: 'muldiv-100', label: '100以内乘除', maxValue: 100, operations: ['x', '÷'] },
-    { id: 'addsub-1000', label: '1000以内加减', maxValue: 1000, operations: ['+', '-'] },
-    { id: 'mix-1000', label: '1000以内四则运算', maxValue: 1000, operations: ['+', '-', 'x', '÷'] },
-  ];
+  // localStorage keys
+  private readonly STORAGE_KEY_SETTINGS = 'basic-ops-game-settings';
+  private readonly STORAGE_KEY_DIFFICULTY = 'basic-ops-game-difficulty-levels';
+
+  difficultyLevels: DifficultyLevel[] = this.createDifficultyLevels();
 
   fallingQuestions: FallingQuestion[] = [];
   hitEffects: HitEffect[] = [];
@@ -81,6 +89,8 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   isGameOver = false;
   inputError = false;
   showSettingsPanel = false;
+  showQuestionBankPanel = false;
+  draggedDifficultyId: string | null = null;
   cannonAngleDeg = -90;
   bulletVisible = false;
   bulletFlying = false;
@@ -89,14 +99,17 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   bulletRotationDeg = 0;
 
   readonly cannonAssetPath =
-    'assets/resources/categories/math/quick-caculation-games/resources/大炮.svg';
+    'assets/resources/categories/math/quick-caculation-games/resources/cannon.svg';
   readonly bulletAssetPath =
-    'assets/resources/categories/math/quick-caculation-games/resources/子弹.svg';
+    'assets/resources/categories/math/quick-caculation-games/resources/bullet.svg';
 
   readonly settings: GameSettings = {
     initialSpeed: 10,
     difficultyAcceleration: 2,
     maxBlocksOnScreen: 5,
+    allowKeyboardShortcuts: true,
+    speedUpThreshold: 5,
+    levelUpThreshold: 30,
   };
 
   private gameAreaHeight = 0;
@@ -108,11 +121,28 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   private audioContext: AudioContext | null = null;
   private activeShotQuestionId: number | null = null;
   private timeoutHandles: number[] = [];
+  private readonly pianoKeyFrequencies: Record<number, number> = {
+    1: 261.63,
+    2: 293.66,
+    3: 329.63,
+    4: 349.23,
+    5: 392.0,
+    6: 440.0,
+    7: 493.88,
+    8: 523.25,
+    9: 587.33,
+    0: 659.25,
+  };
 
   constructor(
     private router: Router,
     private cdr: ChangeDetectorRef,
-  ) {}
+  ) {
+    // Restore persisted settings from localStorage on construction.
+    // Both web (browser) and Cordova/Android WebView support localStorage.
+    this.loadSettingsFromStorage();
+    this.loadDifficultyLevelsFromStorage();
+  }
 
   goBack() {
     this.router.navigate(['/category/math']);
@@ -138,6 +168,46 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   @HostListener('window:resize')
   onResize() {
     this.updateGameAreaSize();
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  onKeydown(event: KeyboardEvent) {
+    if (event.defaultPrevented || event.isComposing) {
+      return;
+    }
+
+    if (!this.settings.allowKeyboardShortcuts) {
+      return;
+    }
+
+    const target = event.target as HTMLElement | null;
+    if (target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) {
+      return;
+    }
+
+    const key = event.key;
+    if (key >= '0' && key <= '9' && !event.altKey && !event.ctrlKey && !event.metaKey) {
+      event.preventDefault();
+      this.onDigitClick(Number(key));
+      return;
+    }
+
+    if (key === 'Enter' || key === ' ') {
+      event.preventDefault();
+      this.confirmAnswer();
+      return;
+    }
+
+    if (key === 'Backspace' || key === 'Delete') {
+      event.preventDefault();
+      this.onDelete();
+      return;
+    }
+
+    if (key === 'Escape') {
+      event.preventDefault();
+      this.onClear();
+    }
   }
 
   startGame(forceNew = false): void {
@@ -174,15 +244,80 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     this.showSettingsPanel = false;
   }
 
+  openQuestionBank(): void {
+    this.showQuestionBankPanel = true;
+  }
+
+  closeQuestionBank(): void {
+    this.showQuestionBankPanel = false;
+  }
+
   updateSettings(): void {
     this.settings.initialSpeed = this.clamp(this.settings.initialSpeed, 6, 28);
     this.settings.difficultyAcceleration = this.clamp(this.settings.difficultyAcceleration, 0, 12);
     this.settings.maxBlocksOnScreen = Math.round(
       this.clamp(this.settings.maxBlocksOnScreen, 2, 12),
     );
+    this.settings.speedUpThreshold = Math.round(this.clamp(this.settings.speedUpThreshold, 1, 20));
+    this.settings.levelUpThreshold = Math.round(this.clamp(this.settings.levelUpThreshold, 5, 60));
+    const activeLevels = this.getActiveDifficultyLevels();
+    if (activeLevels.length === 0 && this.difficultyLevels.length > 0) {
+      this.difficultyLevels[0].enabled = true;
+    }
+    const refreshedLevels = this.getActiveDifficultyLevels();
+    this.levelIndex = Math.min(this.levelIndex, Math.max(0, refreshedLevels.length - 1));
     if (this.fallingQuestions.length > this.settings.maxBlocksOnScreen) {
       this.fallingQuestions = this.fallingQuestions.slice(0, this.settings.maxBlocksOnScreen);
     }
+
+    // Persist both settings and difficulty levels to localStorage so the
+    // configuration survives page reloads and app restarts on both web and Android.
+    this.saveSettingsToStorage();
+    this.saveDifficultyLevelsToStorage();
+  }
+
+  formatOperations(operations: OperationSymbol[]): string {
+    return operations.map((operation) => (operation === 'x' ? '×' : operation)).join(' ');
+  }
+
+  onDifficultyDragStart(levelId: string): void {
+    this.draggedDifficultyId = levelId;
+  }
+
+  onDifficultyDragOver(event: DragEvent): void {
+    event.preventDefault();
+  }
+
+  onDifficultyDrop(targetId: string): void {
+    if (!this.draggedDifficultyId || this.draggedDifficultyId === targetId) {
+      return;
+    }
+
+    const currentLevels = [...this.difficultyLevels];
+    const fromIndex = currentLevels.findIndex((level) => level.id === this.draggedDifficultyId);
+    const toIndex = currentLevels.findIndex((level) => level.id === targetId);
+    if (fromIndex < 0 || toIndex < 0) {
+      return;
+    }
+
+    const activeBefore = this.getActiveDifficultyLevels();
+    const currentLevelId = activeBefore[this.levelIndex]?.id ?? null;
+    const [moved] = currentLevels.splice(fromIndex, 1);
+    currentLevels.splice(toIndex, 0, moved);
+    this.difficultyLevels = currentLevels;
+
+    const activeAfter = this.getActiveDifficultyLevels();
+    const newIndex = activeAfter.findIndex((level) => level.id === currentLevelId);
+    this.levelIndex = newIndex >= 0 ? newIndex : 0;
+    this.draggedDifficultyId = null;
+
+    // Save drag-reordered state immediately so it persists without requiring
+    // the user to press the save button.
+    this.saveDifficultyLevelsToStorage();
+  }
+
+  onDifficultyDragEnd(): void {
+    this.draggedDifficultyId = null;
   }
 
   getOperationClass(question: FallingQuestion): string {
@@ -270,8 +405,12 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     this.launchCannonShot(match);
   }
 
-  get currentLevel(): DifficultyLevel {
-    return this.difficultyLevels[this.levelIndex];
+  get currentLevel(): DifficultyLevel | null {
+    const activeLevels = this.getActiveDifficultyLevels();
+    if (activeLevels.length === 0) {
+      return null;
+    }
+    return activeLevels[Math.min(this.levelIndex, Math.max(0, activeLevels.length - 1))];
   }
 
   get speedLabel(): string {
@@ -383,21 +522,41 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   }
 
   private spawnQuestion(): void {
-    const generated = this.generateQuestion(this.currentLevel);
+    const level = this.currentLevel;
+    if (!level) {
+      return;
+    }
+    const generated = this.generateQuestion(level, level.operationsCount);
     this.fallingQuestions.push({
       id: this.nextQuestionId++,
       text: generated.text,
       answer: generated.answer,
       operation: generated.operation,
       levelIndex: this.levelIndex,
-      widthPx: this.getQuestionTileWidth(this.levelIndex),
+      widthPx: this.getQuestionTileWidth(this.levelIndex, generated.text),
       y: -20,
       leftPercent: this.randomBetween(8, 82),
       isHit: false,
     });
   }
 
-  private generateQuestion(level: DifficultyLevel): {
+  private generateQuestion(
+    level: DifficultyLevel,
+    operationCount: number,
+  ): {
+    text: string;
+    answer: number;
+    operation: OperationSymbol;
+  } {
+    if (operationCount <= 1) {
+      return this.generateSingleOperationQuestion(level);
+    }
+
+    const result = this.generateMultiOperationQuestion(level, operationCount);
+    return result ?? this.generateSingleOperationQuestion(level);
+  }
+
+  private generateSingleOperationQuestion(level: DifficultyLevel): {
     text: string;
     answer: number;
     operation: OperationSymbol;
@@ -433,8 +592,105 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     return { text: `${dividend} ÷ ${divisor}`, answer: quotient, operation };
   }
 
-  private getQuestionTileWidth(levelIndex: number): number {
-    return 108 + levelIndex * 14;
+  private generateMultiOperationQuestion(
+    level: DifficultyLevel,
+    operationCount: number,
+  ): {
+    text: string;
+    answer: number;
+    operation: OperationSymbol;
+  } | null {
+    const maxValue = level.maxValue;
+    const operations = level.operations;
+    let current = this.randomInt(1, maxValue);
+    const tokens: string[] = [String(current)];
+    let firstOperation: OperationSymbol = operations[0];
+
+    for (let i = 0; i < operationCount; i += 1) {
+      let operation = operations[Math.floor(Math.random() * operations.length)];
+      if (i === 0) {
+        firstOperation = operation;
+      }
+
+      const step = this.getOperationStep(current, maxValue, operation);
+      if (!step) {
+        operation = '+';
+      }
+
+      const finalStep = step ?? this.getOperationStep(current, maxValue, operation);
+      if (!finalStep) {
+        return null;
+      }
+
+      tokens.push(this.getOperationDisplay(operation));
+      tokens.push(String(finalStep.operand));
+      current = finalStep.nextValue;
+    }
+
+    return {
+      text: tokens.join(' '),
+      answer: current,
+      operation: firstOperation,
+    };
+  }
+
+  private getOperationDisplay(operation: OperationSymbol): string {
+    return operation === 'x' ? '×' : operation;
+  }
+
+  private getOperationStep(
+    current: number,
+    maxValue: number,
+    operation: OperationSymbol,
+  ): { operand: number; nextValue: number } | null {
+    if (operation === '+') {
+      const maxAdd = Math.max(0, maxValue - current);
+      if (maxAdd < 1) {
+        return null;
+      }
+      const operand = this.randomInt(1, maxAdd);
+      return { operand, nextValue: current + operand };
+    }
+
+    if (operation === '-') {
+      const operand = this.randomInt(0, current);
+      return { operand, nextValue: current - operand };
+    }
+
+    if (operation === 'x') {
+      const maxFactor = Math.min(12, Math.floor(maxValue / Math.max(1, current)));
+      if (maxFactor < 2) {
+        return null;
+      }
+      const operand = this.randomInt(2, maxFactor);
+      return { operand, nextValue: current * operand };
+    }
+
+    const divisors = this.getDivisors(current);
+    if (divisors.length === 0) {
+      return null;
+    }
+    const operand = divisors[Math.floor(Math.random() * divisors.length)];
+    return { operand, nextValue: current / operand };
+  }
+
+  private getDivisors(value: number): number[] {
+    if (value < 2) {
+      return [];
+    }
+    const divisors: number[] = [];
+    const maxDivisor = Math.min(12, value);
+    for (let i = 2; i <= maxDivisor; i += 1) {
+      if (value % i === 0) {
+        divisors.push(i);
+      }
+    }
+    return divisors;
+  }
+
+  private getQuestionTileWidth(levelIndex: number, text: string): number {
+    const baseWidth = 108 + levelIndex * 14;
+    return Math.max(baseWidth, 64 + text.length * 12);
   }
 
   private destroyQuestion(question: FallingQuestion): void {
@@ -447,11 +703,14 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     this.currentAnswer = '';
     this.inputError = false;
 
-    if (this.levelCorrect > 0 && this.levelCorrect % 5 === 0) {
+    const speedUpThreshold = Math.max(1, this.settings.speedUpThreshold);
+    const levelUpThreshold = Math.max(1, this.settings.levelUpThreshold);
+
+    if (this.levelCorrect > 0 && this.levelCorrect % speedUpThreshold === 0) {
       this.speedTier += 1;
     }
 
-    if (this.levelCorrect > 0 && this.levelCorrect % 30 === 0) {
+    if (this.levelCorrect > 0 && this.levelCorrect % levelUpThreshold === 0) {
       this.levelUp();
     }
 
@@ -548,12 +807,182 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   }
 
   private levelUp(): void {
-    if (this.levelIndex < this.difficultyLevels.length - 1) {
+    const activeLevels = this.getActiveDifficultyLevels();
+    if (this.levelIndex < activeLevels.length - 1) {
       this.levelIndex += 1;
     }
     this.levelCorrect = 0;
     this.speedTier = 0;
   }
+
+  private getActiveDifficultyLevels(): DifficultyLevel[] {
+    const activeLevels = this.difficultyLevels.filter((level) => level.enabled);
+    return activeLevels.length > 0 ? activeLevels : this.difficultyLevels;
+  }
+
+  private createDifficultyLevels(): DifficultyLevel[] {
+    const baseLevels: Array<{
+      id: string;
+      label: string;
+      maxValue: number;
+      operations: OperationSymbol[];
+    }> = [
+      { id: 'addsub-20', label: '20以内加减', maxValue: 20, operations: ['+', '-'] },
+      { id: 'mix-20', label: '20以内四则运算', maxValue: 20, operations: ['+', '-', 'x', '÷'] },
+      { id: 'addsub-50', label: '50以内加减', maxValue: 50, operations: ['+', '-'] },
+      { id: 'muldiv-50', label: '50以内乘除', maxValue: 50, operations: ['x', '÷'] },
+      { id: 'mix-50', label: '50以内四则运算', maxValue: 50, operations: ['+', '-', 'x', '÷'] },
+      { id: 'addsub-100', label: '100以内加减', maxValue: 100, operations: ['+', '-'] },
+      { id: 'muldiv-100', label: '100以内乘除', maxValue: 100, operations: ['x', '÷'] },
+      { id: 'mix-100', label: '100以内四则运算', maxValue: 100, operations: ['+', '-', 'x', '÷'] },
+      { id: 'addsub-200', label: '200以内加减', maxValue: 200, operations: ['+', '-'] },
+      { id: 'muldiv-200', label: '200以内乘除', maxValue: 200, operations: ['x', '÷'] },
+      { id: 'addsub-500', label: '500以内加减', maxValue: 500, operations: ['+', '-'] },
+      { id: 'muldiv-500', label: '500以内乘除', maxValue: 500, operations: ['x', '÷'] },
+      {
+        id: 'mix-1000',
+        label: '1000以内四则运算',
+        maxValue: 1000,
+        operations: ['+', '-', 'x', '÷'],
+      },
+    ];
+
+    const operationCounts = [1, 2, 3];
+
+    return baseLevels.flatMap((base) =>
+      operationCounts.map((count) => ({
+        id: `${base.id}-ops${count}`,
+        label: base.label,
+        maxValue: base.maxValue,
+        operations: base.operations,
+        operationsCount: count,
+        enabled: true,
+      })),
+    );
+  }
+
+  // ─── localStorage helpers ─────────────────────────────────────────────────
+
+  /**
+   * Load game settings from localStorage and merge into the current settings
+   * object. Only recognised, type-valid fields are applied; unknown or
+   * malformed data is ignored so the defaults remain intact.
+   */
+  private loadSettingsFromStorage(): void {
+    try {
+      const raw = localStorage.getItem(this.STORAGE_KEY_SETTINGS);
+      if (!raw) {
+        return;
+      }
+      const saved = JSON.parse(raw) as Partial<GameSettings>;
+      if (typeof saved.initialSpeed === 'number') {
+        this.settings.initialSpeed = saved.initialSpeed;
+      }
+      if (typeof saved.difficultyAcceleration === 'number') {
+        this.settings.difficultyAcceleration = saved.difficultyAcceleration;
+      }
+      if (typeof saved.maxBlocksOnScreen === 'number') {
+        this.settings.maxBlocksOnScreen = saved.maxBlocksOnScreen;
+      }
+      if (typeof saved.allowKeyboardShortcuts === 'boolean') {
+        this.settings.allowKeyboardShortcuts = saved.allowKeyboardShortcuts;
+      }
+      if (typeof saved.speedUpThreshold === 'number') {
+        this.settings.speedUpThreshold = saved.speedUpThreshold;
+      }
+      if (typeof saved.levelUpThreshold === 'number') {
+        this.settings.levelUpThreshold = saved.levelUpThreshold;
+      }
+    } catch {
+      // Silently fall back to defaults when storage data is corrupt or unavailable.
+    }
+  }
+
+  /**
+   * Persist the current game settings to localStorage.
+   * Called whenever the user saves from the 游戏设置 drawer.
+   */
+  private saveSettingsToStorage(): void {
+    try {
+      localStorage.setItem(this.STORAGE_KEY_SETTINGS, JSON.stringify(this.settings));
+    } catch {
+      // Storage may be unavailable (private-browsing quota, etc.) – ignore silently.
+    }
+  }
+
+  /**
+   * Load difficulty level state (order + enabled flags) from localStorage and
+   * apply it to this.difficultyLevels.
+   *
+   * Strategy:
+   * 1. Build a Map from the default levels (already set on the field).
+   * 2. Reorder them according to the saved id array.
+   * 3. Apply saved enabled flags per id.
+   * 4. Any new level ids that did not exist at save time are appended at the end.
+   */
+  private loadDifficultyLevelsFromStorage(): void {
+    try {
+      const raw = localStorage.getItem(this.STORAGE_KEY_DIFFICULTY);
+      if (!raw) {
+        return;
+      }
+      const saved = JSON.parse(raw) as Partial<PersistedDifficultyState>;
+      const enabledMap: Record<string, boolean> = saved.enabledMap ?? {};
+      const order: string[] = Array.isArray(saved.order) ? saved.order : [];
+
+      // Apply saved enabled flags first (works even if we skip the reorder below).
+      for (const level of this.difficultyLevels) {
+        if (Object.prototype.hasOwnProperty.call(enabledMap, level.id)) {
+          level.enabled = enabledMap[level.id];
+        }
+      }
+
+      // Reorder according to saved order when it is non-empty.
+      if (order.length > 0) {
+        const levelMap = new Map<string, DifficultyLevel>(
+          this.difficultyLevels.map((l) => [l.id, l]),
+        );
+        const reordered: DifficultyLevel[] = [];
+
+        for (const id of order) {
+          const level = levelMap.get(id);
+          if (level) {
+            reordered.push(level);
+            levelMap.delete(id);
+          }
+        }
+
+        // Append any levels not present in the saved order (added after last save).
+        for (const level of levelMap.values()) {
+          reordered.push(level);
+        }
+
+        this.difficultyLevels = reordered;
+      }
+    } catch {
+      // Silently fall back to defaults when storage data is corrupt or unavailable.
+    }
+  }
+
+  /**
+   * Persist the current difficulty levels order and enabled state to localStorage.
+   * Called whenever the user saves from the 题库设置 drawer or finishes a drag-drop.
+   */
+  private saveDifficultyLevelsToStorage(): void {
+    try {
+      const order = this.difficultyLevels.map((l) => l.id);
+      const enabledMap: Record<string, boolean> = {};
+      for (const level of this.difficultyLevels) {
+        enabledMap[level.id] = level.enabled;
+      }
+      const payload: PersistedDifficultyState = { order, enabledMap };
+      localStorage.setItem(this.STORAGE_KEY_DIFFICULTY, JSON.stringify(payload));
+    } catch {
+      // Storage may be unavailable – ignore silently.
+    }
+  }
+
+  // ─── Audio helpers ────────────────────────────────────────────────────────
 
   private createHitEffect(question: FallingQuestion): void {
     const effect: HitEffect = {
@@ -621,8 +1050,8 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   }
 
   private playKeySound(digit: number): void {
-    const frequency = 240 + digit * 20;
-    this.playTone(frequency, 0.08, 'square', 0.05);
+    const frequency = this.pianoKeyFrequencies[digit] ?? 440.0;
+    this.playTone(frequency, 0.12, 'sine', 0.06);
   }
 
   private playDeleteSound(): void {
@@ -651,6 +1080,8 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   private playFailSound(): void {
     this.playTone(110, 0.35, 'sawtooth', 0.08);
   }
+
+  // ─── Utility helpers ──────────────────────────────────────────────────────
 
   private randomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
