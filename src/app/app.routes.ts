@@ -21,7 +21,8 @@ import { Grade3Term2KnowledgeListComponent } from './components/categories/engli
 import { ScienceCategoryComponent } from './components/categories/science/science-category';
 import { AiCategoryComponent } from './components/categories/ai/ai-category';
 import { NotesCategoryComponent } from './components/categories/notes/notes-category';
-import { SportsCategoryComponent } from './components/categories/sports/sports-category';
+import { OtherSubjectsCategoryComponent } from './components/categories/other-subjects/other-subjects-category';
+import { JingleBellsChorusComponent } from './components/categories/other-subjects/jingle-bells-chorus/jingle-bells-chorus';
 import { RecommendCategoryComponent } from './components/categories/recommend/recommend-category';
 import { NoteEditorComponent } from './components/note-editor/note-editor';
 import { VocabularyComponent } from './components/vocabulary/vocabulary';
@@ -121,9 +122,14 @@ export const routes: Routes = [
     title: '娱乐 - Entertainment',
   },
   {
-    path: 'category/sports',
-    component: SportsCategoryComponent,
-    title: '体育 - Sports',
+    path: 'category/other-subjects',
+    component: OtherSubjectsCategoryComponent,
+    title: '其他学科 - Other Subjects',
+  },
+  {
+    path: 'category/other-subjects/jingle-bells-chorus',
+    component: JingleBellsChorusComponent,
+    title: '二声部合唱«快乐叮当»',
   },
   {
     path: 'category/ai',

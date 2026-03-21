@@ -1,0 +1,214 @@
+// 其他学科 - 与 entertainment/math 等二级页面使用相同的结构和配色规范
+// 主题色：柔和天蓝色（与主页 tile-other-subjects 一致）
+$theme-primary: #42a5f5;
+$theme-secondary: #64b5f6;
+$theme-dark: #1565c0;
+
+// ============================================================
+// 通用 category 布局（与其他二级页面保持一致）
+// ============================================================
+.category-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  animation: fade-in 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  gap: 12px;
+  position: relative;
+
+  .back-btn {
+    color: rgba(255, 255, 255, 0.9);
+    flex-shrink: 0;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .category-title {
+    font-size: 1.8em;
+    font-weight: 300;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .category-subtitle {
+    font-size: 0.9em;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 0 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    align-self: flex-end;
+    padding-bottom: 3px;
+  }
+}
+
+// ============================================================
+// 其他学科主题色（应用于头部）
+// ============================================================
+.other-subjects-theme {
+  .category-header {
+    background: linear-gradient(135deg, $theme-secondary 0%, $theme-primary 50%, $theme-dark 100%);
+    box-shadow: 0 4px 20px rgba(66, 165, 245, 0.4);
+  }
+}
+
+// ============================================================
+// Metro磁贴网格（与其他二级页面完全一致）
+// ============================================================
+.metro-grid {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px;
+  align-content: flex-start;
+}
+
+.metro-tile {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // 高光扫过效果
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  &:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+// 磁贴尺寸
+.tile-medium {
+  width: 200px;
+  height: 180px;
+  background: linear-gradient(135deg, $theme-secondary 0%, $theme-primary 100%);
+}
+
+// 磁贴内容布局
+.tile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  gap: 12px;
+  text-align: center;
+}
+
+.tile-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #ffffff;
+}
+
+.tile-text {
+  color: #ffffff;
+
+  h2 {
+    font-size: 1.1em;
+    font-weight: 400;
+    margin: 0 0 4px 0;
+    letter-spacing: 0.3px;
+  }
+
+  p {
+    font-size: 0.8em;
+    font-weight: 300;
+    margin: 0;
+    opacity: 0.85;
+    letter-spacing: 0.5px;
+  }
+}
+
+// ============================================================
+// 响应式
+// ============================================================
+@media (max-width: 750px) {
+  .category-header {
+    padding: 10px 14px;
+
+    .category-title {
+      font-size: 1.3em;
+    }
+
+    .category-subtitle {
+      display: none;
+    }
+  }
+
+  .metro-grid {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .tile-medium {
+    width: 100%;
+    height: 80px;
+
+    .tile-content {
+      flex-direction: row;
+      justify-content: flex-start;
+      padding: 12px 16px;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .tile-icon {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .tile-text h2 {
+      font-size: 1em;
+    }
+  }
+}

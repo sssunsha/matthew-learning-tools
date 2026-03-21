@@ -281,8 +281,13 @@
   }
 
   &.selected {
-    border-color: #c8f5c8;
-    box-shadow: 0 0 0 2px rgba(200, 245, 200, 0.7);
+    background: #ffffff !important;
+    color: #14213d !important;
+    border-color: #ffffff;
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.9),
+      0 6px 20px rgba(0, 0, 0, 0.35);
+    transform: scale(1.1) !important;
   }
 
   &.correct {

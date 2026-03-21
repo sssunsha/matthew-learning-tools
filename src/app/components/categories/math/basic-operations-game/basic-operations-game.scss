@@ -162,74 +162,292 @@
   position: absolute;
   z-index: 12;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  padding: 8px 12px;
-  border-radius: 10px;
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 1em;
-  letter-spacing: 1px;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 108px;
+  height: 90px;
   transition:
     transform 0.2s ease,
     opacity 0.2s ease;
-  text-align: center;
+}
+
+// Bug image fills the upper portion of the tile
+.bug-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 64px;
+  width: auto;
+  max-width: 110%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.55));
+  user-select: none;
+}
+
+// Expression text badge at the bottom of the tile
+.tile-text {
+  position: relative;
+  z-index: 2;
+  background: rgba(10, 18, 40, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 0.92em;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
   white-space: nowrap;
-  min-width: 108px;
+  letter-spacing: 1px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
 }
 
-.question-tile.operation-add {
-  background: linear-gradient(120deg, rgba(64, 170, 255, 0.44), rgba(48, 119, 255, 0.34));
-  border-color: rgba(171, 226, 255, 0.8);
-}
-
-.question-tile.operation-sub {
-  background: linear-gradient(120deg, rgba(70, 196, 123, 0.44), rgba(33, 148, 96, 0.34));
-  border-color: rgba(173, 243, 202, 0.78);
-}
-
-.question-tile.operation-mul {
-  background: linear-gradient(120deg, rgba(255, 86, 86, 0.44), rgba(204, 39, 39, 0.34));
-  border-color: rgba(255, 189, 189, 0.78);
-}
-
-.question-tile.operation-div {
-  background: linear-gradient(120deg, rgba(151, 102, 255, 0.44), rgba(108, 62, 210, 0.34));
-  border-color: rgba(221, 194, 255, 0.78);
-}
-
-.question-tile.operation-mix-addsub {
-  background: linear-gradient(120deg, rgba(147, 155, 168, 0.44), rgba(105, 114, 130, 0.34));
-  border-color: rgba(223, 228, 238, 0.78);
-}
-
-.question-tile.operation-mix-muldiv {
-  background: linear-gradient(120deg, rgba(255, 169, 89, 0.46), rgba(232, 120, 43, 0.35));
-  border-color: rgba(255, 224, 180, 0.78);
-}
-
-.question-tile.operation-mix-all {
-  background: linear-gradient(120deg, rgba(46, 46, 46, 0.66), rgba(18, 18, 18, 0.58));
-  border-color: rgba(198, 198, 198, 0.72);
-}
+// Per-operation tint on the text badge (subtle colour coding kept)
+.question-tile.operation-add    .tile-text { border-color: rgba(100, 200, 255, 0.55); }
+.question-tile.operation-sub    .tile-text { border-color: rgba(80, 220, 140, 0.55); }
+.question-tile.operation-mul    .tile-text { border-color: rgba(255, 110, 110, 0.55); }
+.question-tile.operation-div    .tile-text { border-color: rgba(190, 130, 255, 0.55); }
+.question-tile.operation-mix-addsub .tile-text { border-color: rgba(170, 185, 210, 0.55); }
+.question-tile.operation-mix-muldiv .tile-text { border-color: rgba(255, 190, 90, 0.55); }
+.question-tile.operation-mix-all    .tile-text { border-color: rgba(200, 200, 200, 0.55); }
 
 .question-tile.hit {
   animation: tile-hit 0.22s ease forwards;
 }
 
-.hit-effect {
+// ─── Hit / explosion effect ────────────────────────────────────────────────
+
+// Anchor positioned at the block's centre
+.hit-container {
   position: absolute;
   z-index: 18;
-  width: 46px;
-  height: 46px;
   transform: translateX(-50%);
+  pointer-events: none;
+}
+
+// ── Central white-hot flash (3-layer: inner core + mid glow + outer halo) ──
+.hit-flash {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 120px;
+  height: 120px;
+  margin-left: -60px;
+  margin-top: -60px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-  animation: hit-burst 0.45s ease forwards;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1)    0%,
+    rgba(255, 255, 180, 1)   15%,
+    rgba(255, 230, 40,  0.9) 35%,
+    rgba(255, 130, 10,  0.6) 58%,
+    rgba(255,  60,  0,  0.2) 75%,
+    transparent 88%
+  );
+  filter: blur(2px);
+  animation: hit-flash-expand 0.70s ease-out forwards;
+}
+
+// ── Inner shock ring ──────────────────────────────────────────────────────
+.hit-ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60px;
+  height: 60px;
+  margin-left: -30px;
+  margin-top: -30px;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 1);
+  box-shadow:
+    0 0 18px 6px rgba(255, 255, 255, 0.75),
+    inset 0 0 12px rgba(255, 255, 255, 0.4);
+  animation: hit-ring-inner 0.75s ease-out forwards;
+}
+
+// ── Outer delayed shock ring ──────────────────────────────────────────────
+.hit-ring--outer {
+  width: 90px;
+  height: 90px;
+  margin-left: -45px;
+  margin-top: -45px;
+  border-width: 3px;
+  box-shadow:
+    0 0 24px 8px rgba(255, 255, 255, 0.5),
+    inset 0 0 16px rgba(255, 255, 255, 0.25);
+  animation: hit-ring-outer 1.05s 90ms ease-out forwards;
+}
+
+// Per-operation ring colour — inner ring
+.hit-ring.operation-add   { border-color: rgba(0,  200, 255, 1); box-shadow: 0 0 22px 8px rgba(0,  190, 255, 0.9); }
+.hit-ring.operation-sub   { border-color: rgba(0,  255, 120, 1); box-shadow: 0 0 22px 8px rgba(0,  240, 110, 0.9); }
+.hit-ring.operation-mul   { border-color: rgba(255,  50,  50, 1); box-shadow: 0 0 22px 8px rgba(255,  40,  40, 0.9); }
+.hit-ring.operation-div   { border-color: rgba(190,  80, 255, 1); box-shadow: 0 0 22px 8px rgba(180,  70, 255, 0.9); }
+.hit-ring.operation-mix-addsub  { border-color: rgba(160, 180, 220, 1); box-shadow: 0 0 22px 8px rgba(150, 170, 210, 0.9); }
+.hit-ring.operation-mix-muldiv  { border-color: rgba(255, 180,   0, 1); box-shadow: 0 0 22px 8px rgba(255, 170,   0, 0.9); }
+.hit-ring.operation-mix-all     { border-color: rgba(220, 220, 220, 1); box-shadow: 0 0 22px 8px rgba(210, 210, 210, 0.9); }
+
+// Per-operation ring colour — outer ring (slightly more transparent)
+.hit-ring--outer.operation-add   { border-color: rgba(0,  200, 255, 0.8); box-shadow: 0 0 30px 10px rgba(0,  190, 255, 0.6); }
+.hit-ring--outer.operation-sub   { border-color: rgba(0,  255, 120, 0.8); box-shadow: 0 0 30px 10px rgba(0,  240, 110, 0.6); }
+.hit-ring--outer.operation-mul   { border-color: rgba(255,  50,  50, 0.8); box-shadow: 0 0 30px 10px rgba(255,  40,  40, 0.6); }
+.hit-ring--outer.operation-div   { border-color: rgba(190,  80, 255, 0.8); box-shadow: 0 0 30px 10px rgba(180,  70, 255, 0.6); }
+.hit-ring--outer.operation-mix-addsub  { border-color: rgba(160, 180, 220, 0.8); box-shadow: 0 0 30px 10px rgba(150, 170, 210, 0.6); }
+.hit-ring--outer.operation-mix-muldiv  { border-color: rgba(255, 180,   0, 0.8); box-shadow: 0 0 30px 10px rgba(255, 170,   0, 0.6); }
+.hit-ring--outer.operation-mix-all     { border-color: rgba(220, 220, 220, 0.8); box-shadow: 0 0 30px 10px rgba(210, 210, 210, 0.6); }
+
+// ── Shared shard base ─────────────────────────────────────────────────────
+.shard {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 3px;
+  animation-fill-mode: forwards;
+  will-change: transform, opacity;
+}
+
+// ── Per-operation shard colours — vivid, fully saturated, strong glow ──────
+.shard.operation-add {
+  background: linear-gradient(135deg, #00d4ff, #0077ff);
+  border: 1px solid rgba(160, 240, 255, 1);
+  box-shadow: 0 0 10px 3px rgba(0, 200, 255, 0.95);
+}
+.shard.operation-sub {
+  background: linear-gradient(135deg, #00ff88, #00c853);
+  border: 1px solid rgba(160, 255, 200, 1);
+  box-shadow: 0 0 10px 3px rgba(0, 240, 130, 0.95);
+}
+.shard.operation-mul {
+  background: linear-gradient(135deg, #ff3b3b, #e60000);
+  border: 1px solid rgba(255, 180, 180, 1);
+  box-shadow: 0 0 10px 3px rgba(255, 50, 50, 0.95);
+}
+.shard.operation-div {
+  background: linear-gradient(135deg, #d050ff, #8b00ff);
+  border: 1px solid rgba(230, 180, 255, 1);
+  box-shadow: 0 0 10px 3px rgba(190, 80, 255, 0.95);
+}
+.shard.operation-mix-addsub {
+  background: linear-gradient(135deg, #a0c8ff, #5080c8);
+  border: 1px solid rgba(200, 230, 255, 1);
+  box-shadow: 0 0 10px 3px rgba(140, 190, 255, 0.95);
+}
+.shard.operation-mix-muldiv {
+  background: linear-gradient(135deg, #ffcc00, #ff8800);
+  border: 1px solid rgba(255, 240, 160, 1);
+  box-shadow: 0 0 10px 3px rgba(255, 200, 0, 0.95);
+}
+.shard.operation-mix-all {
+  background: linear-gradient(135deg, #ffffff, #aaaaaa);
+  border: 1px solid rgba(240, 240, 240, 1);
+  box-shadow: 0 0 10px 3px rgba(220, 220, 220, 0.95);
+}
+
+// ── 12 shard pieces — farther distances, longer durations ────────────────
+.shard-1  { width: 20px; height:  8px; animation: shard-fly-1  1.25s  0ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+.shard-2  { width: 15px; height:  7px; animation: shard-fly-2  1.18s 25ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+.shard-3  { width: 18px; height:  9px; animation: shard-fly-3  1.30s  0ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+.shard-4  { width: 13px; height:  8px; animation: shard-fly-4  1.22s 15ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+.shard-5  { width: 20px; height:  7px; animation: shard-fly-5  1.35s 35ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+.shard-6  { width: 15px; height:  8px; animation: shard-fly-6  1.20s 12ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+.shard-7  { width: 17px; height:  7px; animation: shard-fly-7  1.28s 28ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+.shard-8  { width: 14px; height:  8px; animation: shard-fly-8  1.24s  5ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+.shard-9  { width: 16px; height:  6px; animation: shard-fly-9  1.32s 18ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+.shard-10 { width: 18px; height:  7px; animation: shard-fly-10 1.15s  8ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+.shard-11 { width: 12px; height: 12px; animation: shard-fly-11 1.26s 10ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+.shard-12 { width: 11px; height: 11px; animation: shard-fly-12 1.22s 20ms cubic-bezier(0.15, 0.5, 0.3, 1) forwards; }
+
+// ── Flash & ring keyframes ────────────────────────────────────────────────
+@keyframes hit-flash-expand {
+  0%   { transform: scale(0.1);  opacity: 1; filter: blur(0px); }
+  25%  { transform: scale(1.2);  opacity: 1; filter: blur(2px); }
+  60%  { transform: scale(2.2);  opacity: 0.7; }
+  100% { transform: scale(3.5);  opacity: 0; filter: blur(6px); }
+}
+
+@keyframes hit-ring-inner {
+  0%   { transform: scale(0.15); opacity: 1; }
+  30%  { transform: scale(1.8);  opacity: 1; }
+  100% { transform: scale(4.2);  opacity: 0; }
+}
+
+@keyframes hit-ring-outer {
+  0%   { transform: scale(0.3); opacity: 0.9; }
+  100% { transform: scale(5.5); opacity: 0; }
+}
+
+// ── Shard keyframes — farther destinations (250–290 px range) ────────────
+// Formula: translate(calc(Xpx - 50%), calc(Ypx - 50%))
+// The shard centre ends up X px right and Y px down from the explosion origin.
+
+@keyframes shard-fly-1 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(265px - 50%), calc(-38px - 50%))   scale(0) rotate(540deg);  opacity: 0; }
+}
+@keyframes shard-fly-2 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(200px - 50%), calc(-215px - 50%))  scale(0) rotate(660deg);  opacity: 0; }
+}
+@keyframes shard-fly-3 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(22px - 50%), calc(-290px - 50%))   scale(0) rotate(450deg);  opacity: 0; }
+}
+@keyframes shard-fly-4 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(-215px - 50%), calc(-205px - 50%)) scale(0) rotate(570deg);  opacity: 0; }
+}
+@keyframes shard-fly-5 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(-265px - 50%), calc(-22px - 50%))  scale(0) rotate(420deg);  opacity: 0; }
+}
+@keyframes shard-fly-6 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(-185px - 50%), calc(140px - 50%))  scale(0) rotate(540deg);  opacity: 0; }
+}
+@keyframes shard-fly-7 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(22px - 50%), calc(172px - 50%))    scale(0) rotate(480deg);  opacity: 0; }
+}
+@keyframes shard-fly-8 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(178px - 50%), calc(134px - 50%))   scale(0) rotate(600deg);  opacity: 0; }
+}
+@keyframes shard-fly-9 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(112px - 50%), calc(-260px - 50%))  scale(0) rotate(720deg);  opacity: 0; }
+}
+@keyframes shard-fly-10 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(-120px - 50%), calc(-250px - 50%)) scale(0) rotate(510deg);  opacity: 0; }
+}
+@keyframes shard-fly-11 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(82px - 50%), calc(-245px - 50%))   scale(0) rotate(390deg);  opacity: 0; }
+}
+@keyframes shard-fly-12 {
+  from { transform: translate(-50%, -50%) scale(1.5) rotate(0deg);    opacity: 1; }
+  65%  { opacity: 1; }
+  to   { transform: translate(calc(-90px - 50%), calc(-240px - 50%))  scale(0) rotate(550deg);  opacity: 0; }
 }
 
 .cannon-stage {
@@ -353,9 +571,9 @@
 }
 
 .key-btn {
-  height: 68px;
-  min-width: 36px;
-  padding: 0 6px;
+  height: 46px;
+  min-width: 32px;
+  padding: 0 4px;
   font-size: 0.88em;
   font-weight: 600;
   color: #ffffff;
@@ -366,23 +584,16 @@
 
 .action-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 8px;
   width: 100%;
-  align-items: center;
-}
-
-.action-row-top {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  width: 100%;
+  align-items: stretch;
 }
 
 .action-btn {
-  width: 100%;
-  height: 50px;
-  min-height: 50px;
+  flex: 1;
+  height: 46px;
+  min-height: 46px;
   font-size: 0.9em;
   font-weight: 600;
   background: rgba(255, 255, 255, 0.16);
@@ -400,17 +611,12 @@
 }
 
 .action-btn.confirm-btn {
+  flex: 2;
   background: #e74856;
   border-color: rgba(255, 181, 185, 0.7);
-  width: 50vw;
-  min-width: 220px;
-  max-width: 520px;
-}
-
-.hint-text {
-  font-size: 0.72em;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.7);
+  width: auto;
+  min-width: unset;
+  max-width: unset;
 }
 
 .settings-mask {
@@ -536,23 +742,46 @@
   padding: 8px;
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.18);
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  cursor: grab;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
   transition:
     border-color 0.2s ease,
-    opacity 0.2s ease,
-    transform 0.2s ease;
-  touch-action: pan-y;
+    background 0.2s ease,
+    transform 0.15s ease;
+  user-select: none;
+
+  &:active {
+    transform: scale(0.98);
+  }
 }
 
-.difficulty-item.is-dragging {
-  opacity: 0.6;
-  border-style: solid;
-  transform: scale(0.99);
+.difficulty-item.is-selected {
+  border-color: #ffae62;
+  background: rgba(255, 174, 98, 0.2);
+  box-shadow: 0 0 8px rgba(255, 174, 98, 0.4);
+  transform: scale(1.02);
 }
 
-.drag-handle {
-  color: rgba(255, 255, 255, 0.7);
+.swap-handle {
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+}
+
+.difficulty-item.is-selected .swap-handle {
+  color: #ffae62;
+}
+
+.swap-hint {
+  display: inline-block;
+  margin-left: 6px;
+  color: #ffae62;
+  font-weight: 600;
+  animation: hint-pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes hint-pulse {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
 }
 
 .difficulty-info {
@@ -643,10 +872,24 @@
   font-size: 0.95em;
 }
 
-.save-settings-btn {
+.question-bank-actions {
+  display: flex;
+  gap: 10px;
   margin-top: auto;
+}
+
+.save-settings-btn {
+  flex: 1;
   background: linear-gradient(90deg, #ffae62, #ff8c59);
   color: #fff;
+  font-weight: 600;
+}
+
+.cancel-settings-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   font-weight: 600;
 }
 
@@ -661,16 +904,6 @@
   }
 }
 
-@keyframes hit-burst {
-  0% {
-    transform: translateX(-50%) scale(0.4);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(-50%) scale(1.6);
-    opacity: 0;
-  }
-}
 
 @keyframes input-shake {
   0% {
@@ -757,7 +990,43 @@
 
 @media (max-width: 900px) {
   .hud {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .hud-item {
+    padding: 4px 6px;
+  }
+
+  .hud-label {
+    font-size: 0.6em;
+  }
+
+  .hud-value {
+    font-size: 0.78em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // game-area keeps flex:1 so it fills whatever remains after bottom-controls
+  // Tighten bottom-controls on tablet to give game-area more vertical space
+  .game-layout {
+    gap: 6px;
+    padding: 8px 12px;
+  }
+
+  .bottom-controls {
+    max-height: 32vh;
+  }
+
+  .key-btn {
+    height: 52px;
+  }
+
+  .action-btn {
+    height: 40px;
+    min-height: 40px;
   }
 
   .cannon-image {

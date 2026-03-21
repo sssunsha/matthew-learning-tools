@@ -9,6 +9,10 @@ interface PhonicsItem {
   example: string;
 }
 
+interface PhonicsItemWithColor extends PhonicsItem {
+  color: string;
+}
+
 interface PhonicsGroupSpec {
   name: string;
   color: string;
@@ -245,6 +249,25 @@ export class EnglishPhonicsLearningComponent {
 
   speak(item: PhonicsItem) {
     this.playAudio(item.symbol);
+  }
+
+  /** Flat list of all phonics items with their group color for the dictation grid. */
+  get allItemsWithColor(): PhonicsItemWithColor[] {
+    const colorMap = new Map<string, string>();
+    for (const group of this.vowelGroups) {
+      for (const item of group.items) {
+        colorMap.set(item.symbol, group.color);
+      }
+    }
+    for (const group of this.consonantGroups) {
+      for (const item of group.items) {
+        colorMap.set(item.symbol, group.color);
+      }
+    }
+    return [...this.vowels, ...this.consonants].map((item) => ({
+      ...item,
+      color: colorMap.get(item.symbol) ?? '#ccc',
+    }));
   }
 
   continueTraining() {

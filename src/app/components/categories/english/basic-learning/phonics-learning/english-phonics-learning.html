@@ -97,95 +97,59 @@
         </div>
 
         <div class="dictation-controls">
-          <button mat-stroked-button class="control-btn" type="button" (click)="playCurrent()">
-            播放
+          <button
+            mat-icon-button
+            class="play-btn"
+            type="button"
+            (click)="playCurrent()"
+            title="重播"
+          >
+            <mat-icon>volume_up</mat-icon>
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            class="confirm-btn"
+            type="button"
+            (click)="confirmAnswer()"
+            [disabled]="dictationFinished || !selectedSymbol || dictationAnswered"
+          >
+            确定
+          </button>
+          <div class="dictation-result inline-result" *ngIf="dictationResult">
+            {{ dictationResult }}
+          </div>
+          <button
+            mat-stroked-button
+            class="next-btn"
+            type="button"
+            (click)="nextItem()"
+            *ngIf="dictationAnswered && !dictationFinished"
+          >
+            下一题
           </button>
         </div>
 
-        <div class="dictation-hint">点击选择听到的音标</div>
+        <div class="dictation-hint">点击选择听到的音标（颜色区分类型）</div>
 
-        <div class="phonics-section">
-          <div class="section-title">元音 {{ vowels.length }}</div>
-          <div class="phonics-group-list">
-            <div class="phonics-group" *ngFor="let group of vowelGroups">
-              <div class="group-title" [style.--group-color]="group.color">
-                <span class="group-name">{{ group.name }}</span>
-                <span class="group-count">{{ group.items.length }}</span>
-              </div>
-              <div class="phonics-grid">
-                <button
-                  class="phonics-tile"
-                  type="button"
-                  *ngFor="let item of group.items"
-                  (click)="selectSymbol(item.symbol)"
-                  [class.selected]="selectedSymbol === item.symbol"
-                  [disabled]="dictationAnswered"
-                  [style.--group-color]="group.color"
-                >
-                  <div class="phonics-symbol">
-                    <span class="slash">/</span>
-                    <span class="symbol-text">{{ item.symbol }}</span>
-                    <span class="slash">/</span>
-                  </div>
-                </button>
-              </div>
+        <!-- Flat grid: all phonics symbols with color coding, no group headers -->
+        <div class="phonics-grid dictation-flat-grid">
+          <button
+            class="phonics-tile"
+            type="button"
+            *ngFor="let item of allItemsWithColor"
+            (click)="selectSymbol(item.symbol)"
+            [class.selected]="selectedSymbol === item.symbol"
+            [disabled]="dictationAnswered"
+            [style.--group-color]="item.color"
+          >
+            <div class="phonics-symbol">
+              <span class="slash">/</span>
+              <span class="symbol-text">{{ item.symbol }}</span>
+              <span class="slash">/</span>
             </div>
-          </div>
+          </button>
         </div>
-
-        <div class="phonics-section">
-          <div class="section-title">辅音 {{ consonants.length }}</div>
-          <div class="phonics-group-list">
-            <div class="phonics-group" *ngFor="let group of consonantGroups">
-              <div class="group-title" [style.--group-color]="group.color">
-                <span class="group-name">{{ group.name }}</span>
-                <span class="group-count">{{ group.items.length }}</span>
-              </div>
-              <div class="phonics-grid">
-                <button
-                  class="phonics-tile"
-                  type="button"
-                  *ngFor="let item of group.items"
-                  (click)="selectSymbol(item.symbol)"
-                  [class.selected]="selectedSymbol === item.symbol"
-                  [disabled]="dictationAnswered"
-                  [style.--group-color]="group.color"
-                >
-                  <div class="phonics-symbol">
-                    <span class="slash">/</span>
-                    <span class="symbol-text">{{ item.symbol }}</span>
-                    <span class="slash">/</span>
-                  </div>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <button
-          mat-raised-button
-          color="primary"
-          class="confirm-btn"
-          type="button"
-          (click)="confirmAnswer()"
-          [disabled]="dictationFinished || !selectedSymbol || dictationAnswered"
-        >
-          确定
-        </button>
-
-        <div class="dictation-result" *ngIf="dictationResult">
-          {{ dictationResult }}
-        </div>
-
-        <button
-          mat-stroked-button
-          class="next-btn"
-          type="button"
-          (click)="nextItem()"
-          *ngIf="dictationAnswered && !dictationFinished"
-        >
-          下一题
-        </button>
       </div>
 
       <div class="dictation-summary" *ngIf="dictationFinished">

@@ -109,11 +109,19 @@
           [style.top.px]="question.y"
           [style.left.%]="question.leftPercent"
         >
-          {{ question.text }}
+          <img class="bug-image" [src]="getBugImagePath(question.bugIndex)" alt="" />
+          <span class="tile-text">{{ question.text }}</span>
         </div>
       }
       @for (effect of hitEffects; track effect.id) {
-        <div class="hit-effect" [style.top.px]="effect.y" [style.left.%]="effect.leftPercent"></div>
+        <div class="hit-container" [style.top.px]="effect.y" [style.left.%]="effect.leftPercent">
+          <div [class]="'hit-flash ' + effect.operationClass"></div>
+          <div [class]="'hit-ring ' + effect.operationClass"></div>
+          <div [class]="'hit-ring hit-ring--outer ' + effect.operationClass"></div>
+          @for (n of shardIndices; track n) {
+            <div [class]="'shard shard-' + n + ' ' + effect.operationClass"></div>
+          }
+        </div>
       }
       <div class="ground-line"></div>
 
@@ -142,14 +150,9 @@
       </div>
 
       <div class="action-row">
-        <div class="action-row-top">
-          <button mat-icon-button class="action-btn" (click)="onClear()" title="清空">
-            <mat-icon>clear</mat-icon>
-          </button>
-          <button mat-icon-button class="action-btn" (click)="onDelete()" title="删除">
-            <mat-icon>backspace</mat-icon>
-          </button>
-        </div>
+        <button mat-icon-button class="action-btn" (click)="onClear()" title="清空">
+          <mat-icon>clear</mat-icon>
+        </button>
         <button
           mat-icon-button
           class="action-btn confirm-btn"
@@ -159,10 +162,9 @@
         >
           <mat-icon>check_circle</mat-icon>
         </button>
-      </div>
-
-      <div class="hint-text">
-        每答对{{ settings.speedUpThreshold }}题加速，{{ settings.levelUpThreshold }}题升级难度
+        <button mat-icon-button class="action-btn" (click)="onDelete()" title="删除">
+          <mat-icon>backspace</mat-icon>
+        </button>
       </div>
     </div>
   </div>
@@ -281,20 +283,19 @@
       <div class="setting-item difficulty-setting">
         <label>题型与难度顺序 (大升级)</label>
         <div class="setting-help">
-          拖拽调整顺序，勾选启用题型。当前共 {{ difficultyLevels.length }} 种题型（应为 39 种）。
+          点击两个题型互换顺序，勾选启用题型。当前共 {{ difficultyLevels.length }} 种题型（应为 39 种）。
+          @if (selectedForSwapId) {
+            <span class="swap-hint">已选中，再点击另一项互换</span>
+          }
         </div>
         <div class="difficulty-list">
           @for (level of difficultyLevels; track level.id) {
             <div
               class="difficulty-item"
-              [class.is-dragging]="draggedDifficultyId === level.id"
-              draggable="true"
-              (dragstart)="onDifficultyDragStart(level.id)"
-              (dragover)="onDifficultyDragOver($event)"
-              (drop)="onDifficultyDrop(level.id)"
-              (dragend)="onDifficultyDragEnd()"
+              [class.is-selected]="selectedForSwapId === level.id"
+              (click)="onDifficultySelect(level.id)"
             >
-              <mat-icon class="drag-handle">drag_indicator</mat-icon>
+              <mat-icon class="swap-handle">swap_vert</mat-icon>
               <div class="difficulty-info">
                 <div class="difficulty-name">
                   {{ level.label }}<span class="ops-count-badge">×{{ level.operationsCount }}</span>
@@ -313,12 +314,21 @@
       </div>
     </div>
 
-    <button
-      mat-raised-button
-      class="save-settings-btn"
-      (click)="updateSettings(); closeQuestionBank()"
-    >
-      保存题库
-    </button>
+    <div class="question-bank-actions">
+      <button
+        mat-raised-button
+        class="save-settings-btn"
+        (click)="updateSettings(); closeQuestionBank()"
+      >
+        保存
+      </button>
+      <button
+        mat-raised-button
+        class="cancel-settings-btn"
+        (click)="cancelQuestionBank()"
+      >
+        取消
+      </button>
+    </div>
   </aside>
 </div>

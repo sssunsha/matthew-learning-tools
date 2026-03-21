@@ -30,7 +30,7 @@ export class Grade3Term2LearnTextsComponent {
   currentMedia: { type: 'audio' | 'video' | null; url: string | null; title: string } = {
     type: null,
     url: null,
-    title: ''
+    title: '',
   };
   activeTab: 'pdf' | 'media' = 'pdf';
   menuOpen = false;
@@ -51,7 +51,8 @@ export class Grade3Term2LearnTextsComponent {
   }
 
   constructor(private router: Router) {
-    this.pdfPath = '/assets/resources/categories/english/grade-3-2/小学英语外研版（三起）（孙有中）（2024）三年级下册 电子课本.pdf';
+    this.pdfPath =
+      '/assets/resources/categories/english/grade-3-2/小学英语外研版（三起）（孙有中）（2024）三年级下册 电子课本.pdf';
     this.initializeUnits();
   }
 
@@ -63,80 +64,229 @@ export class Grade3Term2LearnTextsComponent {
         name: 'Unit 1 Animal friends',
         expanded: false,
         items: [
-          { title: '单词音频', type: 'audio', url: `${basePath}/单词音频/Unit 1 单词.mp3` },
-          { title: 'Start up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 1 Animal friends/Start up-1.mp3` },
-          { title: 'Start up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 1 Animal friends/Start up-1.mp4` },
-          { title: 'Speed up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 1 Animal friends/Speed up-1.mp3` },
-          { title: 'Speed up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 1 Animal friends/Speed up-1.mp4` },
-          { title: 'Fuel up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 1 Animal friends/Fuel up-1.mp3` },
-          { title: 'Fuel up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 1 Animal friends/Fuel up-1.mp4` },
-        ]
+          { title: '单词音频', type: 'audio', url: `${basePath}/word_audio/unit_1_words.mp3` },
+          {
+            title: '知识清单',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_1_animal_friends/knowledge_list.m4a`,
+          },
+          {
+            title: 'Start up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_1_animal_friends/start_up_1.mp3`,
+          },
+          {
+            title: 'Start up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_1_animal_friends/start_up_1.mp4`,
+          },
+          {
+            title: 'Speed up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_1_animal_friends/speed_up_1.mp3`,
+          },
+          {
+            title: 'Speed up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_1_animal_friends/speed_up_1.mp4`,
+          },
+          {
+            title: 'Fuel up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_1_animal_friends/fuel_up_1.mp3`,
+          },
+          {
+            title: 'Fuel up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_1_animal_friends/fuel_up_1.mp4`,
+          },
+        ],
       },
       {
         name: 'Unit 2 Know your body',
         expanded: false,
         items: [
-          { title: '单词音频', type: 'audio', url: `${basePath}/单词音频/Unit 2 单词.mp3` },
-          { title: 'Start up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 2 Know your body/Start up-1.mp3` },
-          { title: 'Start up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 2 Know your body/Start up-1.mp4` },
-          { title: 'Speed up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 2 Know your body/Speed up-1.mp3` },
-          { title: 'Speed up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 2 Know your body/Speed up-1.mp4` },
-          { title: 'Fuel up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 2 Know your body/Fuel up-1.mp3` },
-          { title: 'Fuel up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 2 Know your body/Fuel up-1.mp4` },
-        ]
+          { title: '单词音频', type: 'audio', url: `${basePath}/word_audio/unit_2_words.mp3` },
+          {
+            title: 'Start up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_2_know_your_body/start_up_2.mp3`,
+          },
+          {
+            title: 'Start up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_2_know_your_body/start_up_2.mp4`,
+          },
+          {
+            title: 'Speed up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_2_know_your_body/speed_up_2.mp3`,
+          },
+          {
+            title: 'Speed up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_2_know_your_body/speed_up_2.mp4`,
+          },
+          {
+            title: 'Fuel up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_2_know_your_body/fuel_up_2.mp3`,
+          },
+          {
+            title: 'Fuel up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_2_know_your_body/fuel_up_2.mp4`,
+          },
+        ],
       },
       {
         name: 'Unit 3 Yummy food',
         expanded: false,
         items: [
-          { title: '单词音频', type: 'audio', url: `${basePath}/单词音频/Unit 3 单词.mp3` },
-          { title: 'Start up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 3 Yummy food/Start up-1.mp3` },
-          { title: 'Start up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 3 Yummy food/Start up-1.mp4` },
-          { title: 'Speed up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 3 Yummy food/Speed up-1.mp3` },
-          { title: 'Speed up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 3 Yummy food/Speed up-1.mp4` },
-          { title: 'Fuel up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 3 Yummy food/Fuel up-1.mp3` },
-          { title: 'Fuel up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 3 Yummy food/Fuel up-1.mp4` },
-        ]
+          { title: '单词音频', type: 'audio', url: `${basePath}/word_audio/unit_3_words.mp3` },
+          {
+            title: 'Start up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_3_yummy_food/start_up_3.mp3`,
+          },
+          {
+            title: 'Start up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_3_yummy_food/start_up_3.mp4`,
+          },
+          {
+            title: 'Speed up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_3_yummy_food/speed_up_3.mp3`,
+          },
+          {
+            title: 'Speed up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_3_yummy_food/speed_up_3.mp4`,
+          },
+          {
+            title: 'Fuel up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_3_yummy_food/fuel_up_3.mp3`,
+          },
+          {
+            title: 'Fuel up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_3_yummy_food/fuel_up_3.mp4`,
+          },
+        ],
       },
       {
-        name: 'Unit 4 What\'s your hobby',
+        name: "Unit 4 What's your hobby",
         expanded: false,
         items: [
-          { title: '单词音频', type: 'audio', url: `${basePath}/单词音频/Unit 4 单词.mp3` },
-          { title: 'Start up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 4 What's your hobby/Start up-1.mp3` },
-          { title: 'Start up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 4 What's your hobby/Start up-1.mp4` },
-          { title: 'Speed up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 4 What's your hobby/Speed up-1.mp3` },
-          { title: 'Speed up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 4 What's your hobby/Speed up-1.mp4` },
-          { title: 'Fuel up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 4 What's your hobby/Fuel up-1.mp3` },
-          { title: 'Fuel up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 4 What's your hobby/Fuel up-1.mp4` },
-        ]
+          { title: '单词音频', type: 'audio', url: `${basePath}/word_audio/unit_4_words.mp3` },
+          {
+            title: 'Start up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_4_whats_your_hobby/start_up_1.mp3`,
+          },
+          {
+            title: 'Start up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_4_whats_your_hobby/start_up_4.mp4`,
+          },
+          {
+            title: 'Speed up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_4_whats_your_hobby/speed_up_4.mp3`,
+          },
+          {
+            title: 'Speed up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_4_whats_your_hobby/speed_up_4.mp4`,
+          },
+          {
+            title: 'Fuel up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_4_whats_your_hobby/fuel_up_4.mp3`,
+          },
+          {
+            title: 'Fuel up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_4_whats_your_hobby/fuel_up_4.mp4`,
+          },
+        ],
       },
       {
         name: 'Unit 5 What time is it',
         expanded: false,
         items: [
-          { title: '单词音频', type: 'audio', url: `${basePath}/单词音频/Unit 5 单词.mp3` },
-          { title: 'Start up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 5 What time is it/Start up-1.mp3` },
-          { title: 'Start up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 5 What time is it/Start up-1.mp4` },
-          { title: 'Speed up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 5 What time is it/Speed up-1.mp3` },
-          { title: 'Speed up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 5 What time is it/Speed up-1.mp4` },
-          { title: 'Fuel up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 5 What time is it/Fuel up-1.mp3` },
-          { title: 'Fuel up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 5 What time is it/Fuel up-1.mp4` },
-        ]
+          { title: '单词音频', type: 'audio', url: `${basePath}/word_audio/unit_5_words.mp3` },
+          {
+            title: 'Start up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_5_what_time_is_it/start_up_5.mp3`,
+          },
+          {
+            title: 'Start up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_5_what_time_is_it/start_up_5.mp4`,
+          },
+          {
+            title: 'Speed up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_5_what_time_is_it/speed_up_5.mp3`,
+          },
+          {
+            title: 'Speed up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_5_what_time_is_it/speed_up_5.mp4`,
+          },
+          {
+            title: 'Fuel up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_5_what_time_is_it/fuel_up_5.mp3`,
+          },
+          {
+            title: 'Fuel up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_5_what_time_is_it/fuel_up_5.mp4`,
+          },
+        ],
       },
       {
         name: 'Unit 6 A great week',
         expanded: false,
         items: [
-          { title: '单词音频', type: 'audio', url: `${basePath}/单词音频/Unit 6 单词.mp3` },
-          { title: 'Start up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 6 A great week/Start up-1.mp3` },
-          { title: 'Start up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 6 A great week/Start up-1.mp4` },
-          { title: 'Speed up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 6 A great week/Speed up-1.mp3` },
-          { title: 'Speed up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 6 A great week/Speed up-1.mp4` },
-          { title: 'Fuel up - 音频', type: 'audio', url: `${basePath}/课文音频/Unit 6 A great week/Fuel up-1.mp3` },
-          { title: 'Fuel up - 视频', type: 'video', url: `${basePath}/课文视频/Unit 6 A great week/Fuel up-1.mp4` },
-        ]
-      }
+          { title: '单词音频', type: 'audio', url: `${basePath}/word_audio/unit_6_words.mp3` },
+          {
+            title: 'Start up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_6_a_great_week/start_up_6.mp3`,
+          },
+          {
+            title: 'Start up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_6_a_great_week/start_up_6.mp4`,
+          },
+          {
+            title: 'Speed up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_6_a_great_week/speed_up_6.mp3`,
+          },
+          {
+            title: 'Speed up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_6_a_great_week/speed_up_6.mp4`,
+          },
+          {
+            title: 'Fuel up - 音频',
+            type: 'audio',
+            url: `${basePath}/text_audio/unit_6_a_great_week/fuel_up_6.mp3`,
+          },
+          {
+            title: 'Fuel up - 视频',
+            type: 'video',
+            url: `${basePath}/text_video/unit_6_a_great_week/fuel_up_6.mp4`,
+          },
+        ],
+      },
     ];
   }
 
@@ -151,10 +301,13 @@ export class Grade3Term2LearnTextsComponent {
     this.menuOpen = false;
     // Trigger play after Angular updates the src binding
     setTimeout(() => {
-      const el = item.type === 'audio'
-        ? this.audioPlayerRef?.nativeElement
-        : this.videoPlayerRef?.nativeElement;
-      el?.play().catch(() => {/* autoplay blocked, user can press play manually */});
+      const el =
+        item.type === 'audio'
+          ? this.audioPlayerRef?.nativeElement
+          : this.videoPlayerRef?.nativeElement;
+      el?.play().catch(() => {
+        /* autoplay blocked, user can press play manually */
+      });
     }, 100);
   }
 

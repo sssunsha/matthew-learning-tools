@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  NgZone,
   OnDestroy,
   ViewChild,
 } from '@angular/core';
@@ -33,12 +34,14 @@ interface FallingQuestion {
   y: number;
   leftPercent: number;
   isHit: boolean;
+  bugIndex: number;
 }
 
 interface HitEffect {
   id: number;
   y: number;
   leftPercent: number;
+  operationClass: string;
 }
 
 interface GameSettings {
@@ -91,6 +94,9 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   showSettingsPanel = false;
   showQuestionBankPanel = false;
   draggedDifficultyId: string | null = null;
+  /** Id of the first-tapped item waiting for a second tap to swap with */
+  selectedForSwapId: string | null = null;
+  private difficultyLevelsSnapshot: { id: string; enabled: boolean }[] | null = null;
   cannonAngleDeg = -90;
   bulletVisible = false;
   bulletFlying = false;
@@ -98,10 +104,31 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   bulletY = 0;
   bulletRotationDeg = 0;
 
+  /** Indices used to render the fixed 12 shard pieces inside each hit effect. */
+  readonly shardIndices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
   readonly cannonAssetPath =
     'assets/resources/categories/math/quick-caculation-games/resources/cannon.svg';
   readonly bulletAssetPath =
     'assets/resources/categories/math/quick-caculation-games/resources/bullet.svg';
+
+  private readonly bugImagePaths: Record<number, string> = {
+    1: 'assets/resources/categories/math/quick-caculation-games/resources/bug1.png',
+    2: 'assets/resources/categories/math/quick-caculation-games/resources/bug2.webp',
+    3: 'assets/resources/categories/math/quick-caculation-games/resources/bug3.png',
+    4: 'assets/resources/categories/math/quick-caculation-games/resources/bug4.png',
+  };
+
+  getBugImagePath(bugIndex: number): string {
+    return this.bugImagePaths[bugIndex] ?? this.bugImagePaths[1];
+  }
+
+  private readonly shootSoundPath =
+    'assets/resources/categories/math/quick-caculation-games/resources/shoot.mp3';
+  private readonly hintSoundPath =
+    'assets/resources/categories/math/quick-caculation-games/resources/hint.mp3';
+  private readonly gameOverSoundPath =
+    'assets/resources/categories/math/quick-caculation-games/resources/game_over.mp3';
 
   readonly settings: GameSettings = {
     initialSpeed: 10,
@@ -119,24 +146,16 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   private nextQuestionId = 1;
   private nextEffectId = 1;
   private audioContext: AudioContext | null = null;
+  private shootAudioBuffer: AudioBuffer | null = null;
+  private hintAudioBuffer: AudioBuffer | null = null;
+  private gameOverAudioBuffer: AudioBuffer | null = null;
+  private soundsPreloaded = false;
   private activeShotQuestionId: number | null = null;
   private timeoutHandles: number[] = [];
-  private readonly pianoKeyFrequencies: Record<number, number> = {
-    1: 261.63,
-    2: 293.66,
-    3: 329.63,
-    4: 349.23,
-    5: 392.0,
-    6: 440.0,
-    7: 493.88,
-    8: 523.25,
-    9: 587.33,
-    0: 659.25,
-  };
-
   constructor(
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private ngZone: NgZone,
   ) {
     // Restore persisted settings from localStorage on construction.
     // Both web (browser) and Cordova/Android WebView support localStorage.
@@ -220,11 +239,16 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     this.isRunning = true;
     this.isGameOver = false;
     this.updateGameAreaSize();
-    this.lastFrameTime = performance.now();
     this.spawnQuestion();
-    this.lastSpawnTime = performance.now();
     this.ensureAudio();
-    this.animationId = requestAnimationFrame(this.gameLoop);
+    // Run the game loop outside Angular's Zone.js so that Zone does not
+    // trigger its own change-detection pass after every rAF callback.
+    // We call cdr.detectChanges() manually inside the loop instead.
+    this.ngZone.runOutsideAngular(() => {
+      this.lastFrameTime = performance.now();
+      this.lastSpawnTime = performance.now();
+      this.animationId = requestAnimationFrame(this.gameLoop);
+    });
   }
 
   pauseGame(): void {
@@ -245,10 +269,47 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   }
 
   openQuestionBank(): void {
+    // Save a snapshot so "取消" can revert changes
+    this.difficultyLevelsSnapshot = this.difficultyLevels.map((l) => ({
+      id: l.id,
+      enabled: l.enabled,
+    }));
+    this.selectedForSwapId = null;
     this.showQuestionBankPanel = true;
   }
 
   closeQuestionBank(): void {
+    this.selectedForSwapId = null;
+    this.showQuestionBankPanel = false;
+  }
+
+  cancelQuestionBank(): void {
+    // Revert to snapshot
+    if (this.difficultyLevelsSnapshot) {
+      const snapshotOrder = this.difficultyLevelsSnapshot.map((s) => s.id);
+      const levelMap = new Map(this.difficultyLevels.map((l) => [l.id, l]));
+      const restored: DifficultyLevel[] = [];
+      for (const id of snapshotOrder) {
+        const l = levelMap.get(id);
+        if (l) {
+          restored.push(l);
+          levelMap.delete(id);
+        }
+      }
+      for (const l of levelMap.values()) {
+        restored.push(l);
+      }
+      // Restore enabled flags
+      for (const snap of this.difficultyLevelsSnapshot) {
+        const found = restored.find((l) => l.id === snap.id);
+        if (found) {
+          found.enabled = snap.enabled;
+        }
+      }
+      this.difficultyLevels = restored;
+    }
+    this.difficultyLevelsSnapshot = null;
+    this.selectedForSwapId = null;
     this.showQuestionBankPanel = false;
   }
 
@@ -280,44 +341,42 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     return operations.map((operation) => (operation === 'x' ? '×' : operation)).join(' ');
   }
 
-  onDifficultyDragStart(levelId: string): void {
-    this.draggedDifficultyId = levelId;
-  }
-
-  onDifficultyDragOver(event: DragEvent): void {
-    event.preventDefault();
-  }
-
-  onDifficultyDrop(targetId: string): void {
-    if (!this.draggedDifficultyId || this.draggedDifficultyId === targetId) {
+  /**
+   * Tap-to-swap ordering: first tap selects an item, second tap on a different
+   * item swaps them. Tapping the same item again deselects it.
+   */
+  onDifficultySelect(levelId: string): void {
+    if (!this.selectedForSwapId) {
+      // First tap — select this item
+      this.selectedForSwapId = levelId;
       return;
     }
 
-    const currentLevels = [...this.difficultyLevels];
-    const fromIndex = currentLevels.findIndex((level) => level.id === this.draggedDifficultyId);
-    const toIndex = currentLevels.findIndex((level) => level.id === targetId);
-    if (fromIndex < 0 || toIndex < 0) {
+    if (this.selectedForSwapId === levelId) {
+      // Tapped the same item again — deselect
+      this.selectedForSwapId = null;
       return;
     }
 
-    const activeBefore = this.getActiveDifficultyLevels();
-    const currentLevelId = activeBefore[this.levelIndex]?.id ?? null;
-    const [moved] = currentLevels.splice(fromIndex, 1);
-    currentLevels.splice(toIndex, 0, moved);
-    this.difficultyLevels = currentLevels;
+    // Second tap on a different item — swap the two
+    const levels = [...this.difficultyLevels];
+    const fromIndex = levels.findIndex((l) => l.id === this.selectedForSwapId);
+    const toIndex = levels.findIndex((l) => l.id === levelId);
 
-    const activeAfter = this.getActiveDifficultyLevels();
-    const newIndex = activeAfter.findIndex((level) => level.id === currentLevelId);
-    this.levelIndex = newIndex >= 0 ? newIndex : 0;
-    this.draggedDifficultyId = null;
+    if (fromIndex >= 0 && toIndex >= 0) {
+      const activeBefore = this.getActiveDifficultyLevels();
+      const currentLevelId = activeBefore[this.levelIndex]?.id ?? null;
 
-    // Save drag-reordered state immediately so it persists without requiring
-    // the user to press the save button.
-    this.saveDifficultyLevelsToStorage();
-  }
+      // Swap the two items
+      [levels[fromIndex], levels[toIndex]] = [levels[toIndex], levels[fromIndex]];
+      this.difficultyLevels = levels;
 
-  onDifficultyDragEnd(): void {
-    this.draggedDifficultyId = null;
+      const activeAfter = this.getActiveDifficultyLevels();
+      const newIndex = activeAfter.findIndex((l) => l.id === currentLevelId);
+      this.levelIndex = newIndex >= 0 ? newIndex : 0;
+    }
+
+    this.selectedForSwapId = null;
   }
 
   getOperationClass(question: FallingQuestion): string {
@@ -354,8 +413,6 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     if (this.isGameOver) {
       return;
     }
-    this.ensureAudio();
-    this.playKeySound(digit);
     if (this.currentAnswer.length >= 6) {
       return;
     }
@@ -366,8 +423,6 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     if (this.isGameOver) {
       return;
     }
-    this.ensureAudio();
-    this.playDeleteSound();
     this.currentAnswer = this.currentAnswer.slice(0, -1);
   }
 
@@ -375,8 +430,6 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     if (this.isGameOver) {
       return;
     }
-    this.ensureAudio();
-    this.playClearSound();
     this.currentAnswer = '';
   }
 
@@ -458,10 +511,12 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
 
   private resumeGame(): void {
     this.isRunning = true;
-    this.lastFrameTime = performance.now();
-    this.lastSpawnTime = performance.now();
     this.ensureAudio();
-    this.animationId = requestAnimationFrame(this.gameLoop);
+    this.ngZone.runOutsideAngular(() => {
+      this.lastFrameTime = performance.now();
+      this.lastSpawnTime = performance.now();
+      this.animationId = requestAnimationFrame(this.gameLoop);
+    });
   }
 
   private gameLoop = (time: number) => {
@@ -537,6 +592,7 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
       y: -20,
       leftPercent: this.randomBetween(8, 82),
       isHit: false,
+      bugIndex: this.randomInt(1, 4),
     });
   }
 
@@ -1007,16 +1063,15 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
       id: this.nextEffectId++,
       y: question.y,
       leftPercent: question.leftPercent,
+      operationClass: this.getOperationClass(question),
     };
     this.hitEffects = [...this.hitEffects, effect];
     setTimeout(() => {
       this.hitEffects = this.hitEffects.filter((item) => item.id !== effect.id);
-    }, 450);
+    }, 1600);
   }
 
   private triggerInputError(): void {
-    this.ensureAudio();
-    this.playErrorSound();
     this.currentAnswer = '';
     this.inputError = true;
     setTimeout(() => {
@@ -1040,241 +1095,70 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
       return;
     }
     this.audioContext = new AudioContextClass();
+    this.preloadGameSounds();
   }
 
-  private playTone(
-    frequency: number,
-    duration: number,
-    type: OscillatorType,
-    volume: number,
-  ): void {
+  private preloadGameSounds(): void {
+    if (this.soundsPreloaded || !this.audioContext) {
+      return;
+    }
+    this.soundsPreloaded = true;
+    this.loadAudioBuffer(this.shootSoundPath).then((buf) => {
+      this.shootAudioBuffer = buf;
+    });
+    this.loadAudioBuffer(this.hintSoundPath).then((buf) => {
+      this.hintAudioBuffer = buf;
+    });
+    this.loadAudioBuffer(this.gameOverSoundPath).then((buf) => {
+      this.gameOverAudioBuffer = buf;
+    });
+  }
+
+  private async loadAudioBuffer(url: string): Promise<AudioBuffer | null> {
+    if (!this.audioContext) {
+      return null;
+    }
+    try {
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      return await this.audioContext.decodeAudioData(arrayBuffer);
+    } catch {
+      return null;
+    }
+  }
+
+  private playBufferSound(buffer: AudioBuffer): void {
     if (!this.audioContext) {
       return;
     }
-
     if (this.audioContext.state === 'suspended') {
       this.audioContext.resume();
     }
-
-    const oscillator = this.audioContext.createOscillator();
-    const gain = this.audioContext.createGain();
-    oscillator.type = type;
-    oscillator.frequency.value = frequency;
-    gain.gain.value = volume;
-    oscillator.connect(gain);
-    gain.connect(this.audioContext.destination);
-    oscillator.start();
-    gain.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + duration);
-    oscillator.stop(this.audioContext.currentTime + duration);
-  }
-
-  private playKeySound(digit: number): void {
-    const frequency = this.pianoKeyFrequencies[digit] ?? 440.0;
-    this.playTone(frequency, 0.12, 'sine', 0.06);
-  }
-
-  private playDeleteSound(): void {
-    this.playTone(160, 0.1, 'sawtooth', 0.05);
-  }
-
-  private playClearSound(): void {
-    this.playTone(120, 0.12, 'triangle', 0.05);
+    const source = this.audioContext.createBufferSource();
+    source.buffer = buffer;
+    source.connect(this.audioContext.destination);
+    source.start();
   }
 
   private playShootSound(): void {
-    if (!this.audioContext) {
-      return;
+    if (this.shootAudioBuffer) {
+      this.playBufferSound(this.shootAudioBuffer);
     }
-    const ctx = this.audioContext;
-    if (ctx.state === 'suspended') {
-      ctx.resume();
-    }
-    const now = ctx.currentTime;
-
-    // Sharp bandpass noise burst — the "crack" of a cannon
-    const noiseBurst = this.createWhiteNoiseSource(0.18);
-    if (noiseBurst) {
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'bandpass';
-      filter.frequency.value = 600;
-      filter.Q.value = 0.7;
-      const gain = ctx.createGain();
-      gain.gain.setValueAtTime(1.0, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
-      noiseBurst.connect(filter);
-      filter.connect(gain);
-      gain.connect(ctx.destination);
-      noiseBurst.start(now);
-      noiseBurst.stop(now + 0.18);
-    }
-
-    // Low-frequency "thump" — the physical kick of the cannon
-    const thump = ctx.createOscillator();
-    thump.type = 'sine';
-    thump.frequency.setValueAtTime(130, now);
-    thump.frequency.exponentialRampToValueAtTime(38, now + 0.1);
-    const thumpGain = ctx.createGain();
-    thumpGain.gain.setValueAtTime(0.55, now);
-    thumpGain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
-    thump.connect(thumpGain);
-    thumpGain.connect(ctx.destination);
-    thump.start(now);
-    thump.stop(now + 0.13);
-
-    // Brief high-frequency ring — the metallic ring of the barrel
-    const ring = ctx.createOscillator();
-    ring.type = 'sine';
-    ring.frequency.setValueAtTime(3200, now);
-    ring.frequency.exponentialRampToValueAtTime(1800, now + 0.06);
-    const ringGain = ctx.createGain();
-    ringGain.gain.setValueAtTime(0.07, now);
-    ringGain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
-    ring.connect(ringGain);
-    ringGain.connect(ctx.destination);
-    ring.start(now);
-    ring.stop(now + 0.07);
   }
 
   private playExplosionSound(): void {
-    if (!this.audioContext) {
-      return;
+    if (this.hintAudioBuffer) {
+      this.playBufferSound(this.hintAudioBuffer);
     }
-    const ctx = this.audioContext;
-    if (ctx.state === 'suspended') {
-      ctx.resume();
-    }
-    const now = ctx.currentTime;
-
-    // Wide noise burst — the body of the explosion
-    const noiseBurst = this.createWhiteNoiseSource(0.55);
-    if (noiseBurst) {
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(2400, now);
-      filter.frequency.exponentialRampToValueAtTime(180, now + 0.45);
-      const gain = ctx.createGain();
-      gain.gain.setValueAtTime(1.1, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
-      noiseBurst.connect(filter);
-      filter.connect(gain);
-      gain.connect(ctx.destination);
-      noiseBurst.start(now);
-      noiseBurst.stop(now + 0.55);
-    }
-
-    // Deep subsonic boom — the chest-punch of the explosion
-    const boom = ctx.createOscillator();
-    boom.type = 'sine';
-    boom.frequency.setValueAtTime(90, now);
-    boom.frequency.exponentialRampToValueAtTime(28, now + 0.35);
-    const boomGain = ctx.createGain();
-    boomGain.gain.setValueAtTime(0.75, now);
-    boomGain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
-    boom.connect(boomGain);
-    boomGain.connect(ctx.destination);
-    boom.start(now);
-    boom.stop(now + 0.4);
-
-    // Midrange distorted crunch — debris / shockwave crack
-    const crunch = ctx.createOscillator();
-    crunch.type = 'sawtooth';
-    crunch.frequency.setValueAtTime(240, now);
-    crunch.frequency.exponentialRampToValueAtTime(70, now + 0.2);
-    const crunchGain = ctx.createGain();
-    crunchGain.gain.setValueAtTime(0.28, now);
-    crunchGain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
-    crunch.connect(crunchGain);
-    crunchGain.connect(ctx.destination);
-    crunch.start(now);
-    crunch.stop(now + 0.22);
-
-    // Short high sparkle — bright flash pop at impact moment
-    const sparkle = ctx.createOscillator();
-    sparkle.type = 'sine';
-    sparkle.frequency.setValueAtTime(4000, now);
-    sparkle.frequency.exponentialRampToValueAtTime(1200, now + 0.05);
-    const sparkleGain = ctx.createGain();
-    sparkleGain.gain.setValueAtTime(0.1, now);
-    sparkleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
-    sparkle.connect(sparkleGain);
-    sparkleGain.connect(ctx.destination);
-    sparkle.start(now);
-    sparkle.stop(now + 0.07);
-  }
-
-  private playErrorSound(): void {
-    this.playTone(140, 0.2, 'square', 0.06);
   }
 
   private playFailSound(): void {
-    if (!this.audioContext) {
-      return;
-    }
-    const ctx = this.audioContext;
-    if (ctx.state === 'suspended') {
-      ctx.resume();
-    }
-
-    // Descending "wah-wah-wah-waaah" — the classic failure fanfare in G4→E4→C4→G3
-    const notes = [392, 330, 261, 196];
-    const durations = [0.22, 0.22, 0.22, 0.55];
-    let startTime = ctx.currentTime;
-
-    for (let i = 0; i < notes.length; i += 1) {
-      const osc = ctx.createOscillator();
-      osc.type = 'sawtooth';
-      osc.frequency.value = notes[i];
-
-      // Slight vibrato to give it a "sad trombone" feel on the last note
-      if (i === notes.length - 1) {
-        const vibrato = ctx.createOscillator();
-        vibrato.type = 'sine';
-        vibrato.frequency.value = 5;
-        const vibratoDepth = ctx.createGain();
-        vibratoDepth.gain.value = 6;
-        vibrato.connect(vibratoDepth);
-        vibratoDepth.connect(osc.frequency);
-        vibrato.start(startTime);
-        vibrato.stop(startTime + durations[i]);
-      }
-
-      const noteGain = ctx.createGain();
-      noteGain.gain.setValueAtTime(0, startTime);
-      noteGain.gain.linearRampToValueAtTime(0.16, startTime + 0.018);
-      noteGain.gain.setValueAtTime(0.16, startTime + durations[i] - 0.04);
-      noteGain.gain.exponentialRampToValueAtTime(0.001, startTime + durations[i]);
-
-      osc.connect(noteGain);
-      noteGain.connect(ctx.destination);
-      osc.start(startTime);
-      osc.stop(startTime + durations[i]);
-
-      startTime += durations[i] * 0.88;
+    if (this.gameOverAudioBuffer) {
+      this.playBufferSound(this.gameOverAudioBuffer);
     }
   }
 
   // ─── Utility helpers ──────────────────────────────────────────────────────
-
-  /**
-   * Creates an AudioBufferSourceNode filled with white noise of the given duration (seconds).
-   * Returns null when audioContext is unavailable.
-   */
-  private createWhiteNoiseSource(durationSeconds: number): AudioBufferSourceNode | null {
-    if (!this.audioContext) {
-      return null;
-    }
-    const ctx = this.audioContext;
-    const sampleRate = ctx.sampleRate;
-    const frameCount = Math.ceil(sampleRate * durationSeconds);
-    const buffer = ctx.createBuffer(1, frameCount, sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < frameCount; i += 1) {
-      data[i] = Math.random() * 2 - 1;
-    }
-    const source = ctx.createBufferSource();
-    source.buffer = buffer;
-    return source;
-  }
 
   private randomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;

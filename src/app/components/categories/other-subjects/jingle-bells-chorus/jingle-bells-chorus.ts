@@ -4,16 +4,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-sports-category',
+  selector: 'app-jingle-bells-chorus',
   standalone: true,
   imports: [MatIconModule, MatButtonModule],
-  templateUrl: './sports-category.html',
-  styleUrl: './sports-category.scss'
+  templateUrl: './jingle-bells-chorus.html',
+  styleUrl: './jingle-bells-chorus.scss'
 })
-export class SportsCategoryComponent {
+export class JingleBellsChorusComponent {
   constructor(private router: Router) {}
 
   goBack() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/category/other-subjects']);
   }
 }
