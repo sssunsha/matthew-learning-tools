@@ -15,6 +15,7 @@ import { EnglishAlphabetLearningComponent } from './components/categories/englis
 import { EnglishPhonicsLearningComponent } from './components/categories/english/basic-learning/phonics-learning/english-phonics-learning';
 import { EnglishTextbookLearningComponent } from './components/categories/english/textbook-learning/english-textbook-learning';
 import { EnglishLearnTextsComponent } from './components/categories/english/textbook-learning/learn-texts/english-learn-texts';
+import { Grade3Term2Component } from './components/categories/english/grade3-term2/grade3-term2';
 import { Grade3Term2TextbookComponent } from './components/categories/english/grade3-term2-textbook/grade3-term2-textbook';
 import { Grade3Term2LearnTextsComponent } from './components/categories/english/grade3-term2-textbook/learn-texts/grade3-term2-learn-texts';
 import { Grade3Term2KnowledgeListComponent } from './components/categories/english/grade3-term2-knowledge-list/grade3-term2-knowledge-list';
@@ -87,9 +88,25 @@ export const routes: Routes = [
     title: '学课文 - Learn Texts',
   },
   {
+    path: 'category/english/grade3-term2',
+    component: Grade3Term2Component,
+    title: '三年级下 - Grade 3 Term 2',
+  },
+  {
+    path: 'category/english/grade3-term2/learn-texts',
+    component: Grade3Term2LearnTextsComponent,
+    title: '学课文 - Grade 3 Term 2',
+  },
+  {
+    path: 'category/english/grade3-term2/knowledge-list',
+    component: Grade3Term2KnowledgeListComponent,
+    title: '知识清单 - Grade 3 Term 2 Knowledge List',
+  },
+  // Legacy routes for backward compatibility
+  {
     path: 'category/english/grade3-term2-textbook',
-    component: Grade3Term2TextbookComponent,
-    title: '三年级下课本 - Grade 3 Term 2 Textbook',
+    redirectTo: 'category/english/grade3-term2',
+    pathMatch: 'full',
   },
   {
     path: 'category/english/grade3-term2-textbook/learn-texts',
@@ -98,8 +115,8 @@ export const routes: Routes = [
   },
   {
     path: 'category/english/grade3-term2-knowledge-list',
-    component: Grade3Term2KnowledgeListComponent,
-    title: '三年级下知识清单 - Grade 3 Term 2 Knowledge List',
+    redirectTo: 'category/english/grade3-term2/knowledge-list',
+    pathMatch: 'full',
   },
   {
     path: 'category/math',

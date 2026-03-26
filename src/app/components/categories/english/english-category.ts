@@ -29,12 +29,8 @@ export class EnglishCategoryComponent {
     this.router.navigate(['/vocabulary']);
   }
 
-  openGrade3Term2Textbook() {
-    this.router.navigate(['/category/english/grade3-term2-textbook']);
-  }
-
-  openGrade3Term2KnowledgeList() {
-    this.router.navigate(['/category/english/grade3-term2-knowledge-list']);
+  openGrade3Term2() {
+    this.router.navigate(['/category/english/grade3-term2']);
   }
 
   async openCamera(): Promise<void> {

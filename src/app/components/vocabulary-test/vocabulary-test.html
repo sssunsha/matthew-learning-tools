@@ -173,11 +173,11 @@
     <!-- 听写模式 -->
     <div class="dictation-card" *ngIf="testMode === 'dictation'">
       <div class="dictation-header">
-        <button mat-icon-button (click)="playDictation()" [disabled]="isPlaying" class="headphones-btn">
+        <button mat-icon-button (click)="playDictation()" [disabled]="isPlaying" class="headphones-btn play-audio-btn">
           <mat-icon class="headphones-icon">headphones</mat-icon>
         </button>
-        <p class="dictation-instruction">{{ isPlaying ? '正在播放单词...' : '请根据听到的单词拼写' }}</p>
-        <button mat-icon-button (click)="playDictation()" [disabled]="isPlaying">
+        <p class="dictation-instruction">{{ isPlaying ? '正在播放单词...' : (needsUserInteraction ? '👆 点击耳机图标播放' : '请根据听到的单词拼写') }}</p>
+        <button mat-icon-button (click)="playDictation()" [disabled]="isPlaying" class="replay-audio-btn">
           <mat-icon>replay</mat-icon>
         </button>
       </div>

@@ -1,0 +1,13 @@
+# Cline Rules for matthew-learning-tools
+
+## Communication Language / 沟通语言规则
+
+- When communicating with the user during conversation, always output explanations and analysis in **both Chinese and English (bilingual)**.
+- 在与用户沟通交流过程中，介绍和分析内容请使用**中英双语**输出。
+
+## Code Comments and Documentation Language / 代码注释和文档语言规则
+
+- All code comments in the project must be written in **English only**.
+- All documentation files in the project must be written in **English only**.
+- 项目工程中所有的代码注释必须**只使用英文**。
+- 项目工程中所有的文档必须**只使用英文**。

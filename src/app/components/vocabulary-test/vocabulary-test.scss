@@ -529,7 +529,8 @@
       gap: 15px;
       margin-bottom: 30px;
 
-      .headphones-btn {
+      .headphones-btn,
+      .play-audio-btn {
         background: transparent;
         width: 48px;
         height: 48px;
@@ -556,14 +557,30 @@
           cursor: not-allowed;
         }
       }
+      
+      // 增大点击区域，方便移动端用户
+      .play-audio-btn,
+      .replay-audio-btn {
+        min-width: 56px;
+        min-height: 56px;
+        border-radius: 50%;
+        
+        &:active {
+          transform: scale(0.95);
+          background: rgba(129, 199, 132, 0.3);
+        }
+      }
 
       .dictation-instruction {
         font-size: 1.2em;
         color: #666;
         margin: 0;
+        text-align: center;
+        flex: 1;
+        max-width: 300px;
       }
 
-      button:not(.headphones-btn) {
+      button:not(.headphones-btn):not(.play-audio-btn) {
         background: rgba(129, 199, 132, 0.1);
 
         &:hover:not(:disabled) {
@@ -729,14 +746,28 @@
             gap: 5px;
             font-size: 1em;
 
-            &.backspace-btn {
-              background: #fff3e0;
-              border: 2px solid #ff9800;
+          &.backspace-btn {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            color: #e65100;
 
-              &:hover {
-                background: #ffe0b2;
+            mat-icon {
+              color: #e65100;
+            }
+
+            &:hover {
+              background: #ffe0b2;
+              color: #bf360c;
+              
+              mat-icon {
+                color: #bf360c;
               }
             }
+            
+            &:active {
+              background: #ffcc80;
+            }
+          }
 
             &.submit-btn {
               min-width: 120px;

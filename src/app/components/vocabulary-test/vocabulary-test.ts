@@ -84,6 +84,8 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
   // 听写模式相关
   userInput: string = '';
   isPlaying: boolean = false;
+  audioInitialized: boolean = false;
+  needsUserInteraction: boolean = false;
   keyboardLayout: string[][] = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
     ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
@@ -119,6 +121,39 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
       this.loadLastTestMode();
       this.loadVocabulary();
     });
+    
+    // Check if device needs user interaction for audio (mobile/tablet)
+    this.checkAudioSupport();
+  }
+  
+  // Check audio support and initialize speech synthesis
+  checkAudioSupport() {
+    if ('speechSynthesis' in window) {
+      // On Android/mobile, speechSynthesis often requires user interaction
+      // We'll set a flag to show a "tap to play" prompt
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      this.needsUserInteraction = isMobile && !this.audioInitialized;
+    }
+  }
+  
+  // Initialize audio with user interaction (for Android/mobile)
+  initializeAudio() {
+    if ('speechSynthesis' in window) {
+      // Speak an empty utterance to initialize
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance('');
+      utterance.volume = 0;
+      utterance.onend = () => {
+        this.audioInitialized = true;
+        this.needsUserInteraction = false;
+      };
+      utterance.onerror = () => {
+        // Even if error, mark as initialized to avoid blocking
+        this.audioInitialized = true;
+        this.needsUserInteraction = false;
+      };
+      window.speechSynthesis.speak(utterance);
+    }
   }
 
   ngOnDestroy() {
@@ -439,9 +474,13 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
   // 播放听写
   playDictation() {
     if (!this.currentWord || !('speechSynthesis' in window)) {
+      this.needsUserInteraction = true;
       return;
     }
 
+    // Mark audio as initialized since this is triggered by user interaction or auto-play
+    this.audioInitialized = true;
+    this.needsUserInteraction = false;
     this.isPlaying = true;
     let playCount = 0;
 
@@ -452,22 +491,53 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
       }
 
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(this.currentWord!.word);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.7;
-      utterance.pitch = 1;
-      utterance.volume = 1;
+      
+      // Wait for voices to be loaded (important for Android)
+      const speak = () => {
+        const utterance = new SpeechSynthesisUtterance(this.currentWord!.word);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.7;
+        utterance.pitch = 1;
+        utterance.volume = 1;
 
-      utterance.onend = () => {
-        playCount++;
-        if (playCount < 3) {
-          setTimeout(playWord, 2000); // 2秒后播放下一遍
-        } else {
-          this.isPlaying = false;
+        // Try to get English voice
+        const voices = window.speechSynthesis.getVoices();
+        const englishVoice = voices.find(v => v.lang.startsWith('en'));
+        if (englishVoice) {
+          utterance.voice = englishVoice;
         }
+
+        utterance.onend = () => {
+          playCount++;
+          if (playCount < 3) {
+            setTimeout(playWord, 2000); // 2秒后播放下一遍
+          } else {
+            this.isPlaying = false;
+          }
+        };
+
+        utterance.onerror = (event) => {
+          console.error('Speech synthesis error:', event);
+          this.isPlaying = false;
+          // On error, might need user interaction
+          if (event.error === 'not-allowed') {
+            this.needsUserInteraction = true;
+          }
+        };
+
+        window.speechSynthesis.speak(utterance);
       };
 
-      window.speechSynthesis.speak(utterance);
+      // Check if voices are loaded
+      if (window.speechSynthesis.getVoices().length === 0) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          speak();
+        };
+        // Fallback timeout in case onvoiceschanged doesn't fire
+        setTimeout(speak, 100);
+      } else {
+        speak();
+      }
     };
 
     playWord();
@@ -825,16 +895,43 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
   // 朗读单词
   speakWord(text: string) {
     if ('speechSynthesis' in window) {
+      // Mark as initialized since user clicked
+      this.audioInitialized = true;
+      this.needsUserInteraction = false;
+      
       // 停止当前正在播放的语音
       window.speechSynthesis.cancel();
 
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US'; // 设置为英语
-      utterance.rate = 0.8; // 语速稍慢，便于学习
-      utterance.pitch = 1; // 音调
-      utterance.volume = 1; // 音量
+      const speak = () => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US'; // 设置为英语
+        utterance.rate = 0.8; // 语速稍慢，便于学习
+        utterance.pitch = 1; // 音调
+        utterance.volume = 1; // 音量
 
-      window.speechSynthesis.speak(utterance);
+        // Try to get English voice for Android
+        const voices = window.speechSynthesis.getVoices();
+        const englishVoice = voices.find(v => v.lang.startsWith('en'));
+        if (englishVoice) {
+          utterance.voice = englishVoice;
+        }
+
+        utterance.onerror = (event) => {
+          console.error('Speech synthesis error:', event);
+        };
+
+        window.speechSynthesis.speak(utterance);
+      };
+
+      // Check if voices are loaded (important for Android)
+      if (window.speechSynthesis.getVoices().length === 0) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          speak();
+        };
+        setTimeout(speak, 100);
+      } else {
+        speak();
+      }
     } else {
       console.warn('浏览器不支持语音合成');
     }
@@ -843,16 +940,43 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
   // 朗读句子
   speakSentence(text: string) {
     if ('speechSynthesis' in window) {
+      // Mark as initialized since user clicked
+      this.audioInitialized = true;
+      this.needsUserInteraction = false;
+      
       // 停止当前正在播放的语音
       window.speechSynthesis.cancel();
 
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US'; // 设置为英语
-      utterance.rate = 0.7; // 句子语速更慢
-      utterance.pitch = 1; // 音调
-      utterance.volume = 1; // 音量
+      const speak = () => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US'; // 设置为英语
+        utterance.rate = 0.7; // 句子语速更慢
+        utterance.pitch = 1; // 音调
+        utterance.volume = 1; // 音量
 
-      window.speechSynthesis.speak(utterance);
+        // Try to get English voice for Android
+        const voices = window.speechSynthesis.getVoices();
+        const englishVoice = voices.find(v => v.lang.startsWith('en'));
+        if (englishVoice) {
+          utterance.voice = englishVoice;
+        }
+
+        utterance.onerror = (event) => {
+          console.error('Speech synthesis error:', event);
+        };
+
+        window.speechSynthesis.speak(utterance);
+      };
+
+      // Check if voices are loaded (important for Android)
+      if (window.speechSynthesis.getVoices().length === 0) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          speak();
+        };
+        setTimeout(speak, 100);
+      } else {
+        speak();
+      }
     } else {
       console.warn('浏览器不支持语音合成');
     }

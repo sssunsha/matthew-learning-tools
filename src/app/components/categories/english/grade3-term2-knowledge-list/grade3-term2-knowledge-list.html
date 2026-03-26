@@ -1,13 +1,114 @@
-<div class="category-container english-theme">
-  <div class="category-header">
+<div class="page-container english-theme">
+
+  <!-- ── Header ── -->
+  <div class="page-header">
     <button mat-icon-button class="back-btn" (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <h1 class="category-title">三年级下知识清单</h1>
-    <p class="category-subtitle">Grade 3 Term 2 Knowledge List</p>
+    <div class="header-title">
+      <span class="title-main">知识清单</span>
+      <span class="title-sub">Knowledge List - Grade 3 Term 2</span>
+    </div>
+
+    <!-- 音频 menu button -->
+    <button mat-button class="menu-btn" (click)="toggleMenu()">
+      <mat-icon>headphones</mat-icon>
+      <span>音频</span>
+      <mat-icon class="arrow-icon">{{ menuOpen ? 'expand_less' : 'expand_more' }}</mat-icon>
+    </button>
   </div>
 
-  <div class="pdf-container">
-    <app-pdf-viewer [pdfUrl]="pdfUrl"></app-pdf-viewer>
+  <!-- ── Units dropdown overlay ── -->
+  <div class="menu-backdrop" *ngIf="menuOpen" (click)="closeMenu()"></div>
+  <div class="units-dropdown" [class.open]="menuOpen">
+    <div class="units-list">
+      <div class="dropdown-title">
+        <mat-icon>queue_music</mat-icon>
+        <span>选择单元音频</span>
+      </div>
+      <div 
+        *ngFor="let item of audioItems" 
+        class="audio-item"
+        [class.playing]="currentAudio.unitNumber === item.unitNumber"
+        [class.unavailable]="!item.available"
+        (click)="playAudio(item)">
+        <mat-icon class="unit-icon">{{ item.available ? 'music_note' : 'music_off' }}</mat-icon>
+        <div class="unit-info">
+          <span class="unit-name">{{ item.unitName }}</span>
+          <span class="unit-status" *ngIf="!item.available">即将上线</span>
+        </div>
+        <mat-icon class="playing-icon" *ngIf="currentAudio.unitNumber === item.unitNumber">volume_up</mat-icon>
+      </div>
+    </div>
   </div>
+
+  <!-- ── Tab bar ── -->
+  <div class="tab-bar">
+    <div class="tab-btn" [class.active]="activeTab === 'pdf'" (click)="switchTab('pdf')">
+      <mat-icon>picture_as_pdf</mat-icon>
+      <span>知识清单</span>
+    </div>
+    <div class="tab-btn" [class.active]="activeTab === 'audio'" (click)="switchTab('audio')">
+      <mat-icon>headphones</mat-icon>
+      <span>音频播放</span>
+      <span class="playing-badge" *ngIf="currentAudio.url && activeTab === 'pdf'">●</span>
+    </div>
+  </div>
+
+  <!-- ── Content (both panes always in DOM for background playback) ── -->
+  <div class="content-area">
+
+    <!-- PDF pane -->
+    <div class="pane" [hidden]="activeTab !== 'pdf'">
+      <app-pdf-viewer [pdfUrl]="pdfUrl"></app-pdf-viewer>
+    </div>
+
+    <!-- Audio pane (always in DOM for background playback) -->
+    <div class="pane" [hidden]="activeTab !== 'audio'">
+      <div class="audio-pane">
+        <!-- Now-playing info -->
+        <div class="now-playing-title" *ngIf="currentAudio.url">
+          <mat-icon>headphones</mat-icon>
+          <span>{{ currentAudioTitle }}</span>
+        </div>
+
+        <!-- Audio player (always in DOM) -->
+        <div class="audio-wrapper" *ngIf="currentAudio.url">
+          <audio
+            #audioPlayer
+            [src]="audioSrc"
+            controls
+            class="audio-player"
+            preload="auto">
+          </audio>
+        </div>
+
+        <!-- Empty state -->
+        <div class="no-media" *ngIf="!currentAudio.url">
+          <mat-icon>headphones</mat-icon>
+          <p>点击右上角「音频」选择单元</p>
+          <div class="unit-buttons">
+            <button 
+              *ngFor="let item of audioItems"
+              mat-raised-button 
+              class="unit-btn"
+              [class.unavailable]="!item.available"
+              [disabled]="!item.available"
+              (click)="playAudio(item)">
+              <span class="unit-number">Unit {{ item.unitNumber }}</span>
+              <span class="unit-status" *ngIf="!item.available">即将上线</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Mini player bar (shown when audio plays while on PDF tab) ── -->
+  <div class="mini-player" *ngIf="currentAudio.url && activeTab === 'pdf'" (click)="switchTab('audio')">
+    <mat-icon class="mini-icon">headphones</mat-icon>
+    <span class="mini-title">{{ currentAudioTitle }} · 正在播放</span>
+    <mat-icon class="mini-chevron">chevron_right</mat-icon>
+  </div>
+
 </div>
