@@ -1,0 +1,345 @@
+// 算24点游戏样式
+
+.calc24-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+// ─── 顶栏 ────────────────────────────────────────────────────────────────────
+
+.game-header {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 54px;
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+  gap: 8px;
+
+  .back-btn { color: rgba(255,255,255,0.7); flex-shrink: 0; width: 36px; height: 36px;
+    &:hover { color: white; background: rgba(255,255,255,0.1); } }
+  .game-title { font-size: 17px; font-weight: 700; color: white; margin: 0; letter-spacing: 2px; flex-shrink: 0; }
+  .header-spacer { flex: 1; }
+}
+
+.ctrl-btn {
+  display: flex; align-items: center; gap: 4px;
+  padding: 5px 12px 5px 9px; border-radius: 18px; border: none;
+  cursor: pointer; font-size: 12px; font-weight: 600; flex-shrink: 0;
+  transition: all 0.2s; letter-spacing: 0.5px;
+  mat-icon { font-size: 17px; width: 17px; height: 17px; }
+}
+.start-btn {
+  background: linear-gradient(135deg, #43a047, #2e7d32); color: white;
+  box-shadow: 0 2px 8px rgba(67,160,71,0.4);
+  &:hover { transform: translateY(-1px); }
+}
+
+// ─── 难度选择器 ───────────────────────────────────────────────────────────────
+
+.level-selector { position: relative; flex-shrink: 0; }
+
+.level-trigger {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 10px 5px 8px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07);
+  color: white; cursor: pointer; font-size: 12px; font-weight: 500;
+  transition: background 0.2s; white-space: nowrap;
+  &:hover { background: rgba(255,255,255,0.14); }
+  .level-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .level-label { font-size: 12px; }
+  .trigger-arrow { font-size: 16px; width: 16px; height: 16px; color: rgba(255,255,255,0.5); transition: transform 0.2s; &.open { transform: rotate(180deg); } }
+}
+
+.level-backdrop { position: fixed; inset: 0; z-index: 200; }
+
+.level-dropdown {
+  position: absolute; top: calc(100% + 6px); left: 0; width: 220px;
+  max-height: 70vh; overflow-y: auto;
+  background: linear-gradient(160deg, #1e2f4a, #121e33);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6); z-index: 201; padding: 6px;
+  animation: dropdown-in 0.15s ease-out;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.15) transparent;
+}
+
+.level-option {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  padding: 7px 10px; border-radius: 9px; border: 1px solid transparent;
+  background: transparent; color: rgba(255,255,255,0.7); cursor: pointer; text-align: left; transition: all 0.15s;
+  &:hover { background: rgba(255,255,255,0.07); color: white; }
+  &.selected { background: color-mix(in srgb, var(--lv-color) 20%, transparent); border-color: color-mix(in srgb, var(--lv-color) 40%, transparent); color: white; }
+  .lv-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .lv-info { flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0;
+    .lv-name { font-size: 13px; font-weight: 600; }
+    .lv-desc { font-size: 10px; color: rgba(255,255,255,0.4); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } }
+  .lv-check { font-size: 15px; width: 15px; height: 15px; color: var(--lv-color); flex-shrink: 0; }
+}
+
+// ─── 进度条 ──────────────────────────────────────────────────────────────────
+
+.progress-bar-wrap {
+  padding: 6px 16px 4px; flex-shrink: 0;
+  .progress-info { display: flex; justify-content: space-between; margin-bottom: 4px;
+    .progress-label { font-size: 12px; color: rgba(255,255,255,0.5); }
+    .progress-count { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 600; } }
+  .progress-bar { height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;
+    .progress-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; } }
+}
+
+// ─── 待机页 ───────────────────────────────────────────────────────────────────
+
+.idle-screen { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.idle-content {
+  text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px;
+  .idle-icon { font-size: 64px; line-height: 1; }
+  .idle-title { font-size: 28px; font-weight: 800; color: white; margin: 0; letter-spacing: 3px; }
+  .idle-desc { font-size: 14px; color: rgba(255,255,255,0.55); margin: 0; max-width: 300px; line-height: 1.7; }
+  .idle-level-info { display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 20px;
+    .level-dot-big { width: 12px; height: 12px; border-radius: 50%; } }
+}
+.big-start-btn {
+  display: flex; align-items: center; gap: 6px; padding: 12px 28px; border-radius: 24px; border: none;
+  background: linear-gradient(135deg, #43a047, #2e7d32); color: white; font-size: 16px; font-weight: 700;
+  cursor: pointer; box-shadow: 0 4px 20px rgba(67,160,71,0.45); transition: all 0.2s; letter-spacing: 1px;
+  mat-icon { font-size: 20px; width: 20px; height: 20px; }
+  &:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(67,160,71,0.55); }
+}
+
+// ─── 游戏主区 ─────────────────────────────────────────────────────────────────
+
+.game-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+// ─── 步骤提示 ─────────────────────────────────────────────────────────────────
+
+.step-hint {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 20px; border-radius: 20px;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 500;
+  min-height: 38px;
+  mat-icon { font-size: 18px; width: 18px; height: 18px; flex-shrink: 0; }
+
+  &.hint-correct {
+    background: rgba(76,175,80,0.15); border-color: rgba(76,175,80,0.35);
+    color: #81c784; animation: pop-in 0.3s ease-out;
+  }
+  &.hint-wrong {
+    background: rgba(244,67,54,0.12); border-color: rgba(244,67,54,0.3);
+    color: #ef9a9a;
+  }
+}
+
+// ─── 数字牌 ──────────────────────────────────────────────────────────────────
+
+.cards-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.num-card {
+  width: 90px;
+  height: 90px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.92);
+  display: flex; align-items: center; justify-content: center;
+  border: 3px solid rgba(255,255,255,0.4);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.25);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s, background 0.15s;
+  user-select: none;
+  position: relative;
+
+  .num-card-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1a1a2e;
+    line-height: 1;
+    font-family: 'Segoe UI', 'PingFang SC', sans-serif;
+  }
+
+  &.card-clickable { cursor: pointer; }
+
+  &.card-clickable:hover:not(.card-selected) {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+    border-color: rgba(255,255,255,0.8);
+  }
+
+  &.card-selected {
+    background: #e3f2fd;
+    border-color: #1976d2;
+    box-shadow: 0 0 0 4px rgba(25,118,210,0.35), 0 6px 20px rgba(0,0,0,0.4);
+    transform: translateY(-4px) scale(1.05);
+    .num-card-value { color: #0d47a1; }
+  }
+
+  &.card-second-target {
+    cursor: pointer;
+    animation: pulse-target 1.2s ease-in-out infinite;
+    border-color: rgba(255,193,7,0.8);
+  }
+}
+
+// ─── 运算符按钮 ───────────────────────────────────────────────────────────────
+
+.op-row {
+  display: flex;
+  gap: 14px;
+}
+
+.op-btn-big {
+  width: 68px;
+  height: 68px;
+  border-radius: 14px;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center;
+
+  &:hover:not(.op-disabled) {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  }
+  &:active:not(.op-disabled) { transform: translateY(0); }
+
+  &.op-selected {
+    background: rgba(25,118,210,0.5);
+    border-color: #1976d2;
+    box-shadow: 0 0 0 3px rgba(25,118,210,0.3), 0 4px 14px rgba(0,0,0,0.35);
+    color: #bbdefb;
+  }
+
+  &.op-disabled {
+    opacity: 0.25;
+    cursor: default;
+  }
+}
+
+// ─── 控制按钮行 ───────────────────────────────────────────────────────────────
+
+.control-row {
+  display: flex;
+  gap: 12px;
+}
+
+.ctrl-icon-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.65);
+  cursor: pointer; font-size: 11px; font-weight: 600; transition: all 0.2s;
+  mat-icon { font-size: 20px; width: 20px; height: 20px; }
+
+  &:hover:not([disabled]) { background: rgba(255,255,255,0.14); color: white; transform: translateY(-1px); }
+  &[disabled] { opacity: 0.3; cursor: default; }
+
+  &.reveal-btn {
+    border-color: rgba(255,200,0,0.25);
+    background: rgba(255,200,0,0.08);
+    color: #ffe082;
+    &:hover:not([disabled]) { background: rgba(255,200,0,0.18); color: #ffd740; }
+    &[disabled] { opacity: 0.3; }
+  }
+}
+
+// ─── 答案提示框 ───────────────────────────────────────────────────────────────
+
+.hint-box {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+  padding: 10px 16px;
+  background: rgba(255,200,0,0.1); border: 1px solid rgba(255,200,0,0.25);
+  border-radius: 12px; color: #ffe082; font-size: 13px;
+  animation: fade-in 0.25s ease-out;
+  mat-icon { font-size: 18px; width: 18px; height: 18px; flex-shrink: 0; }
+  strong { color: #ffd740; font-family: 'Courier New', monospace; font-size: 15px; }
+
+  .hint-next-btn {
+    display: flex; align-items: center; gap: 2px;
+    padding: 4px 10px; border-radius: 8px;
+    border: 1px solid rgba(255,200,0,0.3); background: rgba(255,200,0,0.12);
+    color: #ffe082; font-size: 12px; font-weight: 600; cursor: pointer; flex-shrink: 0;
+    transition: background 0.15s;
+    mat-icon { font-size: 15px; width: 15px; height: 15px; }
+    &:hover { background: rgba(255,200,0,0.22); }
+  }
+}
+
+// ─── 遮罩卡片 ─────────────────────────────────────────────────────────────────
+
+.overlay-screen {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.65);
+  display: flex; justify-content: center; align-items: center;
+  animation: fade-in 0.25s ease-out; z-index: 100; padding: 20px;
+}
+
+.result-card {
+  background: linear-gradient(135deg, #1e3a5f, #0f2040);
+  border: 1px solid rgba(255,215,0,0.3); border-radius: 18px;
+  padding: 28px 32px; text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  animation: slide-up 0.25s ease-out;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  max-width: 340px; width: 100%;
+  .result-icon { font-size: 56px; line-height: 1; }
+  .result-title { font-size: 24px; font-weight: 800; color: white; margin: 0; letter-spacing: 2px; }
+  .result-sub { font-size: 13px; color: rgba(255,255,255,0.55); margin: 0; line-height: 1.5; }
+  .next-level { font-size: 15px; color: rgba(255,255,255,0.75); margin: 0; strong { font-weight: 800; } }
+}
+
+.big-action-btn {
+  display: flex; align-items: center; gap: 6px; padding: 12px 26px;
+  border-radius: 24px; border: none;
+  background: linear-gradient(135deg, #1976d2, #0d47a1); color: white;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(25,118,210,0.4); transition: all 0.2s;
+  mat-icon { font-size: 18px; width: 18px; height: 18px; }
+  &:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(25,118,210,0.5); }
+}
+
+.text-btn { background: none; border: none; color: rgba(255,255,255,0.45); font-size: 13px; cursor: pointer; &:hover { color: rgba(255,255,255,0.7); } }
+
+// ─── 动画 ─────────────────────────────────────────────────────────────────────
+
+@keyframes fade-in    { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slide-up   { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes dropdown-in { from { transform: translateY(-6px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes pop-in     { 0% { transform: scale(0.7); opacity: 0; } 60% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+@keyframes pulse-target {
+  0%, 100% { box-shadow: 0 6px 20px rgba(0,0,0,0.4), 0 0 0 0 rgba(255,193,7,0.5); }
+  50%       { box-shadow: 0 6px 20px rgba(0,0,0,0.4), 0 0 0 6px rgba(255,193,7,0); }
+}
+
+// ─── 响应式 ───────────────────────────────────────────────────────────────────
+
+@media (max-width: 480px) {
+  .game-title { font-size: 14px; letter-spacing: 1px; }
+  .game-area  { gap: 14px; padding: 12px; }
+  .num-card   { width: 76px; height: 76px; .num-card-value { font-size: 26px; } }
+  .op-btn-big { width: 56px; height: 56px; font-size: 22px; }
+  .ctrl-icon-btn { padding: 8px 14px; font-size: 10px; mat-icon { font-size: 18px; width: 18px; height: 18px; } }
+}

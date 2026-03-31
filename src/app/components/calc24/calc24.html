@@ -1,0 +1,184 @@
+<div class="calc24-container">
+
+  <!-- 顶栏 -->
+  <div class="game-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <h1 class="game-title">算24点</h1>
+
+    <div class="level-selector">
+      <button class="level-trigger" (click)="showLevelPanel = !showLevelPanel">
+        <span class="level-dot" [style.background]="currentLevel.color"></span>
+        <span class="level-label">{{ currentLevel.label }}</span>
+        <mat-icon class="trigger-arrow" [class.open]="showLevelPanel">expand_more</mat-icon>
+      </button>
+
+      @if (showLevelPanel) {
+        <div class="level-backdrop" (click)="showLevelPanel = false"></div>
+        <div class="level-dropdown">
+          @for (lv of levels; track lv.key) {
+            <button class="level-option" [class.selected]="currentLevelKey === lv.key"
+              [style.--lv-color]="lv.color" (click)="selectLevel(lv.key)">
+              <span class="lv-dot" [style.background]="lv.color"></span>
+              <div class="lv-info">
+                <span class="lv-name">{{ lv.label }}</span>
+                <span class="lv-desc">{{ lv.description }}</span>
+              </div>
+              @if (currentLevelKey === lv.key) {
+                <mat-icon class="lv-check">check_circle</mat-icon>
+              }
+            </button>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="header-spacer"></div>
+
+    @if (gameState === 'idle') {
+      <button class="ctrl-btn start-btn" (click)="startGame()">
+        <mat-icon>play_arrow</mat-icon><span>开始</span>
+      </button>
+    }
+  </div>
+
+  <!-- 进度条 -->
+  @if (gameState !== 'idle') {
+    <div class="progress-bar-wrap">
+      <div class="progress-info">
+        <span class="progress-label">{{ currentLevel.label }}</span>
+        <span class="progress-count">{{ correctCount }} / {{ requiredCorrect }}</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="progressPercent" [style.background]="currentLevel.color"></div>
+      </div>
+    </div>
+  }
+
+  <!-- 待机页 -->
+  @if (gameState === 'idle') {
+    <div class="idle-screen">
+      <div class="idle-content">
+        <div class="idle-icon">🃏</div>
+        <h2 class="idle-title">算24点</h2>
+        <p class="idle-desc">选一张牌 → 选运算符 → 选另一张牌，两张合并，直到得出 24</p>
+        <div class="idle-level-info">
+          <span class="level-dot-big" [style.background]="currentLevel.color"></span>
+          <span>当前难度：{{ currentLevel.label }}</span>
+        </div>
+        <button class="big-start-btn" (click)="startGame()">
+          <mat-icon>play_arrow</mat-icon>开始游戏
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- 游戏主区 -->
+  @if (gameState !== 'idle' && gameState !== 'levelUp' && gameState !== 'allDone') {
+    <div class="game-area">
+
+      <!-- 状态提示 -->
+      <div class="step-hint" [class.hint-wrong]="gameState === 'wrong'" [class.hint-correct]="gameState === 'correct'">
+        @if (gameState === 'wrong') {
+          <mat-icon>sentiment_dissatisfied</mat-icon>
+          结果是 {{ wrongResult }}，不等于 24
+        } @else if (gameState === 'correct') {
+          <mat-icon>check_circle</mat-icon>
+          答对了！+1
+        } @else {
+          <mat-icon>touch_app</mat-icon>
+          {{ stepHint }}
+        }
+      </div>
+
+      <!-- 牌堆 -->
+      <div class="cards-area">
+        @for (card of mergeCards; track $index) {
+          <div class="num-card"
+            [class.card-selected]="selectedFirst === $index"
+            [class.card-clickable]="gameState === 'playing'"
+            [class.card-second-target]="selectedFirst !== null && selectedOp !== null && selectedFirst !== $index && gameState === 'playing'"
+            (click)="selectCard($index)">
+            <span class="num-card-value">{{ formatCardValue(card.value) }}</span>
+          </div>
+        }
+      </div>
+
+      <!-- 运算符按钮 -->
+      <div class="op-row">
+        @for (op of ['+', '-', '×', '÷']; track op) {
+          <button class="op-btn-big"
+            [class.op-selected]="selectedOp === (op === '×' ? '*' : op === '÷' ? '/' : op)"
+            [class.op-disabled]="!canUseOp(op === '×' ? '*' : op === '÷' ? '/' : op) || selectedFirst === null"
+            (click)="selectOp(op === '×' ? '*' : op === '÷' ? '/' : op)">
+            {{ op }}
+          </button>
+        }
+      </div>
+
+      <!-- 控制按钮行 -->
+      <div class="control-row">
+        <button class="ctrl-icon-btn" (click)="undo()" [disabled]="history.length === 0" title="撤销">
+          <mat-icon>undo</mat-icon>
+          <span>撤销</span>
+        </button>
+        <button class="ctrl-icon-btn" (click)="resetRound()" title="重来本题">
+          <mat-icon>replay</mat-icon>
+          <span>重来</span>
+        </button>
+        <button class="ctrl-icon-btn reveal-btn" (click)="revealAnswer()" [disabled]="answerRevealed" title="显示答案">
+          <mat-icon>lightbulb</mat-icon>
+          <span>答案</span>
+        </button>
+      </div>
+
+      <!-- 答案展示 -->
+      @if (answerRevealed) {
+        <div class="hint-box">
+          <mat-icon>lightbulb</mat-icon>
+          参考：<strong>{{ formatSolution(sampleSolution) }}</strong>
+          <button class="hint-next-btn" (click)="newQuestion()">
+            <mat-icon>skip_next</mat-icon>换题
+          </button>
+        </div>
+      }
+
+    </div>
+  }
+
+  <!-- 升级遮罩 -->
+  @if (gameState === 'levelUp') {
+    <div class="overlay-screen">
+      <div class="result-card">
+        <div class="result-icon">🎉</div>
+        <h2 class="result-title">恭喜升级！</h2>
+        <p class="result-sub">{{ currentLevel.label }} 通过（答对 {{ requiredCorrect }} 题）</p>
+        @if (currentLevelIndex < levels.length - 1) {
+          <p class="next-level">下一关：<strong [style.color]="levels[currentLevelIndex + 1].color">{{ levels[currentLevelIndex + 1].label }}</strong></p>
+        }
+        <button class="big-action-btn" (click)="nextAfterLevelUp()">
+          <mat-icon>arrow_forward</mat-icon>进入下一关
+        </button>
+        <button class="text-btn" (click)="showLevelPanel = true; gameState = 'idle'">选择其他难度</button>
+      </div>
+    </div>
+  }
+
+  <!-- 全部通关 -->
+  @if (gameState === 'allDone') {
+    <div class="overlay-screen">
+      <div class="result-card">
+        <div class="result-icon">🏆</div>
+        <h2 class="result-title">全部通关！</h2>
+        <p class="result-sub">恭喜你完成了所有难度，你是真正的算24点大师！</p>
+        <button class="big-action-btn" (click)="selectLevel('kindergarten'); startGame()">
+          <mat-icon>replay</mat-icon>重新挑战
+        </button>
+        <button class="text-btn" (click)="goBack()">返回娱乐</button>
+      </div>
+    </div>
+  }
+
+</div>

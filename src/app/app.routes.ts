@@ -29,6 +29,8 @@ import { NoteEditorComponent } from './components/note-editor/note-editor';
 import { VocabularyComponent } from './components/vocabulary/vocabulary';
 import { VocabularyTestComponent } from './components/vocabulary-test/vocabulary-test';
 import { ParrotTrainingComponent } from './components/parrot-training/parrot-training';
+import { GomokuComponent } from './components/gomoku/gomoku';
+import { Calc24Component } from './components/calc24/calc24';
 import { SettingsComponent } from './components/settings/settings';
 import { StatisticsComponent } from './components/statistics/statistics';
 import { PhotosComponent } from './components/photos/photos';
@@ -194,6 +196,16 @@ export const routes: Routes = [
     path: 'tetris',
     component: TetrisComponent,
     title: '俄罗斯方块',
+  },
+  {
+    path: 'gomoku',
+    component: GomokuComponent,
+    title: '五子棋',
+  },
+  {
+    path: 'calc24',
+    component: Calc24Component,
+    title: '算24点',
   },
   {
     path: 'note-editor/:id',

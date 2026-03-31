@@ -1,0 +1,211 @@
+<div class="gomoku-container">
+
+  <!-- 顶栏 -->
+  <div class="game-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <h1 class="game-title">五子棋</h1>
+
+    <!-- 模式切换 -->
+    <div class="mode-toggle">
+      <button class="toggle-seg" [class.active]="gameMode === 'ai'" (click)="selectMode('ai')">
+        <mat-icon>smart_toy</mat-icon>
+        <span>人机</span>
+      </button>
+      <button class="toggle-seg" [class.active]="gameMode === 'pvp'" (click)="selectMode('pvp')">
+        <mat-icon>people</mat-icon>
+        <span>双人</span>
+      </button>
+    </div>
+
+    <!-- 难度下拉（仅人机模式） -->
+    @if (gameMode === 'ai') {
+      <div class="diff-selector">
+        <button class="diff-trigger" (click)="toggleDiffDropdown()">
+          <img [src]="getAvatar(difficulty)" class="trigger-avatar" alt=""/>
+          <span class="trigger-label">{{ getCurrentDifficulty().label }}</span>
+          <mat-icon class="trigger-arrow" [class.open]="showDiffDropdown">expand_more</mat-icon>
+        </button>
+
+        @if (showDiffDropdown) {
+          <div class="diff-backdrop" (click)="closeDiffDropdown()"></div>
+          <div class="diff-dropdown">
+            @for (d of difficulties; track d.key) {
+              <button class="diff-option"
+                [class.selected]="difficulty === d.key"
+                [style.--opt-color]="d.color"
+                (click)="selectDifficulty(d.key)">
+                <img [src]="getAvatar(d.key)" class="option-avatar" alt=""/>
+                <div class="option-info">
+                  <span class="option-name">{{ d.label }}</span>
+                  <span class="option-desc">{{ d.description }}</span>
+                </div>
+                @if (difficulty === d.key) {
+                  <mat-icon class="option-check">check_circle</mat-icon>
+                }
+              </button>
+            }
+          </div>
+        }
+      </div>
+    }
+
+    <div class="header-spacer"></div>
+
+    <!-- 悔棋 -->
+    <button mat-icon-button class="action-btn" (click)="undoMove()" title="悔棋" [disabled]="!canUndo()">
+      <mat-icon>undo</mat-icon>
+    </button>
+
+    <!-- 开始按钮：未开始 或 游戏结束后显示 -->
+    @if (!gameStarted || gameOver) {
+      <button class="ctrl-btn start-btn" (click)="startGame()" title="开始游戏">
+        <mat-icon>play_arrow</mat-icon>
+        <span>开始</span>
+      </button>
+    }
+
+    <!-- 结束按钮：游戏进行中显示 -->
+    @if (gameStarted && !gameOver) {
+      <button class="ctrl-btn end-btn" (click)="endGame()" title="结束游戏">
+        <mat-icon>stop</mat-icon>
+        <span>结束</span>
+      </button>
+    }
+  </div>
+
+  <!-- 状态栏 -->
+  <div class="status-bar" [class.is-over]="gameOver" [class.is-thinking]="isAiThinking">
+    <div class="status-pill">
+      @if (gameStarted && !gameOver) {
+        <span class="stone-dot"
+          [class.dot-white]="currentPlayer === 'white'"
+          [class.dot-black]="currentPlayer === 'black'">
+        </span>
+      }
+      @if (gameOver && winner) {
+        <span class="stone-dot"
+          [class.dot-white]="winner === 'white'"
+          [class.dot-black]="winner === 'black'"
+          style="animation: pulse-win 0.8s ease-in-out infinite alternate;">
+        </span>
+      }
+      <span class="status-text">{{ getStatusText() }}</span>
+    </div>
+  </div>
+
+  <!-- 棋盘 -->
+  <div class="board-wrapper">
+    <div class="board">
+      <svg class="board-lines"
+        [attr.viewBox]="'0 0 ' + (boardSize - 1) * 40 + ' ' + (boardSize - 1) * 40"
+        preserveAspectRatio="xMidYMid meet">
+        @for (i of boardRange; track i) {
+          <line [attr.x1]="0" [attr.y1]="i * 40"
+                [attr.x2]="(boardSize - 1) * 40" [attr.y2]="i * 40" class="grid-line"/>
+        }
+        @for (i of boardRange; track i) {
+          <line [attr.x1]="i * 40" [attr.y1]="0"
+                [attr.x2]="i * 40" [attr.y2]="(boardSize - 1) * 40" class="grid-line"/>
+        }
+        <circle cx="280" cy="280" r="4" class="star-point"/>
+        <circle cx="120" cy="120" r="3" class="star-point"/>
+        <circle cx="440" cy="120" r="3" class="star-point"/>
+        <circle cx="120" cy="440" r="3" class="star-point"/>
+        <circle cx="440" cy="440" r="3" class="star-point"/>
+        <circle cx="280" cy="120" r="3" class="star-point"/>
+        <circle cx="280" cy="440" r="3" class="star-point"/>
+        <circle cx="120" cy="280" r="3" class="star-point"/>
+        <circle cx="440" cy="280" r="3" class="star-point"/>
+      </svg>
+
+      <div class="intersections">
+        @for (row of boardRange; track row) {
+          <div class="board-row">
+            @for (col of boardRange; track col) {
+              <div class="intersection"
+                [class.hoverable]="gameStarted && !board[row][col] && !gameOver && !isAiThinking && !(gameMode === 'ai' && currentPlayer !== playerColor)"
+                [class.hover-white]="gameStarted && !board[row][col] && !gameOver && currentPlayer === 'white'"
+                [class.hover-black]="gameStarted && !board[row][col] && !gameOver && currentPlayer === 'black'"
+                (click)="placeStone(row, col)">
+                @if (board[row][col]) {
+                  <div class="stone"
+                    [class.black-stone]="board[row][col] === 'black'"
+                    [class.white-stone]="board[row][col] === 'white'"
+                    [class.last-stone]="isLastMove(row, col)">
+                    @if (isLastMove(row, col)) {
+                      <div class="last-dot"></div>
+                    }
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- 未开始遮罩 -->
+      @if (!gameStarted) {
+        <div class="board-overlay">
+          <div class="overlay-content">
+            <mat-icon class="overlay-icon">sports_esports</mat-icon>
+            <p class="overlay-title">准备开始</p>
+            <p class="overlay-hint">点击顶栏「开始」按钮开局</p>
+            <button class="overlay-start-btn" (click)="startGame()">
+              <mat-icon>play_arrow</mat-icon>
+              开始游戏
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- 颜色选择对话框（人机模式） -->
+  @if (showColorDialog) {
+    <div class="dialog-backdrop" (click)="showColorDialog = false"></div>
+    <div class="color-dialog">
+      <h3 class="dialog-title">选择你的棋子颜色</h3>
+      <p class="dialog-hint">白棋先手，黑棋后手</p>
+      <div class="color-options">
+        <!-- 白棋 -->
+        <button class="color-opt white-opt" (click)="confirmColor('white')">
+          <div class="color-stone white-stone-demo"></div>
+          <div class="color-info">
+            <span class="color-name">白棋 ○</span>
+            <span class="color-desc">先手落子</span>
+          </div>
+        </button>
+        <!-- 黑棋 -->
+        <button class="color-opt black-opt" (click)="confirmColor('black')">
+          <div class="color-stone black-stone-demo"></div>
+          <div class="color-info">
+            <span class="color-name">黑棋 ●</span>
+            <span class="color-desc">AI 先落白棋</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- 游戏结束遮罩 -->
+  @if (gameOver) {
+    <div class="game-over-overlay">
+      <div class="game-over-card">
+        <div class="result-icon">
+          <mat-icon>{{ isDraw ? 'handshake' : 'emoji_events' }}</mat-icon>
+        </div>
+        <h2 class="result-title">{{ getStatusText() }}</h2>
+        <div class="result-actions">
+          <button mat-raised-button class="play-again-btn" (click)="startGame()">
+            <mat-icon>play_arrow</mat-icon>再来一局
+          </button>
+          <button mat-button class="back-btn-card" (click)="goBack()">返回</button>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>
