@@ -1,0 +1,642 @@
+<div class="category-container math-theme">
+
+  <!-- ─── 顶部导航栏 ─────────────────────────────────────────────────────── -->
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="handleBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-titles">
+      <h1 class="category-title">解方程</h1>
+      <p class="category-subtitle">Solve Equations</p>
+    </div>
+    <div class="header-spacer"></div>
+    @if (currentView === 'practice') {
+      <button mat-icon-button class="header-btn"
+              (click)="viewTutorialFromPractice()" title="查看讲解">
+        <mat-icon>school</mat-icon>
+      </button>
+      <button mat-icon-button class="header-btn"
+              (click)="toggleInputMethod()"
+              [title]="inputMethod === 'drag' ? '切换为键盘输入' : '切换为拖拽输入'">
+        <mat-icon>{{ inputMethod === 'drag' ? 'keyboard' : 'drag_indicator' }}</mat-icon>
+      </button>
+    }
+  </div>
+
+  <!-- ─── 视图1：类型选择 ─────────────────────────────────────────────────── -->
+  @if (currentView === 'type-selection') {
+    <div class="type-selection-screen">
+      <h2 class="screen-title">选择方程类型</h2>
+      <p class="screen-subtitle">Choose equation type to learn</p>
+
+      <div class="type-cards">
+        <!-- 一元一次方程 -->
+        <div class="type-card"
+             [class.selected]="currentEquationType === 'linear-1var'"
+             (click)="selectType('linear-1var')">
+          <div class="type-icon-wrap">
+            <span class="type-icon-text">x</span>
+          </div>
+          <h3>一元一次方程</h3>
+          <p class="type-en">Linear (1 Variable)</p>
+          <div class="type-example">3x + 5 = 14</div>
+          @if (currentEquationType === 'linear-1var') {
+            <div class="type-check"><mat-icon>check_circle</mat-icon></div>
+          }
+        </div>
+
+        <!-- 二元一次方程组 -->
+        <div class="type-card"
+             [class.selected]="currentEquationType === 'system-2var'"
+             (click)="selectType('system-2var')">
+          <div class="type-icon-wrap">
+            <span class="type-icon-text">xy</span>
+          </div>
+          <h3>二元一次方程组</h3>
+          <p class="type-en">System (2 Variables)</p>
+          <div class="type-example">x + y = 10<br>x − y = 4</div>
+          @if (currentEquationType === 'system-2var') {
+            <div class="type-check"><mat-icon>check_circle</mat-icon></div>
+          }
+        </div>
+
+        <!-- 三元图形方程 -->
+        <div class="type-card"
+             [class.selected]="currentEquationType === 'system-3var'"
+             (click)="selectType('system-3var')">
+          <div class="type-icon-wrap">
+            <span class="type-icon-text shape-icons">△□○</span>
+          </div>
+          <h3>三元图形方程</h3>
+          <p class="type-en">Picture Equations (3 Shapes)</p>
+          <div class="type-example">△ + □ = 12<br>□ + ○ = 9</div>
+          @if (currentEquationType === 'system-3var') {
+            <div class="type-check"><mat-icon>check_circle</mat-icon></div>
+          }
+        </div>
+      </div>
+
+      <!-- 难度选择 -->
+      <div class="difficulty-section">
+        <span class="difficulty-label">练习难度：</span>
+        @for (d of difficultyConfigs; track d.id) {
+          <button class="diff-btn"
+                  [class.active]="difficulty.id === d.id"
+                  (click)="difficulty = d">{{ d.labelZh }}</button>
+        }
+      </div>
+
+      <!-- 操作按钮 -->
+      <div class="mode-buttons">
+        <button class="mode-btn mode-btn--tutorial" (click)="startTutorial()">
+          <mat-icon>school</mat-icon>
+          <span>天平讲解</span>
+        </button>
+        <button class="mode-btn mode-btn--practice" (click)="startPractice()">
+          <mat-icon>edit</mat-icon>
+          <span>开始练习</span>
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- ─── 视图2：天平讲解 ─────────────────────────────────────────────────── -->
+  @if (currentView === 'tutorial' && currentStep) {
+    <div class="tutorial-screen">
+
+      <!-- 方程标题 -->
+      <div class="tutorial-equation-title">
+        {{ getEquationDisplayString(tutorialEquation) }}
+      </div>
+
+      <!-- 步骤内容区 -->
+      <div class="tutorial-step-content" [class.step-enter]="stepEnterClass">
+
+        <!-- 方程卡片展示（二元/三元） -->
+        @if (currentStep.hideScale) {
+          <div class="eq-cards-area">
+            @if (currentStep.eq1Card) {
+              <div class="eq-card eq-card--1"
+                   [class.highlight]="currentStep.highlightEqCard === 1">
+                {{ currentStep.eq1Card }}
+              </div>
+            }
+            @if (currentStep.eq2Card) {
+              <div class="eq-card eq-card--2"
+                   [class.highlight]="currentStep.highlightEqCard === 2">
+                {{ currentStep.eq2Card }}
+              </div>
+            }
+            @if (currentStep.eq3Card) {
+              <div class="eq-card eq-card--3"
+                   [class.highlight]="currentStep.highlightEqCard === 3">
+                {{ currentStep.eq3Card }}
+              </div>
+            }
+            @if (currentStep.highlightEqCard === 'merged' && currentStep.mergedCard) {
+              <div class="eq-merge-arrow">
+                <mat-icon>arrow_downward</mat-icon>
+              </div>
+              <div class="eq-card eq-card--merged">
+                {{ currentStep.mergedCard }}
+              </div>
+            }
+          </div>
+        }
+
+        <!-- 天平可视化 -->
+        @if (!currentStep.hideScale) {
+          <div class="scale-container">
+            <!-- 横梁 + 两臂 + 两盘 -->
+            <div class="scale-beam-wrap">
+              <div class="scale-beam"
+                   [class.scale-settle]="currentStep.showSettleAnimation"
+                   [style.transform]="'rotate(' + currentStep.scaleAngleDeg + 'deg)'">
+                <!-- 左臂 -->
+                <div class="scale-arm scale-arm--left">
+                  <div class="scale-string"></div>
+                  <div class="scale-pan scale-pan--left">
+                    @for (term of currentStep.scaleLeftTerms; track term.label + $index) {
+                      <div class="term-chip"
+                           [class.term-variable]="term.isVariable"
+                           [class.term-strikethrough]="term.strikethrough"
+                           [class]="'term-chip term-color-' + term.color +
+                                    (term.isVariable ? ' term-variable' : '') +
+                                    (term.strikethrough ? ' term-strikethrough' : '')">
+                        {{ term.label }}
+                      </div>
+                    }
+                    @if (currentStep.scaleLeftTerms.length === 0) {
+                      <span class="pan-empty">…</span>
+                    }
+                  </div>
+                </div>
+                <!-- 右臂 -->
+                <div class="scale-arm scale-arm--right">
+                  <div class="scale-string"></div>
+                  <div class="scale-pan scale-pan--right">
+                    @for (term of currentStep.scaleRightTerms; track term.label + $index) {
+                      <div [class]="'term-chip term-color-' + term.color +
+                                    (term.isVariable ? ' term-variable' : '') +
+                                    (term.strikethrough ? ' term-strikethrough' : '')">
+                        {{ term.label }}
+                      </div>
+                    }
+                    @if (currentStep.scaleRightTerms.length === 0) {
+                      <span class="pan-empty">…</span>
+                    }
+                  </div>
+                </div>
+              </div>
+              <!-- 支点 -->
+              <div class="scale-fulcrum">
+                <div class="scale-triangle"></div>
+                <div class="scale-base"></div>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- 步骤说明 -->
+        <div class="step-explanation">
+          @if (currentStep.actionLabel) {
+            <div class="step-action-badge">{{ currentStep.actionLabel }}</div>
+          }
+          <p class="step-desc-zh">{{ currentStep.descriptionZh }}</p>
+          <p class="step-desc-en">{{ currentStep.descriptionEn }}</p>
+        </div>
+
+      </div>
+
+      <!-- 步骤导航 -->
+      <div class="tutorial-nav">
+        <button class="nav-btn nav-btn--prev"
+                [disabled]="tutorialStepIndex === 0"
+                (click)="prevStep()">
+          <mat-icon>chevron_left</mat-icon>
+          上一步
+        </button>
+
+        <div class="step-dots">
+          @for (step of tutorialSteps; track step.id; let i = $index) {
+            <div class="step-dot" [class.active]="i === tutorialStepIndex"></div>
+          }
+        </div>
+
+        @if (!isLastStep) {
+          <button class="nav-btn nav-btn--next"
+                  (click)="nextStep()">
+            下一步
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        } @else {
+          <button class="nav-btn nav-btn--practice" (click)="startPractice()">
+            去练习
+            <mat-icon>edit</mat-icon>
+          </button>
+        }
+      </div>
+
+    </div>
+  }
+
+  <!-- ─── 视图3：练习模式 ─────────────────────────────────────────────────── -->
+  @if (currentView === 'practice') {
+    <div class="practice-screen">
+
+      <!-- 模式选择（仅 linear-1var 首次进入） -->
+      @if (showModeSelect) {
+        <div class="mode-select-screen">
+          <h2 class="mode-select-title">选择练习方式</h2>
+          <p class="mode-select-sub">Choose how to practice</p>
+          <div class="mode-select-cards">
+            <button class="mode-select-card" (click)="selectPracticeMode('answer-only')">
+              <mat-icon>quiz</mat-icon>
+              <span class="msc-name">仅填答案</span>
+              <span class="msc-desc">直接写出 x 的值</span>
+            </button>
+            <button class="mode-select-card mode-select-card--guided" (click)="selectPracticeMode('guided')">
+              <mat-icon>school</mat-icon>
+              <span class="msc-name">引导解题</span>
+              <span class="msc-desc">系统提示每步操作</span>
+            </button>
+            <button class="mode-select-card mode-select-card--free" (click)="selectPracticeMode('free')">
+              <mat-icon>explore</mat-icon>
+              <span class="msc-name">自由解题</span>
+              <span class="msc-desc">自己选运算和数字</span>
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- 分步解题：引导模式 / 自由模式 -->
+      @if (!showModeSelect && session && (session.mode === 'guided' || session.mode === 'free')) {
+        <!-- 成绩条 -->
+        <div class="score-bar">
+          <div class="score-item">
+            <mat-icon>star</mat-icon>
+            <span>连对 {{ streak }}</span>
+          </div>
+          <div class="score-item">
+            <mat-icon>check_circle</mat-icon>
+            <span>{{ correctCount }} / {{ totalAttempts }}</span>
+          </div>
+          <div class="score-item score-difficulty">
+            <span>{{ session.mode === 'guided' ? '引导' : '自由' }}</span>
+          </div>
+        </div>
+
+        <!-- 方程状态展示区 -->
+        <div class="step-eq-area" [class.correct-bounce]="showCorrectAnimation">
+          <div class="step-eq-history">
+            @for (state of session.stateHistory; track $index) {
+              <div class="step-eq-row" [class.step-eq-row--current]="$index === session.stateHistory.length - 1">
+                <!-- 左侧项 -->
+                <div class="step-eq-lhs">
+                  @for (term of state.lhsTerms; track $index) {
+                    <span class="step-term-chip"
+                          [class.step-term-var]="term.isVar"
+                          [class.step-term-const]="!term.isVar">
+                      @if (term.isVar) {
+                        {{ term.coeff === 1 ? 'x' : term.coeff + 'x' }}
+                      } @else {
+                        {{ term.value >= 0 ? '+' + term.value : term.value }}
+                      }
+                    </span>
+                  }
+                </div>
+                <span class="step-eq-equals">=</span>
+                <span class="step-eq-rhs">{{ state.rhs }}</span>
+                @if ($index < session.stateHistory.length - 1) {
+                  <mat-icon class="step-eq-arrow">arrow_downward</mat-icon>
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- 已解出 -->
+        @if (session.phase === 'solved') {
+          <div class="step-solved-banner">
+            <mat-icon>star</mat-icon>
+            <span>解出了！x = {{ session.equation.solution }}</span>
+          </div>
+          <div class="practice-actions">
+            <button class="action-btn action-btn--next" (click)="nextStepQuestion()">
+              <mat-icon>arrow_forward</mat-icon>
+              下一题
+            </button>
+          </div>
+        }
+
+        <!-- 引导模式操作区 -->
+        @if (session.phase === 'awaiting-step' && session.mode === 'guided') {
+          @if (currentGuidedStep) {
+            <!-- 指令横幅 -->
+            <div class="guided-instruction">
+              <mat-icon>lightbulb</mat-icon>
+              <div class="guided-instruction-text">
+                <span class="gi-zh">{{ currentGuidedStep.instructionZh }}</span>
+                <span class="gi-en">{{ currentGuidedStep.instructionEn }}</span>
+              </div>
+            </div>
+
+            <!-- 操作数槽 -->
+            <div class="step-operand-area">
+              <span class="step-operand-label">
+                两边同时 {{ opLabel(currentGuidedStep.op) }}
+              </span>
+              <div class="step-operand-slot"
+                   cdkDropList
+                   id="guided-slot"
+                   [cdkDropListConnectedTo]="['step-tile-bank']"
+                   (cdkDropListDropped)="onGuidedTileDrop($event)"
+                   (click)="clickGuidedSlot()"
+                   [class.slot-filled]="session.guidedSlotTile !== null">
+                @if (session.guidedSlotTile) {
+                  <div class="number-tile number-tile--placed"
+                       cdkDrag [cdkDragData]="session.guidedSlotTile">
+                    {{ session.guidedSlotTile.value }}
+                  </div>
+                } @else {
+                  <span class="slot-hint">?</span>
+                }
+              </div>
+            </div>
+
+            <!-- 数字池 -->
+            <div class="tile-bank"
+                 id="step-tile-bank"
+                 cdkDropList
+                 [cdkDropListData]="stepTiles"
+                 [cdkDropListConnectedTo]="['guided-slot']"
+                 (cdkDropListDropped)="onGuidedTileDropToPool($event)">
+              @for (tile of stepTiles; track tile.id) {
+                @if (!tile.isUsed) {
+                  <div class="number-tile"
+                       cdkDrag [cdkDragData]="tile"
+                       (click)="clickStepTile(tile)">
+                    {{ tile.value }}
+                    <div *cdkDragPlaceholder class="tile-placeholder"></div>
+                  </div>
+                }
+              }
+            </div>
+
+            @if (session.errorMsg) {
+              <div class="step-error">{{ session.errorMsg }}</div>
+            }
+
+            <div class="step-actions">
+              <button class="action-btn action-btn--undo"
+                      [disabled]="session.stateHistory.length <= 1"
+                      (click)="undoStep()">
+                <mat-icon>undo</mat-icon>
+                撤销
+              </button>
+              <button class="action-btn action-btn--submit"
+                      [disabled]="!session.guidedSlotTile"
+                      (click)="confirmGuidedStep()">
+                <mat-icon>check</mat-icon>
+                确认
+              </button>
+            </div>
+          }
+        }
+
+        <!-- 自由模式操作区 -->
+        @if (session.phase === 'awaiting-step' && session.mode === 'free') {
+          <!-- 操作符选择 -->
+          <div class="free-op-section">
+            <p class="free-op-label">选择操作：</p>
+            <div class="free-op-grid">
+              @for (op of stepOperations; track op) {
+                <button class="free-op-btn"
+                        [class.free-op-btn--selected]="session.selectedOp === op"
+                        (click)="selectOp(op)">
+                  <span class="fob-symbol">{{ opLabel(op) }}</span>
+                  <span class="fob-name">{{ opNameZh(op) }}</span>
+                </button>
+              }
+            </div>
+          </div>
+
+          <!-- 操作数槽 -->
+          @if (session.selectedOp) {
+            <div class="step-operand-area">
+              <span class="step-operand-label">
+                两边{{ opNameZh(session.selectedOp) }}
+              </span>
+              <div class="step-operand-slot"
+                   cdkDropList
+                   id="free-slot"
+                   [cdkDropListConnectedTo]="['free-tile-bank']"
+                   (cdkDropListDropped)="onFreeTileDrop($event)"
+                   (click)="clickFreeSlot()"
+                   [class.slot-filled]="session.freeTile !== null">
+                @if (session.freeTile) {
+                  <div class="number-tile number-tile--placed"
+                       cdkDrag [cdkDragData]="session.freeTile">
+                    {{ session.freeTile.value }}
+                  </div>
+                } @else {
+                  <span class="slot-hint">?</span>
+                }
+              </div>
+            </div>
+
+            <!-- 数字池 -->
+            <div class="tile-bank step-tile-bank--free"
+                 id="free-tile-bank"
+                 cdkDropList
+                 [cdkDropListData]="stepTiles"
+                 [cdkDropListConnectedTo]="['free-slot']"
+                 (cdkDropListDropped)="onFreeTileDropToPool($event)">
+              @for (tile of stepTiles; track tile.id) {
+                @if (!tile.isUsed) {
+                  <div class="number-tile"
+                       cdkDrag [cdkDragData]="tile"
+                       (click)="clickStepTile(tile)">
+                    {{ tile.value }}
+                    <div *cdkDragPlaceholder class="tile-placeholder"></div>
+                  </div>
+                }
+              }
+            </div>
+          }
+
+          @if (session.errorMsg) {
+            <div class="step-error">{{ session.errorMsg }}</div>
+          }
+
+          <div class="step-actions">
+            <button class="action-btn action-btn--undo"
+                    [disabled]="session.stateHistory.length <= 1"
+                    (click)="undoStep()">
+              <mat-icon>undo</mat-icon>
+              撤销
+            </button>
+            <button class="action-btn action-btn--submit"
+                    [disabled]="!session.selectedOp || !session.freeTile"
+                    (click)="confirmFreeStep()">
+              <mat-icon>check</mat-icon>
+              应用
+            </button>
+          </div>
+        }
+      }
+
+      <!-- 仅答案模式（answer-only，原有代码） -->
+      @if (!showModeSelect && practiceMode === 'answer-only' && practiceEquation) {
+
+        <!-- 成绩条 -->
+        <div class="score-bar">
+          <div class="score-item">
+            <mat-icon>star</mat-icon>
+            <span>连对 {{ streak }}</span>
+          </div>
+          <div class="score-item">
+            <mat-icon>check_circle</mat-icon>
+            <span>{{ correctCount }} / {{ totalAttempts }}</span>
+          </div>
+          <div class="score-item score-difficulty">
+            <span>{{ difficulty.labelZh }}</span>
+          </div>
+        </div>
+
+        <!-- 题目展示 -->
+        <div class="practice-question-area" [class.correct-bounce]="showCorrectAnimation"
+                                            [class.incorrect-shake]="showIncorrectAnimation">
+          @if (practiceEquation.type === 'linear-1var') {
+            <div class="equation-display">
+              {{ getEquationDisplayString(practiceEquation) }}
+            </div>
+          }
+          @if (practiceEquation.type === 'system-2var') {
+            <div class="system-equation-display">
+              <div class="sys-eq-line">x + y = {{ practiceEquation.c1 }}</div>
+              <div class="sys-eq-divider"></div>
+              <div class="sys-eq-line">x − y = {{ practiceEquation.c2 >= 0 ? practiceEquation.c2 : -practiceEquation.c2 }}</div>
+            </div>
+          }
+          @if (practiceEquation.type === 'system-3var') {
+            <div class="system-equation-display">
+              <div class="sys-eq-line">{{ practiceEquation.eq1Display }}</div>
+              <div class="sys-eq-line">{{ practiceEquation.eq2Display }}</div>
+              <div class="sys-eq-line">{{ practiceEquation.eq3Display }}</div>
+            </div>
+          }
+        </div>
+
+        <!-- 答案区 -->
+        <div class="answer-area">
+          <p class="answer-prompt">求解：</p>
+
+          @if (inputMethod === 'drag') {
+            <!-- 拖拽模式：答案槽 -->
+            <div class="answer-slots-row">
+              @for (slot of answerSlots; track slot.variableName) {
+                <div class="answer-slot-group">
+                  <div class="slot-label">{{ slot.displayLabel }} =</div>
+                  <div class="answer-slot"
+                       [id]="'slot-' + slot.variableName"
+                       cdkDropList
+                       [cdkDropListConnectedTo]="['tile-bank', ...slotListIds]"
+                       (cdkDropListDropped)="onTileDropToSlot($event, slot)"
+                       (click)="clickSlot(slot)"
+                       [class.slot-correct]="slot.isCorrect === true"
+                       [class.slot-incorrect]="slot.isCorrect === false"
+                       [class.slot-filled]="slot.droppedTile !== null">
+                    @if (slot.droppedTile) {
+                      <div class="number-tile number-tile--placed"
+                           cdkDrag [cdkDragData]="slot.droppedTile">
+                        {{ slot.droppedTile.value }}
+                      </div>
+                    } @else {
+                      <span class="slot-hint">?</span>
+                    }
+                    @if (isSubmitted && slot.isCorrect === false) {
+                      <div class="slot-correct-hint">{{ slot.correctValue }}</div>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+
+            <!-- 数字池 -->
+            <div class="tile-bank"
+                 id="tile-bank"
+                 cdkDropList
+                 [cdkDropListData]="availableTiles"
+                 [cdkDropListConnectedTo]="slotListIds"
+                 (cdkDropListDropped)="onTileDropToBank($event)">
+              @for (tile of availableTiles; track tile.id) {
+                @if (!tile.isUsed) {
+                  <div class="number-tile"
+                       cdkDrag [cdkDragData]="tile"
+                       (click)="clickTile(tile)">
+                    {{ tile.value }}
+                    <div *cdkDragPlaceholder class="tile-placeholder"></div>
+                  </div>
+                }
+              }
+            </div>
+          } @else {
+            <!-- 键盘输入模式 -->
+            <div class="typed-answer-area">
+              @for (slot of answerSlots; track slot.variableName) {
+                <div class="typed-row">
+                  <span class="typed-label">{{ slot.displayLabel }} =</span>
+                  <input type="number"
+                         inputmode="numeric"
+                         class="typed-input"
+                         [class.input-correct]="slot.isCorrect === true"
+                         [class.input-incorrect]="slot.isCorrect === false"
+                         [(ngModel)]="slot.typedValue"
+                         [disabled]="isSubmitted"
+                         placeholder="?" />
+                  @if (isSubmitted && slot.isCorrect === false) {
+                    <span class="typed-correct-hint">正确：{{ slot.correctValue }}</span>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- 提交 / 下一题 -->
+        <div class="practice-actions">
+          @if (!isSubmitted) {
+            <button class="action-btn action-btn--submit"
+                    [disabled]="!canSubmit"
+                    (click)="submitAnswer()">
+              <mat-icon>check</mat-icon>
+              提交答案
+            </button>
+          } @else {
+            <div class="feedback-row">
+              @if (isCorrect) {
+                <div class="feedback feedback--correct">
+                  <mat-icon>star</mat-icon>
+                  <span>回答正确！</span>
+                </div>
+              } @else {
+                <div class="feedback feedback--incorrect">
+                  <mat-icon>close</mat-icon>
+                  <span>再想想～</span>
+                </div>
+              }
+              <button class="action-btn action-btn--next" (click)="nextQuestion()">
+                <mat-icon>arrow_forward</mat-icon>
+                下一题
+              </button>
+            </div>
+          }
+        </div>
+
+      }
+
+    </div>
+  }
+
+</div>

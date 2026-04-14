@@ -33,6 +33,10 @@ export class MathCategoryComponent {
     this.router.navigate(['/category/math/basic-operations-game']);
   }
 
+  openSolveEquations() {
+    this.router.navigate(['/category/math/solve-equations']);
+  }
+
   openSettings() {
     this.router.navigate(['/settings']);
   }

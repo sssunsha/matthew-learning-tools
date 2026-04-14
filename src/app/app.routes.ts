@@ -5,6 +5,7 @@ import { QuickCalculationComponent } from './components/quick-calculation/quick-
 import { TetrisComponent } from './components/tetris/tetris';
 import { MathCategoryComponent } from './components/categories/math/math-category';
 import { BasicOperationsGameComponent } from './components/categories/math/basic-operations-game/basic-operations-game';
+import { SolveEquationsComponent } from './components/categories/math/solve-equations/solve-equations';
 import { EntertainmentCategoryComponent } from './components/categories/entertainment/entertainment-category';
 import { ChineseCategoryComponent } from './components/categories/chinese/chinese-category';
 import { Grade3Term2CharactersComponent } from './components/categories/chinese/grade3-term2-characters/grade3-term2-characters';
@@ -129,6 +130,11 @@ export const routes: Routes = [
     path: 'category/math/basic-operations-game',
     component: BasicOperationsGameComponent,
     title: '基础运算游戏 - Basic Operations Game',
+  },
+  {
+    path: 'category/math/solve-equations',
+    component: SolveEquationsComponent,
+    title: '解方程 - Solve Equations',
   },
   {
     path: 'category/science',
