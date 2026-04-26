@@ -16,7 +16,7 @@ export interface Token {
 const TOKEN_RULES: Array<{ type: TokenType; re: RegExp }> = [
   { type: 'number',   re: /^\d+(\.\d+)?/ },
   { type: 'equals',   re: /^=/ },
-  { type: 'addsub',   re: /^[+\-]/ },
+  { type: 'addsub',   re: /^[-+]/ },
   { type: 'muldiv',   re: /^[×*÷/]/ },
   { type: 'paren',    re: /^[()]/ },
   { type: 'variable', re: /^[a-zA-Z△□○]/ },

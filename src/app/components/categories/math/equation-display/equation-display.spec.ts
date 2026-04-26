@@ -42,4 +42,13 @@ describe('tokenizeLine', () => {
   it('空字符串应返回空数组', () => {
     expect(tokenizeLine('')).toEqual([]);
   });
+
+  it('应将小数数字作为整体 token', () => {
+    const tokens = tokenizeLine('3.14');
+    expect(tokens).toEqual([{ text: '3.14', type: 'number' }] as Token[]);
+  });
+
+  it('纯空格输入应返回空数组', () => {
+    expect(tokenizeLine('   ')).toEqual([]);
+  });
 });
