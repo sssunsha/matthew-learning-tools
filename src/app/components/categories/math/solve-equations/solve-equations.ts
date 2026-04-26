@@ -207,6 +207,10 @@ export class SolveEquationsComponent implements OnDestroy {
     }
   }
 
+  goToEquationDisplay(): void {
+    this.router.navigate(['/category/math/equation-display']);
+  }
+
   selectType(type: EquationType): void {
     this.currentEquationType = type;
   }

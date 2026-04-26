@@ -137,6 +137,14 @@ export const routes: Routes = [
     title: '解方程 - Solve Equations',
   },
   {
+    path: 'category/math/equation-display',
+    loadComponent: () =>
+      import('./components/categories/math/equation-display/equation-display').then(
+        m => m.EquationDisplayComponent
+      ),
+    title: '方程小练习 - Equation Display',
+  },
+  {
     path: 'category/science',
     component: ScienceCategoryComponent,
     title: '科学 - Science',
