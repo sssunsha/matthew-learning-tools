@@ -1,1 +1,46 @@
-<div></div>
+<div class="category-container math-theme eq-display-page">
+
+  <!-- 顶部导航栏 -->
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="handleBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-titles">
+      <h1 class="category-title">方程小练习</h1>
+      <p class="category-subtitle">Equation Display</p>
+    </div>
+    <div class="header-spacer"></div>
+  </div>
+
+  <!-- 中央展示区 -->
+  <div class="eq-display-area">
+    @if (displayLines.length === 0) {
+      <p class="eq-placeholder">输入方程后点击确定</p>
+    } @else {
+      <div class="eq-lines">
+        @for (line of displayLines; track $index) {
+          <div class="eq-token-row">
+            @for (token of line; track $index) {
+              <span class="eq-token eq-token--{{ token.type }}">{{ token.text }}</span>
+            }
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- 底部输入区 -->
+  <div class="eq-input-area">
+    <textarea
+      class="eq-textarea"
+      [(ngModel)]="inputText"
+      placeholder="3x + 5 = 14（方程组请换行输入）"
+      rows="3"
+    ></textarea>
+    <button class="eq-confirm-btn" (click)="confirm()">
+      <mat-icon>check</mat-icon>
+      确定
+    </button>
+  </div>
+
+</div>
