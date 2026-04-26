@@ -276,7 +276,11 @@
 
   &--display {
     background: linear-gradient(135deg, #9b59b6, #7d3c98);
-    &:hover { background: linear-gradient(135deg, #7d3c98, #6c3483); }
+    color: #fff;
+    &:hover {
+      background: linear-gradient(135deg, #7d3c98, #6c3483);
+      transform: scale(1.05);
+    }
   }
 }
 
