@@ -20,8 +20,8 @@
       <div class="eq-lines">
         @for (line of displayLines; track $index) {
           <div class="eq-token-row">
-            @for (token of line; track $index) {
-              <span class="eq-token eq-token--{{ token.type }}">{{ token.text }}</span>
+            @for (token of line; track token.text + token.type) {
+              <span class="eq-token" [class]="'eq-token--' + token.type">{{ token.text }}</span>
             }
           </div>
         }
