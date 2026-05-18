@@ -1,0 +1,194 @@
+<div class="category-container math-theme quiz-container">
+  
+  <!-- ─── 顶部导航栏 ─────────────────────────────────────────────────────── -->
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-titles">
+      <h1 class="category-title">方程小测验</h1>
+      <p class="category-subtitle">Equation Quiz</p>
+    </div>
+    <div class="header-spacer"></div>
+  </div>
+
+  <!-- ─── 题型切换标签 ───────────────────────────────────────────────────── -->
+  <div class="quiz-tabs">
+    <button class="quiz-tab"
+            [class.active]="currentType === 'linear-1var'"
+            (click)="switchType('linear-1var')">
+      <mat-icon>functions</mat-icon>
+      <span class="tab-label">一元一次方程</span>
+      <span class="tab-sublabel">Linear Equation</span>
+    </button>
+    <button class="quiz-tab"
+            [class.active]="currentType === 'system-2var'"
+            (click)="switchType('system-2var')">
+      <mat-icon>grid_on</mat-icon>
+      <span class="tab-label">二元一次方程组</span>
+      <span class="tab-sublabel">System of Equations</span>
+    </button>
+  </div>
+
+  <!-- ─── 主内容区 ───────────────────────────────────────────────────────── -->
+  <div class="quiz-content">
+    
+    <!-- 统计栏 -->
+    <div class="quiz-stats">
+      <div class="stat-item">
+        <mat-icon>star</mat-icon>
+        <span class="stat-label">连对</span>
+        <span class="stat-value">{{ streak }}</span>
+      </div>
+      <div class="stat-item">
+        <mat-icon>check_circle</mat-icon>
+        <span class="stat-label">正确率</span>
+        <span class="stat-value">{{ correctCount }}/{{ totalQuestions }}</span>
+      </div>
+      <div class="stat-item">
+        <mat-icon>percent</mat-icon>
+        <span class="stat-label">准确度</span>
+        <span class="stat-value">{{ accuracy }}%</span>
+      </div>
+    </div>
+
+    <!-- 难度选择 -->
+    <div class="difficulty-selector">
+      <span class="difficulty-label">难度：</span>
+      @for (diff of difficulties; track diff.id) {
+        <button class="difficulty-btn"
+                [class.active]="currentDifficulty === diff.id"
+                (click)="switchDifficulty(diff.id)">
+          {{ diff.labelZh }}
+        </button>
+      }
+    </div>
+
+    <!-- 题目区域 -->
+    @if (currentQuestion) {
+      <div class="question-area" 
+           [class.correct-flash]="showResult && isCorrect"
+           [class.incorrect-shake]="showResult && !isCorrect">
+        
+        <!-- 题目编号 -->
+        <div class="question-number">
+          第 {{ totalQuestions + 1 }} 题
+        </div>
+
+        <!-- 一元一次方程显示 -->
+        @if (currentQuestion.type === 'linear-1var') {
+          <div class="equation-display large-equation">
+            {{ currentQuestion.display }}
+          </div>
+        }
+
+        <!-- 二元一次方程组显示 -->
+        @if (currentQuestion.type === 'system-2var') {
+          <div class="system-display">
+            <div class="system-brace">{{ '{' }}</div>
+            <div class="system-equations">
+              <div class="system-eq">{{ currentQuestion.eq1Display }}</div>
+              <div class="system-eq">{{ currentQuestion.eq2Display }}</div>
+            </div>
+          </div>
+        }
+
+      </div>
+
+      <!-- 答案输入区 -->
+      <div class="answer-section">
+        <p class="answer-prompt">请输入答案：</p>
+        
+        @if (currentQuestion.type === 'linear-1var') {
+          <!-- 一元一次方程答案 -->
+          <div class="answer-input-group">
+            <label class="answer-label">x =</label>
+            <input type="number"
+                   inputmode="numeric"
+                   class="answer-input"
+                   [class.input-correct]="isSubmitted && isCorrect"
+                   [class.input-incorrect]="isSubmitted && !isCorrect"
+                   [(ngModel)]="userAnswerX"
+                   [disabled]="isSubmitted"
+                   placeholder="?" />
+            @if (isSubmitted && !isCorrect) {
+              <span class="correct-answer-hint">
+                正确答案: {{ currentQuestion.solution }}
+              </span>
+            }
+          </div>
+        }
+
+        @if (currentQuestion.type === 'system-2var') {
+          <!-- 二元一次方程组答案 -->
+          <div class="answer-input-group">
+            <label class="answer-label">x =</label>
+            <input type="number"
+                   inputmode="numeric"
+                   class="answer-input"
+                   [class.input-correct]="isSubmitted && isCorrect"
+                   [class.input-incorrect]="isSubmitted && !isCorrect"
+                   [(ngModel)]="userAnswerX"
+                   [disabled]="isSubmitted"
+                   placeholder="?" />
+            @if (isSubmitted && !isCorrect) {
+              <span class="correct-answer-hint">
+                正确: {{ currentQuestion.solutionX }}
+              </span>
+            }
+          </div>
+
+          <div class="answer-input-group">
+            <label class="answer-label">y =</label>
+            <input type="number"
+                   inputmode="numeric"
+                   class="answer-input"
+                   [class.input-correct]="isSubmitted && isCorrect"
+                   [class.input-incorrect]="isSubmitted && !isCorrect"
+                   [(ngModel)]="userAnswerY"
+                   [disabled]="isSubmitted"
+                   placeholder="?" />
+            @if (isSubmitted && !isCorrect) {
+              <span class="correct-answer-hint">
+                正确: {{ currentQuestion.solutionY }}
+              </span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- 操作按钮 -->
+      <div class="quiz-actions">
+        @if (!isSubmitted) {
+          <button class="quiz-btn quiz-btn--submit"
+                  [disabled]="!canSubmit"
+                  (click)="submitAnswer()">
+            <mat-icon>check</mat-icon>
+            <span>确定</span>
+          </button>
+        } @else {
+          <div class="result-feedback">
+            @if (isCorrect) {
+              <div class="feedback-badge feedback-correct">
+                <mat-icon>check_circle</mat-icon>
+                <span>回答正确！</span>
+              </div>
+            } @else {
+              <div class="feedback-badge feedback-incorrect">
+                <mat-icon>cancel</mat-icon>
+                <span>答案错误，再接再厉！</span>
+              </div>
+            }
+          </div>
+          
+          <button class="quiz-btn quiz-btn--next" (click)="nextQuestion()">
+            <mat-icon>arrow_forward</mat-icon>
+            <span>下一题</span>
+          </button>
+        }
+      </div>
+    }
+
+  </div>
+
+</div>

@@ -6,6 +6,7 @@ import { TetrisComponent } from './components/tetris/tetris';
 import { MathCategoryComponent } from './components/categories/math/math-category';
 import { BasicOperationsGameComponent } from './components/categories/math/basic-operations-game/basic-operations-game';
 import { SolveEquationsComponent } from './components/categories/math/solve-equations/solve-equations';
+import { EquationQuizComponent } from './components/categories/math/solve-equations/equation-quiz';
 import { EntertainmentCategoryComponent } from './components/categories/entertainment/entertainment-category';
 import { ChineseCategoryComponent } from './components/categories/chinese/chinese-category';
 import { Grade3Term2CharactersComponent } from './components/categories/chinese/grade3-term2-characters/grade3-term2-characters';
@@ -46,19 +47,27 @@ export const routes: Routes = [
 
   // Category routes with /category prefix (maintains existing navigation compatibility)
   {
-    path: 'category/chinese',
-    component: ChineseCategoryComponent,
-    title: '语文 - Chinese',
+    path: 'category/math/basic-operations-game',
+    component: BasicOperationsGameComponent,
+    title: '基础运算游戏 - Basic Operations Game',
   },
   {
-    path: 'category/chinese/grade3-term2-characters',
-    component: Grade3Term2CharactersComponent,
-    title: '三年级下册生字表',
+    path: 'category/math/solve-equations',
+    component: SolveEquationsComponent,
+    title: '解方程 - Solve Equations',
   },
   {
-    path: 'category/chinese/grade3-term2-morning-reading',
-    component: Grade3Term2MorningReadingComponent,
-    title: '三下晨读单',
+    path: 'category/math/equation-display',
+    loadComponent: () =>
+      import('./components/categories/math/equation-display/equation-display').then(
+        (m) => m.EquationDisplayComponent,
+      ),
+    title: '方程小练习 - Equation Display',
+  },
+  {
+    path: 'category/math/equation-quiz',
+    component: EquationQuizComponent,
+    title: '小测验 - Equation Quiz',
   },
   {
     path: 'category/english',
@@ -140,9 +149,14 @@ export const routes: Routes = [
     path: 'category/math/equation-display',
     loadComponent: () =>
       import('./components/categories/math/equation-display/equation-display').then(
-        m => m.EquationDisplayComponent
+        (m) => m.EquationDisplayComponent,
       ),
     title: '方程小练习 - Equation Display',
+  },
+  {
+    path: 'category/math/equation-quiz',
+    component: EquationQuizComponent,
+    title: '小测验 - Equation Quiz',
   },
   {
     path: 'category/science',

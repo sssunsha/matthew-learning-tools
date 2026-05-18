@@ -10,6 +10,9 @@
       <p class="category-subtitle">Equation Display</p>
     </div>
     <div class="header-spacer"></div>
+    <button mat-icon-button class="reset-btn" (click)="reset()" [disabled]="displayLines.length === 0">
+      <mat-icon>restart_alt</mat-icon>
+    </button>
   </div>
 
   <!-- 中央展示区 -->
@@ -17,30 +20,208 @@
     @if (displayLines.length === 0) {
       <p class="eq-placeholder">输入方程后点击确定</p>
     } @else {
-      <div class="eq-lines">
-        @for (line of displayLines; track $index) {
-          <div class="eq-token-row">
+
+      <!-- 左侧：原方程（固定参考） -->
+      <div class="eq-source-panel">
+        @for (line of originalLines; track $index; let i = $index) {
+          @if (i > 0) {
+            <div class="eq-source-divider"></div>
+          }
+          <div class="eq-source-line">
             @for (token of line; track token.text + token.type) {
-              <span class="eq-token" [class]="'eq-token--' + token.type">{{ token.text }}</span>
+              <span [class]="'eq-token-sm eq-token-sm--' + token.type">{{ token.text }}</span>
             }
           </div>
         }
       </div>
+
+      <!-- 右侧：推演区（逐步从上到下） -->
+      <div class="eq-derivation-panel">
+        @for (line of displayLines; track $index; let lineIdx = $index) {
+          @if (lineIdx > 0) {
+            <div class="eq-chain-separator"></div>
+          }
+          <div class="eq-chain">
+
+            <!-- 历史步骤（上方，较小，半透明） -->
+            @for (step of stepHistories[lineIdx]; track $index) {
+              <div class="eq-chain-step eq-chain-step--history" [@historyItem]>
+                @if (step.combineWith) {
+                  <span class="eq-token-sm eq-token-sm--paren">(</span>
+                  @for (token of step.tokens; track token.text + token.type) {
+                    <span [class]="'eq-token-sm eq-token-sm--' + token.type">{{ token.text }}</span>
+                  }
+                  <span class="eq-token-sm eq-token-sm--paren">)</span>
+                  <span [class]="'eq-token-sm eq-token-sm--' + (/^[-+]$/.test(step.combineWith.op) ? 'addsub' : 'muldiv')">{{ step.combineWith.op }}</span>
+                  <span class="eq-token-sm eq-token-sm--paren">(</span>
+                  @for (token of step.combineWith.tokens; track token.text + token.type) {
+                    <span [class]="'eq-token-sm eq-token-sm--' + token.type">{{ token.text }}</span>
+                  }
+                  <span class="eq-token-sm eq-token-sm--paren">)</span>
+                } @else {
+                  @for (token of step.tokens; track token.text + token.type) {
+                    <span [class]="'eq-token-sm eq-token-sm--' + token.type">{{ token.text }}</span>
+                  }
+                }
+              </div>
+              <div class="eq-chain-arrow">↓</div>
+            }
+
+            <!-- 当前步骤（大字，可交互） -->
+            <div class="eq-current-wrapper" [@currentStep]="stepVersions[lineIdx]">
+              <div class="eq-line-wrapper">
+
+                <!-- 联立模式序号徽章 -->
+                @if (selectedIndices.length > 1 && selectedIndices[0] === lineIdx) {
+                  <span class="eq-selection-badge eq-selection-badge--primary">①</span>
+                }
+                @if (selectedIndices.length > 1 && selectedIndices[1] === lineIdx) {
+                  <span class="eq-selection-badge eq-selection-badge--secondary">②</span>
+                }
+
+                @if (selectedIndices[0] === lineIdx && pendingPreviewTokens.length > 0) {
+                  <span class="eq-bracket">[</span>
+                }
+                <div
+                  class="eq-token-row"
+                  [class.eq-token-row--selected]="selectedIndices[0] === lineIdx"
+                  [class.eq-token-row--selected-combine]="selectedIndices.length > 1 && selectedIndices[1] === lineIdx"
+                  (click)="selectLine(lineIdx)"
+                  (keydown.enter)="selectLine(lineIdx)"
+                >
+                  @for (token of line; track token.text + token.type) {
+                    <span [class]="'eq-token eq-token--' + token.type">{{ token.text }}</span>
+                  }
+                </div>
+                @if (selectedIndices.includes(lineIdx)) {
+                  @if (selectedIndices[0] === lineIdx && pendingPreviewTokens.length > 0) {
+                    <span class="eq-bracket">]</span>
+                    @for (token of pendingPreviewTokens; track token.text + token.type) {
+                      <span [class]="'eq-token eq-token--' + token.type">{{ token.text }}</span>
+                    }
+                  }
+                  @if (selectedIndices.length < 2) {
+                    <button class="eq-inline-calc-btn" (click)="simplifyLine(lineIdx)">
+                      计算
+                    </button>
+                  }
+                }
+
+              </div>
+            </div>
+
+          </div>
+        }
+      </div>
+
     }
   </div>
 
-  <!-- 底部输入区 -->
-  <div class="eq-input-area">
-    <textarea
-      class="eq-textarea"
-      [(ngModel)]="inputText"
-      placeholder="3x + 5 = 14（方程组请换行输入）"
-      rows="3"
-    ></textarea>
-    <button class="eq-confirm-btn" (click)="confirm()">
-      <mat-icon>check</mat-icon>
-      确定
-    </button>
+  <!-- 底部区域 -->
+  <div class="eq-bottom">
+
+    <!-- 普通输入区（无方程选中时显示） -->
+    @if (!drawerOpen) {
+      <div class="eq-input-area">
+        <textarea
+          class="eq-textarea"
+          [(ngModel)]="inputText"
+          placeholder="3x + 5 = 14（方程组请换行输入）"
+          rows="3"
+        ></textarea>
+        @if (displayLines.length === 1) {
+          <div class="eq-drawer-actions">
+            <button
+              class="eq-action-btn eq-action-btn--calc"
+              (click)="quickCalculate()"
+              [disabled]="simplifying"
+            >
+              <mat-icon>{{ simplifying ? 'hourglass_empty' : 'calculate' }}</mat-icon>
+              计算
+            </button>
+          </div>
+        }
+        <button class="eq-confirm-btn" (click)="confirm()">
+          <mat-icon>check</mat-icon>
+          确定
+        </button>
+      </div>
+    }
+
+    <!-- 交互抽屉（有方程选中时显示） -->
+    @if (drawerOpen) {
+      <div class="eq-drawer">
+
+        <!-- 状态 A：两方程已选，联立加减操作 -->
+        @if (selectedIndices.length >= 2) {
+          <div class="eq-combine-preview">
+            <span class="eq-selection-badge eq-selection-badge--primary">①</span>
+            <span class="eq-combine-preview-label">{{ operationLabel || '选择运算符' }}</span>
+            <div class="eq-combine-ops">
+              @for (op of combineOperators; track op) {
+                <button
+                  class="eq-key eq-key--op eq-key--op-sm"
+                  [class.eq-key--active]="pendingOp === op"
+                  (click)="pressOp(op)"
+                >{{ op }}</button>
+              }
+            </div>
+            <span class="eq-selection-badge eq-selection-badge--secondary">②</span>
+          </div>
+          <div class="eq-drawer-actions">
+            <button class="eq-action-btn eq-action-btn--cancel" (click)="undo()">
+              <mat-icon>{{ canUndo ? 'undo' : 'close' }}</mat-icon>
+              {{ canUndo ? '撤销' : '取消' }}
+            </button>
+            <button
+              class="eq-action-btn eq-action-btn--calc"
+              (click)="calculate()"
+              [disabled]="!canCalculate"
+            >
+              <mat-icon>check</mat-icon>
+              确定
+            </button>
+          </div>
+        }
+
+        <!-- 状态 B：单方程操作（输入数字和运算符） -->
+        @else {
+          <div class="eq-drawer-row1">
+            @for (d of digits; track d) {
+              <button class="eq-key eq-key--num" (click)="pressDigit(d)">{{ d }}</button>
+            }
+            @for (v of displayVars; track v) {
+              <button class="eq-key eq-key--var" (click)="pressVariable(v)">{{ v }}</button>
+            }
+          </div>
+          <div class="eq-drawer-row2">
+            @for (op of operators; track op) {
+              <button
+                class="eq-key eq-key--op"
+                [class.eq-key--active]="pendingOp === op"
+                (click)="pressOp(op)"
+              >{{ op }}</button>
+            }
+          </div>
+          <div class="eq-drawer-actions">
+            <button class="eq-action-btn eq-action-btn--cancel" (click)="undo()">
+              <mat-icon>{{ canUndo ? 'undo' : 'close' }}</mat-icon>
+              {{ canUndo ? '撤销' : '取消' }}
+            </button>
+            <button
+              class="eq-action-btn eq-action-btn--calc"
+              (click)="calculate()"
+              [disabled]="!canCalculate"
+            >
+              <mat-icon>{{ simplifying ? 'hourglass_empty' : 'check' }}</mat-icon>
+              确定
+            </button>
+          </div>
+        }
+
+      </div>
+    }
+
   </div>
 
 </div>

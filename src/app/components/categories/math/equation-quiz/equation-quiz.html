@@ -1,0 +1,195 @@
+<div class="category-container math-theme">
+
+  <!-- Top Navigation Bar -->
+  <div class="category-header">
+    <button mat-icon-button class="back-btn" (click)="handleBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-titles">
+      <h1 class="category-title">小测验</h1>
+      <p class="category-subtitle">Equation Quiz</p>
+    </div>
+    <div class="header-spacer"></div>
+    
+    <!-- Question Type Switcher in Header -->
+    <div class="type-tabs">
+      <button class="type-tab"
+              [class.active]="currentQuestionType === 'linear-1var'"
+              (click)="switchQuestionType('linear-1var')">
+        <span class="tab-icon">x</span>
+        <span class="tab-label">一元一次</span>
+      </button>
+      <button class="type-tab"
+              [class.active]="currentQuestionType === 'system-2var'"
+              (click)="switchQuestionType('system-2var')">
+        <span class="tab-icon">xy</span>
+        <span class="tab-label">二元一次</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Quiz Content -->
+  <div class="quiz-screen">
+
+    <!-- Score Bar -->
+    <div class="score-bar">
+      <div class="score-item">
+        <mat-icon>star</mat-icon>
+        <span>连对 {{ streak }}</span>
+      </div>
+      <div class="score-item">
+        <mat-icon>check_circle</mat-icon>
+        <span>{{ score }} / {{ totalQuestions }}</span>
+      </div>
+      <div class="score-item">
+        <mat-icon>percent</mat-icon>
+        <span>{{ accuracyPercent }}%</span>
+      </div>
+    </div>
+
+    <!-- Difficulty Selector -->
+    <div class="difficulty-section">
+      <span class="difficulty-label">难度：</span>
+      @for (d of difficultyConfigs; track d.id) {
+        <button class="diff-btn"
+                [class.active]="currentDifficulty.id === d.id"
+                (click)="changeDifficulty(d)">
+          {{ d.labelZh }}
+        </button>
+      }
+    </div>
+
+    <!-- Question Display Area -->
+    @if (currentQuestion) {
+      <div class="question-area" 
+           [class.correct-bounce]="showCorrectAnimation"
+           [class.incorrect-shake]="showIncorrectAnimation">
+        
+        <!-- Linear Equation Display -->
+        @if (currentQuestionType === 'linear-1var') {
+          <div class="equation-card">
+            <div class="equation-label">方程题</div>
+            <div class="equation-display">
+              {{ currentQuestion.equation }}
+            </div>
+          </div>
+        }
+
+        <!-- System of Equations Display -->
+        @if (currentQuestionType === 'system-2var' && currentQuestion.equations) {
+          <div class="equation-card">
+            <div class="equation-label">方程组</div>
+            <div class="system-equations">
+              <div class="sys-eq-brace">{{ '{' }}</div>
+              <div class="sys-eq-list">
+                @for (eq of currentQuestion.equations; track $index) {
+                  <div class="sys-eq-line">{{ eq }}</div>
+                }
+              </div>
+            </div>
+          </div>
+        }
+
+      </div>
+
+      <!-- Answer Input Area -->
+      <div class="answer-section">
+        <p class="answer-prompt">请输入答案：</p>
+
+        <div class="answer-inputs">
+          @if (currentQuestionType === 'linear-1var') {
+            <!-- Single variable input -->
+            <div class="input-group">
+              <label class="input-label">x =</label>
+              <input type="number"
+                     inputmode="decimal"
+                     class="answer-input"
+                     [(ngModel)]="answerX"
+                     [disabled]="isAnswered"
+                     placeholder="?"
+                     (keyup.enter)="canSubmit && submitAnswer()" />
+            </div>
+          } @else {
+            <!-- Two variables input -->
+            <div class="input-group">
+              <label class="input-label">x =</label>
+              <input type="number"
+                     inputmode="decimal"
+                     class="answer-input"
+                     [(ngModel)]="answerX"
+                     [disabled]="isAnswered"
+                     placeholder="?"
+                     (keyup.enter)="canSubmit && submitAnswer()" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">y =</label>
+              <input type="number"
+                     inputmode="decimal"
+                     class="answer-input"
+                     [(ngModel)]="answerY"
+                     [disabled]="isAnswered"
+                     placeholder="?"
+                     (keyup.enter)="canSubmit && submitAnswer()" />
+            </div>
+          }
+        </div>
+
+        <!-- Submit / Next Button -->
+        <div class="action-buttons">
+          @if (!isAnswered) {
+            <button class="action-btn action-btn--submit"
+                    [disabled]="!canSubmit"
+                    (click)="submitAnswer()">
+              <mat-icon>check</mat-icon>
+              <span>提交答案</span>
+            </button>
+          } @else {
+            <!-- Feedback Section -->
+            <div class="feedback-section">
+              @if (currentQuestion.isCorrect) {
+                <div class="feedback feedback--correct">
+                  <mat-icon>celebration</mat-icon>
+                  <span class="feedback-text">回答正确！</span>
+                </div>
+              } @else {
+                <div class="feedback feedback--incorrect">
+                  <mat-icon>close</mat-icon>
+                  <span class="feedback-text">再想想～</span>
+                </div>
+                
+                <!-- Show Correct Answer -->
+                <div class="correct-answer-box">
+                  <div class="correct-answer-label">正确答案：</div>
+                  @if (currentQuestionType === 'linear-1var') {
+                    <div class="correct-answer-value">x = {{ currentQuestion.solution }}</div>
+                  } @else {
+                    @if (currentQuestion.solution && typeof currentQuestion.solution === 'object') {
+                      <div class="correct-answer-value">
+                        x = {{ currentQuestion.solution['x'] }}, 
+                        y = {{ currentQuestion.solution['y'] }}
+                      </div>
+                    }
+                  }
+                </div>
+
+                <!-- Explanation -->
+                <div class="explanation-box">
+                  <div class="explanation-label">解题步骤：</div>
+                  <div class="explanation-content">{{ currentQuestion.explanation }}</div>
+                </div>
+              }
+            </div>
+
+            <button class="action-btn action-btn--next"
+                    (click)="nextQuestion()">
+              <mat-icon>arrow_forward</mat-icon>
+              <span>下一题</span>
+            </button>
+          }
+        </div>
+      </div>
+    }
+
+  </div>
+
+</div>

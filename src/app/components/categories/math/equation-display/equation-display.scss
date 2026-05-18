@@ -1,11 +1,26 @@
 // ─── Token 颜色变量 ────────────────────────────────────────────────────────────
-$color-number:   #5c9ce6;
-$color-variable: #f5a623;
-$color-equals:   #e05c5c;
-$color-addsub:   #4caf7d;
-$color-muldiv:   #9b59b6;
-$color-paren:    rgba(255, 255, 255, 0.7);
-$color-other:    #ffffff;
+$color-number:   #b45309;
+$color-variable: #2563eb;
+$color-equals:   #dc2626;
+$color-addsub:   #16a34a;
+$color-muldiv:   #9333ea;
+$color-paren:    #0891b2;
+$color-other:    #4b5563;
+
+// 主题 CSS 变量
+.math-theme {
+  --category-color: #5c9ce6;
+  --category-dark:  #4a8fd9;
+  --category-light: #7cb3ed;
+}
+
+// 容器背景白色
+.category-container {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 
 // ─── 页面布局 ──────────────────────────────────────────────────────────────────
 .eq-display-page {
@@ -15,28 +30,50 @@ $color-other:    #ffffff;
   overflow: hidden;
 }
 
-// ─── 顶部导航栏（与 solve-equations 共用结构，需在此重定义） ──────────────────
+// ─── 顶部导航栏 ────────────────────────────────────────────────────────────────
 .category-header {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 12px 16px;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  background: #f3f4f6;
+  border-bottom: 2px solid #e5e7eb;
   flex-shrink: 0;
 
   .back-btn {
-    background: rgba(92, 156, 230, 0.3);
-    color: #fff;
+    background: rgba(92, 156, 230, 0.15);
+    color: #111827;
     transition: all 0.3s;
     width: 38px;
     height: 38px;
     flex-shrink: 0;
 
     &:hover {
-      background: #5c9ce6;
+      background: var(--category-color);
+      color: #fff;
       transform: scale(1.1);
+    }
+
+    mat-icon { font-size: 22px; width: 22px; height: 22px; }
+  }
+
+  .reset-btn {
+    background: rgba(220, 38, 38, 0.1);
+    color: #991b1b;
+    transition: all 0.3s;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+
+    &:hover:not([disabled]) {
+      background: #dc2626;
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    &[disabled] {
+      opacity: 0.3;
+      cursor: not-allowed;
     }
 
     mat-icon { font-size: 22px; width: 22px; height: 22px; }
@@ -49,15 +86,15 @@ $color-other:    #ffffff;
 
     .category-title {
       font-size: 1.3em;
-      font-weight: 300;
-      color: #fff;
+      font-weight: 600;
+      color: #111827;
       margin: 0;
       line-height: 1.2;
     }
 
     .category-subtitle {
       font-size: 0.75em;
-      color: rgba(255, 255, 255, 0.6);
+      color: #6b7280;
       margin: 0;
     }
   }
@@ -65,30 +102,100 @@ $color-other:    #ffffff;
   .header-spacer { flex: 1; }
 }
 
-// ─── 中央展示区 ────────────────────────────────────────────────────────────────
+// ─── 中央展示区（左右两栏） ────────────────────────────────────────────────────
 .eq-display-area {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.eq-placeholder {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 16px;
-  overflow-y: auto;
-}
-
-.eq-placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: #9ca3af;
   font-size: 1.2rem;
   font-weight: 300;
-  text-align: center;
   letter-spacing: 0.05em;
 }
 
-// ─── 方程行 ────────────────────────────────────────────────────────────────────
-.eq-lines {
+// ─── 左侧：原方程参考区 ────────────────────────────────────────────────────────
+.eq-source-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 24px 14px;
+  flex-shrink: 0;
+  width: 190px;
+  background: #f9fafb;
+  border-right: 2px solid #e5e7eb;
+  overflow-y: auto;
+}
+
+.eq-source-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.05em;
+}
+
+.eq-source-divider {
+  width: 60%;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+// ─── 右侧：推演区 ──────────────────────────────────────────────────────────────
+.eq-derivation-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   gap: 1.2rem;
+  padding: 24px 20px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+// ─── 推演链（单方程的垂直步骤链） ──────────────────────────────────────────────
+.eq-chain {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.eq-chain-step {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.02em;
+  padding: 2px 0;
+}
+
+.eq-chain-step--history {
+  opacity: 0.45;
+}
+
+.eq-chain-arrow {
+  font-size: 1.1rem;
+  color: #9ca3af;
+  font-weight: 500;
+  padding-left: 6px;
+  line-height: 1.6;
+}
+
+.eq-chain-separator {
+  width: 100%;
+  height: 1px;
+  background: #e5e7eb;
 }
 
 .eq-token-row {
@@ -96,78 +203,79 @@ $color-other:    #ffffff;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 0.3em;
+  gap: 0.2em;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 6px 10px;
+  border: 2px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  &--selected {
+    background: #fef9c3;
+
+    &:hover {
+      background: #fef08a;
+    }
+  }
+
+  &--selected-combine {
+    background: #dcfce7;
+
+    &:hover {
+      background: #bbf7d0;
+    }
+  }
+
 }
 
-// ─── Token 积木块基础样式 ──────────────────────────────────────────────────────
+// ─── Token 纯色字符 ────────────────────────────────────────────────────────────
 .eq-token {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 2.5rem;
-  font-weight: 700;
-  padding: 0.3em 0.55em;
-  border-radius: 0.4em;
-  border-width: 2px;
-  border-style: solid;
+  font-weight: 800;
   line-height: 1;
+  padding: 0.1em 0.25em;
+  border: none;
+  background: transparent;
   transition: transform 0.15s ease;
 
-  &:hover {
-    transform: scale(1.05);
-  }
+  &:hover { transform: scale(1.1); }
 
-  // ─── 各类型颜色（双横线 BEM，与模板 [class]="'eq-token--' + token.type" 对应）
-  &--number {
-    color: $color-number;
-    background: rgba(92, 156, 230, 0.15);
-    border-color: $color-number;
-  }
-
-  &--variable {
-    color: $color-variable;
-    background: rgba(245, 166, 35, 0.15);
-    border-color: $color-variable;
-  }
-
-  &--equals {
-    color: $color-equals;
-    background: rgba(224, 92, 92, 0.15);
-    border-color: $color-equals;
-  }
-
-  &--addsub {
-    color: $color-addsub;
-    background: rgba(76, 175, 125, 0.15);
-    border-color: $color-addsub;
-  }
-
-  &--muldiv {
-    color: $color-muldiv;
-    background: rgba(155, 89, 182, 0.15);
-    border-color: $color-muldiv;
-  }
-
-  &--paren {
-    color: $color-paren;
-    background: rgba(255, 255, 255, 0.08);
-    border-color: $color-paren;
-  }
-
-  &--other {
-    color: $color-other;
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
+  &--number   { color: $color-number; }
+  &--variable { color: $color-variable; }
+  &--equals   { color: $color-equals; }
+  &--addsub   { color: $color-addsub; }
+  &--muldiv   { color: $color-muldiv; }
+  &--paren    { color: $color-paren; }
+  &--other    { color: $color-other; }
 }
 
-// ─── 底部输入区 ────────────────────────────────────────────────────────────────
-.eq-input-area {
+.eq-bracket {
+  display: inline-flex;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #9ca3af;
+  padding: 0 0.05em;
+}
+
+// ─── 底部容器 ──────────────────────────────────────────────────────────────────
+.eq-bottom {
   flex-shrink: 0;
+}
+
+// ─── 普通输入区 ────────────────────────────────────────────────────────────────
+.eq-input-area {
   padding: 12px 16px 16px;
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(10px);
-  border-top: 2px solid rgba(255, 255, 255, 0.15);
+  background: #f3f4f6;
+  border-top: 2px solid #e5e7eb;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -176,10 +284,10 @@ $color-other:    #ffffff;
 .eq-textarea {
   width: 100%;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: #ffffff;
+  border: 1.5px solid #d1d5db;
   border-radius: 10px;
-  color: #fff;
+  color: #111827;
   font-size: 1.1rem;
   padding: 10px 14px;
   resize: none;
@@ -187,13 +295,11 @@ $color-other:    #ffffff;
   font-family: inherit;
   line-height: 1.5;
 
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-  }
+  &::placeholder { color: #9ca3af; }
 
   &:focus {
-    border-color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.15);
+    border-color: #5c9ce6;
+    box-shadow: 0 0 0 3px rgba(92, 156, 230, 0.15);
   }
 }
 
@@ -213,18 +319,242 @@ $color-other:    #ffffff;
   cursor: pointer;
   transition: opacity 0.2s, transform 0.15s;
 
-  &:hover {
-    opacity: 0.9;
-    transform: scale(1.01);
+  &:hover { opacity: 0.9; transform: scale(1.01); }
+  &:active { transform: scale(0.98); }
+
+  mat-icon { font-size: 20px; width: 20px; height: 20px; }
+}
+
+// ─── 交互抽屉 ──────────────────────────────────────────────────────────────────
+.eq-drawer {
+  padding: 12px 16px 16px;
+  background: #f3f4f6;
+  border-top: 2px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eq-op-label {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1d4ed8;
+  min-height: 1.5em;
+  background: rgba(37, 99, 235, 0.06);
+  border-radius: 8px;
+  padding: 6px 12px;
+  letter-spacing: 0.02em;
+}
+
+// ─── 抽屉行布局 ────────────────────────────────────────────────────────────────
+.eq-drawer-row1,
+.eq-drawer-row2 {
+  display: flex;
+  gap: 6px;
+
+  .eq-key { flex: 1; }
+}
+
+.eq-key {
+  min-height: 44px;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.1s;
+
+  &:active { transform: scale(0.93); }
+
+  &--num {
+    background: #ffffff;
+    border: 1.5px solid #d1d5db;
+    color: #374151;
+
+    &:hover { background: #f9fafb; }
   }
 
-  &:active {
-    transform: scale(0.98);
+  &--op {
+    background: rgba(147, 51, 234, 0.07);
+    border: 1.5px solid #9333ea;
+    color: #9333ea;
+
+    &:hover { background: rgba(147, 51, 234, 0.14); }
   }
 
-  mat-icon {
-    font-size: 20px;
-    width: 20px;
-    height: 20px;
+  &--var {
+    flex: 1;
+    background: rgba(37, 99, 235, 0.07);
+    border: 1.5px solid #2563eb;
+    color: #2563eb;
+    font-weight: 800;
+
+    &:hover { background: rgba(37, 99, 235, 0.14); }
+  }
+}
+
+// ─── 联立模式：序号徽章 ────────────────────────────────────────────────────────
+.eq-selection-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  line-height: 1;
+
+  &--primary {
+    background: #fef08a;
+    color: #92400e;
+    border: 1.5px solid #d97706;
+  }
+
+  &--secondary {
+    background: #bbf7d0;
+    color: #14532d;
+    border: 1.5px solid #16a34a;
+  }
+}
+
+// ─── 联立模式：两方程已选预览 ──────────────────────────────────────────────────
+.eq-combine-preview {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(37, 99, 235, 0.06);
+  border-radius: 8px;
+  padding: 6px 10px;
+
+  .eq-combine-preview-label {
+    flex: 1;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1d4ed8;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// ─── 联立模式：行内运算符按钮组 ────────────────────────────────────────────────
+.eq-combine-ops {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.eq-key--op-sm {
+  flex: none;
+  min-height: 36px;
+  padding: 6px 14px;
+  font-size: 1.3rem;
+}
+
+// ─── 运算符选中状态 ────────────────────────────────────────────────────────────
+.eq-key--op.eq-key--active {
+  background: rgba(147, 51, 234, 0.22);
+  border-color: #7e22ce;
+  color: #3b0764;
+  transform: scale(1.05);
+}
+
+// ─── 方程行 inline 包装 ────────────────────────────────────────────────────────
+.eq-line-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.eq-token-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.05em 0.1em;
+
+  &--number   { color: $color-number; }
+  &--variable { color: $color-variable; }
+  &--equals   { color: $color-equals; }
+  &--addsub   { color: $color-addsub; }
+  &--muldiv   { color: $color-muldiv; }
+  &--paren    { color: $color-paren; }
+  &--other    { color: $color-other; }
+}
+
+.eq-current-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.eq-inline-calc-btn {
+  flex-shrink: 0;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.1s;
+
+  &:hover { opacity: 0.9; }
+  &:active { transform: scale(0.96); }
+}
+
+// ─── 抽屉操作按钮 ──────────────────────────────────────────────────────────────
+.eq-drawer-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.eq-action-btn {
+  flex: 1;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 8px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  color: #fff;
+
+  &:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  &:not(:disabled):active { transform: scale(0.96); }
+
+  mat-icon { font-size: 18px; width: 18px; height: 18px; }
+
+  &--simplify {
+    background: linear-gradient(135deg, #0891b2, #0e7490);
+    &:not(:disabled):hover { opacity: 0.9; }
+  }
+
+  &--cancel {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    &:not(:disabled):hover { opacity: 0.9; }
+  }
+
+  &--calc {
+    flex: 1.5;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    &:not(:disabled):hover { opacity: 0.9; }
   }
 }

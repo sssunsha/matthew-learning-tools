@@ -1,0 +1,224 @@
+<!-- Equation Quiz Component / 方程式小测验组件 -->
+<div class="equation-quiz-container">
+  <!-- Header Section / 头部区域 -->
+  <div class="quiz-header">
+    <h1 class="quiz-title">方程式小测验 / Equation Quiz</h1>
+    <button class="back-button" (click)="goBack()">
+      ← 返回 / Back
+    </button>
+  </div>
+
+  <!-- Type Selector / 题型切换 -->
+  <div class="type-selector">
+    <button 
+      class="type-btn"
+      [class.active]="currentType === 'linear'"
+      (click)="switchType('linear')">
+      一元一次方程 / Linear Equation
+    </button>
+    <button 
+      class="type-btn"
+      [class.active]="currentType === 'system'"
+      (click)="switchType('system')">
+      二元一次方程组 / System of Equations
+    </button>
+  </div>
+
+  <!-- Difficulty Selector / 难度选择 -->
+  <div class="difficulty-selector">
+    <span class="selector-label">难度 / Difficulty:</span>
+    <button 
+      class="difficulty-btn"
+      [class.active]="difficulty === 'easy'"
+      (click)="setDifficulty('easy')">
+      简单 / Easy
+    </button>
+    <button 
+      class="difficulty-btn"
+      [class.active]="difficulty === 'medium'"
+      (click)="setDifficulty('medium')">
+      中等 / Medium
+    </button>
+    <button 
+      class="difficulty-btn"
+      [class.active]="difficulty === 'hard'"
+      (click)="setDifficulty('hard')">
+      困难 / Hard
+    </button>
+  </div>
+
+  <!-- Score Display / 分数显示 -->
+  <div class="score-display">
+    <div class="score-item">
+      <span class="label">总题数 / Total:</span>
+      <span class="value">{{ totalQuestions }}</span>
+    </div>
+    <div class="score-item">
+      <span class="label">正确 / Correct:</span>
+      <span class="value correct">{{ correctCount }}</span>
+    </div>
+    <div class="score-item">
+      <span class="label">错误 / Wrong:</span>
+      <span class="value wrong">{{ wrongCount }}</span>
+    </div>
+    <div class="score-item">
+      <span class="label">准确率 / Accuracy:</span>
+      <span class="value">{{ accuracy }}%</span>
+    </div>
+  </div>
+
+  <!-- Question Display / 题目显示 -->
+  <div class="question-card">
+    <div class="question-number">
+      第 {{ totalQuestions + 1 }} 题 / Question {{ totalQuestions + 1 }}
+    </div>
+    
+    <div class="question-content">
+      <ng-container *ngIf="currentType === 'linear'">
+        <div class="equation-display">
+          {{ currentQuestion.equation }}
+        </div>
+        <div class="question-text">
+          求解 x 的值 / Solve for x
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="currentType === 'system'">
+        <div class="equation-system">
+          <div class="equation-line">
+            <span class="equation-number">①</span>
+            <span class="equation-display">{{ currentQuestion.equation1 }}</span>
+          </div>
+          <div class="equation-line">
+            <span class="equation-number">②</span>
+            <span class="equation-display">{{ currentQuestion.equation2 }}</span>
+          </div>
+        </div>
+        <div class="question-text">
+          求解 x 和 y 的值 / Solve for x and y
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Answer Input / 答案输入 -->
+    <div class="answer-section">
+      <ng-container *ngIf="currentType === 'linear'">
+        <div class="input-group">
+          <label>x = </label>
+          <input 
+            type="text" 
+            [(ngModel)]="userAnswer.x"
+            [disabled]="showResult"
+            (keyup.enter)="submitAnswer()"
+            placeholder="输入答案 / Enter answer"
+            class="answer-input">
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="currentType === 'system'">
+        <div class="input-group">
+          <label>x = </label>
+          <input 
+            type="text" 
+            [(ngModel)]="userAnswer.x"
+            [disabled]="showResult"
+            placeholder="输入 x 的值 / Enter x value"
+            class="answer-input">
+        </div>
+        <div class="input-group">
+          <label>y = </label>
+          <input 
+            type="text" 
+            [(ngModel)]="userAnswer.y"
+            [disabled]="showResult"
+            (keyup.enter)="submitAnswer()"
+            placeholder="输入 y 的值 / Enter y value"
+            class="answer-input">
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Action Buttons / 操作按钮 -->
+    <div class="action-buttons">
+      <button 
+        class="submit-btn"
+        *ngIf="!showResult"
+        (click)="submitAnswer()"
+        [disabled]="!isAnswerValid()">
+        确定 / Submit
+      </button>
+      <button 
+        class="next-btn"
+        *ngIf="showResult"
+        (click)="nextQuestion()">
+        下一题 / Next Question
+      </button>
+      <button 
+        class="hint-btn"
+        *ngIf="!showResult"
+        (click)="showHint()">
+        提示 / Hint
+      </button>
+    </div>
+
+    <!-- Result Display / 结果显示 -->
+    <div class="result-section" *ngIf="showResult">
+      <div class="result-banner" [class.correct]="isCorrect" [class.wrong]="!isCorrect">
+        <div class="result-icon">
+          {{ isCorrect ? '✓' : '✗' }}
+        </div>
+        <div class="result-text">
+          {{ isCorrect ? '回答正确！/ Correct!' : '回答错误！/ Wrong!' }}
+        </div>
+      </div>
+
+      <div class="solution-section">
+        <div class="solution-title">正确答案 / Correct Answer:</div>
+        <ng-container *ngIf="currentType === 'linear'">
+          <div class="solution-value">x = {{ currentQuestion.solution.x }}</div>
+        </ng-container>
+        <ng-container *ngIf="currentType === 'system'">
+          <div class="solution-value">x = {{ currentQuestion.solution.x }}</div>
+          <div class="solution-value">y = {{ currentQuestion.solution.y }}</div>
+        </ng-container>
+
+        <div class="solution-steps" *ngIf="showDetailedSteps">
+          <div class="steps-title">解题步骤 / Solution Steps:</div>
+          <div class="step" *ngFor="let step of currentQuestion.steps; let i = index">
+            <span class="step-number">步骤 {{ i + 1 }} / Step {{ i + 1 }}:</span>
+            <span class="step-content">{{ step }}</span>
+          </div>
+        </div>
+
+        <button class="toggle-steps-btn" (click)="toggleSteps()">
+          {{ showDetailedSteps ? '隐藏步骤 / Hide Steps' : '显示步骤 / Show Steps' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Hint Display / 提示显示 -->
+    <div class="hint-section" *ngIf="showHintText && !showResult">
+      <div class="hint-title">💡 提示 / Hint:</div>
+      <div class="hint-content">{{ currentHint }}</div>
+    </div>
+  </div>
+
+  <!-- Statistics Panel / 统计面板 -->
+  <div class="statistics-panel">
+    <h3>本次测验统计 / Quiz Statistics</h3>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">平均用时 / Avg Time</div>
+        <div class="stat-value">{{ averageTime }}s</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">最快用时 / Fastest</div>
+        <div class="stat-value">{{ fastestTime }}s</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">连续正确 / Streak</div>
+        <div class="stat-value">{{ correctStreak }}</div>
+      </div>
+    </div>
+  </div>
+</div>

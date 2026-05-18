@@ -1,0 +1,523 @@
+// Equation Quiz Styles / 方程式小测验样式
+
+.equation-quiz-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+// Header Section / 头部区域
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+
+  .quiz-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+    color: #667eea;
+  }
+
+  .back-button {
+    padding: 10px 20px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #e0e0e0;
+      transform: translateX(-3px);
+    }
+  }
+}
+
+// Type Selector / 题型切换
+.type-selector {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .type-btn {
+    flex: 1;
+    padding: 15px 20px;
+    background: #f5f5f5;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #e8e8e8;
+    }
+
+    &.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-color: #667eea;
+      box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+    }
+  }
+}
+
+// Difficulty Selector / 难度选择
+.difficulty-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+
+  .selector-label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #555;
+    margin-right: 10px;
+  }
+
+  .difficulty-btn {
+    padding: 10px 20px;
+    background: #f5f5f5;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #e8e8e8;
+    }
+
+    &.active {
+      border-color: #667eea;
+      background: #667eea;
+      color: white;
+      box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+    }
+  }
+}
+
+// Score Display / 分数显示
+.score-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+
+  .score-item {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .label {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+
+      &.correct {
+        color: #4caf50;
+      }
+
+      &.wrong {
+        color: #f44336;
+      }
+    }
+  }
+}
+
+// Question Card / 题目卡片
+.question-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+
+  .question-number {
+    font-size: 18px;
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 20px;
+  }
+
+  .question-content {
+    margin-bottom: 30px;
+
+    .equation-display {
+      font-size: 32px;
+      font-weight: 500;
+      text-align: center;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-family: 'Courier New', monospace;
+      color: #333;
+    }
+
+    .equation-system {
+      .equation-line {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 28px;
+
+        .equation-number {
+          font-size: 20px;
+          font-weight: bold;
+          color: #667eea;
+          margin-right: 15px;
+          min-width: 30px;
+        }
+
+        .equation-display {
+          font-size: 28px;
+          font-weight: 500;
+          font-family: 'Courier New', monospace;
+          color: #333;
+        }
+      }
+    }
+
+    .question-text {
+      font-size: 18px;
+      color: #666;
+      text-align: center;
+      font-style: italic;
+    }
+  }
+
+  // Answer Input Section / 答案输入区域
+  .answer-section {
+    margin-bottom: 25px;
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      gap: 10px;
+
+      label {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        min-width: 50px;
+      }
+
+      .answer-input {
+        flex: 1;
+        padding: 12px 20px;
+        font-size: 18px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        outline: none;
+        transition: all 0.3s ease;
+        font-family: 'Courier New', monospace;
+
+        &:focus {
+          border-color: #667eea;
+          box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        &:disabled {
+          background: #f5f5f5;
+          color: #999;
+        }
+      }
+    }
+  }
+
+  // Action Buttons / 操作按钮
+  .action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+
+    button {
+      flex: 1;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+      }
+    }
+
+    .next-btn {
+      background: #4caf50;
+      color: white;
+
+      &:hover {
+        background: #45a049;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+      }
+    }
+
+    .hint-btn {
+      background: #ff9800;
+      color: white;
+
+      &:hover {
+        background: #fb8c00;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(255, 152, 0, 0.4);
+      }
+    }
+  }
+
+  // Result Section / 结果区域
+  .result-section {
+    margin-top: 20px;
+
+    .result-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+
+      &.correct {
+        background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
+        color: white;
+      }
+
+      &.wrong {
+        background: linear-gradient(135deg, #f44336 0%, #e57373 100%);
+        color: white;
+      }
+
+      .result-icon {
+        font-size: 48px;
+        margin-right: 20px;
+      }
+
+      .result-text {
+        font-size: 24px;
+        font-weight: bold;
+      }
+    }
+
+    .solution-section {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+
+      .solution-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .solution-value {
+        font-size: 22px;
+        font-weight: 500;
+        color: #667eea;
+        margin-bottom: 10px;
+        font-family: 'Courier New', monospace;
+      }
+
+      .solution-steps {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 2px solid #ddd;
+
+        .steps-title {
+          font-size: 16px;
+          font-weight: 600;
+          color: #333;
+          margin-bottom: 15px;
+        }
+
+        .step {
+          margin-bottom: 12px;
+          display: flex;
+          gap: 10px;
+
+          .step-number {
+            font-weight: 600;
+            color: #667eea;
+            min-width: 100px;
+          }
+
+          .step-content {
+            color: #555;
+            flex: 1;
+          }
+        }
+      }
+
+      .toggle-steps-btn {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #5568d3;
+        }
+      }
+    }
+  }
+
+  // Hint Section / 提示区域
+  .hint-section {
+    background: #fff3cd;
+    border-left: 4px solid #ff9800;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+
+    .hint-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #856404;
+      margin-bottom: 10px;
+    }
+
+    .hint-content {
+      font-size: 15px;
+      color: #856404;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Statistics Panel / 统计面板
+.statistics-panel {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    margin: 0 0 20px 0;
+    font-size: 22px;
+    color: #333;
+    text-align: center;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      color: white;
+
+      .stat-label {
+        font-size: 14px;
+        margin-bottom: 10px;
+        opacity: 0.9;
+      }
+
+      .stat-value {
+        font-size: 28px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// Responsive Design / 响应式设计
+@media (max-width: 768px) {
+  .equation-quiz-container {
+    padding: 15px;
+  }
+
+  .quiz-header {
+    flex-direction: column;
+    gap: 15px;
+
+    .quiz-title {
+      font-size: 22px;
+    }
+  }
+
+  .type-selector {
+    flex-direction: column;
+  }
+
+  .difficulty-selector {
+    flex-wrap: wrap;
+  }
+
+  .question-card {
+    padding: 20px;
+
+    .question-content .equation-display {
+      font-size: 24px;
+    }
+
+    .question-content .equation-system .equation-line {
+      font-size: 20px;
+
+      .equation-display {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+}

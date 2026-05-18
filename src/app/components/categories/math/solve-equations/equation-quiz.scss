@@ -1,0 +1,535 @@
+// ─── 主题变量（继承自 solve-equations） ───────────────────────────────────
+.math-theme {
+  --category-color: #5c9ce6;
+  --category-dark: #4a8fd9;
+  --category-light: #7cb3ed;
+}
+
+// ─── 测验容器 ──────────────────────────────────────────────────────────────
+.quiz-container {
+  min-height: 100vh;
+  height: 100vh;
+  background: linear-gradient(135deg, #5c9ce6 0%, #4a8fd9 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// ─── 题型切换标签 ──────────────────────────────────────────────────────────
+.quiz-tabs {
+  display: flex;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.quiz-tab {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s;
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    margin-bottom: 2px;
+  }
+
+  .tab-label {
+    font-size: 0.9em;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .tab-sublabel {
+    font-size: 0.7em;
+    opacity: 0.8;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-bottom-color: #fff;
+    color: #fff;
+
+    mat-icon {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// ─── 主内容区 ──────────────────────────────────────────────────────────────
+.quiz-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  overflow-y: auto;
+  gap: 16px;
+}
+
+// ─── 统计栏 ────────────────────────────────────────────────────────────────
+.quiz-stats {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 12px;
+  gap: 12px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: #ffd54f;
+  }
+
+  .stat-label {
+    font-size: 0.75em;
+    opacity: 0.9;
+  }
+
+  .stat-value {
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+}
+
+// ─── 难度选择 ──────────────────────────────────────────────────────────────
+.difficulty-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.difficulty-label {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.difficulty-btn {
+  padding: 6px 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #fff;
+    color: var(--category-dark);
+    font-weight: 600;
+    transform: scale(1.05);
+  }
+}
+
+// ─── 题目区域 ──────────────────────────────────────────────────────────────
+.question-area {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 180px;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+
+  &.correct-flash {
+    animation: correctFlash 0.6s ease;
+  }
+
+  &.incorrect-shake {
+    animation: incorrectShake 0.5s ease;
+  }
+}
+
+@keyframes correctFlash {
+  0%, 100% { background: rgba(255, 255, 255, 0.95); }
+  50% { background: rgba(76, 175, 80, 0.3); }
+}
+
+@keyframes incorrectShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.question-number {
+  font-size: 0.85em;
+  color: var(--category-dark);
+  font-weight: 600;
+  padding: 4px 12px;
+  background: rgba(92, 156, 230, 0.15);
+  border-radius: 12px;
+}
+
+.equation-display {
+  font-size: 1.8em;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+
+  &.large-equation {
+    font-size: 2em;
+    padding: 12px;
+  }
+}
+
+// ─── 二元方程组显示 ────────────────────────────────────────────────────────
+.system-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5em;
+  font-family: 'Courier New', monospace;
+}
+
+.system-brace {
+  font-size: 3em;
+  color: var(--category-dark);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.system-equations {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.system-eq {
+  font-size: 1em;
+  color: #333;
+  font-weight: 500;
+}
+
+// ─── 答案输入区 ────────────────────────────────────────────────────────────
+.answer-section {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.answer-prompt {
+  font-size: 0.95em;
+  color: #555;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+}
+
+.answer-input-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.answer-label {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: var(--category-dark);
+  min-width: 40px;
+  font-family: 'Courier New', monospace;
+}
+
+.answer-input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 1.1em;
+  border: 2px solid rgba(92, 156, 230, 0.3);
+  border-radius: 10px;
+  background: #fff;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s;
+  font-family: 'Courier New', monospace;
+
+  &:focus {
+    outline: none;
+    border-color: var(--category-color);
+    box-shadow: 0 0 0 3px rgba(92, 156, 230, 0.1);
+  }
+
+  &:disabled {
+    background: #f5f5f5;
+    cursor: not-allowed;
+  }
+
+  &.input-correct {
+    border-color: #4caf50;
+    background: rgba(76, 175, 80, 0.05);
+  }
+
+  &.input-incorrect {
+    border-color: #f44336;
+    background: rgba(244, 67, 54, 0.05);
+  }
+
+  &::placeholder {
+    color: #bbb;
+  }
+}
+
+.correct-answer-hint {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 4px;
+  font-size: 0.85em;
+  color: #4caf50;
+  font-weight: 600;
+  padding: 4px 8px;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 6px;
+}
+
+// ─── 操作按钮区 ────────────────────────────────────────────────────────────
+.quiz-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.quiz-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #fff;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  &:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  &:not(:disabled):active {
+    transform: translateY(0);
+  }
+}
+
+.quiz-btn--submit {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+  }
+}
+
+.quiz-btn--next {
+  background: linear-gradient(135deg, var(--category-color), var(--category-dark));
+
+  &:hover {
+    background: linear-gradient(135deg, var(--category-dark), #3a7ac0);
+  }
+}
+
+// ─── 结果反馈 ──────────────────────────────────────────────────────────────
+.result-feedback {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.feedback-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1em;
+  animation: fadeIn 0.3s ease;
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.feedback-correct {
+  background: rgba(76, 175, 80, 0.15);
+  color: #2e7d32;
+  border: 2px solid #4caf50;
+
+  mat-icon {
+    color: #4caf50;
+  }
+}
+
+.feedback-incorrect {
+  background: rgba(244, 67, 54, 0.15);
+  color: #c62828;
+  border: 2px solid #f44336;
+
+  mat-icon {
+    color: #f44336;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// ─── 响应式设计 ────────────────────────────────────────────────────────────
+@media (max-width: 600px) {
+  .quiz-tabs {
+    .quiz-tab {
+      min-width: 120px;
+      padding: 10px 12px;
+
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+
+      .tab-label {
+        font-size: 0.8em;
+      }
+
+      .tab-sublabel {
+        font-size: 0.65em;
+      }
+    }
+  }
+
+  .quiz-content {
+    padding: 16px 12px;
+    gap: 12px;
+  }
+
+  .quiz-stats {
+    padding: 10px;
+    gap: 8px;
+
+    .stat-item {
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+
+      .stat-label {
+        font-size: 0.7em;
+      }
+
+      .stat-value {
+        font-size: 1em;
+      }
+    }
+  }
+
+  .question-area {
+    padding: 20px 16px;
+    min-height: 150px;
+  }
+
+  .equation-display {
+    font-size: 1.5em;
+
+    &.large-equation {
+      font-size: 1.6em;
+    }
+  }
+
+  .system-display {
+    font-size: 1.2em;
+    gap: 8px;
+  }
+
+  .system-brace {
+    font-size: 2.5em;
+  }
+
+  .answer-input-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .answer-label {
+    font-size: 1em;
+  }
+
+  .answer-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 1em;
+  }
+}
