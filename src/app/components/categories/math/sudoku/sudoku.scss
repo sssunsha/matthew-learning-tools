@@ -343,7 +343,8 @@
   text-align: center;
   max-width: 320px;
   width: 90%;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 40px rgba(255, 215, 0, 0.5);
+  border: 2px solid rgba(255, 215, 0, 0.6);
   animation: card-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   flex-direction: column;
@@ -441,6 +442,38 @@ $fw-colors: #ff4757, #ffa502, #2ed573, #1e90ff, #ff6b81, #eccc68, #a29bfe, #fd79
       scale(0);
     opacity: 0;
   }
+}
+
+// ── 纸屑动画 ──────────────────────────────────────────────────────────────────
+$cf-colors: #ff4757, #ffa502, #2ed573, #1e90ff, #ff6b81, #eccc68, #a29bfe, #fd79a8;
+
+.confetti-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  animation: confetti-fall 3s ease-in forwards;
+}
+
+@for $n from 1 through 20 {
+  .confetti-piece:nth-child(#{$n}) {
+    left: #{($n - 1) * 5 + 2}%;
+    animation-delay: #{($n - 1) * 0.05}s;
+    background: nth($cf-colors, (($n - 1) % 8) + 1);
+  }
+}
+
+@keyframes confetti-fall {
+  0%   { transform: translateY(0)     rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }
 
 // ── 响应式（手机窄屏） ────────────────────────────────────────────────────────

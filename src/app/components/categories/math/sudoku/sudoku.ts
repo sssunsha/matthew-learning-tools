@@ -57,6 +57,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
   showCorrectAnimation = false;
   showFireworks = false;
   readonly fireworkParticles = Array.from({ length: 16 }, (_, i) => i);
+  readonly confettiParticles = Array.from({ length: 20 }, (_, i) => i);
 
   private solveTimeoutId: ReturnType<typeof setTimeout> | null = null;
   private audioCtx: AudioContext | null = null;

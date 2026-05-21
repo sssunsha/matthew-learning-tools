@@ -110,6 +110,11 @@
 
     @if (showLevelUpCard) {
       <div class="overlay">
+        <div class="confetti-container">
+          @for (p of confettiParticles; track p) {
+            <span class="confetti-piece"></span>
+          }
+        </div>
         <div class="levelup-card">
           <div class="levelup-emoji">🎉</div>
           <div class="levelup-title">恭喜通关！</div>
