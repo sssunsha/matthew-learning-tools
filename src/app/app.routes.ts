@@ -7,6 +7,7 @@ import { MathCategoryComponent } from './components/categories/math/math-categor
 import { BasicOperationsGameComponent } from './components/categories/math/basic-operations-game/basic-operations-game';
 import { SolveEquationsComponent } from './components/categories/math/solve-equations/solve-equations';
 import { EquationQuizComponent } from './components/categories/math/solve-equations/equation-quiz';
+import { SudokuComponent } from './components/categories/math/sudoku/sudoku';
 import { EntertainmentCategoryComponent } from './components/categories/entertainment/entertainment-category';
 import { ChineseCategoryComponent } from './components/categories/chinese/chinese-category';
 import { Grade3Term2CharactersComponent } from './components/categories/chinese/grade3-term2-characters/grade3-term2-characters';
@@ -157,6 +158,11 @@ export const routes: Routes = [
     path: 'category/math/equation-quiz',
     component: EquationQuizComponent,
     title: '小测验 - Equation Quiz',
+  },
+  {
+    path: 'category/math/sudoku',
+    component: SudokuComponent,
+    title: '数独游戏 - Sudoku',
   },
   {
     path: 'category/science',

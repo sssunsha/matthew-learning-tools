@@ -37,6 +37,10 @@ export class MathCategoryComponent {
     this.router.navigate(['/category/math/solve-equations']);
   }
 
+  openSudoku(): void {
+    this.router.navigate(['/category/math/sudoku']);
+  }
+
   openSettings() {
     this.router.navigate(['/settings']);
   }
