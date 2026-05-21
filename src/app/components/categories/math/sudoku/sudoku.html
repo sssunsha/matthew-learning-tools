@@ -45,8 +45,11 @@
         <mat-icon>arrow_back</mat-icon>
       </button>
       <div class="header-titles">
-        <h1 class="page-title">{{ currentLevel.name }}</h1>
-        <p class="page-subtitle">{{ currentLevel.subtitle }} 数独</p>
+        <div class="title-row">
+          <h1 class="page-title">{{ currentLevel.name }}</h1>
+          <span [class]="'level-size-badge ' + currentLevel.theme">{{ currentLevel.subtitle }}</span>
+        </div>
+        <p class="page-subtitle">数独</p>
       </div>
       <div class="header-right">
         <span class="progress-header">
