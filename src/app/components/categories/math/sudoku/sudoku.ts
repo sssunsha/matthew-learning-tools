@@ -56,6 +56,56 @@ export class SudokuComponent implements OnInit {
   showLevelUpCard = false;
   showCorrectAnimation = false;
 
+  private audioCtx: AudioContext | null = null;
+
+  // 确保 AudioContext 已初始化（兼容 webkit 前缀）
+  private ensureAudioCtx(): void {
+    if (this.audioCtx) return;
+    const Ctx = globalThis.AudioContext ||
+      (globalThis as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    if (Ctx) this.audioCtx = new Ctx();
+  }
+
+  // 播放单个音调
+  private playTone(freq: number, duration: number, type: OscillatorType = 'sine', volume = 0.3): void {
+    if (!this.audioCtx) return;
+    if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
+    const osc = this.audioCtx.createOscillator();
+    const gain = this.audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(volume, this.audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(this.audioCtx.destination);
+    osc.start();
+    osc.stop(this.audioCtx.currentTime + duration);
+  }
+
+  // 点击格子音效
+  private playClickSound(): void {
+    this.playTone(800, 0.06);
+  }
+
+  // 输入数字音效
+  private playInputSound(): void {
+    this.playTone(1050, 0.05);
+  }
+
+  // 完成关卡庆祝音效
+  private playCelebrationSound(): void {
+    [523, 659, 784, 1047].forEach((freq, i) => {
+      setTimeout(() => this.playTone(freq, 0.15, 'sine', 0.35), i * 120);
+    });
+  }
+
+  // 升级音效
+  private playLevelUpSound(): void {
+    [523, 659, 784, 1047, 1319].forEach((freq, i) => {
+      setTimeout(() => this.playTone(freq, 0.18, 'sine', 0.45), i * 160);
+    });
+  }
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {
@@ -137,6 +187,8 @@ export class SudokuComponent implements OnInit {
       this.selectedCell = null;
       return;
     }
+    this.ensureAudioCtx();
+    this.playClickSound();
     this.selectedCell = { row, col };
   }
 
@@ -145,6 +197,7 @@ export class SudokuComponent implements OnInit {
     const { row, col } = this.selectedCell;
     this.userBoard[row][col] = num;
     if (this.isChecked) this.errorCells.delete(`${row},${col}`);
+    this.playInputSound();
   }
 
   clearCell(): void {
@@ -152,6 +205,7 @@ export class SudokuComponent implements OnInit {
     const { row, col } = this.selectedCell;
     this.userBoard[row][col] = 0;
     this.errorCells.delete(`${row},${col}`);
+    this.playInputSound();
   }
 
   resetPuzzle(): void {
@@ -184,6 +238,7 @@ export class SudokuComponent implements OnInit {
   private onPuzzleSolved(): void {
     this.showCorrectAnimation = true;
     this.selectedCell = null;
+    this.playCelebrationSound();
     const levelId = this.currentLevel.id;
     const newCount = Math.min((this.progress[levelId] ?? 0) + 1, PUZZLES_PER_LEVEL);
     this.progress = { ...this.progress, [levelId]: newCount };
@@ -192,14 +247,15 @@ export class SudokuComponent implements OnInit {
     if (newCount >= PUZZLES_PER_LEVEL) {
       setTimeout(() => {
         this.showCorrectAnimation = false;
+        this.playLevelUpSound();
         this.showLevelUpCard = true;
-      }, 1500);
+      }, 1800);
     } else {
       this.puzzleIndexInLevel = newCount;
       setTimeout(() => {
         this.showCorrectAnimation = false;
         this.loadNewPuzzle();
-      }, 1500);
+      }, 1800);
     }
   }
 
