@@ -58,6 +58,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
   showFireworks = false;
   readonly fireworkParticles = Array.from({ length: 16 }, (_, i) => i);
 
+  private solveTimeoutId: ReturnType<typeof setTimeout> | null = null;
   private audioCtx: AudioContext | null = null;
 
   // 确保 AudioContext 已初始化（兼容 webkit 前缀）
@@ -123,6 +124,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.solveTimeoutId !== null) clearTimeout(this.solveTimeoutId);
     this.audioCtx?.close();
   }
 
@@ -260,7 +262,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
     this.saveProgress();
 
     if (newCount >= PUZZLES_PER_LEVEL) {
-      setTimeout(() => {
+      this.solveTimeoutId = setTimeout(() => {
         this.showFireworks = false;
         this.showCorrectAnimation = false;
         this.playLevelUpSound();
@@ -268,7 +270,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
       }, 1800);
     } else {
       this.puzzleIndexInLevel = newCount;
-      setTimeout(() => {
+      this.solveTimeoutId = setTimeout(() => {
         this.showFireworks = false;
         this.showCorrectAnimation = false;
         this.loadNewPuzzle();
