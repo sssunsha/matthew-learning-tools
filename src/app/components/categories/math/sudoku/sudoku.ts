@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -39,7 +39,7 @@ const PUZZLES_PER_LEVEL = 10;
   templateUrl: './sudoku.html',
   styleUrl: './sudoku.scss',
 })
-export class SudokuComponent implements OnInit {
+export class SudokuComponent implements OnInit, OnDestroy {
   readonly levels = SUDOKU_LEVELS;
   readonly puzzlesPerLevel = PUZZLES_PER_LEVEL;
 
@@ -68,18 +68,26 @@ export class SudokuComponent implements OnInit {
 
   // 播放单个音调
   private playTone(freq: number, duration: number, type: OscillatorType = 'sine', volume = 0.3): void {
+    this.ensureAudioCtx();
     if (!this.audioCtx) return;
-    if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
-    const osc = this.audioCtx.createOscillator();
-    const gain = this.audioCtx.createGain();
-    osc.type = type;
-    osc.frequency.value = freq;
-    gain.gain.setValueAtTime(volume, this.audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + duration);
-    osc.connect(gain);
-    gain.connect(this.audioCtx.destination);
-    osc.start();
-    osc.stop(this.audioCtx.currentTime + duration);
+    const ctx = this.audioCtx;
+    const startOsc = () => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(volume, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + duration);
+    };
+    if (ctx.state === 'suspended') {
+      ctx.resume().then(startOsc);
+    } else {
+      startOsc();
+    }
   }
 
   // 点击格子音效
@@ -110,6 +118,10 @@ export class SudokuComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProgress();
+  }
+
+  ngOnDestroy(): void {
+    this.audioCtx?.close();
   }
 
   get unlockedLevelIds(): string[] {
