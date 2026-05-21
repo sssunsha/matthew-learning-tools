@@ -148,3 +148,265 @@
   font-weight: 600;
   white-space: nowrap;
 }
+
+// ── 游戏区域布局 ──────────────────────────────────────────────────────────────
+.game-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 12px;
+  background: #f8fafc;
+}
+
+.board-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+// ── 数独棋盘 ──────────────────────────────────────────────────────────────────
+.sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(var(--board-size), 1fr);
+  border: 3px solid #334155;
+  border-radius: 8px;
+  overflow: hidden;
+  width:  min(calc(100vw - 32px), calc(100vh - 220px), 480px);
+  height: min(calc(100vw - 32px), calc(100vh - 220px), 480px);
+  transition: box-shadow 0.3s;
+
+  &.board-correct {
+    box-shadow: 0 0 0 5px #22c55e, 0 0 32px rgba(34, 197, 94, 0.45);
+    animation: board-pulse 0.7s ease 2;
+  }
+}
+
+.board-cell {
+  border: 1px solid #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.1s;
+  background: #ffffff;
+  position: relative;
+  user-select: none;
+  aspect-ratio: 1;
+
+  &.box-right  { border-right:  2.5px solid #334155; }
+  &.box-bottom { border-bottom: 2.5px solid #334155; }
+
+  &.cell-given       { cursor: default; background: #e2e8f0; }
+  &.cell-highlighted { background: #dbeafe; }
+  &.cell-selected    { background: #fef08a !important; border-color: #f59e0b !important; z-index: 2; }
+  &.cell-error       { background: #fee2e2 !important; animation: cell-shake 0.4s ease; }
+}
+
+.cell-number {
+  font-size: clamp(0.85rem, 2.8vw, 1.7rem);
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+// ── 主题：低年级（幼儿园 ~ 小学2年级） ───────────────────────────────────────
+.theme-kids {
+  border-color: #7c3aed;
+  .board-cell.box-right  { border-right-color:  #7c3aed; }
+  .board-cell.box-bottom { border-bottom-color: #7c3aed; }
+  .board-cell.cell-given { background: #ede9fe; }
+
+  .cell-number[data-num="1"] { color: #dc2626; }
+  .cell-number[data-num="2"] { color: #d97706; }
+  .cell-number[data-num="3"] { color: #2563eb; }
+  .cell-number[data-num="4"] { color: #16a34a; }
+
+  .board-cell.cell-given .cell-number { font-size: clamp(1rem, 3.2vw, 1.9rem); }
+}
+
+// ── 主题：中年级（小学3-6年级 ~ 初中） ───────────────────────────────────────
+.theme-mid {
+  border-color: #1d4ed8;
+  .board-cell.box-right  { border-right-color:  #1d4ed8; }
+  .board-cell.box-bottom { border-bottom-color: #1d4ed8; }
+  .board-cell.cell-given { background: #e0e7ff; }
+  .cell-number                       { color: #2563eb; }
+  .board-cell.cell-given  .cell-number { color: #1e3a8a; }
+  .board-cell.cell-filled .cell-number { color: #3b82f6; }
+}
+
+// ── 主题：高年级（高中 ~ 博士） ───────────────────────────────────────────────
+.theme-pro {
+  border-color: #111827;
+  .board-cell.box-right  { border-right-color:  #111827; }
+  .board-cell.box-bottom { border-bottom-color: #111827; }
+  .board-cell.cell-given { background: #f1f5f9; }
+  .cell-number                       { color: #475569; }
+  .board-cell.cell-given  .cell-number { color: #0f172a; font-weight: 900; }
+  .board-cell.cell-filled .cell-number { color: #1d4ed8; }
+}
+
+// ── 数字键盘 ──────────────────────────────────────────────────────────────────
+.number-pad-area {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  background: #f1f5f9;
+  border-top: 2px solid #e2e8f0;
+}
+
+.number-pad {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: opacity 0.2s;
+  &.pad-inactive { opacity: 0.4; pointer-events: none; }
+}
+
+.num-btn {
+  min-width: 36px;
+  height: 44px;
+  padding: 0 6px;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  max-width: 50px;
+
+  &:hover { background: #dbeafe; border-color: #3b82f6; color: #1d4ed8; }
+  &:active { transform: scale(0.9); }
+
+  &--clear {
+    background: #fee2e2;
+    border-color: #fca5a5;
+    max-width: 52px;
+    mat-icon { font-size: 18px; width: 18px; height: 18px; color: #dc2626; }
+    &:hover { background: #fecaca; border-color: #f87171; }
+  }
+}
+
+// ── 确认按钮 ──────────────────────────────────────────────────────────────────
+.action-bar {
+  flex-shrink: 0;
+  padding: 8px 16px 14px;
+  background: #f1f5f9;
+}
+
+.confirm-btn {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #5c9ce6, #4a8fd9);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.2s, transform 0.1s;
+  &:hover  { opacity: 0.9; }
+  &:active { transform: scale(0.98); }
+  mat-icon { font-size: 22px; width: 22px; height: 22px; }
+}
+
+// ── 升级通关弹窗 ──────────────────────────────────────────────────────────────
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fade-in 0.3s ease;
+}
+
+.levelup-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 32px 28px;
+  text-align: center;
+  max-width: 320px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: card-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.levelup-emoji { font-size: 3rem; line-height: 1; }
+.levelup-title { font-size: 1.6rem; font-weight: 800; color: #1e3a8a; }
+.levelup-desc  { font-size: 1rem;   color: #475569; }
+.levelup-next  {
+  font-size: 0.9rem;
+  color: #16a34a;
+  font-weight: 600;
+  background: #dcfce7;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+.levelup-btn {
+  margin-top: 8px;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #5c9ce6, #4a8fd9);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  &:hover  { opacity: 0.9; }
+  &:active { transform: scale(0.97); }
+}
+
+// ── 动画 ──────────────────────────────────────────────────────────────────────
+@keyframes cell-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-5px); }
+  40%       { transform: translateX(5px); }
+  60%       { transform: translateX(-3px); }
+  80%       { transform: translateX(3px); }
+}
+
+@keyframes board-pulse {
+  0%, 100% { box-shadow: 0 0 0 5px #22c55e, 0 0 32px rgba(34,197,94,0.45); }
+  50%       { box-shadow: 0 0 0 9px #22c55e, 0 0 48px rgba(34,197,94,0.65); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes card-pop {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1);   }
+}
+
+// ── 响应式（手机窄屏） ────────────────────────────────────────────────────────
+@media (max-width: 480px) {
+  .level-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 8px;
+    padding: 12px;
+  }
+  .num-btn   { height: 40px; font-size: 1rem; }
+  .confirm-btn { height: 44px; font-size: 1rem; }
+}

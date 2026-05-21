@@ -40,7 +40,82 @@
   }
 
   @if (viewMode === 'game') {
-    <p>游戏视图（Task 4 实现）</p>
+    <div class="page-header">
+      <button mat-icon-button class="back-btn" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="header-titles">
+        <h1 class="page-title">{{ currentLevel.name }}</h1>
+        <p class="page-subtitle">{{ currentLevel.subtitle }} 数独</p>
+      </div>
+      <div class="header-right">
+        <span class="progress-header">
+          {{ puzzleIndexInLevel + 1 }}/{{ puzzlesPerLevel }}
+        </span>
+        <button mat-icon-button class="reset-btn" (click)="resetPuzzle()" title="重置本题">
+          <mat-icon>restart_alt</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="game-area">
+      <div class="board-wrapper">
+        <div [class]="boardClasses"
+          [style.--board-size]="currentLevel.size">
+          @for (row of userBoard; track rowIdx; let rowIdx = $index) {
+            @for (cell of row; track colIdx; let colIdx = $index) {
+              <div class="board-cell"
+                [class.cell-given]="isGiven(rowIdx, colIdx)"
+                [class.cell-selected]="isSelected(rowIdx, colIdx)"
+                [class.cell-highlighted]="isCellHighlighted(rowIdx, colIdx)"
+                [class.cell-error]="hasError(rowIdx, colIdx)"
+                [class.cell-filled]="cell !== 0 && !isGiven(rowIdx, colIdx)"
+                [class.box-right]="isBoxRight(colIdx)"
+                [class.box-bottom]="isBoxBottom(rowIdx)"
+                (click)="selectCell(rowIdx, colIdx)">
+                @if (cell !== 0) {
+                  <span class="cell-number" [attr.data-num]="cell">{{ cell }}</span>
+                }
+              </div>
+            }
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="number-pad-area">
+      <div class="number-pad" [class.pad-inactive]="!selectedCell">
+        @for (n of currentNumbers; track n) {
+          <button class="num-btn" [attr.data-num]="n" (click)="inputNumber(n)">{{ n }}</button>
+        }
+        <button class="num-btn num-btn--clear" (click)="clearCell()">
+          <mat-icon>backspace</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <button class="confirm-btn" (click)="checkAnswer()">
+        <mat-icon>check_circle</mat-icon>
+        确认校验
+      </button>
+    </div>
+
+    @if (showLevelUpCard) {
+      <div class="overlay">
+        <div class="levelup-card">
+          <div class="levelup-emoji">🎉</div>
+          <div class="levelup-title">恭喜通关！</div>
+          <div class="levelup-desc">{{ currentLevel.name }} 全部完成！</div>
+          @if (levelIndex(currentLevel) < levels.length - 1) {
+            <div class="levelup-next">
+              已解锁：{{ levels[levelIndex(currentLevel) + 1].name }}
+            </div>
+          }
+          <button class="levelup-btn" (click)="closeLevelUpCard()">返回选关</button>
+        </div>
+      </div>
+    }
   }
 
 </div>
