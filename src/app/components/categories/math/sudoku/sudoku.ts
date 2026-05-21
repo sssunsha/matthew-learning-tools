@@ -55,6 +55,8 @@ export class SudokuComponent implements OnInit, OnDestroy {
   puzzleIndexInLevel = 0;
   showLevelUpCard = false;
   showCorrectAnimation = false;
+  showFireworks = false;
+  readonly fireworkParticles = Array.from({ length: 16 }, (_, i) => i);
 
   private audioCtx: AudioContext | null = null;
 
@@ -249,6 +251,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
 
   private onPuzzleSolved(): void {
     this.showCorrectAnimation = true;
+    this.showFireworks = true;
     this.selectedCell = null;
     this.playCelebrationSound();
     const levelId = this.currentLevel.id;
@@ -258,6 +261,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
 
     if (newCount >= PUZZLES_PER_LEVEL) {
       setTimeout(() => {
+        this.showFireworks = false;
         this.showCorrectAnimation = false;
         this.playLevelUpSound();
         this.showLevelUpCard = true;
@@ -265,6 +269,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
     } else {
       this.puzzleIndexInLevel = newCount;
       setTimeout(() => {
+        this.showFireworks = false;
         this.showCorrectAnimation = false;
         this.loadNewPuzzle();
       }, 1800);
@@ -292,6 +297,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
     this.errorCells.clear();
     this.isChecked = false;
     this.showCorrectAnimation = false;
+    this.showFireworks = false;
   }
 
   private loadProgress(): void {

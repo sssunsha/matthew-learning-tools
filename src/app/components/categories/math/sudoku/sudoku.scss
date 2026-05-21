@@ -161,6 +161,7 @@
 }
 
 .board-wrapper {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -398,6 +399,48 @@
 @keyframes card-pop {
   from { opacity: 0; transform: scale(0.7); }
   to   { opacity: 1; transform: scale(1);   }
+}
+
+// ── 烟花动画 ──────────────────────────────────────────────────────────────────
+$fw-colors: #ff4757, #ffa502, #2ed573, #1e90ff, #ff6b81, #eccc68, #a29bfe, #fd79a8;
+
+.fireworks-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.firework-particle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: firework-burst 1.2s ease-out forwards;
+}
+
+@for $n from 1 through 16 {
+  .firework-particle:nth-child(#{$n}) {
+    --angle: #{($n - 1) * 22.5}deg;
+    --dist: 110px;
+    background: nth($fw-colors, (($n - 1) % 8) + 1);
+  }
+}
+
+@keyframes firework-burst {
+  0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% {
+    transform:
+      translate(
+        calc(cos(var(--angle)) * var(--dist)),
+        calc(sin(var(--angle)) * var(--dist))
+      )
+      scale(0);
+    opacity: 0;
+  }
 }
 
 // ── 响应式（手机窄屏） ────────────────────────────────────────────────────────
