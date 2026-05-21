@@ -4,6 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { generatePuzzle, SudokuPuzzle } from './sudoku-generator';
 
+export type LevelCategory = '幼儿园' | '小学' | '初中' | '高中' | '大学' | '研究生';
+
 export interface SudokuLevel {
   id: string;
   name: string;
@@ -13,23 +15,34 @@ export interface SudokuLevel {
   boxCols: number;
   targetBlanks: number;
   theme: 'theme-kids' | 'theme-mid' | 'theme-pro';
+  category: LevelCategory;
 }
 
 export const SUDOKU_LEVELS: SudokuLevel[] = [
-  { id: 'kg-1', name: '幼儿园小班', subtitle: '3×3', size: 3, boxRows: 0, boxCols: 0, targetBlanks: 4,  theme: 'theme-kids' },
-  { id: 'kg-2', name: '幼儿园中班', subtitle: '3×3', size: 3, boxRows: 0, boxCols: 0, targetBlanks: 5,  theme: 'theme-kids' },
-  { id: 'kg-3', name: '幼儿园大班', subtitle: '4×4', size: 4, boxRows: 2, boxCols: 2, targetBlanks: 6,  theme: 'theme-kids' },
-  { id: 'el-1', name: '小学1-2年级', subtitle: '4×4', size: 4, boxRows: 2, boxCols: 2, targetBlanks: 9,  theme: 'theme-kids' },
-  { id: 'el-2', name: '小学3-4年级', subtitle: '6×6', size: 6, boxRows: 2, boxCols: 3, targetBlanks: 16, theme: 'theme-mid'  },
-  { id: 'el-3', name: '小学5-6年级', subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 28, theme: 'theme-mid'  },
-  { id: 'mid',  name: '初中',        subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 36, theme: 'theme-mid'  },
-  { id: 'high', name: '高中',        subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 42, theme: 'theme-pro'  },
-  { id: 'col',  name: '大学本科',    subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 47, theme: 'theme-pro'  },
-  { id: 'mst',  name: '硕士',        subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 51, theme: 'theme-pro'  },
-  { id: 'doc',  name: '博士',        subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 55, theme: 'theme-pro'  },
+  { id: 'kg-1',   name: '幼儿园小班', subtitle: '3×3', size: 3, boxRows: 0, boxCols: 0, targetBlanks: 4,  theme: 'theme-kids', category: '幼儿园' },
+  { id: 'kg-2',   name: '幼儿园中班', subtitle: '3×3', size: 3, boxRows: 0, boxCols: 0, targetBlanks: 5,  theme: 'theme-kids', category: '幼儿园' },
+  { id: 'kg-3',   name: '幼儿园大班', subtitle: '4×4', size: 4, boxRows: 2, boxCols: 2, targetBlanks: 6,  theme: 'theme-kids', category: '幼儿园' },
+  { id: 'el-1',   name: '小学一年级', subtitle: '4×4', size: 4, boxRows: 2, boxCols: 2, targetBlanks: 7,  theme: 'theme-kids', category: '小学'   },
+  { id: 'el-2',   name: '小学二年级', subtitle: '4×4', size: 4, boxRows: 2, boxCols: 2, targetBlanks: 9,  theme: 'theme-kids', category: '小学'   },
+  { id: 'el-3',   name: '小学三年级', subtitle: '6×6', size: 6, boxRows: 2, boxCols: 3, targetBlanks: 13, theme: 'theme-mid',  category: '小学'   },
+  { id: 'el-4',   name: '小学四年级', subtitle: '6×6', size: 6, boxRows: 2, boxCols: 3, targetBlanks: 18, theme: 'theme-mid',  category: '小学'   },
+  { id: 'el-5',   name: '小学五年级', subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 24, theme: 'theme-mid',  category: '小学'   },
+  { id: 'el-6',   name: '小学六年级', subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 28, theme: 'theme-mid',  category: '小学'   },
+  { id: 'mid-1',  name: '初一',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 32, theme: 'theme-mid',  category: '初中'   },
+  { id: 'mid-2',  name: '初二',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 36, theme: 'theme-mid',  category: '初中'   },
+  { id: 'mid-3',  name: '初三',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 39, theme: 'theme-mid',  category: '初中'   },
+  { id: 'high-1', name: '高一',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 41, theme: 'theme-pro',  category: '高中'   },
+  { id: 'high-2', name: '高二',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 43, theme: 'theme-pro',  category: '高中'   },
+  { id: 'high-3', name: '高三',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 45, theme: 'theme-pro',  category: '高中'   },
+  { id: 'col-1',  name: '大一',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 46, theme: 'theme-pro',  category: '大学'   },
+  { id: 'col-2',  name: '大二',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 47, theme: 'theme-pro',  category: '大学'   },
+  { id: 'col-3',  name: '大三',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 49, theme: 'theme-pro',  category: '大学'   },
+  { id: 'col-4',  name: '大四',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 50, theme: 'theme-pro',  category: '大学'   },
+  { id: 'mst',    name: '硕士',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 52, theme: 'theme-pro',  category: '研究生' },
+  { id: 'doc',    name: '博士',       subtitle: '9×9', size: 9, boxRows: 3, boxCols: 3, targetBlanks: 55, theme: 'theme-pro',  category: '研究生' },
 ];
 
-const STORAGE_KEY = 'sudoku_progress';
+const STORAGE_KEY = 'sudoku_progress_v2';
 const PUZZLES_PER_LEVEL = 10;
 
 @Component({
@@ -42,6 +55,11 @@ const PUZZLES_PER_LEVEL = 10;
 export class SudokuComponent implements OnInit, OnDestroy {
   readonly levels = SUDOKU_LEVELS;
   readonly puzzlesPerLevel = PUZZLES_PER_LEVEL;
+  readonly categories: LevelCategory[] = ['幼儿园', '小学', '初中', '高中', '大学', '研究生'];
+
+  getLevelsByCategory(cat: LevelCategory): SudokuLevel[] {
+    return this.levels.filter(l => l.category === cat);
+  }
 
   viewMode: 'level-select' | 'game' = 'level-select';
   progress: Record<string, number> = {};

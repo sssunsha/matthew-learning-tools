@@ -81,30 +81,47 @@
   mat-icon { font-size: 20px; width: 20px; height: 20px; }
 }
 
-// ── 关卡选择网格 ──────────────────────────────────────────────────────────────
-.level-grid {
+// ── 关卡选择列 ────────────────────────────────────────────────────────────────
+.level-columns {
   flex: 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 12px;
-  padding: 20px;
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+  overflow-x: auto;
   overflow-y: auto;
-  align-content: start;
+  align-items: flex-start;
+}
+
+.level-category {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 118px;
+  flex-shrink: 0;
+}
+
+.category-label {
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.78em;
+  padding: 5px 8px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 8px;
+  letter-spacing: 0.02em;
 }
 
 .level-card {
   background: rgba(255,255,255,0.15);
-  border-radius: 16px;
-  padding: 14px 12px;
+  border-radius: 12px;
+  padding: 8px 10px;
   cursor: pointer;
   transition: all 0.3s;
   border: 2px solid transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  min-height: 110px;
-  justify-content: center;
+  gap: 5px;
 
   &.unlocked:hover {
     background: rgba(255,255,255,0.3);
@@ -496,11 +513,8 @@ $cf-colors: #ff4757, #ffa502, #2ed573, #1e90ff, #ff6b81, #eccc68, #a29bfe, #fd79
 
 // ── 响应式（手机窄屏） ────────────────────────────────────────────────────────
 @media (max-width: 480px) {
-  .level-grid {
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 8px;
-    padding: 12px;
-  }
+  .level-columns { gap: 8px; padding: 10px; }
+  .level-category { min-width: 100px; }
   .num-btn   { height: 40px; font-size: 1rem; }
   .confirm-btn { height: 44px; font-size: 1rem; }
 }

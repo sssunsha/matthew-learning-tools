@@ -11,29 +11,34 @@
       </div>
     </div>
 
-    <div class="level-grid">
-      @for (level of levels; track level.id) {
-        <div class="level-card"
-          [class.unlocked]="isLevelUnlocked(level.id)"
-          [class.locked]="!isLevelUnlocked(level.id)"
-          [class.completed]="getLevelProgress(level.id) >= puzzlesPerLevel"
-          (click)="startLevel(level)">
-          <div [class]="'level-badge ' + level.theme">{{ level.subtitle }}</div>
-          <div class="level-name">{{ level.name }}</div>
-          <div class="level-progress-row">
-            @if (!isLevelUnlocked(level.id)) {
-              <mat-icon class="lock-icon">lock</mat-icon>
-            } @else {
-              <div class="progress-bar">
-                <div class="progress-fill"
-                  [style.width.%]="getLevelProgress(level.id) / puzzlesPerLevel * 100">
-                </div>
+    <div class="level-columns">
+      @for (cat of categories; track cat) {
+        <div class="level-category">
+          <div class="category-label">{{ cat }}</div>
+          @for (level of getLevelsByCategory(cat); track level.id) {
+            <div class="level-card"
+              [class.unlocked]="isLevelUnlocked(level.id)"
+              [class.locked]="!isLevelUnlocked(level.id)"
+              [class.completed]="getLevelProgress(level.id) >= puzzlesPerLevel"
+              (click)="startLevel(level)">
+              <div [class]="'level-badge ' + level.theme">{{ level.subtitle }}</div>
+              <div class="level-name">{{ level.name }}</div>
+              <div class="level-progress-row">
+                @if (!isLevelUnlocked(level.id)) {
+                  <mat-icon class="lock-icon">lock</mat-icon>
+                } @else {
+                  <div class="progress-bar">
+                    <div class="progress-fill"
+                      [style.width.%]="getLevelProgress(level.id) / puzzlesPerLevel * 100">
+                    </div>
+                  </div>
+                  <span class="progress-text">
+                    {{ getLevelProgress(level.id) }}/{{ puzzlesPerLevel }}
+                  </span>
+                }
               </div>
-              <span class="progress-text">
-                {{ getLevelProgress(level.id) }}/{{ puzzlesPerLevel }}
-              </span>
-            }
-          </div>
+            </div>
+          }
         </div>
       }
     </div>
