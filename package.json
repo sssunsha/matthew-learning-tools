@@ -1,6 +1,6 @@
 {
   "name": "matthew-learning-tools",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "main": "electron.js",
   "scripts": {
     "ng": "ng",
@@ -80,6 +80,8 @@
     "@angular/material": "~21.1.2",
     "@angular/platform-browser": "^21.1.2",
     "@angular/router": "^21.1.0",
+    "@fontsource/roboto": "^5.2.10",
+    "material-icons": "^1.13.14",
     "mathjs": "^15.2.0",
     "ngx-quill": "^30.0.1",
     "pdfjs-dist": "^4.10.38",
