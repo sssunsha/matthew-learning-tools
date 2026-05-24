@@ -18,8 +18,12 @@
     "android:release": "node scripts/build-android.js release",
     "android:install": "/Users/I340818/Library/Android/sdk/platform-tools/adb install -r cordova-app/platforms/android/app/build/outputs/apk/debug/app-debug.apk",
     "android:deploy": "npm run android:debug && npm run android:install",
+    "android:deploy:fast": "npm run android:debug && npm run android:install",
     "android:run": "cd cordova-app && npx cordova run android",
-    "android:emulate": "cd cordova-app && npx cordova emulate android"
+    "android:emulate": "cd cordova-app && npx cordova emulate android",
+    "android:optimize": "node scripts/optimize-android-build.js",
+    "android:setup-mirror": "bash scripts/setup-gradle-mirror.sh",
+    "android:check": "bash scripts/test-proxy-connection.sh"
   },
   "prettier": {
     "printWidth": 100,

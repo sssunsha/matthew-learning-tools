@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.matthew.learningtools" version="0.0.34" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<widget id="com.matthew.learningtools" version="0.0.36" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>MatthewTools</name>
     <description>Matthew Learning Tools - Educational App for Kids</description>
     <author email="your-email@example.com" href="https://github.com/sssunsha/matthew-learning-tools">
@@ -14,6 +14,9 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     
+    <!-- 构建前自动注入阿里云镜像，防止 platform add 后配置丢失 -->
+    <hook type="before_build" src="scripts/inject-aliyun-repos.js" />
+
     <platform name="android">
         <allow-intent href="market:*" />
         <!-- Android specific configurations -->
