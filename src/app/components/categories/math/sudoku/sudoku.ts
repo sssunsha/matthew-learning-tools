@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -136,7 +136,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
     });
   }
 
-  constructor(private router: Router) {}
+  constructor(private readonly router: Router, private readonly cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadProgress();
@@ -252,6 +252,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
   }
 
   checkAnswer(): void {
+    if (this.showCorrectAnimation) return;
     this.errorCells = new Set<string>();
     this.isChecked = true;
     const { solution, givens } = this.currentPuzzle;
@@ -286,6 +287,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
         this.showCorrectAnimation = false;
         this.playLevelUpSound();
         this.showLevelUpCard = true;
+        this.cdr.detectChanges();
       }, 1800);
     } else {
       this.puzzleIndexInLevel = newCount;
@@ -293,6 +295,7 @@ export class SudokuComponent implements OnInit, OnDestroy {
         this.showFireworks = false;
         this.showCorrectAnimation = false;
         this.loadNewPuzzle();
+        this.cdr.detectChanges();
       }, 1800);
     }
   }
