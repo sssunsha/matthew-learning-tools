@@ -1,68 +1,56 @@
 import { Injectable } from '@angular/core';
 
-declare const TTS: {
-  speak: (options: { text: string; locale: string; rate: number }, success: () => void, error: (err: unknown) => void) => void;
-  stop: (success: () => void, error: (err: unknown) => void) => void;
-};
-
 @Injectable({ providedIn: 'root' })
 export class TtsService {
-  private get isCordova(): boolean {
-    return typeof (window as Window & { cordova?: unknown }).cordova !== 'undefined';
+  private get cordovaAvailable(): boolean {
+    const w = window as Window & { cordova?: unknown };
+    return typeof w.cordova !== 'undefined';
   }
 
   speak(text: string, rate = 0.8): void {
-    if (this.isCordova && typeof TTS !== 'undefined') {
-      TTS.speak(
-        { text, locale: 'en-US', rate },
-        () => {},
-        (err) => console.error('TTS error:', err),
-      );
+    if (this.cordovaAvailable) {
+      this.playAudio(text);
     } else if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
-      utterance.rate = rate;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      window.speechSynthesis.speak(utterance);
-    }
-  }
-
-  stop(): void {
-    if (this.isCordova && typeof TTS !== 'undefined') {
-      TTS.stop(() => {}, (err) => console.error('TTS stop error:', err));
-    } else if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = rate;
+      u.pitch = 1;
+      u.volume = 1;
+      window.speechSynthesis.speak(u);
     }
   }
 
   speakSequence(texts: { text: string; rate?: number }[], delayBetween = 500): void {
     if (texts.length === 0) return;
 
-    if (this.isCordova && typeof TTS !== 'undefined') {
+    if (this.cordovaAvailable) {
       const playNext = (index: number) => {
         if (index >= texts.length) return;
-        const { text, rate = 0.8 } = texts[index];
-        TTS.speak(
-          { text, locale: 'en-US', rate },
-          () => { setTimeout(() => playNext(index + 1), delayBetween); },
-          (err) => console.error('TTS error:', err),
-        );
+        this.playAudio(texts[index].text, () => setTimeout(() => playNext(index + 1), delayBetween));
       };
       playNext(0);
     } else if ('speechSynthesis' in window) {
       const playNext = (index: number) => {
         if (index >= texts.length) return;
         const { text, rate = 0.8 } = texts[index];
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US';
-        utterance.rate = rate;
-        utterance.pitch = 1;
-        utterance.volume = 1;
-        utterance.onend = () => setTimeout(() => playNext(index + 1), delayBetween);
-        window.speechSynthesis.speak(utterance);
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US';
+        u.rate = rate;
+        u.pitch = 1;
+        u.volume = 1;
+        u.onend = () => setTimeout(() => playNext(index + 1), delayBetween);
+        window.speechSynthesis.speak(u);
       };
       playNext(0);
     }
+  }
+
+  private playAudio(text: string, onEnd?: () => void): void {
+    const url = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&type=2`;
+    const audio = new Audio(url);
+    audio.volume = 1.0;
+    if (onEnd) audio.onended = onEnd;
+    audio.onerror = () => onEnd?.();
+    audio.play().catch(() => onEnd?.());
   }
 }

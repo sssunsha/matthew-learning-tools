@@ -417,8 +417,8 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
       this.showAnswer = false;
       this.currentQuestion = null;
 
-      // 自动播放单词
-      this.playDictation();
+      // 自动播放单词（延迟一帧确保 UI 先渲染）
+      setTimeout(() => this.playDictation(), 0);
     } else {
       // 选择模式
       const question: Question = {
@@ -446,11 +446,10 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
     if (!this.currentWord) return;
 
     this.isPlaying = true;
-
     let playCount = 0;
     const playNext = () => {
       if (playCount >= 3) {
-        this.isPlaying = false;
+        this.ngZone.run(() => { this.isPlaying = false; });
         return;
       }
       playCount++;
@@ -458,7 +457,7 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
       if (playCount < 3) {
         setTimeout(playNext, 2500);
       } else {
-        setTimeout(() => { this.isPlaying = false; }, 2000);
+        setTimeout(() => this.ngZone.run(() => { this.isPlaying = false; }), 2000);
       }
     };
     playNext();
