@@ -52,12 +52,12 @@ export class Grade3Term2LearnTextsComponent {
 
   constructor(private router: Router) {
     this.pdfPath =
-      '/assets/resources/categories/english/grade-3-2/小学英语外研版（三起）（孙有中）（2024）三年级下册 电子课本.pdf';
+      'assets/resources/categories/english/grade-3-2/小学英语外研版（三起）（孙有中）（2024）三年级下册 电子课本.pdf';
     this.initializeUnits();
   }
 
   initializeUnits() {
-    const basePath = '/assets/resources/categories/english/grade-3-2';
+    const basePath = 'assets/resources/categories/english/grade-3-2';
 
     this.units = [
       {

@@ -19,15 +19,11 @@ import { EnglishPhonicsLearningComponent } from './components/categories/english
 import { EnglishTextbookLearningComponent } from './components/categories/english/textbook-learning/english-textbook-learning';
 import { EnglishLearnTextsComponent } from './components/categories/english/textbook-learning/learn-texts/english-learn-texts';
 import { Grade3Term2Component } from './components/categories/english/grade3-term2/grade3-term2';
-import { Grade3Term2TextbookComponent } from './components/categories/english/grade3-term2-textbook/grade3-term2-textbook';
 import { Grade3Term2LearnTextsComponent } from './components/categories/english/grade3-term2-textbook/learn-texts/grade3-term2-learn-texts';
 import { Grade3Term2KnowledgeListComponent } from './components/categories/english/grade3-term2-knowledge-list/grade3-term2-knowledge-list';
-import { ScienceCategoryComponent } from './components/categories/science/science-category';
-import { AiCategoryComponent } from './components/categories/ai/ai-category';
 import { NotesCategoryComponent } from './components/categories/notes/notes-category';
 import { OtherSubjectsCategoryComponent } from './components/categories/other-subjects/other-subjects-category';
 import { JingleBellsChorusComponent } from './components/categories/other-subjects/jingle-bells-chorus/jingle-bells-chorus';
-import { RecommendCategoryComponent } from './components/categories/recommend/recommend-category';
 import { NoteEditorComponent } from './components/note-editor/note-editor';
 import { VocabularyComponent } from './components/vocabulary/vocabulary';
 import { VocabularyTestComponent } from './components/vocabulary-test/vocabulary-test';
@@ -165,9 +161,19 @@ export const routes: Routes = [
     title: '数独游戏 - Sudoku',
   },
   {
-    path: 'category/science',
-    component: ScienceCategoryComponent,
-    title: '科学 - Science',
+    path: 'category/chinese',
+    component: ChineseCategoryComponent,
+    title: '语文 - Chinese',
+  },
+  {
+    path: 'category/chinese/grade3-term2-characters',
+    component: Grade3Term2CharactersComponent,
+    title: '三年级下识字表 - Grade 3 Term 2 Characters',
+  },
+  {
+    path: 'category/chinese/grade3-term2-morning-reading',
+    component: Grade3Term2MorningReadingComponent,
+    title: '三年级下晨读 - Grade 3 Term 2 Morning Reading',
   },
   {
     path: 'category/entertainment',
@@ -185,19 +191,9 @@ export const routes: Routes = [
     title: '二声部合唱«快乐叮当»',
   },
   {
-    path: 'category/ai',
-    component: AiCategoryComponent,
-    title: 'AI - Artificial Intelligence',
-  },
-  {
     path: 'category/notes',
     component: NotesCategoryComponent,
     title: '记录 - Notes',
-  },
-  {
-    path: 'category/recommend',
-    component: RecommendCategoryComponent,
-    title: '推荐 - Recommend',
   },
 
   // Standalone feature routes

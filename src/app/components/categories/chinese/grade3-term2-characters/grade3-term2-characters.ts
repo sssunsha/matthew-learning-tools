@@ -14,7 +14,7 @@ export class Grade3Term2CharactersComponent {
   pdfPath: string;
 
   constructor(private router: Router) {
-    this.pdfPath = '/assets/resources/categories/chinese/grade3-term2-characters/三年级下册语文生字预习.pdf';
+    this.pdfPath = 'assets/resources/categories/chinese/grade3-term2-characters/三年级下册语文生字预习.pdf';
   }
 
   goBack() {

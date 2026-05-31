@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CommonModule } from '@angular/common';
@@ -113,6 +113,7 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
     private router: Router,
     private location: Location,
     private http: HttpClient,
+    private ngZone: NgZone,
   ) {}
 
   ngOnInit() {
@@ -276,12 +277,14 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
   loadVocabulary() {
     const fileName = this.getFileName(this.grade);
     this.http
-      .get<VocabularyData>(`/assets/resources/categories/english/vocabulary/${fileName}`)
+      .get<VocabularyData>(`assets/resources/categories/english/vocabulary/${fileName}`)
       .subscribe({
         next: (data) => {
-          this.gradeInfo = data;
-          this.allWords = data.words;
-          this.extractAvailableUnits();
+          this.ngZone.run(() => {
+            this.gradeInfo = data;
+            this.allWords = data.words;
+            this.extractAvailableUnits();
+          });
         },
         error: (err) => {
           console.error('加载词汇失败:', err);
@@ -478,69 +481,44 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Mark audio as initialized since this is triggered by user interaction or auto-play
     this.audioInitialized = true;
     this.needsUserInteraction = false;
     this.isPlaying = true;
     let playCount = 0;
 
-    const playWord = () => {
+    const playNext = () => {
       if (playCount >= 3) {
         this.isPlaying = false;
         return;
       }
 
-      window.speechSynthesis.cancel();
-      
-      // Wait for voices to be loaded (important for Android)
-      const speak = () => {
-        const utterance = new SpeechSynthesisUtterance(this.currentWord!.word);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.7;
-        utterance.pitch = 1;
-        utterance.volume = 1;
+      const utterance = new SpeechSynthesisUtterance(this.currentWord!.word);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.7;
+      utterance.pitch = 1;
+      utterance.volume = 1;
 
-        // Try to get English voice
-        const voices = window.speechSynthesis.getVoices();
-        const englishVoice = voices.find(v => v.lang.startsWith('en'));
-        if (englishVoice) {
-          utterance.voice = englishVoice;
-        }
-
-        utterance.onend = () => {
-          playCount++;
-          if (playCount < 3) {
-            setTimeout(playWord, 2000); // 2秒后播放下一遍
-          } else {
-            this.isPlaying = false;
-          }
-        };
-
-        utterance.onerror = (event) => {
-          console.error('Speech synthesis error:', event);
+      utterance.onend = () => {
+        playCount++;
+        if (playCount < 3) {
+          setTimeout(playNext, 2000);
+        } else {
           this.isPlaying = false;
-          // On error, might need user interaction
-          if (event.error === 'not-allowed') {
-            this.needsUserInteraction = true;
-          }
-        };
-
-        window.speechSynthesis.speak(utterance);
+        }
       };
 
-      // Check if voices are loaded
-      if (window.speechSynthesis.getVoices().length === 0) {
-        window.speechSynthesis.onvoiceschanged = () => {
-          speak();
-        };
-        // Fallback timeout in case onvoiceschanged doesn't fire
-        setTimeout(speak, 100);
-      } else {
-        speak();
-      }
+      utterance.onerror = (event) => {
+        console.error('Speech synthesis error:', event);
+        this.isPlaying = false;
+        if (event.error === 'not-allowed') {
+          this.needsUserInteraction = true;
+        }
+      };
+
+      window.speechSynthesis.speak(utterance);
     };
 
-    playWord();
+    playNext();
   }
 
   // 软键盘输入
@@ -654,26 +632,19 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // 停止当前正在播放的语音
-    window.speechSynthesis.cancel();
-
-    // 先朗读单词
     const wordUtterance = new SpeechSynthesisUtterance(this.currentWord.word);
     wordUtterance.lang = 'en-US';
     wordUtterance.rate = 0.8;
     wordUtterance.pitch = 1;
     wordUtterance.volume = 1;
 
-    // 单词朗读完成后朗读例句
     wordUtterance.onend = () => {
-      // 等待500ms后朗读例句
       setTimeout(() => {
         const sentenceUtterance = new SpeechSynthesisUtterance(this.currentWord!.example);
         sentenceUtterance.lang = 'en-US';
         sentenceUtterance.rate = 0.7;
         sentenceUtterance.pitch = 1;
         sentenceUtterance.volume = 1;
-
         window.speechSynthesis.speak(sentenceUtterance);
       }, 500);
     };
@@ -894,91 +865,37 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
 
   // 朗读单词
   speakWord(text: string) {
-    if ('speechSynthesis' in window) {
-      // Mark as initialized since user clicked
-      this.audioInitialized = true;
-      this.needsUserInteraction = false;
-      
-      // 停止当前正在播放的语音
-      window.speechSynthesis.cancel();
-
-      const speak = () => {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US'; // 设置为英语
-        utterance.rate = 0.8; // 语速稍慢，便于学习
-        utterance.pitch = 1; // 音调
-        utterance.volume = 1; // 音量
-
-        // Try to get English voice for Android
-        const voices = window.speechSynthesis.getVoices();
-        const englishVoice = voices.find(v => v.lang.startsWith('en'));
-        if (englishVoice) {
-          utterance.voice = englishVoice;
-        }
-
-        utterance.onerror = (event) => {
-          console.error('Speech synthesis error:', event);
-        };
-
-        window.speechSynthesis.speak(utterance);
-      };
-
-      // Check if voices are loaded (important for Android)
-      if (window.speechSynthesis.getVoices().length === 0) {
-        window.speechSynthesis.onvoiceschanged = () => {
-          speak();
-        };
-        setTimeout(speak, 100);
-      } else {
-        speak();
-      }
-    } else {
+    if (!('speechSynthesis' in window)) {
       console.warn('浏览器不支持语音合成');
+      return;
     }
+    this.audioInitialized = true;
+    this.needsUserInteraction = false;
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.8;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+    utterance.onerror = (event) => console.error('Speech synthesis error:', event);
+    window.speechSynthesis.speak(utterance);
   }
 
   // 朗读句子
   speakSentence(text: string) {
-    if ('speechSynthesis' in window) {
-      // Mark as initialized since user clicked
-      this.audioInitialized = true;
-      this.needsUserInteraction = false;
-      
-      // 停止当前正在播放的语音
-      window.speechSynthesis.cancel();
-
-      const speak = () => {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US'; // 设置为英语
-        utterance.rate = 0.7; // 句子语速更慢
-        utterance.pitch = 1; // 音调
-        utterance.volume = 1; // 音量
-
-        // Try to get English voice for Android
-        const voices = window.speechSynthesis.getVoices();
-        const englishVoice = voices.find(v => v.lang.startsWith('en'));
-        if (englishVoice) {
-          utterance.voice = englishVoice;
-        }
-
-        utterance.onerror = (event) => {
-          console.error('Speech synthesis error:', event);
-        };
-
-        window.speechSynthesis.speak(utterance);
-      };
-
-      // Check if voices are loaded (important for Android)
-      if (window.speechSynthesis.getVoices().length === 0) {
-        window.speechSynthesis.onvoiceschanged = () => {
-          speak();
-        };
-        setTimeout(speak, 100);
-      } else {
-        speak();
-      }
-    } else {
+    if (!('speechSynthesis' in window)) {
       console.warn('浏览器不支持语音合成');
+      return;
     }
+    this.audioInitialized = true;
+    this.needsUserInteraction = false;
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.7;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+    utterance.onerror = (event) => console.error('Speech synthesis error:', event);
+    window.speechSynthesis.speak(utterance);
   }
 }

@@ -21,7 +21,7 @@ interface AudioItem {
   styleUrl: './grade3-term2-knowledge-list.scss',
 })
 export class Grade3Term2KnowledgeListComponent {
-  pdfUrl = '/assets/resources/categories/english/grade-3-2/knowledge_list.pdf';
+  pdfUrl = 'assets/resources/categories/english/grade-3-2/knowledge_list.pdf';
   audioItems: AudioItem[] = [];
   currentAudio: { url: string | null; title: string; unitNumber: number | null } = {
     url: null,
@@ -46,7 +46,7 @@ export class Grade3Term2KnowledgeListComponent {
   }
 
   initializeAudioItems() {
-    const basePath = '/assets/resources/categories/english/grade-3-2/text_audio';
+    const basePath = 'assets/resources/categories/english/grade-3-2/text_audio';
 
     // Define units with their folder names and availability
     // Currently only Unit 1 has knowledge_list.m4a

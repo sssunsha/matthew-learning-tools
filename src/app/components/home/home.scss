@@ -269,21 +269,12 @@ $metro-brown: #7e735f;
 .tile-english {
   background: linear-gradient(135deg, #81c784 0%, #66bb6a 100%);
 } // 柔和绿色
-.tile-science {
-  background: linear-gradient(135deg, #4db6ac 0%, #26a69a 100%);
-} // 柔和青色
-.tile-ai {
-  background: linear-gradient(135deg, #ffb74d 0%, #ffa726 100%);
-} // 柔和橙色
 .tile-entertainment {
   background: linear-gradient(135deg, #e57373 0%, #ef5350 100%);
 } // 柔和红色
 .tile-other-subjects {
   background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%);
 } // 柔和天蓝色 - 其他学科
-.tile-recommend {
-  background: linear-gradient(135deg, #f06292 0%, #ec407a 100%);
-} // 柔和粉色 - 推荐
 
 // 翻转动画效果
 @keyframes metro-tile-flip {

@@ -111,7 +111,7 @@ export class QuickCalculationComponent implements OnInit {
       return;
     }
 
-    const path = `/assets/resources/categories/math/quick-calculation-questions/${lesson.filename}`;
+    const path = `assets/resources/categories/math/quick-calculation-questions/${lesson.filename}`;
     
     try {
       this.questionBank = await this.http.get<QuestionBank>(path).toPromise() as QuestionBank;

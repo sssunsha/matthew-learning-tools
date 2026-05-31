@@ -14,7 +14,7 @@ export class Grade3Term2MorningReadingComponent {
   pdfPath: string;
 
   constructor(private router: Router) {
-    this.pdfPath = '/assets/resources/categories/chinese/grade3-term2-characters/三下语文寒假预习每课晨读单.pdf';
+    this.pdfPath = 'assets/resources/categories/chinese/grade3-term2-characters/三下语文寒假预习每课晨读单.pdf';
   }
 
   goBack() {
