@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClient } from '@angular/common/http';
+import { TtsService } from '../../services/tts.service';
 
 interface Word {
   id: number;
@@ -84,8 +85,6 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
   // 听写模式相关
   userInput: string = '';
   isPlaying: boolean = false;
-  audioInitialized: boolean = false;
-  needsUserInteraction: boolean = false;
   keyboardLayout: string[][] = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
     ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
@@ -114,6 +113,7 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
     private location: Location,
     private http: HttpClient,
     private ngZone: NgZone,
+    private tts: TtsService,
   ) {}
 
   ngOnInit() {
@@ -122,39 +122,6 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
       this.loadLastTestMode();
       this.loadVocabulary();
     });
-    
-    // Check if device needs user interaction for audio (mobile/tablet)
-    this.checkAudioSupport();
-  }
-  
-  // Check audio support and initialize speech synthesis
-  checkAudioSupport() {
-    if ('speechSynthesis' in window) {
-      // On Android/mobile, speechSynthesis often requires user interaction
-      // We'll set a flag to show a "tap to play" prompt
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      this.needsUserInteraction = isMobile && !this.audioInitialized;
-    }
-  }
-  
-  // Initialize audio with user interaction (for Android/mobile)
-  initializeAudio() {
-    if ('speechSynthesis' in window) {
-      // Speak an empty utterance to initialize
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance('');
-      utterance.volume = 0;
-      utterance.onend = () => {
-        this.audioInitialized = true;
-        this.needsUserInteraction = false;
-      };
-      utterance.onerror = () => {
-        // Even if error, mark as initialized to avoid blocking
-        this.audioInitialized = true;
-        this.needsUserInteraction = false;
-      };
-      window.speechSynthesis.speak(utterance);
-    }
   }
 
   ngOnDestroy() {
@@ -476,48 +443,24 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
 
   // 播放听写
   playDictation() {
-    if (!this.currentWord || !('speechSynthesis' in window)) {
-      this.needsUserInteraction = true;
-      return;
-    }
+    if (!this.currentWord) return;
 
-    this.audioInitialized = true;
-    this.needsUserInteraction = false;
     this.isPlaying = true;
-    let playCount = 0;
 
+    let playCount = 0;
     const playNext = () => {
       if (playCount >= 3) {
         this.isPlaying = false;
         return;
       }
-
-      const utterance = new SpeechSynthesisUtterance(this.currentWord!.word);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.7;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-
-      utterance.onend = () => {
-        playCount++;
-        if (playCount < 3) {
-          setTimeout(playNext, 2000);
-        } else {
-          this.isPlaying = false;
-        }
-      };
-
-      utterance.onerror = (event) => {
-        console.error('Speech synthesis error:', event);
-        this.isPlaying = false;
-        if (event.error === 'not-allowed') {
-          this.needsUserInteraction = true;
-        }
-      };
-
-      window.speechSynthesis.speak(utterance);
+      playCount++;
+      this.tts.speak(this.currentWord!.word, 0.7);
+      if (playCount < 3) {
+        setTimeout(playNext, 2500);
+      } else {
+        setTimeout(() => { this.isPlaying = false; }, 2000);
+      }
     };
-
     playNext();
   }
 
@@ -628,28 +571,11 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
 
   // 自动朗读答案（单词和例句）
   autoReadAnswer() {
-    if (!this.currentWord || !('speechSynthesis' in window)) {
-      return;
-    }
-
-    const wordUtterance = new SpeechSynthesisUtterance(this.currentWord.word);
-    wordUtterance.lang = 'en-US';
-    wordUtterance.rate = 0.8;
-    wordUtterance.pitch = 1;
-    wordUtterance.volume = 1;
-
-    wordUtterance.onend = () => {
-      setTimeout(() => {
-        const sentenceUtterance = new SpeechSynthesisUtterance(this.currentWord!.example);
-        sentenceUtterance.lang = 'en-US';
-        sentenceUtterance.rate = 0.7;
-        sentenceUtterance.pitch = 1;
-        sentenceUtterance.volume = 1;
-        window.speechSynthesis.speak(sentenceUtterance);
-      }, 500);
-    };
-
-    window.speechSynthesis.speak(wordUtterance);
+    if (!this.currentWord) return;
+    this.tts.speakSequence([
+      { text: this.currentWord.word, rate: 0.8 },
+      { text: this.currentWord.example, rate: 0.7 },
+    ]);
   }
 
   // 记录错题
@@ -865,37 +791,11 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
 
   // 朗读单词
   speakWord(text: string) {
-    if (!('speechSynthesis' in window)) {
-      console.warn('浏览器不支持语音合成');
-      return;
-    }
-    this.audioInitialized = true;
-    this.needsUserInteraction = false;
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.8;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-    utterance.onerror = (event) => console.error('Speech synthesis error:', event);
-    window.speechSynthesis.speak(utterance);
+    this.tts.speak(text, 0.8);
   }
 
   // 朗读句子
   speakSentence(text: string) {
-    if (!('speechSynthesis' in window)) {
-      console.warn('浏览器不支持语音合成');
-      return;
-    }
-    this.audioInitialized = true;
-    this.needsUserInteraction = false;
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.7;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-    utterance.onerror = (event) => console.error('Speech synthesis error:', event);
-    window.speechSynthesis.speak(utterance);
+    this.tts.speak(text, 0.7);
   }
 }
