@@ -1,0 +1,23 @@
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
+@Component({
+  selector: 'app-review-category',
+  standalone: true,
+  imports: [MatIconModule, MatButtonModule],
+  templateUrl: './review-category.html',
+  styleUrl: './review-category.scss',
+})
+export class ReviewCategoryComponent {
+  constructor(private router: Router) {}
+
+  goBack() {
+    this.router.navigate(['/']);
+  }
+
+  openEnglishVocabularyReview() {
+    this.router.navigate(['/category/review/english-vocabulary-review']);
+  }
+}
