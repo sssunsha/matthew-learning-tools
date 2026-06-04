@@ -5,8 +5,51 @@
     </button>
     <h1 class="page-title">英语单词复习</h1>
     <p class="page-subtitle">English Vocabulary Review</p>
+    <div class="header-spacer"></div>
+    <button mat-icon-button class="answer-btn" (click)="toggleAnswerPanel()" [class.active]="answerPanelOpen" title="参考答案">
+      <mat-icon>menu_book</mat-icon>
+    </button>
   </div>
-  <div class="pdf-area">
-    <app-pdf-viewer [pdfUrl]="pdfUrl"></app-pdf-viewer>
+
+  <div class="main-area">
+    <div class="pdf-area">
+      <app-pdf-viewer [pdfUrl]="pdfUrl"></app-pdf-viewer>
+    </div>
+
+    <div class="answer-panel" [class.open]="answerPanelOpen">
+      <div class="panel-header">
+        @if (selectedUnit) {
+          <button mat-icon-button class="panel-back-btn" (click)="backToUnits()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        }
+        <span class="panel-title">{{ selectedUnit ? selectedUnit.title : '参考答案' }}</span>
+      </div>
+
+      @if (!selectedUnit) {
+        <div class="unit-list">
+          @for (unit of units; track unit.unit) {
+            <button class="unit-item" (click)="selectUnit(unit)">
+              <span class="unit-name">{{ unit.title }}</span>
+              <span class="unit-count">{{ unit.words.length }} 词</span>
+              <mat-icon class="unit-arrow">chevron_right</mat-icon>
+            </button>
+          }
+        </div>
+      }
+
+      @if (selectedUnit) {
+        <div class="word-list">
+          @for (word of selectedUnit.words; track word.id) {
+            <div class="word-item">
+              <span class="word-translation">{{ word.translation }}</span>
+              <span class="word-divider">→</span>
+              <span class="word-english">{{ word.word }}</span>
+              <span class="word-pos">{{ word.partOfSpeech }}</span>
+            </div>
+          }
+        </div>
+      }
+    </div>
   </div>
 </div>

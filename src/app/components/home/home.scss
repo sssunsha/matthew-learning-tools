@@ -275,6 +275,9 @@ $metro-brown: #7e735f;
 .tile-other-subjects {
   background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%);
 } // 柔和天蓝色 - 其他学科
+.tile-review {
+  background: linear-gradient(135deg, #78909c 0%, #607d8b 100%);
+} // 蓝灰色 - 复习
 
 // 翻转动画效果
 @keyframes metro-tile-flip {
