@@ -14,7 +14,7 @@ if (typeof Worker !== 'undefined') {
 }
 
 // IIFE classic-script bundle, compatible with all WebViews
-pdfjsLib.GlobalWorkerOptions.workerSrc = './assets/pdfjs/pdf.worker.js';
+pdfjsLib.GlobalWorkerOptions.workerSrc = '/assets/pdfjs/pdf.worker.js';
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -321,7 +321,10 @@ export class PdfViewerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.pageCanvases = [];
 
     try {
-      const loadingTask = pdfjsLib.getDocument(this.pdfUrl);
+      const url = (this.pdfUrl.startsWith('/') || this.pdfUrl.startsWith('file://') || this.pdfUrl.startsWith('http'))
+        ? this.pdfUrl
+        : `/${this.pdfUrl}`;
+      const loadingTask = pdfjsLib.getDocument(url);
       this.pdfDocument = await loadingTask.promise;
       this.totalPages = this.pdfDocument.numPages;
       this.thumbnails = Array.from({ length: this.totalPages }, (_, i) => i + 1);
