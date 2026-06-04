@@ -1,0 +1,12 @@
+<div class="page-container">
+  <div class="page-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="page-title">英语单词复习</h1>
+    <p class="page-subtitle">English Vocabulary Review</p>
+  </div>
+  <div class="pdf-area">
+    <app-pdf-viewer [pdfUrl]="pdfUrl"></app-pdf-viewer>
+  </div>
+</div>
