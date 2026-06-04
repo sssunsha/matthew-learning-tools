@@ -33,6 +33,8 @@ import { Calc24Component } from './components/calc24/calc24';
 import { SettingsComponent } from './components/settings/settings';
 import { StatisticsComponent } from './components/statistics/statistics';
 import { PhotosComponent } from './components/photos/photos';
+import { ReviewCategoryComponent } from './components/categories/review/review-category';
+import { EnglishVocabularyReviewComponent } from './components/categories/review/english-vocabulary-review/english-vocabulary-review';
 
 export const routes: Routes = [
   // Home route
@@ -194,6 +196,16 @@ export const routes: Routes = [
     path: 'category/notes',
     component: NotesCategoryComponent,
     title: '记录 - Notes',
+  },
+  {
+    path: 'category/review',
+    component: ReviewCategoryComponent,
+    title: '复习 - Review',
+  },
+  {
+    path: 'category/review/english-vocabulary-review',
+    component: EnglishVocabularyReviewComponent,
+    title: '英语单词复习 - English Vocabulary Review',
   },
 
   // Standalone feature routes
