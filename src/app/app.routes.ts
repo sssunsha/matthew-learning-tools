@@ -27,7 +27,6 @@ import { JingleBellsChorusComponent } from './components/categories/other-subjec
 import { NoteEditorComponent } from './components/note-editor/note-editor';
 import { VocabularyComponent } from './components/vocabulary/vocabulary';
 import { VocabularyTestComponent } from './components/vocabulary-test/vocabulary-test';
-import { ParrotTrainingComponent } from './components/parrot-training/parrot-training';
 import { GomokuComponent } from './components/gomoku/gomoku';
 import { Calc24Component } from './components/calc24/calc24';
 import { SettingsComponent } from './components/settings/settings';
@@ -228,11 +227,6 @@ export const routes: Routes = [
     path: 'vocabulary-test/:grade',
     component: VocabularyTestComponent,
     title: '单词测试 - Vocabulary Test',
-  },
-  {
-    path: 'parrot-training',
-    component: ParrotTrainingComponent,
-    title: '鹦鹉训练 - Parrot Training',
   },
   {
     path: 'tetris',
