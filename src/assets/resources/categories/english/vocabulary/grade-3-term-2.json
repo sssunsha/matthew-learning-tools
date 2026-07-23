@@ -8,6 +8,7 @@
     {
       "id": 1,
       "word": "animal",
+      "phonics": ["a", "ni", "mal"],
       "pronunciation": "",
       "translation": "动物",
       "partOfSpeech": "n.",
@@ -18,6 +19,7 @@
     {
       "id": 2,
       "word": "panda",
+      "phonics": ["pan", "da"],
       "pronunciation": "",
       "translation": "大熊猫",
       "partOfSpeech": "n.",
@@ -28,6 +30,7 @@
     {
       "id": 3,
       "word": "elephant",
+      "phonics": ["e", "le", "ph", "a", "nt"],
       "pronunciation": "",
       "translation": "象",
       "partOfSpeech": "n.",
@@ -38,6 +41,7 @@
     {
       "id": 4,
       "word": "bear",
+      "phonics": ["bear"],
       "pronunciation": "",
       "translation": "熊",
       "partOfSpeech": "n.",
@@ -48,6 +52,7 @@
     {
       "id": 5,
       "word": "giraffe",
+      "phonics": ["gi", "raffe"],
       "pronunciation": "",
       "translation": "长颈鹿",
       "partOfSpeech": "n.",
@@ -58,6 +63,7 @@
     {
       "id": 6,
       "word": "monkey",
+      "phonics": ["mon", "key"],
       "pronunciation": "",
       "translation": "猴",
       "partOfSpeech": "n.",
@@ -68,6 +74,7 @@
     {
       "id": 7,
       "word": "them",
+      "phonics": ["th", "em"],
       "pronunciation": "",
       "translation": "他们；她们；它们",
       "partOfSpeech": "pron.",
@@ -78,6 +85,7 @@
     {
       "id": 8,
       "word": "draw",
+      "phonics": ["dr", "aw"],
       "pronunciation": "",
       "translation": "画，绘画",
       "partOfSpeech": "v.",
@@ -88,6 +96,7 @@
     {
       "id": 9,
       "word": "tiger",
+      "phonics": ["ti", "ger"],
       "pronunciation": "",
       "translation": "老虎，虎",
       "partOfSpeech": "n.",
@@ -98,6 +107,7 @@
     {
       "id": 10,
       "word": "strong",
+      "phonics": ["str", "ong"],
       "pronunciation": "",
       "translation": "强壮的，力气大的",
       "partOfSpeech": "adj.",
@@ -108,6 +118,7 @@
     {
       "id": 11,
       "word": "short",
+      "phonics": ["sh", "ort"],
       "pronunciation": "",
       "translation": "个子矮的",
       "partOfSpeech": "adj.",
@@ -118,6 +129,7 @@
     {
       "id": 12,
       "word": "white",
+      "phonics": ["wh", "ite"],
       "pronunciation": "",
       "translation": "白的，白色的",
       "partOfSpeech": "adj.",
@@ -128,6 +140,7 @@
     {
       "id": 13,
       "word": "brown",
+      "phonics": ["br", "own"],
       "pronunciation": "",
       "translation": "棕色的；褐色的",
       "partOfSpeech": "adj.",
@@ -138,6 +151,7 @@
     {
       "id": 14,
       "word": "tall",
+      "phonics": ["tall"],
       "pronunciation": "",
       "translation": "高的，高大的",
       "partOfSpeech": "adj.",
@@ -148,6 +162,7 @@
     {
       "id": 15,
       "word": "him",
+      "phonics": ["him"],
       "pronunciation": "",
       "translation": "他；它（指雄性动物）",
       "partOfSpeech": "pron.",
@@ -158,6 +173,7 @@
     {
       "id": 16,
       "word": "ostrich",
+      "phonics": ["os", "tr", "ich"],
       "pronunciation": "",
       "translation": "鸵鸟",
       "partOfSpeech": "n.",
@@ -168,6 +184,7 @@
     {
       "id": 17,
       "word": "fast",
+      "phonics": ["fast"],
       "pronunciation": "",
       "translation": "快的，快速的",
       "partOfSpeech": "adj.",
@@ -178,6 +195,7 @@
     {
       "id": 18,
       "word": "chameleon",
+      "phonics": ["cha", "me", "le", "on"],
       "pronunciation": "",
       "translation": "变色龙",
       "partOfSpeech": "n.",
@@ -188,6 +206,7 @@
     {
       "id": 19,
       "word": "small",
+      "phonics": ["sm", "all"],
       "pronunciation": "",
       "translation": "小的",
       "partOfSpeech": "adj.",
@@ -198,6 +217,7 @@
     {
       "id": 20,
       "word": "lion",
+      "phonics": ["li", "on"],
       "pronunciation": "",
       "translation": "狮子",
       "partOfSpeech": "n.",
@@ -208,6 +228,7 @@
     {
       "id": 21,
       "word": "cute",
+      "phonics": ["cute"],
       "pronunciation": "",
       "translation": "可爱的，漂亮的，逗人喜爱的",
       "partOfSpeech": "adj.",
@@ -218,6 +239,7 @@
     {
       "id": 22,
       "word": "out",
+      "phonics": ["out"],
       "pronunciation": "",
       "translation": "往外，向外，出来",
       "partOfSpeech": "adv.",
@@ -228,6 +250,7 @@
     {
       "id": 23,
       "word": "zoo",
+      "phonics": ["zoo"],
       "pronunciation": "",
       "translation": "动物园",
       "partOfSpeech": "n.",
@@ -238,6 +261,7 @@
     {
       "id": 24,
       "word": "go",
+      "phonics": ["go"],
       "pronunciation": "",
       "translation": "走，去",
       "partOfSpeech": "v.",
@@ -248,6 +272,7 @@
     {
       "id": 25,
       "word": "zebra",
+      "phonics": ["ze", "bra"],
       "pronunciation": "",
       "translation": "斑马",
       "partOfSpeech": "n.",
@@ -258,6 +283,7 @@
     {
       "id": 26,
       "word": "move",
+      "phonics": ["move"],
       "pronunciation": "",
       "translation": "移动",
       "partOfSpeech": "v.",
@@ -268,6 +294,7 @@
     {
       "id": 27,
       "word": "road",
+      "phonics": ["r", "oa", "d"],
       "pronunciation": "",
       "translation": "路，道路",
       "partOfSpeech": "n.",
@@ -278,6 +305,7 @@
     {
       "id": 28,
       "word": "dance",
+      "phonics": ["dan", "ce"],
       "pronunciation": "",
       "translation": "跳舞",
       "partOfSpeech": "v.",
@@ -288,6 +316,7 @@
     {
       "id": 29,
       "word": "along",
+      "phonics": ["a", "long"],
       "pronunciation": "",
       "translation": "一起",
       "partOfSpeech": "adv.",
@@ -298,6 +327,7 @@
     {
       "id": 30,
       "word": "which",
+      "phonics": ["wh", "ich"],
       "pronunciation": "",
       "translation": "哪一个；哪些",
       "partOfSpeech": "pron.",
@@ -308,6 +338,7 @@
     {
       "id": 31,
       "word": "word",
+      "phonics": ["word"],
       "pronunciation": "",
       "translation": "字，词，单词",
       "partOfSpeech": "n.",
@@ -318,6 +349,7 @@
     {
       "id": 32,
       "word": "stone",
+      "phonics": ["st", "one"],
       "pronunciation": "",
       "translation": "石头",
       "partOfSpeech": "n.",
@@ -328,6 +360,7 @@
     {
       "id": 33,
       "word": "hat",
+      "phonics": ["hat"],
       "pronunciation": "",
       "translation": "帽子",
       "partOfSpeech": "n.",
@@ -338,6 +371,7 @@
     {
       "id": 34,
       "word": "shoe",
+      "phonics": ["sh", "oe"],
       "pronunciation": "",
       "translation": "鞋",
       "partOfSpeech": "n.",
@@ -348,6 +382,7 @@
     {
       "id": 35,
       "word": "body",
+      "phonics": ["bo", "dy"],
       "pronunciation": "",
       "translation": "身体",
       "partOfSpeech": "n.",
@@ -358,6 +393,7 @@
     {
       "id": 36,
       "word": "head",
+      "phonics": ["h", "ea", "d"],
       "pronunciation": "",
       "translation": "头，头部",
       "partOfSpeech": "n.",
@@ -368,6 +404,7 @@
     {
       "id": 37,
       "word": "eye",
+      "phonics": ["eye"],
       "pronunciation": "",
       "translation": "眼睛",
       "partOfSpeech": "n.",
@@ -378,6 +415,7 @@
     {
       "id": 38,
       "word": "ear",
+      "phonics": ["ear"],
       "pronunciation": "",
       "translation": "耳朵",
       "partOfSpeech": "n.",
@@ -388,6 +426,7 @@
     {
       "id": 39,
       "word": "mouth",
+      "phonics": ["m", "ou", "th"],
       "pronunciation": "",
       "translation": "嘴，口",
       "partOfSpeech": "n.",
@@ -398,6 +437,7 @@
     {
       "id": 40,
       "word": "nose",
+      "phonics": ["n", "ose"],
       "pronunciation": "",
       "translation": "鼻子",
       "partOfSpeech": "n.",
@@ -408,6 +448,7 @@
     {
       "id": 41,
       "word": "touch",
+      "phonics": ["t", "ou", "ch"],
       "pronunciation": "",
       "translation": "触摸，碰",
       "partOfSpeech": "v.",
@@ -418,6 +459,7 @@
     {
       "id": 42,
       "word": "hand",
+      "phonics": ["hand"],
       "pronunciation": "",
       "translation": "手",
       "partOfSpeech": "n.",
@@ -428,6 +470,7 @@
     {
       "id": 43,
       "word": "arm",
+      "phonics": ["arm"],
       "pronunciation": "",
       "translation": "手臂，上肢",
       "partOfSpeech": "n.",
@@ -438,6 +481,7 @@
     {
       "id": 44,
       "word": "leg",
+      "phonics": ["leg"],
       "pronunciation": "",
       "translation": "腿",
       "partOfSpeech": "n.",
@@ -448,6 +492,7 @@
     {
       "id": 45,
       "word": "foot",
+      "phonics": ["f", "oo", "t"],
       "pronunciation": "",
       "translation": "（复数feet）脚",
       "partOfSpeech": "n.",
@@ -458,6 +503,7 @@
     {
       "id": 46,
       "word": "toe",
+      "phonics": ["toe"],
       "pronunciation": "",
       "translation": "脚趾",
       "partOfSpeech": "n.",
@@ -468,6 +514,7 @@
     {
       "id": 47,
       "word": "get",
+      "phonics": ["get"],
       "pronunciation": "",
       "translation": "获得，得到",
       "partOfSpeech": "v.",
@@ -478,6 +525,7 @@
     {
       "id": 48,
       "word": "snowy",
+      "phonics": ["sn", "ow", "y"],
       "pronunciation": "",
       "translation": "多雪的，积雪的",
       "partOfSpeech": "adj.",
@@ -488,6 +536,7 @@
     {
       "id": 49,
       "word": "child",
+      "phonics": ["ch", "ild"],
       "pronunciation": "",
       "translation": "（复数children）儿童，小孩",
       "partOfSpeech": "n.",
@@ -498,6 +547,7 @@
     {
       "id": 50,
       "word": "work",
+      "phonics": ["work"],
       "pronunciation": "",
       "translation": "事情，工作",
       "partOfSpeech": "n.",
@@ -508,6 +558,7 @@
     {
       "id": 51,
       "word": "snowman",
+      "phonics": ["snow", "man"],
       "pronunciation": "",
       "translation": "雪人",
       "partOfSpeech": "n.",
@@ -518,6 +569,7 @@
     {
       "id": 52,
       "word": "long",
+      "phonics": ["long"],
       "pronunciation": "",
       "translation": "长的",
       "partOfSpeech": "adj.",
@@ -528,6 +580,7 @@
     {
       "id": 53,
       "word": "rock",
+      "phonics": ["rock"],
       "pronunciation": "",
       "translation": "石头，石子",
       "partOfSpeech": "n.",
@@ -538,6 +591,7 @@
     {
       "id": 54,
       "word": "cool",
+      "phonics": ["c", "oo", "l"],
       "pronunciation": "",
       "translation": "时髦的，酷的",
       "partOfSpeech": "adj.",
@@ -548,6 +602,7 @@
     {
       "id": 55,
       "word": "best",
+      "phonics": ["best"],
       "pronunciation": "",
       "translation": "最好的",
       "partOfSpeech": "adj.",
@@ -558,6 +613,7 @@
     {
       "id": 56,
       "word": "part",
+      "phonics": ["part"],
       "pronunciation": "",
       "translation": "器官；部位；组成部分",
       "partOfSpeech": "n.",
@@ -568,6 +624,7 @@
     {
       "id": 57,
       "word": "well",
+      "phonics": ["well"],
       "pronunciation": "",
       "translation": "嘿，这个；健康的",
       "partOfSpeech": "interj./adj.",
@@ -578,6 +635,7 @@
     {
       "id": 58,
       "word": "hear",
+      "phonics": ["h", "ear"],
       "pronunciation": "",
       "translation": "听见",
       "partOfSpeech": "v.",
@@ -588,6 +646,7 @@
     {
       "id": 59,
       "word": "smell",
+      "phonics": ["sm", "ell"],
       "pronunciation": "",
       "translation": "闻到，嗅到",
       "partOfSpeech": "v.",
@@ -598,6 +657,7 @@
     {
       "id": 60,
       "word": "talk",
+      "phonics": ["talk"],
       "pronunciation": "",
       "translation": "说话",
       "partOfSpeech": "v.",
@@ -608,6 +668,7 @@
     {
       "id": 61,
       "word": "eat",
+      "phonics": ["eat"],
       "pronunciation": "",
       "translation": "吃",
       "partOfSpeech": "v.",
@@ -618,6 +679,7 @@
     {
       "id": 62,
       "word": "hey",
+      "phonics": ["hey"],
       "pronunciation": "",
       "translation": "嘿，嗨",
       "partOfSpeech": "interj.",
@@ -628,6 +690,7 @@
     {
       "id": 63,
       "word": "stop",
+      "phonics": ["st", "op"],
       "pronunciation": "",
       "translation": "停止，终止",
       "partOfSpeech": "v.",
@@ -638,6 +701,7 @@
     {
       "id": 64,
       "word": "important",
+      "phonics": ["im", "por", "tant"],
       "pronunciation": "",
       "translation": "重要的，重大的",
       "partOfSpeech": "adj.",
@@ -648,6 +712,7 @@
     {
       "id": 65,
       "word": "team",
+      "phonics": ["t", "ea", "m"],
       "pronunciation": "",
       "translation": "队",
       "partOfSpeech": "n.",
@@ -658,6 +723,7 @@
     {
       "id": 66,
       "word": "dream",
+      "phonics": ["dr", "eam"],
       "pronunciation": "",
       "translation": "梦",
       "partOfSpeech": "n.",
@@ -668,6 +734,7 @@
     {
       "id": 67,
       "word": "ask",
+      "phonics": ["ask"],
       "pronunciation": "",
       "translation": "问，提问",
       "partOfSpeech": "v.",
@@ -678,6 +745,7 @@
     {
       "id": 68,
       "word": "answer",
+      "phonics": ["an", "swer"],
       "pronunciation": "",
       "translation": "回答，答复",
       "partOfSpeech": "v.",
@@ -688,6 +756,7 @@
     {
       "id": 69,
       "word": "hair",
+      "phonics": ["hair"],
       "pronunciation": "",
       "translation": "头发",
       "partOfSpeech": "n.",
@@ -698,6 +767,7 @@
     {
       "id": 70,
       "word": "different",
+      "phonics": ["dif", "fer", "ent"],
       "pronunciation": "",
       "translation": "不同的，不一样的，有差异的",
       "partOfSpeech": "adj.",
@@ -708,6 +778,7 @@
     {
       "id": 71,
       "word": "face",
+      "phonics": ["face"],
       "pronunciation": "",
       "translation": "脸",
       "partOfSpeech": "n.",
@@ -718,6 +789,7 @@
     {
       "id": 72,
       "word": "yummy",
+      "phonics": ["yum", "my"],
       "pronunciation": "",
       "translation": "美味的，很好吃的",
       "partOfSpeech": "adj.",
@@ -728,6 +800,7 @@
     {
       "id": 73,
       "word": "food",
+      "phonics": ["f", "oo", "d"],
       "pronunciation": "",
       "translation": "食物",
       "partOfSpeech": "n.",
@@ -738,6 +811,7 @@
     {
       "id": 74,
       "word": "strawberry",
+      "phonics": ["str", "aw", "ber", "ry"],
       "pronunciation": "",
       "translation": "草莓",
       "partOfSpeech": "n.",
@@ -748,6 +822,7 @@
     {
       "id": 75,
       "word": "tomato",
+      "phonics": ["to", "ma", "to"],
       "pronunciation": "",
       "translation": "番茄，西红柿",
       "partOfSpeech": "n.",
@@ -758,6 +833,7 @@
     {
       "id": 76,
       "word": "noodles",
+      "phonics": ["n", "oo", "dles"],
       "pronunciation": "",
       "translation": "（一般用复数）面条",
       "partOfSpeech": "n.",
@@ -768,6 +844,7 @@
     {
       "id": 77,
       "word": "carrot",
+      "phonics": ["car", "rot"],
       "pronunciation": "",
       "translation": "胡萝卜",
       "partOfSpeech": "n.",
@@ -778,6 +855,7 @@
     {
       "id": 78,
       "word": "chicken",
+      "phonics": ["ch", "ick", "en"],
       "pronunciation": "",
       "translation": "鸡肉；鸡",
       "partOfSpeech": "n.",
@@ -788,6 +866,7 @@
     {
       "id": 79,
       "word": "fish",
+      "phonics": ["f", "ish"],
       "pronunciation": "",
       "translation": "鱼肉；鱼",
       "partOfSpeech": "n.",
@@ -798,6 +877,7 @@
     {
       "id": 80,
       "word": "rice",
+      "phonics": ["r", "ice"],
       "pronunciation": "",
       "translation": "米；米饭",
       "partOfSpeech": "n.",
@@ -808,6 +888,7 @@
     {
       "id": 81,
       "word": "meat",
+      "phonics": ["m", "eat"],
       "pronunciation": "",
       "translation": "肉",
       "partOfSpeech": "n.",
@@ -818,6 +899,7 @@
     {
       "id": 82,
       "word": "fruit",
+      "phonics": ["fr", "uit"],
       "pronunciation": "",
       "translation": "水果",
       "partOfSpeech": "n.",
@@ -828,6 +910,7 @@
     {
       "id": 83,
       "word": "vegetable",
+      "phonics": ["veg", "e", "ta", "ble"],
       "pronunciation": "",
       "translation": "蔬菜",
       "partOfSpeech": "n.",
@@ -838,6 +921,7 @@
     {
       "id": 84,
       "word": "salad",
+      "phonics": ["sal", "ad"],
       "pronunciation": "",
       "translation": "沙拉",
       "partOfSpeech": "n.",
@@ -848,6 +932,7 @@
     {
       "id": 85,
       "word": "banana",
+      "phonics": ["ba", "na", "na"],
       "pronunciation": "",
       "translation": "香蕉",
       "partOfSpeech": "n.",
@@ -858,6 +943,7 @@
     {
       "id": 86,
       "word": "bean",
+      "phonics": ["b", "ean"],
       "pronunciation": "",
       "translation": "豆子",
       "partOfSpeech": "n.",
@@ -868,6 +954,7 @@
     {
       "id": 87,
       "word": "cucumber",
+      "phonics": ["cu", "cum", "ber"],
       "pronunciation": "",
       "translation": "黄瓜",
       "partOfSpeech": "n.",
@@ -878,6 +965,7 @@
     {
       "id": 88,
       "word": "then",
+      "phonics": ["th", "en"],
       "pronunciation": "",
       "translation": "那么；然后，接下来",
       "partOfSpeech": "adv.",
@@ -888,6 +976,7 @@
     {
       "id": 89,
       "word": "about",
+      "phonics": ["a", "b", "out"],
       "pronunciation": "",
       "translation": "关于",
       "partOfSpeech": "prep.",
@@ -898,6 +987,7 @@
     {
       "id": 90,
       "word": "what about...",
+      "phonics": null,
       "pronunciation": "",
       "translation": "......怎么样",
       "partOfSpeech": "",
@@ -908,6 +998,7 @@
     {
       "id": 91,
       "word": "grape",
+      "phonics": ["gr", "ape"],
       "pronunciation": "",
       "translation": "葡萄",
       "partOfSpeech": "n.",
@@ -918,6 +1009,7 @@
     {
       "id": 92,
       "word": "juice",
+      "phonics": ["j", "ui", "ce"],
       "pronunciation": "",
       "translation": "汁",
       "partOfSpeech": "n.",
@@ -928,6 +1020,7 @@
     {
       "id": 93,
       "word": "why",
+      "phonics": ["wh", "y"],
       "pronunciation": "",
       "translation": "为什么",
       "partOfSpeech": "adv.",
@@ -938,6 +1031,7 @@
     {
       "id": 94,
       "word": "early",
+      "phonics": ["ear", "ly"],
       "pronunciation": "",
       "translation": "提早，提前；早的",
       "partOfSpeech": "adv./adj.",
@@ -948,6 +1042,7 @@
     {
       "id": 95,
       "word": "breakfast",
+      "phonics": ["break", "fast"],
       "pronunciation": "",
       "translation": "早餐，早饭",
       "partOfSpeech": "n.",
@@ -958,6 +1053,7 @@
     {
       "id": 96,
       "word": "time",
+      "phonics": ["t", "ime"],
       "pronunciation": "",
       "translation": "时间",
       "partOfSpeech": "n.",
@@ -968,6 +1064,7 @@
     {
       "id": 97,
       "word": "still",
+      "phonics": ["st", "ill"],
       "pronunciation": "",
       "translation": "还，仍然",
       "partOfSpeech": "adv.",
@@ -978,6 +1075,7 @@
     {
       "id": 98,
       "word": "ready",
+      "phonics": ["r", "ea", "dy"],
       "pronunciation": "",
       "translation": "准备好的",
       "partOfSpeech": "adj.",
@@ -988,6 +1086,7 @@
     {
       "id": 99,
       "word": "corn",
+      "phonics": ["c", "orn"],
       "pronunciation": "",
       "translation": "玉米",
       "partOfSpeech": "n.",
@@ -998,6 +1097,7 @@
     {
       "id": 100,
       "word": "lunch",
+      "phonics": ["l", "un", "ch"],
       "pronunciation": "",
       "translation": "午餐",
       "partOfSpeech": "n.",
@@ -1008,6 +1108,7 @@
     {
       "id": 101,
       "word": "very",
+      "phonics": ["ver", "y"],
       "pronunciation": "",
       "translation": "很，非常",
       "partOfSpeech": "adv.",
@@ -1018,6 +1119,7 @@
     {
       "id": 102,
       "word": "much",
+      "phonics": ["m", "u", "ch"],
       "pronunciation": "",
       "translation": "非常",
       "partOfSpeech": "adv.",
@@ -1028,6 +1130,7 @@
     {
       "id": 103,
       "word": "very much",
+      "phonics": null,
       "pronunciation": "",
       "translation": "非常",
       "partOfSpeech": "",
@@ -1038,6 +1141,7 @@
     {
       "id": 104,
       "word": "afternoon",
+      "phonics": ["af", "ter", "noon"],
       "pronunciation": "",
       "translation": "下午，午后",
       "partOfSpeech": "n.",
@@ -1048,6 +1152,7 @@
     {
       "id": 105,
       "word": "tea",
+      "phonics": ["tea"],
       "pronunciation": "",
       "translation": "茶；茶叶",
       "partOfSpeech": "n.",
@@ -1058,6 +1163,7 @@
     {
       "id": 106,
       "word": "afternoon tea",
+      "phonics": null,
       "pronunciation": "",
       "translation": "下午茶",
       "partOfSpeech": "",
@@ -1068,6 +1174,7 @@
     {
       "id": 107,
       "word": "every",
+      "phonics": ["ev", "er", "y"],
       "pronunciation": "",
       "translation": "每，每逢，每隔",
       "partOfSpeech": "adj.",
@@ -1078,6 +1185,7 @@
     {
       "id": 108,
       "word": "week",
+      "phonics": ["week"],
       "pronunciation": "",
       "translation": "星期，周",
       "partOfSpeech": "n.",
@@ -1088,6 +1196,7 @@
     {
       "id": 109,
       "word": "tree",
+      "phonics": ["tr", "ee"],
       "pronunciation": "",
       "translation": "树",
       "partOfSpeech": "n.",
@@ -1098,6 +1207,7 @@
     {
       "id": 110,
       "word": "milk",
+      "phonics": ["milk"],
       "pronunciation": "",
       "translation": "奶，牛奶",
       "partOfSpeech": "n.",
@@ -1108,6 +1218,7 @@
     {
       "id": 111,
       "word": "cupcake",
+      "phonics": ["cup", "cake"],
       "pronunciation": "",
       "translation": "杯形蛋糕",
       "partOfSpeech": "n.",
@@ -1118,6 +1229,7 @@
     {
       "id": 112,
       "word": "sandwich",
+      "phonics": ["sand", "wich"],
       "pronunciation": "",
       "translation": "三明治，夹心面包",
       "partOfSpeech": "n.",
@@ -1128,6 +1240,7 @@
     {
       "id": 113,
       "word": "beef",
+      "phonics": ["b", "ee", "f"],
       "pronunciation": "",
       "translation": "牛肉",
       "partOfSpeech": "n.",
@@ -1138,6 +1251,7 @@
     {
       "id": 114,
       "word": "dumpling",
+      "phonics": ["dum", "pl", "ing"],
       "pronunciation": "",
       "translation": "水饺",
       "partOfSpeech": "n.",
@@ -1148,6 +1262,7 @@
     {
       "id": 115,
       "word": "hot",
+      "phonics": ["hot"],
       "pronunciation": "",
       "translation": "热的",
       "partOfSpeech": "adj.",
@@ -1158,6 +1273,7 @@
     {
       "id": 116,
       "word": "hot dog",
+      "phonics": null,
       "pronunciation": "",
       "translation": "热狗",
       "partOfSpeech": "",
@@ -1168,6 +1284,7 @@
     {
       "id": 117,
       "word": "sushi",
+      "phonics": ["su", "sh", "i"],
       "pronunciation": "",
       "translation": "寿司",
       "partOfSpeech": "n.",
@@ -1178,6 +1295,7 @@
     {
       "id": 118,
       "word": "cake",
+      "phonics": ["cake"],
       "pronunciation": "",
       "translation": "蛋糕",
       "partOfSpeech": "n.",
@@ -1188,6 +1306,7 @@
     {
       "id": 119,
       "word": "hobby",
+      "phonics": ["hob", "by"],
       "pronunciation": "",
       "translation": "业余爱好，嗜好",
       "partOfSpeech": "n.",
@@ -1198,6 +1317,7 @@
     {
       "id": 120,
       "word": "free",
+      "phonics": ["fr", "ee"],
       "pronunciation": "",
       "translation": "空闲的，有空的",
       "partOfSpeech": "adj.",
@@ -1208,6 +1328,7 @@
     {
       "id": 121,
       "word": "after",
+      "phonics": ["af", "ter"],
       "pronunciation": "",
       "translation": "在......后",
       "partOfSpeech": "prep.",
@@ -1218,6 +1339,7 @@
     {
       "id": 122,
       "word": "swim",
+      "phonics": ["sw", "im"],
       "pronunciation": "",
       "translation": "游泳",
       "partOfSpeech": "v.",
@@ -1228,6 +1350,7 @@
     {
       "id": 123,
       "word": "lot",
+      "phonics": ["lot"],
       "pronunciation": "",
       "translation": "许多",
       "partOfSpeech": "n.",
@@ -1238,6 +1361,7 @@
     {
       "id": 124,
       "word": "a lot",
+      "phonics": null,
       "pronunciation": "",
       "translation": "大量，许多",
       "partOfSpeech": "",
@@ -1248,6 +1372,7 @@
     {
       "id": 125,
       "word": "these",
+      "phonics": ["th", "ese"],
       "pronunciation": "",
       "translation": "这些（this的复数形式）",
       "partOfSpeech": "pron.",
@@ -1258,6 +1383,7 @@
     {
       "id": 126,
       "word": "tai chi",
+      "phonics": null,
       "pronunciation": "",
       "translation": "太极",
       "partOfSpeech": "",
@@ -1268,6 +1394,7 @@
     {
       "id": 127,
       "word": "his",
+      "phonics": ["his"],
       "pronunciation": "",
       "translation": "他的",
       "partOfSpeech": "pron.",
@@ -1278,6 +1405,7 @@
     {
       "id": 128,
       "word": "insect",
+      "phonics": ["in", "sect"],
       "pronunciation": "",
       "translation": "昆虫",
       "partOfSpeech": "n.",
@@ -1288,6 +1416,7 @@
     {
       "id": 129,
       "word": "man",
+      "phonics": ["man"],
       "pronunciation": "",
       "translation": "成年男子，男人",
       "partOfSpeech": "n.",
@@ -1298,6 +1427,7 @@
     {
       "id": 130,
       "word": "learn",
+      "phonics": ["l", "earn"],
       "pronunciation": "",
       "translation": "学习",
       "partOfSpeech": "v.",
@@ -1308,6 +1438,7 @@
     {
       "id": 131,
       "word": "plant",
+      "phonics": ["pl", "ant"],
       "pronunciation": "",
       "translation": "植物",
       "partOfSpeech": "n.",
@@ -1318,6 +1449,7 @@
     {
       "id": 132,
       "word": "when",
+      "phonics": ["wh", "en"],
       "pronunciation": "",
       "translation": "什么时候",
       "partOfSpeech": "adv.",
@@ -1328,6 +1460,7 @@
     {
       "id": 133,
       "word": "question",
+      "phonics": ["qu", "es", "tion"],
       "pronunciation": "",
       "translation": "问题，疑问",
       "partOfSpeech": "n.",
@@ -1338,6 +1471,7 @@
     {
       "id": 134,
       "word": "watch",
+      "phonics": ["w", "a", "tch"],
       "pronunciation": "",
       "translation": "观察",
       "partOfSpeech": "v.",
@@ -1348,6 +1482,7 @@
     {
       "id": 135,
       "word": "study",
+      "phonics": ["st", "u", "dy"],
       "pronunciation": "",
       "translation": "研究；仔细察看",
       "partOfSpeech": "v.",
@@ -1358,6 +1493,7 @@
     {
       "id": 136,
       "word": "mantis",
+      "phonics": ["man", "tis"],
       "pronunciation": "",
       "translation": "螳螂",
       "partOfSpeech": "n.",
@@ -1368,6 +1504,7 @@
     {
       "id": 137,
       "word": "stay",
+      "phonics": ["st", "ay"],
       "pronunciation": "",
       "translation": "停留，逗留，留下",
       "partOfSpeech": "v.",
@@ -1378,6 +1515,7 @@
     {
       "id": 138,
       "word": "interesting",
+      "phonics": ["in", "ter", "est", "ing"],
       "pronunciation": "",
       "translation": "有趣的，吸引人的",
       "partOfSpeech": "adj.",
@@ -1388,6 +1526,7 @@
     {
       "id": 139,
       "word": "grow",
+      "phonics": ["gr", "ow"],
       "pronunciation": "",
       "translation": "成长，长大",
       "partOfSpeech": "v.",
@@ -1398,6 +1537,7 @@
     {
       "id": 140,
       "word": "grow up",
+      "phonics": null,
       "pronunciation": "",
       "translation": "长大",
       "partOfSpeech": "",
@@ -1408,6 +1548,7 @@
     {
       "id": 141,
       "word": "country",
+      "phonics": ["coun", "try"],
       "pronunciation": "",
       "translation": "国家",
       "partOfSpeech": "n.",
@@ -1418,6 +1559,7 @@
     {
       "id": 142,
       "word": "robot",
+      "phonics": ["ro", "bot"],
       "pronunciation": "",
       "translation": "机器人",
       "partOfSpeech": "n.",
@@ -1428,6 +1570,7 @@
     {
       "id": 143,
       "word": "kite",
+      "phonics": ["k", "ite"],
       "pronunciation": "",
       "translation": "风筝",
       "partOfSpeech": "n.",
@@ -1438,6 +1581,7 @@
     {
       "id": 144,
       "word": "skate",
+      "phonics": ["sk", "ate"],
       "pronunciation": "",
       "translation": "滑冰，溜冰",
       "partOfSpeech": "v.",
@@ -1448,6 +1592,7 @@
     {
       "id": 145,
       "word": "ice",
+      "phonics": ["ice"],
       "pronunciation": "",
       "translation": "冰",
       "partOfSpeech": "n.",
@@ -1458,6 +1603,7 @@
     {
       "id": 146,
       "word": "ski",
+      "phonics": ["ski"],
       "pronunciation": "",
       "translation": "滑雪",
       "partOfSpeech": "v.",
@@ -1468,6 +1614,7 @@
     {
       "id": 147,
       "word": "garden",
+      "phonics": ["gar", "den"],
       "pronunciation": "",
       "translation": "做园艺工作；花园",
       "partOfSpeech": "v./n.",
@@ -1478,6 +1625,7 @@
     {
       "id": 148,
       "word": "tick-tock",
+      "phonics": null,
       "pronunciation": "",
       "translation": "嘀嗒声",
       "partOfSpeech": "",
@@ -1488,6 +1636,7 @@
     {
       "id": 149,
       "word": "tell",
+      "phonics": ["tell"],
       "pronunciation": "",
       "translation": "告诉，告知",
       "partOfSpeech": "v.",
@@ -1498,6 +1647,7 @@
     {
       "id": 150,
       "word": "clock",
+      "phonics": ["cl", "ock"],
       "pronunciation": "",
       "translation": "时钟",
       "partOfSpeech": "n.",
@@ -1508,6 +1658,7 @@
     {
       "id": 151,
       "word": "o'clock",
+      "phonics": null,
       "pronunciation": "",
       "translation": "点钟",
       "partOfSpeech": "",
@@ -1518,6 +1669,7 @@
     {
       "id": 152,
       "word": "fifteen",
+      "phonics": ["fif", "teen"],
       "pronunciation": "",
       "translation": "十五",
       "partOfSpeech": "num.",
@@ -1528,6 +1680,7 @@
     {
       "id": 153,
       "word": "thirty",
+      "phonics": ["th", "ir", "ty"],
       "pronunciation": "",
       "translation": "三十",
       "partOfSpeech": "num.",
@@ -1538,6 +1691,7 @@
     {
       "id": 154,
       "word": "forty-five",
+      "phonics": null,
       "pronunciation": "",
       "translation": "四十五",
       "partOfSpeech": "num.",
@@ -1548,6 +1702,7 @@
     {
       "id": 155,
       "word": "dinner",
+      "phonics": ["din", "ner"],
       "pronunciation": "",
       "translation": "正餐，主餐",
       "partOfSpeech": "n.",
@@ -1558,6 +1713,7 @@
     {
       "id": 156,
       "word": "half",
+      "phonics": ["half"],
       "pronunciation": "",
       "translation": "一半，半",
       "partOfSpeech": "n.",
@@ -1568,6 +1724,7 @@
     {
       "id": 157,
       "word": "past",
+      "phonics": ["past"],
       "pronunciation": "",
       "translation": "晚于；在......之后",
       "partOfSpeech": "prep.",
@@ -1578,6 +1735,7 @@
     {
       "id": 158,
       "word": "half past one / two...",
+      "phonics": null,
       "pronunciation": "",
       "translation": "1点半/2点半等",
       "partOfSpeech": "",
@@ -1588,6 +1746,7 @@
     {
       "id": 159,
       "word": "urgh",
+      "phonics": ["urgh"],
       "pronunciation": "",
       "translation": "呃，呸",
       "partOfSpeech": "interj.",
@@ -1598,6 +1757,7 @@
     {
       "id": 160,
       "word": "homework",
+      "phonics": ["home", "work"],
       "pronunciation": "",
       "translation": "家庭作业，功课",
       "partOfSpeech": "n.",
@@ -1608,6 +1768,7 @@
     {
       "id": 161,
       "word": "need",
+      "phonics": ["n", "ee", "d"],
       "pronunciation": "",
       "translation": "需要",
       "partOfSpeech": "v.",
@@ -1618,6 +1779,7 @@
     {
       "id": 162,
       "word": "activity",
+      "phonics": ["ac", "tiv", "i", "ty"],
       "pronunciation": "",
       "translation": "活动",
       "partOfSpeech": "n.",
@@ -1628,6 +1790,7 @@
     {
       "id": 163,
       "word": "her",
+      "phonics": ["her"],
       "pronunciation": "",
       "translation": "她的",
       "partOfSpeech": "pron.",
@@ -1638,6 +1801,7 @@
     {
       "id": 164,
       "word": "class",
+      "phonics": ["cl", "ass"],
       "pronunciation": "",
       "translation": "课；班级",
       "partOfSpeech": "n.",
@@ -1648,6 +1812,7 @@
     {
       "id": 165,
       "word": "evening",
+      "phonics": ["eve", "ning"],
       "pronunciation": "",
       "translation": "傍晚；晚上",
       "partOfSpeech": "n.",
@@ -1658,6 +1823,7 @@
     {
       "id": 166,
       "word": "call",
+      "phonics": ["call"],
       "pronunciation": "",
       "translation": "（给......）打电话",
       "partOfSpeech": "v.",
@@ -1668,6 +1834,7 @@
     {
       "id": 167,
       "word": "Monday",
+      "phonics": ["Mon", "day"],
       "pronunciation": "",
       "translation": "星期一",
       "partOfSpeech": "n.",
@@ -1678,6 +1845,7 @@
     {
       "id": 168,
       "word": "Tuesday",
+      "phonics": ["Tues", "day"],
       "pronunciation": "",
       "translation": "星期二",
       "partOfSpeech": "n.",
@@ -1688,6 +1856,7 @@
     {
       "id": 169,
       "word": "Wednesday",
+      "phonics": ["Wed", "nes", "day"],
       "pronunciation": "",
       "translation": "星期三",
       "partOfSpeech": "n.",
@@ -1698,6 +1867,7 @@
     {
       "id": 170,
       "word": "Thursday",
+      "phonics": ["Th", "urs", "day"],
       "pronunciation": "",
       "translation": "星期四",
       "partOfSpeech": "n.",
@@ -1708,6 +1878,7 @@
     {
       "id": 171,
       "word": "Friday",
+      "phonics": ["Fri", "day"],
       "pronunciation": "",
       "translation": "星期五",
       "partOfSpeech": "n.",
@@ -1718,6 +1889,7 @@
     {
       "id": 172,
       "word": "Saturday",
+      "phonics": ["Sat", "ur", "day"],
       "pronunciation": "",
       "translation": "星期六",
       "partOfSpeech": "n.",
@@ -1728,6 +1900,7 @@
     {
       "id": 173,
       "word": "Sunday",
+      "phonics": ["Sun", "day"],
       "pronunciation": "",
       "translation": "星期日",
       "partOfSpeech": "n.",
@@ -1738,6 +1911,7 @@
     {
       "id": 174,
       "word": "park",
+      "phonics": ["park"],
       "pronunciation": "",
       "translation": "公园",
       "partOfSpeech": "n.",
@@ -1748,6 +1922,7 @@
     {
       "id": 175,
       "word": "visit",
+      "phonics": ["vis", "it"],
       "pronunciation": "",
       "translation": "看望，拜访",
       "partOfSpeech": "v.",
@@ -1758,6 +1933,7 @@
     {
       "id": 176,
       "word": "lesson",
+      "phonics": ["les", "son"],
       "pronunciation": "",
       "translation": "课，课程",
       "partOfSpeech": "n.",
@@ -1768,6 +1944,7 @@
     {
       "id": 177,
       "word": "football",
+      "phonics": ["foot", "ball"],
       "pronunciation": "",
       "translation": "足球",
       "partOfSpeech": "n.",
@@ -1778,6 +1955,7 @@
     {
       "id": 178,
       "word": "art",
+      "phonics": ["art"],
       "pronunciation": "",
       "translation": "美术，艺术",
       "partOfSpeech": "n.",
@@ -1788,6 +1966,7 @@
     {
       "id": 179,
       "word": "subject",
+      "phonics": ["sub", "ject"],
       "pronunciation": "",
       "translation": "学科",
       "partOfSpeech": "n.",
@@ -1798,6 +1977,7 @@
     {
       "id": 180,
       "word": "maths",
+      "phonics": ["m", "a", "ths"],
       "pronunciation": "",
       "translation": "数学",
       "partOfSpeech": "n.",
@@ -1808,6 +1988,7 @@
     {
       "id": 181,
       "word": "science",
+      "phonics": ["sci", "ence"],
       "pronunciation": "",
       "translation": "科学",
       "partOfSpeech": "n.",
@@ -1818,6 +1999,7 @@
     {
       "id": 182,
       "word": "something",
+      "phonics": ["some", "th", "ing"],
       "pronunciation": "",
       "translation": "某物；某事",
       "partOfSpeech": "pron.",
@@ -1828,6 +2010,7 @@
     {
       "id": 183,
       "word": "idea",
+      "phonics": ["i", "de", "a"],
       "pronunciation": "",
       "translation": "想法，主意",
       "partOfSpeech": "n.",
@@ -1838,6 +2021,7 @@
     {
       "id": 184,
       "word": "soon",
+      "phonics": ["s", "oo", "n"],
       "pronunciation": "",
       "translation": "不久，即刻，很快",
       "partOfSpeech": "adv.",
@@ -1848,6 +2032,7 @@
     {
       "id": 185,
       "word": "teach",
+      "phonics": ["t", "ea", "ch"],
       "pronunciation": "",
       "translation": "教，教授",
       "partOfSpeech": "v.",
@@ -1858,6 +2043,7 @@
     {
       "id": 186,
       "word": "English",
+      "phonics": ["Eng", "l", "ish"],
       "pronunciation": "",
       "translation": "英语",
       "partOfSpeech": "n.",
@@ -1868,6 +2054,7 @@
     {
       "id": 187,
       "word": "card",
+      "phonics": ["card"],
       "pronunciation": "",
       "translation": "卡片",
       "partOfSpeech": "n.",
@@ -1878,6 +2065,7 @@
     {
       "id": 188,
       "word": "busy",
+      "phonics": ["bus", "y"],
       "pronunciation": "",
       "translation": "忙的，忙碌的",
       "partOfSpeech": "adj.",
@@ -1888,6 +2076,7 @@
     {
       "id": 189,
       "word": "old",
+      "phonics": ["old"],
       "pronunciation": "",
       "translation": "年老的；相识很久的",
       "partOfSpeech": "adj.",
@@ -1898,6 +2087,7 @@
     {
       "id": 190,
       "word": "some",
+      "phonics": ["some"],
       "pronunciation": "",
       "translation": "一些，若干",
       "partOfSpeech": "det.",
@@ -1908,6 +2098,7 @@
     {
       "id": 191,
       "word": "bookmark",
+      "phonics": ["book", "mark"],
       "pronunciation": "",
       "translation": "书签",
       "partOfSpeech": "n.",
@@ -1918,6 +2109,7 @@
     {
       "id": 192,
       "word": "stick",
+      "phonics": ["st", "ick"],
       "pronunciation": "",
       "translation": "木棍，拐杖",
       "partOfSpeech": "n.",
@@ -1928,6 +2120,7 @@
     {
       "id": 193,
       "word": "sure",
+      "phonics": ["sure"],
       "pronunciation": "",
       "translation": "当然，好的",
       "partOfSpeech": "adv.",
@@ -1938,6 +2131,7 @@
     {
       "id": 194,
       "word": "flower",
+      "phonics": ["fl", "ow", "er"],
       "pronunciation": "",
       "translation": "花，花朵",
       "partOfSpeech": "n.",
@@ -1948,6 +2142,7 @@
     {
       "id": 195,
       "word": "afterschool",
+      "phonics": ["af", "ter", "school"],
       "pronunciation": "",
       "translation": "课外的",
       "partOfSpeech": "adj.",
@@ -1958,6 +2153,7 @@
     {
       "id": 196,
       "word": "club",
+      "phonics": ["cl", "ub"],
       "pronunciation": "",
       "translation": "俱乐部",
       "partOfSpeech": "n.",
@@ -1968,6 +2164,7 @@
     {
       "id": 197,
       "word": "piano",
+      "phonics": ["pi", "an", "o"],
       "pronunciation": "",
       "translation": "钢琴",
       "partOfSpeech": "n.",
@@ -1978,6 +2175,7 @@
     {
       "id": 198,
       "word": "basketball",
+      "phonics": ["bas", "ket", "ball"],
       "pronunciation": "",
       "translation": "篮球",
       "partOfSpeech": "n.",
@@ -1988,6 +2186,7 @@
     {
       "id": 199,
       "word": "computer",
+      "phonics": ["com", "pu", "ter"],
       "pronunciation": "",
       "translation": "计算机；电脑",
       "partOfSpeech": "n.",
@@ -1998,6 +2197,7 @@
     {
       "id": 200,
       "word": "music",
+      "phonics": ["mu", "sic"],
       "pronunciation": "",
       "translation": "音乐",
       "partOfSpeech": "n.",

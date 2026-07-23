@@ -7,15 +7,19 @@ export class TtsService {
     return typeof w.cordova !== 'undefined';
   }
 
-  speak(text: string, rate = 0.8): void {
+  speak(text: string, rate = 0.8, onEnd?: () => void): void {
     if (this.cordovaAvailable) {
-      this.playAudio(text);
+      this.playAudio(text, onEnd);
     } else if ('speechSynthesis' in window) {
       const u = new SpeechSynthesisUtterance(text);
       u.lang = 'en-US';
       u.rate = rate;
       u.pitch = 1;
       u.volume = 1;
+      if (onEnd) {
+        u.onend = onEnd;
+        u.onerror = onEnd;
+      }
       window.speechSynthesis.speak(u);
     }
   }

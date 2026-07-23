@@ -3,7 +3,7 @@
   <div class="unit-sidebar" *ngIf="availableUnits.length > 0">
     <h3>单元列表</h3>
     <div class="unit-list-sidebar">
-      <button 
+      <button
         *ngFor="let unit of availableUnits"
         mat-raised-button
         class="unit-item"
@@ -14,31 +14,12 @@
           <span class="unit-number">{{ unit === -1 ? '错题集' : 'Unit ' + unit }}</span>
           <mat-icon *ngIf="unit === -1" class="error-icon">error</mat-icon>
         </div>
-        <!-- 显示三种模式的完成状态 -->
         <div *ngIf="unit !== -1" class="mode-progress">
-          <mat-icon 
-            class="mode-icon"
-            [class.completed]="isUnitModeCompleted(unit, 'en-zh')"
-            [matTooltip]="'英译中' + (isUnitModeCompleted(unit, 'en-zh') ? ' ✓' : '')">
-            translate
-          </mat-icon>
-          <mat-icon 
-            class="mode-icon"
-            [class.completed]="isUnitModeCompleted(unit, 'zh-en')"
-            [matTooltip]="'中译英' + (isUnitModeCompleted(unit, 'zh-en') ? ' ✓' : '')">
-            g_translate
-          </mat-icon>
-          <mat-icon 
-            class="mode-icon"
-            [class.completed]="isUnitModeCompleted(unit, 'dictation')"
-            [matTooltip]="'听写' + (isUnitModeCompleted(unit, 'dictation') ? ' ✓' : '')">
-            hearing
-          </mat-icon>
+          <mat-icon class="mode-icon" [class.completed]="isUnitModeCompleted(unit, 'en-zh')" [matTooltip]="'英译中' + (isUnitModeCompleted(unit, 'en-zh') ? ' ✓' : '')">translate</mat-icon>
+          <mat-icon class="mode-icon" [class.completed]="isUnitModeCompleted(unit, 'zh-en')" [matTooltip]="'中译英' + (isUnitModeCompleted(unit, 'zh-en') ? ' ✓' : '')">g_translate</mat-icon>
+          <mat-icon class="mode-icon" [class.completed]="isUnitModeCompleted(unit, 'dictation')" [matTooltip]="'听写' + (isUnitModeCompleted(unit, 'dictation') ? ' ✓' : '')">hearing</mat-icon>
         </div>
-        <!-- 显示完成数量 -->
-        <div *ngIf="unit !== -1 && getUnitCompletedModesCount(unit) > 0" class="completion-badge">
-          {{ getUnitCompletedModesCount(unit) }}/3
-        </div>
+        <div *ngIf="unit !== -1 && getUnitCompletedModesCount(unit) > 0" class="completion-badge">{{ getUnitCompletedModesCount(unit) }}/3</div>
       </button>
     </div>
   </div>
@@ -52,287 +33,262 @@
     </div>
 
     <div class="test-mode-toggle">
-      <button 
-        mat-raised-button 
-        [color]="testMode === 'en-zh' ? 'primary' : ''"
-        (click)="switchMode('en-zh')">
-        英译中
+      <button mat-raised-button [color]="testMode === 'en-zh' ? 'primary' : ''" (click)="switchMode('en-zh')">英译中</button>
+      <button mat-raised-button [color]="testMode === 'zh-en' ? 'primary' : ''" (click)="switchMode('zh-en')">中译英</button>
+      <button mat-raised-button [color]="testMode === 'dictation' ? 'primary' : ''" (click)="switchMode('dictation')">听写</button>
+    </div>
+
+    <!-- 听写难度切换器 -->
+    <div class="difficulty-selector" *ngIf="testMode === 'dictation'">
+      <span class="difficulty-label">难度：</span>
+      <button
+        *ngFor="let level of [1, 2, 3]"
+        class="difficulty-btn"
+        [class.active]="dictationDifficulty === level"
+        [class.locked]="level > unlockedDifficulty"
+        [disabled]="level > unlockedDifficulty"
+        (click)="switchDifficulty(asDifficulty(level))">
+        <mat-icon *ngIf="level > unlockedDifficulty" class="lock-icon">lock</mat-icon>
+        <span *ngIf="level <= unlockedDifficulty">
+          <span *ngFor="let s of [].constructor(level)">★</span>
+        </span>
+        <span class="difficulty-name">
+          {{ level === 1 ? '音节拼接' : level === 2 ? '字母拼写' : '全键盘' }}
+        </span>
       </button>
-      <button 
-        mat-raised-button 
-        [color]="testMode === 'zh-en' ? 'primary' : ''"
-        (click)="switchMode('zh-en')">
-        中译英
-      </button>
-      <button 
-        mat-raised-button 
-        [color]="testMode === 'dictation' ? 'primary' : ''"
-        (click)="switchMode('dictation')">
-        听写
-      </button>
+    </div>
+
+    <!-- 解锁提示 Toast -->
+    <div class="unlock-toast" *ngIf="showUnlockToast">
+      <mat-icon>emoji_events</mat-icon>
+      <span>{{ unlockToastMessage }}</span>
     </div>
 
     <div class="test-content" *ngIf="!showResult && (currentQuestion || testMode === 'dictation')">
-    <div class="progress-bar">
-      <div class="progress-fill" [style.width.%]="progress"></div>
-    </div>
-    <p class="progress-text">进度: {{ currentQuestionIndex + 1 }} / {{ unitWords.length }}</p>
-
-    <div class="question-card" *ngIf="testMode !== 'dictation' && currentQuestion">
-      <h2 class="question-text clickable" (click)="speakWord(currentQuestion.question)">
-        <mat-icon class="speaker-icon">volume_up</mat-icon>
-        {{ currentQuestion.question }}
-      </h2>
-      
-      <div class="options-grid">
-        <button 
-          *ngFor="let option of currentQuestion.options; let i = index"
-          class="option-btn"
-          [class.selected]="selectedOption === i"
-          [class.correct]="showAnswer && i === currentQuestion.correctIndex"
-          [class.wrong]="showAnswer && selectedOption === i && i !== currentQuestion.correctIndex"
-          [disabled]="showAnswer"
-          (click)="selectOption(i)">
-          {{ option }}
-        </button>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="progress"></div>
       </div>
+      <p class="progress-text">进度: {{ currentQuestionIndex + 1 }} / {{ unitWords.length }}</p>
 
-      <div class="answer-feedback" *ngIf="showAnswer">
-        <div class="feedback-header">
-          <p [class.correct]="isCorrect" [class.wrong]="!isCorrect">
-            {{ isCorrect ? '✓ 回答正确！' : '✗ 回答错误' }}
-          </p>
-          <div class="wrong-word-actions">
-            <button 
-              *ngIf="currentUnit === -1 && currentWord"
-              mat-mini-fab 
-              color="warn"
-              class="remove-btn"
-              (click)="removeFromWrongWords(currentWord.id)"
-              matTooltip="从错题集移除">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button 
-              *ngIf="currentUnit !== -1 && currentWord && !isInWrongWords(currentWord.id)"
-              mat-mini-fab 
-              color="accent"
-              class="add-btn"
-              (click)="addToWrongWords(currentWord)"
-              matTooltip="加入错题集">
-              <mat-icon>bookmark_add</mat-icon>
-            </button>
-            <button 
-              *ngIf="currentUnit !== -1 && currentWord && isInWrongWords(currentWord.id)"
-              mat-mini-fab 
-              color="primary"
-              class="added-btn"
-              disabled
-              matTooltip="已在错题集">
-              <mat-icon>bookmark</mat-icon>
-            </button>
-          </div>
+      <!-- 选择题模式 -->
+      <div class="question-card" *ngIf="testMode !== 'dictation' && currentQuestion">
+        <h2 class="question-text clickable" (click)="speakWord(currentQuestion.question)">
+          <mat-icon class="speaker-icon">volume_up</mat-icon>
+          {{ currentQuestion.question }}
+        </h2>
+        <div class="options-grid">
+          <button
+            *ngFor="let option of currentQuestion.options; let i = index"
+            class="option-btn"
+            [class.selected]="selectedOption === i"
+            [class.correct]="showAnswer && i === currentQuestion.correctIndex"
+            [class.wrong]="showAnswer && selectedOption === i && i !== currentQuestion.correctIndex"
+            [disabled]="showAnswer"
+            (click)="selectOption(i)">
+            {{ option }}
+          </button>
         </div>
-        <div class="word-detail" *ngIf="currentWord">
-          <p>
-            <strong>单词：</strong>
-            <span class="word-clickable" (click)="speakWord(currentWord.word)">
-              <mat-icon class="speaker-icon-small">volume_up</mat-icon>
-              {{ currentWord.word }}
-            </span>
-          </p>
-          <p><strong>翻译：</strong>{{ currentWord.translation }}</p>
-          <p>
-            <strong>例句：</strong>
-            <span class="word-clickable" (click)="speakSentence(currentWord.example)">
-              <mat-icon class="speaker-icon-small">volume_up</mat-icon>
-              {{ currentWord.example }}
-            </span>
-          </p>
-          <p><strong>翻译：</strong>{{ currentWord.exampleTranslation }}</p>
-        </div>
-      </div>
 
-      <div class="action-buttons" *ngIf="showAnswer">
-        <button 
-          mat-raised-button 
-          [disabled]="currentQuestionIndex === 0"
-          (click)="previousQuestion()">
-          <mat-icon>arrow_back</mat-icon>
-          上一题
-        </button>
-        <button 
-          mat-raised-button 
-          color="primary"
-          (click)="nextQuestion()">
-          {{ currentQuestionIndex < unitWords.length - 1 ? '下一题' : '查看成绩' }}
-          <mat-icon>arrow_forward</mat-icon>
-        </button>
-      </div>
-    </div>
-
-    <!-- 听写模式 -->
-    <div class="dictation-card" *ngIf="testMode === 'dictation'">
-      <div class="dictation-header">
-        <button mat-icon-button (click)="playDictation()" [disabled]="isPlaying" class="headphones-btn play-audio-btn">
-          <mat-icon class="headphones-icon">headphones</mat-icon>
-        </button>
-        <p class="dictation-instruction">{{ isPlaying ? '正在播放单词...' : '请根据听到的单词拼写' }}</p>
-        <button mat-icon-button (click)="playDictation()" [disabled]="isPlaying" class="replay-audio-btn">
-          <mat-icon>replay</mat-icon>
-        </button>
-      </div>
-
-      <div class="input-display">
-        <span class="user-input">{{ userInput || '&nbsp;' }}</span>
-        <span class="cursor" *ngIf="!showAnswer">|</span>
-      </div>
-
-      <div class="keyboard" *ngIf="!showAnswer">
-        <div class="keyboard-row" *ngFor="let row of keyboardLayout">
-          <button 
-            *ngFor="let key of row"
-            mat-raised-button
-            class="key-btn"
-            (click)="onKeyboardClick(key)">
-            <div class="key-letters">
-              <span class="upper">{{ key }}</span>
-              <span class="lower">{{ key.toLowerCase() }}</span>
+        <div class="answer-feedback" *ngIf="showAnswer">
+          <div class="feedback-header">
+            <p [class.correct]="isCorrect" [class.wrong]="!isCorrect">
+              {{ isCorrect ? '✓ 回答正确！' : '✗ 回答错误' }}
+            </p>
+            <div class="wrong-word-actions">
+              <button *ngIf="currentUnit === -1 && currentWord" mat-mini-fab color="warn" class="remove-btn" (click)="removeFromWrongWords(currentWord.id)" matTooltip="从错题集移除"><mat-icon>delete</mat-icon></button>
+              <button *ngIf="currentUnit !== -1 && currentWord && !isInWrongWords(currentWord.id)" mat-mini-fab color="accent" class="add-btn" (click)="addToWrongWords(currentWord)" matTooltip="加入错题集"><mat-icon>bookmark_add</mat-icon></button>
+              <button *ngIf="currentUnit !== -1 && currentWord && isInWrongWords(currentWord.id)" mat-mini-fab color="primary" class="added-btn" disabled matTooltip="已在错题集"><mat-icon>bookmark</mat-icon></button>
             </div>
-          </button>
+          </div>
+          <div class="word-detail" *ngIf="currentWord">
+            <p><strong>单词：</strong><span class="word-clickable" (click)="speakWord(currentWord.word)"><mat-icon class="speaker-icon-small">volume_up</mat-icon>{{ currentWord.word }}</span></p>
+            <p><strong>翻译：</strong>{{ currentWord.translation }}</p>
+            <p><strong>例句：</strong><span class="word-clickable" (click)="speakSentence(currentWord.example)"><mat-icon class="speaker-icon-small">volume_up</mat-icon>{{ currentWord.example }}</span></p>
+            <p><strong>翻译：</strong>{{ currentWord.exampleTranslation }}</p>
+          </div>
         </div>
-        <div class="keyboard-row control-row">
-          <button mat-raised-button class="control-btn" (click)="onClear()">
-            <mat-icon>clear</mat-icon>
-            清空
-          </button>
-          <button mat-raised-button class="control-btn backspace-btn" (click)="onBackspace()">
-            <mat-icon>backspace</mat-icon>
-            删除
-          </button>
-          <button mat-raised-button color="primary" class="control-btn submit-btn" (click)="submitDictation()">
-            <mat-icon>check</mat-icon>
-            提交
-          </button>
+
+        <div class="action-buttons" *ngIf="showAnswer">
+          <button mat-raised-button [disabled]="currentQuestionIndex === 0" (click)="previousQuestion()"><mat-icon>arrow_back</mat-icon>上一题</button>
+          <button mat-raised-button color="primary" (click)="nextQuestion()">{{ currentQuestionIndex < unitWords.length - 1 ? '下一题' : '查看成绩' }}<mat-icon>arrow_forward</mat-icon></button>
         </div>
       </div>
 
-      <!-- 提交后显示答案结果 -->
-      <div class="dictation-result" *ngIf="showAnswer && currentWord" [class.correct-result]="isCorrect" [class.wrong-result]="!isCorrect">
-        <div class="result-header">
-          <div class="result-status">
-            <mat-icon>{{ isCorrect ? 'check_circle' : 'cancel' }}</mat-icon>
-            <span>{{ isCorrect ? '回答正确！' : '回答错误' }}</span>
+      <!-- 听写模式 -->
+      <div class="dictation-card" *ngIf="testMode === 'dictation'">
+        <div class="dictation-header">
+          <button mat-icon-button (click)="playDictation()" [disabled]="isPlaying" class="headphones-btn play-audio-btn">
+            <mat-icon class="headphones-icon">headphones</mat-icon>
+          </button>
+          <p class="dictation-instruction">{{ isPlaying ? '正在播放单词...' : '请根据听到的单词拼写' }}</p>
+          <button mat-icon-button (click)="playDictation()" [disabled]="isPlaying" class="replay-audio-btn">
+            <mat-icon>replay</mat-icon>
+          </button>
+        </div>
+
+        <!-- ───────── 难度 1：音节拼接 ───────── -->
+        <div class="phonics-area" *ngIf="isPhonicsMode && !showAnswer">
+          <div class="phonics-assembled">
+            <span *ngFor="let slot of phonicsSlots; let i = index"
+              class="assembled-part"
+              [class.filled]="slot.selected !== null"
+              [class.active]="i === currentPhonicsSlotIndex && slot.selected === null"
+              [class.correct]="slot.isCorrect === true"
+              [class.wrong]="slot.isCorrect === false">
+              {{ slot.selected || '_' }}
+            </span>
           </div>
-          <div class="wrong-word-actions">
-            <button 
-              *ngIf="currentUnit === -1 && currentWord"
-              mat-mini-fab 
-              color="warn"
-              class="remove-btn"
-              (click)="removeFromWrongWords(currentWord.id)"
-              matTooltip="从错题集移除">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button 
-              *ngIf="currentUnit !== -1 && currentWord && !isInWrongWords(currentWord.id) && !isCorrect"
-              mat-mini-fab 
-              color="accent"
-              class="add-btn"
-              (click)="addToWrongWords(currentWord)"
-              matTooltip="加入错题集">
-              <mat-icon>bookmark_add</mat-icon>
-            </button>
-            <button 
-              *ngIf="currentUnit !== -1 && currentWord && isInWrongWords(currentWord.id)"
-              mat-mini-fab 
-              color="primary"
-              class="added-btn"
-              disabled
-              matTooltip="已在错题集">
-              <mat-icon>bookmark</mat-icon>
-            </button>
+
+          <div class="phonics-slots" *ngFor="let slot of phonicsSlots; let i = index">
+            <div class="phonics-slot-row" *ngIf="i === currentPhonicsSlotIndex">
+              <span class="slot-hint">第 {{ i + 1 }} 部分</span>
+              <div class="phonics-options">
+                <button
+                  *ngFor="let opt of slot.options"
+                  class="phonics-option-btn"
+                  [class.selected]="slot.selected === opt"
+                  [class.correct]="slot.isCorrect === true && slot.selected === opt"
+                  [class.wrong]="slot.isCorrect === false && slot.selected === opt"
+                  [disabled]="slot.isCorrect === true"
+                  (click)="selectPhonicsOption(i, opt)">
+                  {{ opt }}
+                </button>
+              </div>
+              <button *ngIf="slot.isCorrect === false" class="retry-hint-btn" (click)="retryPhonicsSlot(i)">
+                <mat-icon>refresh</mat-icon> 重试
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="answer-comparison">
-          <div class="answer-row">
-            <span class="label">你的答案：</span>
-            <span class="user-answer" [class.correct-text]="isCorrect" [class.wrong-text]="!isCorrect">{{ userInput || '(未填写)' }}</span>
+        <!-- ───────── 难度 2：字母子键盘 ───────── -->
+        <ng-container *ngIf="isSubKeyboardMode && !showAnswer">
+          <div class="input-display">
+            <span class="user-input">{{ userInput || '&nbsp;' }}</span>
+            <span class="cursor">|</span>
           </div>
-          <div class="answer-row" *ngIf="!isCorrect">
-            <span class="label">正确答案：</span>
-            <span class="correct-answer">
-              <span class="word-clickable" (click)="speakWord(currentWord.word)">
-                <mat-icon class="speaker-icon-small">volume_up</mat-icon>
-                {{ currentWord.word }}
+          <div class="sub-keyboard">
+            <button
+              *ngFor="let key of subKeyboard"
+              mat-raised-button
+              class="sub-key-btn"
+              (click)="onKeyboardClick(key)">
+              {{ key.toUpperCase() }}
+            </button>
+          </div>
+          <div class="keyboard-row control-row sub-control-row">
+            <button mat-raised-button class="control-btn" (click)="onClear()"><mat-icon>clear</mat-icon>清空</button>
+            <button mat-raised-button class="control-btn backspace-btn" (click)="onBackspace()"><mat-icon>backspace</mat-icon>删除</button>
+            <button mat-raised-button color="primary" class="control-btn submit-btn" (click)="submitDictation()"><mat-icon>check</mat-icon>提交</button>
+          </div>
+        </ng-container>
+
+        <!-- ───────── 难度 3：全键盘 ───────── -->
+        <ng-container *ngIf="dictationDifficulty === 3 && !showAnswer">
+          <div class="input-display">
+            <span class="user-input">{{ userInput || '&nbsp;' }}</span>
+            <span class="cursor">|</span>
+          </div>
+          <div class="keyboard">
+            <div class="keyboard-row" *ngFor="let row of keyboardLayout">
+              <button *ngFor="let key of row" mat-raised-button class="key-btn" (click)="onKeyboardClick(key)">
+                <div class="key-letters">
+                  <span class="upper">{{ key }}</span>
+                  <span class="lower">{{ key.toLowerCase() }}</span>
+                </div>
+              </button>
+            </div>
+            <div class="keyboard-row control-row">
+              <button mat-raised-button class="control-btn" (click)="onClear()"><mat-icon>clear</mat-icon>清空</button>
+              <button mat-raised-button class="control-btn backspace-btn" (click)="onBackspace()"><mat-icon>backspace</mat-icon>删除</button>
+              <button mat-raised-button color="primary" class="control-btn submit-btn" (click)="submitDictation()"><mat-icon>check</mat-icon>提交</button>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- 提交后的结果 -->
+        <div class="dictation-result" *ngIf="showAnswer && currentWord" [class.correct-result]="isCorrect" [class.wrong-result]="!isCorrect">
+          <div class="result-header">
+            <div class="result-status">
+              <mat-icon>{{ isCorrect ? 'check_circle' : 'cancel' }}</mat-icon>
+              <span>{{ isCorrect ? '回答正确！' : '回答错误' }}</span>
+            </div>
+            <div class="wrong-word-actions">
+              <button *ngIf="currentUnit === -1 && currentWord" mat-mini-fab color="warn" class="remove-btn" (click)="removeFromWrongWords(currentWord.id)" matTooltip="从错题集移除"><mat-icon>delete</mat-icon></button>
+              <button *ngIf="currentUnit !== -1 && currentWord && !isInWrongWords(currentWord.id) && !isCorrect" mat-mini-fab color="accent" class="add-btn" (click)="addToWrongWords(currentWord)" matTooltip="加入错题集"><mat-icon>bookmark_add</mat-icon></button>
+              <button *ngIf="currentUnit !== -1 && currentWord && isInWrongWords(currentWord.id)" mat-mini-fab color="primary" class="added-btn" disabled matTooltip="已在错题集"><mat-icon>bookmark</mat-icon></button>
+            </div>
+          </div>
+
+          <div class="answer-comparison">
+            <div class="answer-row">
+              <span class="label">你的答案：</span>
+              <span class="user-answer" [class.correct-text]="isCorrect" [class.wrong-text]="!isCorrect">
+                {{ isPhonicsMode ? phonicsUserWord : (userInput || '(未填写)') }}
               </span>
-            </span>
+            </div>
+            <div class="answer-row" *ngIf="!isCorrect">
+              <span class="label">正确答案：</span>
+              <span class="correct-answer">
+                <span class="word-clickable" (click)="speakWord(currentWord.word)">
+                  <mat-icon class="speaker-icon-small">volume_up</mat-icon>
+                  {{ currentWord.word }}
+                </span>
+              </span>
+            </div>
+            <!-- 难度 1 额外显示音节分解 -->
+            <div class="answer-row phonics-breakdown" *ngIf="isPhonicsMode && currentWord.phonics">
+              <span class="label">音节分解：</span>
+              <span class="phonics-parts">
+                <span *ngFor="let part of currentWord.phonics; let last = last" class="phonics-part-chip">{{ part }}<span *ngIf="!last" class="phonics-sep">·</span></span>
+              </span>
+            </div>
+            <div class="answer-row">
+              <span class="label">翻译：</span>
+              <span class="translation">{{ currentWord.translation }}</span>
+            </div>
           </div>
-          <div class="answer-row">
-            <span class="label">翻译：</span>
-            <span class="translation">{{ currentWord.translation }}</span>
+
+          <div class="example-section">
+            <div class="example-label">例句：</div>
+            <div class="example-content">
+              <span class="word-clickable" (click)="speakSentence(currentWord.example)">
+                <mat-icon class="speaker-icon-small">volume_up</mat-icon>
+                {{ currentWord.example }}
+              </span>
+            </div>
+            <div class="example-translation">{{ currentWord.exampleTranslation }}</div>
           </div>
         </div>
 
-        <div class="example-section">
-          <div class="example-label">例句：</div>
-          <div class="example-content">
-            <span class="word-clickable" (click)="speakSentence(currentWord.example)">
-              <mat-icon class="speaker-icon-small">volume_up</mat-icon>
-              {{ currentWord.example }}
-            </span>
-          </div>
-          <div class="example-translation">{{ currentWord.exampleTranslation }}</div>
+        <div class="action-buttons" *ngIf="showAnswer">
+          <button mat-raised-button [disabled]="currentQuestionIndex === 0" (click)="previousQuestion()"><mat-icon>arrow_back</mat-icon>上一题</button>
+          <button mat-raised-button color="primary" (click)="nextQuestion()">{{ currentQuestionIndex < unitWords.length - 1 ? '下一题' : '查看成绩' }}<mat-icon>arrow_forward</mat-icon></button>
         </div>
-      </div>
-
-      <div class="action-buttons" *ngIf="showAnswer">
-        <button 
-          mat-raised-button 
-          [disabled]="currentQuestionIndex === 0"
-          (click)="previousQuestion()">
-          <mat-icon>arrow_back</mat-icon>
-          上一题
-        </button>
-        <button 
-          mat-raised-button 
-          color="primary"
-          (click)="nextQuestion()">
-          {{ currentQuestionIndex < unitWords.length - 1 ? '下一题' : '查看成绩' }}
-          <mat-icon>arrow_forward</mat-icon>
-        </button>
       </div>
     </div>
-  </div>
 
+    <!-- 结果页 -->
     <div class="result-content" *ngIf="showResult">
-    <div class="result-card">
-      <h2 class="result-title">测试完成！</h2>
-      <div class="score-display">
-        <div class="score-circle">
-          <span class="score-number">{{ score }}</span>
-          <span class="score-total">/ {{ unitWords.length }}</span>
+      <div class="result-card">
+        <h2 class="result-title">测试完成！</h2>
+        <div class="score-display">
+          <div class="score-circle">
+            <span class="score-number">{{ score }}</span>
+            <span class="score-total">/ {{ unitWords.length }}</span>
+          </div>
+          <p class="score-percentage">正确率: {{ getPercentage() }}%</p>
         </div>
-        <p class="score-percentage">正确率: {{ getPercentage() }}%</p>
+        <div class="result-details">
+          <p>正确: {{ correctCount }} 题</p>
+          <p>错误: {{ wrongCount }} 题</p>
+        </div>
+        <div class="result-actions">
+          <button mat-raised-button color="primary" (click)="restartTest()">重新测试</button>
+          <button mat-raised-button (click)="selectUnit()">选择其他单元</button>
+          <button mat-raised-button (click)="goBack()">返回</button>
+        </div>
       </div>
-      
-      <div class="result-details">
-        <p>正确: {{ correctCount }} 题</p>
-        <p>错误: {{ wrongCount }} 题</p>
-      </div>
-
-      <div class="result-actions">
-        <button mat-raised-button color="primary" (click)="restartTest()">
-          重新测试
-        </button>
-        <button mat-raised-button (click)="selectUnit()">
-          选择其他单元
-        </button>
-        <button mat-raised-button (click)="goBack()">
-          返回
-        </button>
-      </div>
-    </div>
     </div>
   </div>
 

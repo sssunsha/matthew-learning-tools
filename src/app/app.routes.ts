@@ -23,7 +23,6 @@ import { Grade3Term2LearnTextsComponent } from './components/categories/english/
 import { Grade3Term2KnowledgeListComponent } from './components/categories/english/grade3-term2-knowledge-list/grade3-term2-knowledge-list';
 import { NotesCategoryComponent } from './components/categories/notes/notes-category';
 import { OtherSubjectsCategoryComponent } from './components/categories/other-subjects/other-subjects-category';
-import { JingleBellsChorusComponent } from './components/categories/other-subjects/jingle-bells-chorus/jingle-bells-chorus';
 import { NoteEditorComponent } from './components/note-editor/note-editor';
 import { VocabularyComponent } from './components/vocabulary/vocabulary';
 import { VocabularyTestComponent } from './components/vocabulary-test/vocabulary-test';
@@ -185,11 +184,6 @@ export const routes: Routes = [
     path: 'category/other-subjects',
     component: OtherSubjectsCategoryComponent,
     title: '其他学科 - Other Subjects',
-  },
-  {
-    path: 'category/other-subjects/jingle-bells-chorus',
-    component: JingleBellsChorusComponent,
-    title: '二声部合唱«快乐叮当»',
   },
   {
     path: 'category/notes',

@@ -11,6 +11,7 @@ import { TtsService } from '../../services/tts.service';
 interface Word {
   id: number;
   word: string;
+  phonics?: string[] | null;
   translation: string;
   partOfSpeech: string;
   example: string;
@@ -59,6 +60,16 @@ interface WrongWord {
   wrongCount: number;
 }
 
+// 难度 1：每个音节槽位的状态
+interface PhonicsSlot {
+  correctPart: string;
+  options: string[];     // 3 个选项（含正确答案，已打乱）
+  selected: string | null;
+  isCorrect: boolean | null;
+}
+
+type DictationDifficulty = 1 | 2 | 3;
+
 @Component({
   selector: 'app-vocabulary-test',
   standalone: true,
@@ -74,7 +85,7 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
   availableUnits: number[] = [];
   currentUnit: number = 1;
 
-  testMode: 'en-zh' | 'zh-en' | 'dictation' = 'en-zh'; // 英译中 or 中译英 or 听写
+  testMode: 'en-zh' | 'zh-en' | 'dictation' = 'en-zh';
   currentQuestionIndex: number = 0;
   currentQuestion: Question | null = null;
   currentWord: Word | null = null;
@@ -91,15 +102,26 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
     ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
   ];
 
+  // 难度系统
+  dictationDifficulty: DictationDifficulty = 1;
+  unlockedDifficulty: DictationDifficulty = 1;  // 已解锁到哪个等级
+  showUnlockToast: boolean = false;
+  unlockToastMessage: string = '';
+
+  // 难度 1：音节拼接
+  phonicsSlots: PhonicsSlot[] = [];
+  currentPhonicsSlotIndex: number = 0;   // 当前激活的槽位下标
+  phonicsSubmitted: boolean = false;
+
+  // 难度 2：字母子键盘
+  subKeyboard: string[] = [];
+
   score: number = 0;
   correctCount: number = 0;
   wrongCount: number = 0;
   showResult: boolean = false;
 
-  // 单元进度数据
   unitProgress: Map<number, UnitProgress> = new Map();
-
-  // 错题集
   wrongWords: WrongWord[] = [];
 
   get progress(): number {
@@ -120,38 +142,174 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params) => {
       this.grade = params['grade'];
       this.loadLastTestMode();
+      this.loadDifficulty();
       this.loadVocabulary();
     });
   }
 
   ngOnDestroy() {
-    // 组件销毁时保存当前测试状态
     this.saveTestState();
   }
 
-  // 加载上次的测试模式
+  // ─── 难度管理 ───────────────────────────────────────────────
+
+  loadDifficulty() {
+    const stored = localStorage.getItem(`dictation-difficulty-${this.grade}`);
+    const unlockedStored = localStorage.getItem(`dictation-unlocked-${this.grade}`);
+    if (stored) {
+      const v = parseInt(stored, 10);
+      if (v === 1 || v === 2 || v === 3) this.dictationDifficulty = v as DictationDifficulty;
+    }
+    if (unlockedStored) {
+      const v = parseInt(unlockedStored, 10);
+      if (v === 1 || v === 2 || v === 3) this.unlockedDifficulty = v as DictationDifficulty;
+    }
+  }
+
+  saveDifficulty() {
+    localStorage.setItem(`dictation-difficulty-${this.grade}`, String(this.dictationDifficulty));
+    localStorage.setItem(`dictation-unlocked-${this.grade}`, String(this.unlockedDifficulty));
+  }
+
+  asDifficulty(n: number): DictationDifficulty { return n as DictationDifficulty; }
+
+  switchDifficulty(level: DictationDifficulty) {
+    if (level > this.unlockedDifficulty) return;
+    if (this.dictationDifficulty === level) return;
+    this.dictationDifficulty = level;
+    this.saveDifficulty();
+    if (this.testMode === 'dictation' && !this.showResult) {
+      this.resetTest();
+      this.generateQuestion();
+    }
+  }
+
+  // 检查是否所有 unit（排除错题集）在当前难度下 dictation 都完成
+  checkDifficultyUnlock() {
+    if (this.dictationDifficulty >= 3) return;
+    const regularUnits = this.availableUnits.filter(u => u !== -1);
+    const allDone = regularUnits.every(u => {
+      const p = this.unitProgress.get(u);
+      return p?.modes['dictation']?.completed;
+    });
+    if (allDone && this.dictationDifficulty === this.unlockedDifficulty) {
+      const next = (this.dictationDifficulty + 1) as DictationDifficulty;
+      this.unlockedDifficulty = next;
+      this.dictationDifficulty = next;
+      this.saveDifficulty();
+      this.showUnlockMessage(`🎉 恭喜通关难度 ${this.dictationDifficulty - 1}！难度 ${this.dictationDifficulty} 已解锁！`);
+    }
+  }
+
+  showUnlockMessage(msg: string) {
+    this.unlockToastMessage = msg;
+    this.showUnlockToast = true;
+    setTimeout(() => { this.ngZone.run(() => { this.showUnlockToast = false; }); }, 3500);
+  }
+
+  // ─── 难度 1：音节拼接逻辑 ─────────────────────────────────
+
+  buildPhonicsSlots(word: Word): PhonicsSlot[] {
+    const parts = word.phonics!;
+    // 从同 unit 其他单词的 phonics 收集干扰项池
+    const unitOtherWords = this.unitWords.filter(w => w.id !== word.id && w.phonics && w.phonics.length > 0);
+    const distractorPool: string[] = [];
+    for (const w of unitOtherWords) {
+      for (const p of w.phonics!) {
+        if (!distractorPool.includes(p)) distractorPool.push(p);
+      }
+    }
+
+    return parts.map((correctPart) => {
+      // 选 2 个干扰项（不与正确答案相同）
+      const pool = distractorPool.filter(d => d.toLowerCase() !== correctPart.toLowerCase());
+      const shuffledPool = [...pool].sort(() => Math.random() - 0.5);
+      const distractors = shuffledPool.slice(0, 2);
+      // 凑够 3 个（万一干扰项不足时生成随机字母组合兜底）
+      while (distractors.length < 2) {
+        const fallback = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+        if (!distractors.includes(fallback) && fallback !== correctPart.toLowerCase()) {
+          distractors.push(fallback);
+        }
+      }
+      const options = [correctPart, ...distractors].sort(() => Math.random() - 0.5);
+      return { correctPart, options, selected: null, isCorrect: null };
+    });
+  }
+
+  selectPhonicsOption(slotIndex: number, option: string) {
+    if (this.showAnswer || slotIndex !== this.currentPhonicsSlotIndex) return;
+    const slot = this.phonicsSlots[slotIndex];
+    slot.selected = option;
+    slot.isCorrect = option.toLowerCase() === slot.correctPart.toLowerCase();
+
+    if (slot.isCorrect) {
+      // 激活下一个槽位
+      if (slotIndex < this.phonicsSlots.length - 1) {
+        this.currentPhonicsSlotIndex = slotIndex + 1;
+      } else {
+        // 所有槽位完成，自动判题
+        this.submitPhonics();
+      }
+    }
+    // 答错时槽位标红，仍停在当前槽位，等待重新选择
+  }
+
+  retryPhonicsSlot(slotIndex: number) {
+    if (this.showAnswer || slotIndex !== this.currentPhonicsSlotIndex) return;
+    const slot = this.phonicsSlots[slotIndex];
+    if (slot.isCorrect === false) {
+      slot.selected = null;
+      slot.isCorrect = null;
+    }
+  }
+
+  submitPhonics() {
+    if (!this.currentWord) return;
+    this.phonicsSubmitted = true;
+    const allCorrect = this.phonicsSlots.every(s => s.isCorrect === true);
+    this.showAnswer = true;
+    this.isCorrect = allCorrect;
+
+    if (this.isCorrect) {
+      this.score++;
+      this.correctCount++;
+    } else {
+      this.wrongCount++;
+      if (this.currentWord) this.recordWrongWord(this.currentWord);
+    }
+    this.autoReadAnswer();
+  }
+
+  get phonicsUserWord(): string {
+    return this.phonicsSlots.map(s => s.selected || '').join('');
+  }
+
+  // ─── 难度 2：子键盘逻辑 ──────────────────────────────────
+
+  buildSubKeyboard(word: string): string[] {
+    const letters = Array.from(new Set(word.toLowerCase().replace(/[^a-z]/g, '').split('')));
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    const extra = alphabet.filter(c => !letters.includes(c));
+    const shuffledExtra = extra.sort(() => Math.random() - 0.5).slice(0, 3);
+    return [...letters, ...shuffledExtra].sort(() => Math.random() - 0.5);
+  }
+
+  // ─── 加载与存储 ──────────────────────────────────────────
+
   loadLastTestMode() {
-    const storageKey = `test-mode-${this.grade}`;
-    const stored = localStorage.getItem(storageKey);
+    const stored = localStorage.getItem(`test-mode-${this.grade}`);
     if (stored && (stored === 'en-zh' || stored === 'zh-en' || stored === 'dictation')) {
       this.testMode = stored as 'en-zh' | 'zh-en' | 'dictation';
     }
   }
 
-  // 保存测试模式
   saveTestMode() {
-    const storageKey = `test-mode-${this.grade}`;
-    localStorage.setItem(storageKey, this.testMode);
+    localStorage.setItem(`test-mode-${this.grade}`, this.testMode);
   }
 
-  // 保存测试状态（单元、题目位置、当前成绩等）
   saveTestState() {
-    // 如果已经显示结果，不保存状态
-    if (this.showResult || this.unitWords.length === 0) {
-      return;
-    }
-
-    const storageKey = `test-state-${this.grade}`;
+    if (this.showResult || this.unitWords.length === 0) return;
     const state = {
       currentUnit: this.currentUnit,
       currentQuestionIndex: this.currentQuestionIndex,
@@ -159,59 +317,35 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
       correctCount: this.correctCount,
       wrongCount: this.wrongCount,
       testMode: this.testMode,
+      dictationDifficulty: this.dictationDifficulty,
       timestamp: new Date().toISOString(),
     };
-    localStorage.setItem(storageKey, JSON.stringify(state));
+    localStorage.setItem(`test-state-${this.grade}`, JSON.stringify(state));
   }
 
-  // 恢复测试状态
   restoreTestState(): boolean {
-    const storageKey = `test-state-${this.grade}`;
-    const stored = localStorage.getItem(storageKey);
-
-    if (!stored) {
-      return false;
-    }
+    const stored = localStorage.getItem(`test-state-${this.grade}`);
+    if (!stored) return false;
 
     try {
       const state = JSON.parse(stored);
+      const hoursDiff = (Date.now() - new Date(state.timestamp).getTime()) / (1000 * 60 * 60);
+      if (hoursDiff > 24) { localStorage.removeItem(`test-state-${this.grade}`); return false; }
+      if (!this.availableUnits.includes(state.currentUnit)) { localStorage.removeItem(`test-state-${this.grade}`); return false; }
 
-      // 检查状态是否过期（超过24小时）
-      const timestamp = new Date(state.timestamp);
-      const now = new Date();
-      const hoursDiff = (now.getTime() - timestamp.getTime()) / (1000 * 60 * 60);
-
-      if (hoursDiff > 24) {
-        // 状态过期，清除
-        localStorage.removeItem(storageKey);
-        return false;
-      }
-
-      // 验证单元是否存在
-      if (!this.availableUnits.includes(state.currentUnit)) {
-        localStorage.removeItem(storageKey);
-        return false;
-      }
-
-      // 恢复测试模式（在准备单元词汇之前）
       this.testMode = state.testMode;
       this.currentUnit = state.currentUnit;
+      if (state.dictationDifficulty) this.dictationDifficulty = state.dictationDifficulty;
 
-      // 准备单元词汇
       if (state.currentUnit === -1) {
-        const wrongWordIds = this.wrongWords.map((w) => w.wordId);
-        this.unitWords = this.allWords.filter((w) => wrongWordIds.includes(w.id));
+        const wrongWordIds = this.wrongWords.map(w => w.wordId);
+        this.unitWords = this.allWords.filter(w => wrongWordIds.includes(w.id));
       } else {
-        this.unitWords = this.allWords.filter((w) => w.unit === state.currentUnit);
+        this.unitWords = this.allWords.filter(w => w.unit === state.currentUnit);
       }
 
-      // 验证题目索引是否有效
-      if (state.currentQuestionIndex >= this.unitWords.length) {
-        localStorage.removeItem(storageKey);
-        return false;
-      }
+      if (state.currentQuestionIndex >= this.unitWords.length) { localStorage.removeItem(`test-state-${this.grade}`); return false; }
 
-      // 恢复进度
       this.currentQuestionIndex = state.currentQuestionIndex;
       this.score = state.score;
       this.correctCount = state.correctCount;
@@ -219,44 +353,30 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
       this.showResult = false;
       this.selectedOption = null;
       this.showAnswer = false;
-
-      // 生成当前题目（会自动使用已恢复的testMode）
       this.generateQuestion();
-
-      console.log(
-        `已恢复测试状态: Unit ${this.currentUnit}, 题目 ${this.currentQuestionIndex + 1}/${this.unitWords.length}, 模式: ${this.testMode}`,
-      );
-
       return true;
     } catch (e) {
-      console.error('恢复测试状态失败:', e);
-      localStorage.removeItem(storageKey);
+      localStorage.removeItem(`test-state-${this.grade}`);
       return false;
     }
   }
 
-  // 清除测试状态（测试完成或重新开始时调用）
   clearTestState() {
-    const storageKey = `test-state-${this.grade}`;
-    localStorage.removeItem(storageKey);
+    localStorage.removeItem(`test-state-${this.grade}`);
   }
 
   loadVocabulary() {
     const fileName = this.getFileName(this.grade);
-    this.http
-      .get<VocabularyData>(`assets/resources/categories/english/vocabulary/${fileName}`)
-      .subscribe({
-        next: (data) => {
-          this.ngZone.run(() => {
-            this.gradeInfo = data;
-            this.allWords = data.words;
-            this.extractAvailableUnits();
-          });
-        },
-        error: (err) => {
-          console.error('加载词汇失败:', err);
-        },
-      });
+    this.http.get<VocabularyData>(`assets/resources/categories/english/vocabulary/${fileName}`).subscribe({
+      next: (data) => {
+        this.ngZone.run(() => {
+          this.gradeInfo = data;
+          this.allWords = data.words;
+          this.extractAvailableUnits();
+        });
+      },
+      error: (err) => console.error('加载词汇失败:', err),
+    });
   }
 
   getFileName(grade: string): string {
@@ -274,25 +394,15 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
   }
 
   extractAvailableUnits() {
-    const units = new Set(this.allWords.map((w) => w.unit));
+    const units = new Set(this.allWords.map(w => w.unit));
     this.availableUnits = Array.from(units).sort((a, b) => a - b);
-
-    // 加载进度数据和错题集
     this.loadProgress();
     this.loadWrongWords();
+    if (this.wrongWords.length > 0) this.availableUnits.unshift(-1);
 
-    // 如果有错题，添加错题单元（用-1表示）
-    if (this.wrongWords.length > 0) {
-      this.availableUnits.unshift(-1);
-    }
-
-    // 尝试恢复上次测试状态
     const restored = this.restoreTestState();
-    if (restored) {
-      return; // 成功恢复状态，不再自动开始新单元
-    }
+    if (restored) return;
 
-    // 自动开始第一个未完成的单元，如果都完成了则开始第一个单元
     const unfinishedUnit = this.findNextUnfinishedUnit();
     if (unfinishedUnit) {
       this.startUnit(unfinishedUnit);
@@ -301,90 +411,62 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
     }
   }
 
-  // 查找下一个未完成的单元
   findNextUnfinishedUnit(): number | null {
     for (const unit of this.availableUnits) {
       const progress = this.unitProgress.get(unit);
-      // 检查当前测试模式是否完成
-      if (!progress || !progress.modes[this.testMode]?.completed) {
-        return unit;
-      }
+      if (!progress || !progress.modes[this.testMode]?.completed) return unit;
     }
     return null;
   }
 
-  // 加载进度数据
   loadProgress() {
-    const storageKey = `vocabulary-progress-${this.grade}`;
-    const stored = localStorage.getItem(storageKey);
+    const stored = localStorage.getItem(`vocabulary-progress-${this.grade}`);
     if (stored) {
       try {
         const data = JSON.parse(stored);
-        this.unitProgress = new Map(
-          Object.entries(data).map(([key, value]) => [Number(key), value as UnitProgress]),
-        );
-      } catch (e) {
-        console.error('加载进度失败:', e);
-      }
+        this.unitProgress = new Map(Object.entries(data).map(([k, v]) => [Number(k), v as UnitProgress]));
+      } catch (e) { console.error('加载进度失败:', e); }
     }
   }
 
-  // 保存进度数据
   saveProgress() {
-    const storageKey = `vocabulary-progress-${this.grade}`;
-    const data = Object.fromEntries(this.unitProgress);
-    localStorage.setItem(storageKey, JSON.stringify(data));
+    localStorage.setItem(`vocabulary-progress-${this.grade}`, JSON.stringify(Object.fromEntries(this.unitProgress)));
   }
 
-  // 获取单元进度
   getUnitProgress(unit: number): UnitProgress | null {
     return this.unitProgress.get(unit) || null;
   }
 
-  // 获取单元某个模式的进度
   getUnitModeProgress(unit: number, mode: 'en-zh' | 'zh-en' | 'dictation'): ModeProgress | null {
-    const progress = this.unitProgress.get(unit);
-    return progress?.modes[mode] || null;
+    return this.unitProgress.get(unit)?.modes[mode] || null;
   }
 
-  // 检查单元某个模式是否完成
   isUnitModeCompleted(unit: number, mode: 'en-zh' | 'zh-en' | 'dictation'): boolean {
-    const modeProgress = this.getUnitModeProgress(unit, mode);
-    return modeProgress?.completed ?? false;
+    return this.getUnitModeProgress(unit, mode)?.completed ?? false;
   }
 
-  // 获取单元所有模式的完成数量
   getUnitCompletedModesCount(unit: number): number {
-    const progress = this.unitProgress.get(unit);
-    if (!progress || !progress.modes) return 0;
-    
-    let count = 0;
-    if (progress.modes['en-zh']?.completed) count++;
-    if (progress.modes['zh-en']?.completed) count++;
-    if (progress.modes['dictation']?.completed) count++;
-    return count;
+    const p = this.unitProgress.get(unit);
+    if (!p?.modes) return 0;
+    return (p.modes['en-zh']?.completed ? 1 : 0) + (p.modes['zh-en']?.completed ? 1 : 0) + (p.modes['dictation']?.completed ? 1 : 0);
   }
 
-  // 检查单元是否全部完成（所有三种模式都完成）
   isUnitFullyCompleted(unit: number): boolean {
     return this.getUnitCompletedModesCount(unit) === 3;
   }
 
+  // ─── 测试流程 ────────────────────────────────────────────
+
   startUnit(unit: number) {
     this.currentUnit = unit;
-
-    // 如果是错题单元
     if (unit === -1) {
-      const wrongWordIds = this.wrongWords.map((w) => w.wordId);
-      this.unitWords = this.allWords.filter((w) => wrongWordIds.includes(w.id));
+      const wrongWordIds = this.wrongWords.map(w => w.wordId);
+      this.unitWords = this.allWords.filter(w => wrongWordIds.includes(w.id));
     } else {
-      this.unitWords = this.allWords.filter((w) => w.unit === unit);
+      this.unitWords = this.allWords.filter(w => w.unit === unit);
     }
-
     this.resetTest();
     this.generateQuestion();
-
-    // 清除之前保存的测试状态（因为开始了新单元）
     this.clearTestState();
   }
 
@@ -396,8 +478,9 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
     this.showResult = false;
     this.selectedOption = null;
     this.showAnswer = false;
-
-    // 清除测试状态
+    this.phonicsSlots = [];
+    this.currentPhonicsSlotIndex = 0;
+    this.phonicsSubmitted = false;
     this.clearTestState();
   }
 
@@ -411,164 +494,145 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
     this.currentWord = word;
 
     if (this.testMode === 'dictation') {
-      // 听写模式
       this.userInput = '';
       this.selectedOption = null;
       this.showAnswer = false;
       this.currentQuestion = null;
+      this.phonicsSlots = [];
+      this.currentPhonicsSlotIndex = 0;
+      this.phonicsSubmitted = false;
 
-      // 自动播放单词（延迟一帧确保 UI 先渲染）
+      // 对于难度 1，若单词没有 phonics 数据则自动降级到难度 2
+      if (this.dictationDifficulty === 1 && (!word.phonics || word.phonics.length === 0)) {
+        // 降级到难度 2 交互（仍走难度 2 的键盘逻辑）
+        this.subKeyboard = this.buildSubKeyboard(word.word);
+      } else if (this.dictationDifficulty === 1) {
+        this.phonicsSlots = this.buildPhonicsSlots(word);
+      } else if (this.dictationDifficulty === 2) {
+        this.subKeyboard = this.buildSubKeyboard(word.word);
+      }
+
       setTimeout(() => this.playDictation(), 0);
     } else {
-      // 选择模式
-      const question: Question = {
-        question: this.testMode === 'en-zh' ? word.word : word.translation,
-        options: [],
-        correctIndex: 0,
-      };
-
-      // 生成选项
       const correctAnswer = this.testMode === 'en-zh' ? word.translation : word.word;
       const allOptions = this.generateOptions(word, correctAnswer);
-
-      question.options = allOptions.options;
-      question.correctIndex = allOptions.correctIndex;
-
-      this.currentQuestion = question;
+      this.currentQuestion = {
+        question: this.testMode === 'en-zh' ? word.word : word.translation,
+        options: allOptions.options,
+        correctIndex: allOptions.correctIndex,
+      };
       this.selectedOption = null;
       this.showAnswer = false;
       this.userInput = '';
     }
   }
 
-  // 播放听写
+  // 判断当前是否实际走难度 1 的音节模式（有 phonics 数据）
+  get isPhonicsMode(): boolean {
+    return this.testMode === 'dictation' && this.dictationDifficulty === 1
+      && !!this.currentWord?.phonics && this.currentWord.phonics.length > 0;
+  }
+
+  // 判断当前是否走子键盘模式（难度 2，或难度 1 降级）
+  get isSubKeyboardMode(): boolean {
+    return this.testMode === 'dictation' && (
+      this.dictationDifficulty === 2 ||
+      (this.dictationDifficulty === 1 && (!this.currentWord?.phonics || this.currentWord.phonics.length === 0))
+    );
+  }
+
+  // ─── 音频播放 ────────────────────────────────────────────
+
   playDictation() {
     if (!this.currentWord) return;
-
     this.isPlaying = true;
     let playCount = 0;
+
     const playNext = () => {
       if (playCount >= 3) {
-        this.ngZone.run(() => { this.isPlaying = false; });
+        this.isPlaying = false;
         return;
       }
       playCount++;
-      this.tts.speak(this.currentWord!.word, 0.7);
-      if (playCount < 3) {
-        setTimeout(playNext, 2500);
-      } else {
-        setTimeout(() => this.ngZone.run(() => { this.isPlaying = false; }), 2000);
-      }
+      const word = this.currentWord!.word;
+      // 估算单词播放时长：字符数 * 120ms / rate，最少 1200ms
+      const estimatedMs = Math.max(1200, (word.length * 120) / 0.7);
+      this.tts.speak(word, 0.7);
+      setTimeout(playNext, estimatedMs + 300);
     };
+
     playNext();
   }
 
-  // 软键盘输入
+  // ─── 输入处理 ────────────────────────────────────────────
+
   onKeyboardClick(letter: string) {
     if (!this.showAnswer && this.testMode === 'dictation') {
       this.userInput += letter.toLowerCase();
     }
   }
 
-  // 删除字符
   onBackspace() {
     if (!this.showAnswer && this.testMode === 'dictation' && this.userInput.length > 0) {
       this.userInput = this.userInput.slice(0, -1);
     }
   }
 
-  // 清空输入
   onClear() {
     if (!this.showAnswer && this.testMode === 'dictation') {
       this.userInput = '';
     }
   }
 
-  // 提交听写答案
   submitDictation() {
     if (!this.currentWord || this.userInput.trim() === '') return;
-
     this.showAnswer = true;
     this.isCorrect = this.userInput.toLowerCase().trim() === this.currentWord.word.toLowerCase();
-
     if (this.isCorrect) {
       this.score++;
       this.correctCount++;
     } else {
       this.wrongCount++;
-      if (this.currentWord) {
-        this.recordWrongWord(this.currentWord);
-      }
+      if (this.currentWord) this.recordWrongWord(this.currentWord);
     }
-
     this.autoReadAnswer();
   }
 
-  generateOptions(
-    currentWord: Word,
-    correctAnswer: string,
-  ): { options: string[]; correctIndex: number } {
+  // ─── 选择题 ──────────────────────────────────────────────
+
+  generateOptions(currentWord: Word, correctAnswer: string): { options: string[]; correctIndex: number } {
     const options: string[] = [correctAnswer];
     const usedWords = new Set([currentWord.id]);
-
-    // 从同一单元或其他单元随机选择3个错误选项
-    const otherWords = this.allWords.filter((w) => w.id !== currentWord.id);
-    const shuffled = otherWords.sort(() => Math.random() - 0.5);
-
-    for (let i = 0; i < shuffled.length && options.length < 4; i++) {
-      const word = shuffled[i];
+    const otherWords = this.allWords.filter(w => w.id !== currentWord.id).sort(() => Math.random() - 0.5);
+    for (let i = 0; i < otherWords.length && options.length < 4; i++) {
+      const word = otherWords[i];
       if (!usedWords.has(word.id)) {
         const option = this.testMode === 'en-zh' ? word.translation : word.word;
-        if (!options.includes(option)) {
-          options.push(option);
-          usedWords.add(word.id);
-        }
+        if (!options.includes(option)) { options.push(option); usedWords.add(word.id); }
       }
     }
-
-    // 打乱选项顺序
     const correctIndex = Math.floor(Math.random() * options.length);
-    const shuffledOptions = [...options];
-    const temp = shuffledOptions[0];
-    shuffledOptions[0] = shuffledOptions[correctIndex];
-    shuffledOptions[correctIndex] = temp;
-
-    return {
-      options: shuffledOptions,
-      correctIndex: shuffledOptions.indexOf(correctAnswer),
-    };
+    const shuffled = [...options];
+    [shuffled[0], shuffled[correctIndex]] = [shuffled[correctIndex], shuffled[0]];
+    return { options: shuffled, correctIndex: shuffled.indexOf(correctAnswer) };
   }
 
   selectOption(index: number) {
     if (!this.showAnswer && this.testMode !== 'dictation') {
       this.selectedOption = index;
-      // 立即判断答案
       this.checkAnswer();
     }
   }
 
   checkAnswer() {
     if (this.selectedOption === null) return;
-
     this.showAnswer = true;
     this.isCorrect = this.selectedOption === this.currentQuestion?.correctIndex;
-
-    if (this.isCorrect) {
-      this.score++;
-      this.correctCount++;
-    } else {
-      this.wrongCount++;
-      // 记录错题
-      if (this.currentWord) {
-        this.recordWrongWord(this.currentWord);
-      }
-    }
-
-    // 自动朗读单词和例句
+    if (this.isCorrect) { this.score++; this.correctCount++; }
+    else { this.wrongCount++; if (this.currentWord) this.recordWrongWord(this.currentWord); }
     this.autoReadAnswer();
   }
 
-  // 自动朗读答案（单词和例句）
   autoReadAnswer() {
     if (!this.currentWord) return;
     this.tts.speakSequence([
@@ -577,125 +641,81 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
     ]);
   }
 
-  // 记录错题
+  // ─── 错题集 ──────────────────────────────────────────────
+
   recordWrongWord(word: Word) {
-    const existingWrong = this.wrongWords.find((w) => w.wordId === word.id);
-    if (existingWrong) {
-      existingWrong.wrongCount++;
-    } else {
-      this.wrongWords.push({
-        wordId: word.id,
-        word: word.word,
-        translation: word.translation,
-        unit: word.unit,
-        wrongCount: 1,
-      });
+    const existing = this.wrongWords.find(w => w.wordId === word.id);
+    if (existing) { existing.wrongCount++; }
+    else {
+      this.wrongWords.push({ wordId: word.id, word: word.word, translation: word.translation, unit: word.unit, wrongCount: 1 });
     }
     this.saveWrongWords();
-    // 更新可用单元列表（如果是第一次添加错题）
     this.updateAvailableUnits();
   }
 
-  // 手动添加单词到错题集
   addToWrongWords(word: Word) {
-    const existingWrong = this.wrongWords.find((w) => w.wordId === word.id);
-    if (!existingWrong) {
-      this.wrongWords.push({
-        wordId: word.id,
-        word: word.word,
-        translation: word.translation,
-        unit: word.unit,
-        wrongCount: 1,
-      });
+    if (!this.wrongWords.find(w => w.wordId === word.id)) {
+      this.wrongWords.push({ wordId: word.id, word: word.word, translation: word.translation, unit: word.unit, wrongCount: 1 });
       this.saveWrongWords();
       this.updateAvailableUnits();
     }
   }
 
-  // 从错题集删除单词
   removeFromWrongWords(wordId: number) {
-    const index = this.wrongWords.findIndex((w) => w.wordId === wordId);
+    const index = this.wrongWords.findIndex(w => w.wordId === wordId);
     if (index !== -1) {
       this.wrongWords.splice(index, 1);
       this.saveWrongWords();
       this.updateAvailableUnits();
-
-      // 如果当前在错题集且删除后没有错题了，返回第一个单元
       if (this.currentUnit === -1 && this.wrongWords.length === 0) {
-        const firstUnit = this.availableUnits.find((u) => u !== -1);
-        if (firstUnit) {
-          this.startUnit(firstUnit);
-        }
+        const firstUnit = this.availableUnits.find(u => u !== -1);
+        if (firstUnit) this.startUnit(firstUnit);
       }
     }
   }
 
-  // 检查单词是否在错题集中
   isInWrongWords(wordId: number): boolean {
-    return this.wrongWords.some((w) => w.wordId === wordId);
+    return this.wrongWords.some(w => w.wordId === wordId);
   }
 
-  // 更新可用单元列表（添加或移除错题集）
   updateAvailableUnits() {
     const hasWrongUnit = this.availableUnits.includes(-1);
-    const shouldHaveWrongUnit = this.wrongWords.length > 0;
-
-    if (shouldHaveWrongUnit && !hasWrongUnit) {
-      // 添加错题集到列表开头
-      this.availableUnits.unshift(-1);
-    } else if (!shouldHaveWrongUnit && hasWrongUnit) {
-      // 移除错题集
-      this.availableUnits = this.availableUnits.filter((u) => u !== -1);
-    }
+    const shouldHave = this.wrongWords.length > 0;
+    if (shouldHave && !hasWrongUnit) this.availableUnits.unshift(-1);
+    else if (!shouldHave && hasWrongUnit) this.availableUnits = this.availableUnits.filter(u => u !== -1);
   }
 
-  // 保存错题集
   saveWrongWords() {
-    const storageKey = `wrong-words-${this.grade}`;
-    localStorage.setItem(storageKey, JSON.stringify(this.wrongWords));
+    localStorage.setItem(`wrong-words-${this.grade}`, JSON.stringify(this.wrongWords));
   }
 
-  // 加载错题集
   loadWrongWords() {
-    const storageKey = `wrong-words-${this.grade}`;
-    const stored = localStorage.getItem(storageKey);
+    const stored = localStorage.getItem(`wrong-words-${this.grade}`);
     if (stored) {
-      try {
-        this.wrongWords = JSON.parse(stored);
-      } catch (e) {
-        console.error('加载错题集失败:', e);
-      }
+      try { this.wrongWords = JSON.parse(stored); }
+      catch (e) { console.error('加载错题集失败:', e); }
     }
   }
+
+  // ─── 进度流转 ────────────────────────────────────────────
 
   nextQuestion() {
     this.currentQuestionIndex++;
     if (this.currentQuestionIndex < this.unitWords.length) {
       this.generateQuestion();
-      // 保存当前状态
       this.saveTestState();
     } else {
       this.completeUnit();
     }
   }
 
-  // 完成当前单元
   completeUnit() {
     this.showResult = true;
-
-    // 清除测试状态（因为测试已完成）
     this.clearTestState();
 
-    // 获取或创建单元进度
     let unitProgress = this.unitProgress.get(this.currentUnit);
-    if (!unitProgress) {
-      unitProgress = {
-        unit: this.currentUnit,
-        modes: {}
-      };
-    }
+    if (!unitProgress) unitProgress = { unit: this.currentUnit, modes: {} };
 
-    // 保存当前测试模式的进度
     unitProgress.modes[this.testMode] = {
       completed: true,
       score: this.score,
@@ -704,25 +724,23 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
       wrongCount: this.wrongCount,
       lastAttempt: new Date().toISOString(),
     };
-
     this.unitProgress.set(this.currentUnit, unitProgress);
     this.saveProgress();
 
-    // 3秒后自动跳转到下一个单元
+    // 仅在听写模式完成时检查难度解锁
+    if (this.testMode === 'dictation') {
+      this.checkDifficultyUnlock();
+    }
+
     setTimeout(() => {
       const nextUnit = this.findNextUnit();
-      if (nextUnit) {
-        this.startUnit(nextUnit);
-      }
+      if (nextUnit) this.startUnit(nextUnit);
     }, 3000);
   }
 
-  // 查找下一个单元
   findNextUnit(): number | null {
-    const currentIndex = this.availableUnits.indexOf(this.currentUnit);
-    if (currentIndex >= 0 && currentIndex < this.availableUnits.length - 1) {
-      return this.availableUnits[currentIndex + 1];
-    }
+    const idx = this.availableUnits.indexOf(this.currentUnit);
+    if (idx >= 0 && idx < this.availableUnits.length - 1) return this.availableUnits[idx + 1];
     return null;
   }
 
@@ -744,37 +762,26 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
     if (this.testMode !== mode) {
       this.testMode = mode;
       this.saveTestMode();
-      
-      // 如果正在测试中，需要重置
       if (!this.showResult) {
         this.resetTest();
         this.generateQuestion();
       }
-      
-      // 清除测试状态（因为切换了模式）
       this.clearTestState();
     }
   }
 
-  // 监听键盘输入
+  // ─── 物理键盘 ────────────────────────────────────────────
+
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (this.testMode !== 'dictation' || this.showAnswer) {
-      return;
-    }
+    // 难度 1 和 2 不支持物理键盘（让小朋友用屏幕按钮）
+    if (this.testMode !== 'dictation' || this.showAnswer) return;
+    if (this.dictationDifficulty !== 3) return;
 
     const key = event.key.toLowerCase();
-
-    if (key === 'backspace') {
-      event.preventDefault();
-      this.onBackspace();
-    } else if (key === 'enter') {
-      event.preventDefault();
-      this.submitDictation();
-    } else if (/^[a-z]$/.test(key)) {
-      event.preventDefault();
-      this.onKeyboardClick(key);
-    }
+    if (key === 'backspace') { event.preventDefault(); this.onBackspace(); }
+    else if (key === 'enter') { event.preventDefault(); this.submitDictation(); }
+    else if (/^[a-z]$/.test(key)) { event.preventDefault(); this.onKeyboardClick(key); }
   }
 
   previousQuestion() {
@@ -788,13 +795,6 @@ export class VocabularyTestComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  // 朗读单词
-  speakWord(text: string) {
-    this.tts.speak(text, 0.8);
-  }
-
-  // 朗读句子
-  speakSentence(text: string) {
-    this.tts.speak(text, 0.7);
-  }
+  speakWord(text: string) { this.tts.speak(text, 0.8); }
+  speakSentence(text: string) { this.tts.speak(text, 0.7); }
 }
