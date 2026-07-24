@@ -1,152 +1,107 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import {
+  MultiplicationPracticeService,
+  PracticeLevel,
+  PracticeData,
+  PracticeQuestion,
+  FlashcardItem,
+  LevelConfig,
+  BatchConfig
+} from '../../services/multiplication-practice.service';
 
-interface QuizQuestion {
-  num1: number;
-  num2: number;
-  answer: number;
-  userAnswer: string;
-  isCorrect: boolean | null;
-}
+type ViewMode = 'table' | 'flashcard' | 'practice' | 'wrongbook';
 
 @Component({
   selector: 'app-multiplication-table',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, MatDialogModule, FormsModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, FormsModule],
   templateUrl: './multiplication-table.html',
   styleUrl: './multiplication-table.scss'
 })
-export class MultiplicationTableComponent {
+export class MultiplicationTableComponent implements OnInit, OnDestroy {
+  Math = Math;
+
+  // Table view
   rows: number[] = Array.from({ length: 19 }, (_, i) => i + 1);
   cols: number[] = Array.from({ length: 19 }, (_, i) => i + 1);
   selectedRow: number | null = null;
   selectedCol: number | null = null;
 
-  // 测验相关
-  showQuizDialog = false;
-  quizQuestions: QuizQuestion[] = [];
+  // Mode management
+  currentMode: ViewMode = 'table';
+  practiceData!: PracticeData;
+  levelConfigs: LevelConfig[] = [];
+  selectedLevel: PracticeLevel = PracticeLevel.LEVEL_0;
+
+  // Batch filtering for table
+  batchConfigs: BatchConfig[] = [];
+  selectedBatchId: string | null = null;
+  showBatchHintDialog = false;
+
+  // Flashcard source mode
+  flashcardSource: 'level' | 'batch' = 'level';
+  selectedBatchForFlashcard: string | null = null;
+  currentBatchHint: string | null = null;
+
+  // Flashcard mode
+  flashcards: FlashcardItem[] = [];
+  currentCardIndex = 0;
+  isCardFlipped = false;
+  flashcardStats = { remembered: 0, notRemembered: 0, total: 0 };
+  flashcardComplete = false;
+
+  // Practice mode
+  practiceQuestions: PracticeQuestion[] = [];
   currentQuestionIndex = 0;
-  numberButtons = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  isListening = false;
-  recognition: any = null;
+  practiceComplete = false;
+  roundResult: { passed: boolean; accuracy: number; leveledUp: boolean } | null = null;
+  showDecomposition = false;
+  currentDecomposition = '';
+  questionStartTime = 0;
+  comboCount = 0;
+  maxCombo = 0;
+  showComboEffect = false;
 
-  constructor(private router: Router) {
-    this.initSpeechRecognition();
+  // Wrong book mode
+  isWrongBookPractice = false;
+
+  // Timer
+  timerInterval: any = null;
+  elapsedSeconds = 0;
+
+  constructor(
+    private router: Router,
+    private practiceService: MultiplicationPracticeService
+  ) {}
+
+  ngOnInit(): void {
+    this.practiceData = this.practiceService.loadData();
+    this.levelConfigs = this.practiceService.getAllLevelConfigs();
+    this.batchConfigs = this.practiceService.getAllBatchConfigs();
+    this.selectedLevel = this.practiceData.currentLevel;
   }
 
-  initSpeechRecognition(): void {
-    // 初始化语音识别
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
-      this.recognition = new SpeechRecognition();
-      this.recognition.lang = 'zh-CN';
-      this.recognition.continuous = false;
-      this.recognition.interimResults = false;
-      this.recognition.maxAlternatives = 1;
-
-      this.recognition.onstart = () => {
-        console.log('语音识别已启动');
-      };
-
-      this.recognition.onresult = (event: any) => {
-        console.log('识别到语音结果:', event);
-        const transcript = event.results[0][0].transcript;
-        console.log('识别文本:', transcript);
-        
-        // 尝试多种方式提取数字
-        let numberStr = '';
-        
-        // 方法1: 直接匹配数字
-        const directNumbers = transcript.match(/\d+/g);
-        if (directNumbers && directNumbers.length > 0) {
-          numberStr = directNumbers.join('');
-        } else {
-          // 方法2: 转换中文数字
-          numberStr = this.chineseToNumber(transcript);
-        }
-        
-        console.log('提取的数字:', numberStr);
-        
-        if (numberStr) {
-          const question = this.quizQuestions[this.currentQuestionIndex];
-          if (question) {
-            question.userAnswer = numberStr;
-          }
-        }
-        this.isListening = false;
-      };
-
-      this.recognition.onerror = (event: any) => {
-        console.error('语音识别错误:', event.error, event);
-        alert(`语音识别错误: ${event.error}`);
-        this.isListening = false;
-      };
-
-      this.recognition.onend = () => {
-        console.log('语音识别已结束');
-        this.isListening = false;
-      };
-    }
+  ngOnDestroy(): void {
+    this.stopTimer();
   }
 
-  // 简单的中文数字转换
-  chineseToNumber(chinese: string): string {
-    const chineseNumbers: {[key: string]: string} = {
-      '零': '0', '一': '1', '二': '2', '三': '3', '四': '4',
-      '五': '5', '六': '6', '七': '7', '八': '8', '九': '9',
-      '十': '10', '百': '00', '千': '000'
-    };
-    
-    let result = '';
-    for (let char of chinese) {
-      if (chineseNumbers[char]) {
-        result += chineseNumbers[char];
-      }
-    }
-    
-    // 如果转换后有内容，尝试计算实际数值
-    if (result) {
-      try {
-        // 处理如"一百八十"这样的情况
-        if (chinese.includes('百')) {
-          const parts = chinese.split('百');
-          const hundreds = this.chineseDigitToNumber(parts[0]) || 1;
-          const remainder = parts[1] ? this.chineseDigitToNumber(parts[1]) : 0;
-          return String(hundreds * 100 + remainder);
-        }
-        return result.replace(/[^0-9]/g, '');
-      } catch (e) {
-        return result.replace(/[^0-9]/g, '');
-      }
-    }
-    
-    return '';
-  }
-
-  chineseDigitToNumber(chinese: string): number {
-    const map: {[key: string]: number} = {
-      '零': 0, '一': 1, '二': 2, '三': 3, '四': 4,
-      '五': 5, '六': 6, '七': 7, '八': 8, '九': 9
-    };
-    
-    let result = 0;
-    for (let char of chinese) {
-      if (map[char] !== undefined) {
-        result = result * 10 + map[char];
-      }
-    }
-    return result;
-  }
-
+  // Navigation
   goBack(): void {
-    this.router.navigate(['/']);
+    if (this.currentMode !== 'table') {
+      this.currentMode = 'table';
+      this.stopTimer();
+      this.resetStates();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
+  // Table interactions
   getProduct(row: number, col: number): number {
     return row * col;
   }
@@ -168,97 +123,349 @@ export class MultiplicationTableComponent {
     return this.selectedCol === col;
   }
 
-  // 测验功能
-  openQuizDialog(): void {
-    this.generateQuestions();
-    this.showQuizDialog = true;
+  // Batch filtering on table
+  selectBatch(batchId: string | null): void {
+    this.selectedBatchId = batchId;
   }
 
-  closeQuizDialog(): void {
-    this.showQuizDialog = false;
+  isCellInSelectedBatch(row: number, col: number): boolean {
+    if (!this.selectedBatchId) return true;
+    return this.practiceService.isCellInBatch(row, col, this.selectedBatchId);
+  }
+
+  get selectedBatchConfig(): BatchConfig | null {
+    if (!this.selectedBatchId) return null;
+    return this.practiceService.getBatchConfig(this.selectedBatchId) || null;
+  }
+
+  // Mode switching
+  startFlashcardMode(): void {
+    this.currentMode = 'flashcard';
+    this.flashcardSource = 'level';
+    this.startFlashcards();
+  }
+
+  startPracticeMode(): void {
+    this.currentMode = 'practice';
+    this.startPractice();
+  }
+
+  startWrongBookMode(): void {
+    if (this.practiceData.wrongBook.length === 0) {
+      return;
+    }
+    this.currentMode = 'wrongbook';
+    this.isWrongBookPractice = true;
+    this.startWrongBookPractice();
+  }
+
+  // === FLASHCARD MODE ===
+
+  startFlashcards(): void {
+    if (this.flashcardSource === 'batch' && this.selectedBatchForFlashcard) {
+      this.flashcards = this.practiceService.generateBatchFlashcards(this.selectedBatchForFlashcard);
+      const batch = this.practiceService.getBatchConfig(this.selectedBatchForFlashcard);
+      this.currentBatchHint = batch?.patternHint || null;
+    } else {
+      this.flashcards = this.practiceService.generateFlashcards(this.selectedLevel, 20);
+      this.currentBatchHint = null;
+    }
+    this.currentCardIndex = 0;
+    this.isCardFlipped = false;
+    this.flashcardComplete = false;
+    this.flashcardStats = { remembered: 0, notRemembered: 0, total: this.flashcards.length };
+  }
+
+  selectFlashcardSource(source: 'level' | 'batch'): void {
+    this.flashcardSource = source;
+    if (source === 'batch' && !this.selectedBatchForFlashcard) {
+      this.selectedBatchForFlashcard = this.batchConfigs[0]?.id || null;
+    }
+    this.startFlashcards();
+  }
+
+  selectBatchForFlashcard(batchId: string): void {
+    this.selectedBatchForFlashcard = batchId;
+    this.flashcardSource = 'batch';
+    this.startFlashcards();
+  }
+
+  flipCard(): void {
+    this.isCardFlipped = true;
+  }
+
+  markRemembered(remembered: boolean): void {
+    if (this.currentCardIndex < this.flashcards.length) {
+      this.flashcards[this.currentCardIndex].remembered = remembered;
+      if (remembered) {
+        this.flashcardStats.remembered++;
+      } else {
+        this.flashcardStats.notRemembered++;
+      }
+      this.nextCard();
+    }
+  }
+
+  nextCard(): void {
+    this.isCardFlipped = false;
+    if (this.currentCardIndex < this.flashcards.length - 1) {
+      // Small delay for flip animation reset
+      setTimeout(() => {
+        this.currentCardIndex++;
+      }, 200);
+    } else {
+      this.flashcardComplete = true;
+    }
+  }
+
+  restartFlashcardsWithFailed(): void {
+    const failedCards = this.flashcards.filter(c => c.remembered === false);
+    if (failedCards.length > 0) {
+      this.flashcards = failedCards.map(c => ({ ...c, remembered: null }));
+      this.currentCardIndex = 0;
+      this.isCardFlipped = false;
+      this.flashcardComplete = false;
+      this.flashcardStats = { remembered: 0, notRemembered: 0, total: this.flashcards.length };
+    } else {
+      this.startFlashcards();
+    }
+  }
+
+  get currentFlashcard(): FlashcardItem | null {
+    return this.flashcards[this.currentCardIndex] || null;
+  }
+
+  getFlashcardDecomposition(): string {
+    const card = this.currentFlashcard;
+    if (!card) return '';
+    return this.practiceService.getDecomposition(card.num1, card.num2);
+  }
+
+  // === PRACTICE MODE ===
+
+  startPractice(): void {
+    this.practiceQuestions = this.practiceService.generateQuestions(this.selectedLevel, 10);
     this.currentQuestionIndex = 0;
+    this.practiceComplete = false;
+    this.roundResult = null;
+    this.showDecomposition = false;
+    this.currentDecomposition = '';
+    this.comboCount = 0;
+    this.maxCombo = 0;
+    this.elapsedSeconds = 0;
+    this.questionStartTime = Date.now();
+    this.startTimer();
   }
 
-  generateQuestions(): void {
-    this.quizQuestions = [];
-    const usedPairs = new Set<string>();
-
-    while (this.quizQuestions.length < 10) {
-      // 生成10-19之间的随机数
-      const num1 = Math.floor(Math.random() * 10) + 10;
-      const num2 = Math.floor(Math.random() * 10) + 10;
-
-      // 确保不是9*9乘法表内的题目（即至少有一个数大于9）
-      if (num1 <= 9 && num2 <= 9) {
-        continue;
-      }
-
-      // 避免重复题目
-      const pairKey = `${Math.min(num1, num2)}-${Math.max(num1, num2)}`;
-      if (usedPairs.has(pairKey)) {
-        continue;
-      }
-
-      usedPairs.add(pairKey);
-      this.quizQuestions.push({
-        num1,
-        num2,
-        answer: num1 * num2,
-        userAnswer: '',
-        isCorrect: null
-      });
+  startWrongBookPractice(): void {
+    this.practiceQuestions = this.practiceService.generateWrongBookQuestions(this.practiceData);
+    if (this.practiceQuestions.length === 0) {
+      this.currentMode = 'table';
+      return;
     }
+    this.currentQuestionIndex = 0;
+    this.practiceComplete = false;
+    this.roundResult = null;
+    this.showDecomposition = false;
+    this.currentDecomposition = '';
+    this.comboCount = 0;
+    this.maxCombo = 0;
+    this.elapsedSeconds = 0;
+    this.questionStartTime = Date.now();
+    this.startTimer();
   }
 
-  onNumberClick(num: number): void {
-    const question = this.quizQuestions[this.currentQuestionIndex];
-    if (question) {
-      question.userAnswer += num.toString();
-    }
+  get currentPracticeQuestion(): PracticeQuestion | null {
+    return this.practiceQuestions[this.currentQuestionIndex] || null;
   }
 
-  onDelete(): void {
-    const question = this.quizQuestions[this.currentQuestionIndex];
-    if (question && question.userAnswer.length > 0) {
+  onNumberInput(num: number): void {
+    const question = this.currentPracticeQuestion;
+    if (!question || question.isCorrect !== null) return;
+    question.userAnswer += num.toString();
+  }
+
+  onDeleteInput(): void {
+    const question = this.currentPracticeQuestion;
+    if (!question || question.isCorrect !== null) return;
+    if (question.userAnswer.length > 0) {
       question.userAnswer = question.userAnswer.slice(0, -1);
     }
   }
 
-  verifyAnswers(): void {
-    this.quizQuestions.forEach(question => {
-      const userAnswer = parseInt(question.userAnswer) || 0;
-      question.isCorrect = userAnswer === question.answer;
-    });
+  submitAnswer(): void {
+    const question = this.currentPracticeQuestion;
+    if (!question || question.userAnswer === '') return;
+
+    const userAnswer = parseInt(question.userAnswer, 10);
+    question.isCorrect = userAnswer === question.answer;
+    question.timeSpent = Date.now() - this.questionStartTime;
+
+    if (question.isCorrect) {
+      this.comboCount++;
+      this.maxCombo = Math.max(this.maxCombo, this.comboCount);
+      if (this.comboCount >= 3) {
+        this.showComboEffect = true;
+        setTimeout(() => this.showComboEffect = false, 1500);
+      }
+    } else {
+      this.comboCount = 0;
+      this.currentDecomposition = this.practiceService.getDecomposition(question.num1, question.num2);
+      this.showDecomposition = true;
+    }
   }
 
-  regenerateQuestions(): void {
-    this.generateQuestions();
+  nextQuestion(): void {
+    this.showDecomposition = false;
+    this.currentDecomposition = '';
+
+    if (this.currentQuestionIndex < this.practiceQuestions.length - 1) {
+      this.currentQuestionIndex++;
+      this.questionStartTime = Date.now();
+    } else {
+      this.finishPractice();
+    }
   }
 
-  get currentQuestion(): QuizQuestion {
-    return this.quizQuestions[this.currentQuestionIndex];
+  finishPractice(): void {
+    this.stopTimer();
+    this.practiceComplete = true;
+
+    if (this.isWrongBookPractice) {
+      // For wrong book practice, still update the wrong book entries
+      this.practiceQuestions.forEach(q => {
+        if (q.isCorrect === false) {
+          // Already in wrong book, wrongCount will be incremented
+        }
+      });
+      // Use a special recording that doesn't affect level progress
+      this.practiceData.stats.totalPracticed += this.practiceQuestions.length;
+      this.practiceData.stats.totalCorrect += this.practiceQuestions.filter(q => q.isCorrect).length;
+
+      // Update wrong book entries
+      this.practiceQuestions.forEach(q => {
+        const key1 = Math.min(q.num1, q.num2);
+        const key2 = Math.max(q.num1, q.num2);
+        const entry = this.practiceData.wrongBook.find(
+          e => Math.min(e.num1, e.num2) === key1 && Math.max(e.num1, e.num2) === key2
+        );
+        if (entry) {
+          if (q.isCorrect) {
+            entry.correctStreak++;
+            entry.lastPracticed = Date.now();
+            if (entry.correctStreak >= 3) {
+              this.practiceData.wrongBook = this.practiceData.wrongBook.filter(e => e !== entry);
+            }
+          } else {
+            entry.wrongCount++;
+            entry.correctStreak = 0;
+            entry.lastPracticed = Date.now();
+          }
+        }
+      });
+
+      this.practiceService.saveData(this.practiceData);
+      const correctCount = this.practiceQuestions.filter(q => q.isCorrect).length;
+      this.roundResult = {
+        passed: correctCount === this.practiceQuestions.length,
+        accuracy: Math.round((correctCount / this.practiceQuestions.length) * 100),
+        leveledUp: false
+      };
+    } else {
+      this.roundResult = this.practiceService.recordRoundResult(
+        this.practiceData,
+        this.selectedLevel,
+        this.practiceQuestions
+      );
+      // Reload data to get updated state
+      this.practiceData = this.practiceService.loadData();
+    }
   }
 
-  // 语音输入
-  startVoiceInput(questionIndex: number): void {
-    if (!this.recognition) {
-      alert('您的浏览器不支持语音识别功能');
-      return;
+  restartPractice(): void {
+    if (this.isWrongBookPractice) {
+      this.startWrongBookPractice();
+    } else {
+      this.startPractice();
     }
+  }
 
-    if (this.isListening) {
-      this.recognition.stop();
-      return;
+  // Level selection
+  selectLevel(level: PracticeLevel): void {
+    if (this.practiceService.isLevelUnlocked(this.practiceData, level)) {
+      this.selectedLevel = level;
     }
+  }
 
-    this.currentQuestionIndex = questionIndex;
-    this.isListening = true;
-    
-    try {
-      this.recognition.start();
-    } catch (error) {
-      console.error('启动语音识别失败:', error);
-      this.isListening = false;
+  // Flashcard level selection (all levels open for learning)
+  selectFlashcardLevel(level: PracticeLevel): void {
+    this.selectedLevel = level;
+    this.startFlashcards();
+  }
+
+  isLevelUnlocked(level: PracticeLevel): boolean {
+    return this.practiceService.isLevelUnlocked(this.practiceData, level);
+  }
+
+  getLevelProgress(level: PracticeLevel): number {
+    const progress = this.practiceData.levelProgress[level];
+    if (!progress) return 0;
+    return Math.min(progress.consecutivePasses, 3);
+  }
+
+  // Wrong book
+  get wrongBookCount(): number {
+    return this.practiceData.wrongBook.length;
+  }
+
+  clearWrongBook(): void {
+    this.practiceService.clearWrongBook(this.practiceData);
+    this.practiceData = this.practiceService.loadData();
+  }
+
+  // Timer
+  private startTimer(): void {
+    this.elapsedSeconds = 0;
+    this.timerInterval = setInterval(() => {
+      this.elapsedSeconds++;
+    }, 1000);
+  }
+
+  private stopTimer(): void {
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+      this.timerInterval = null;
     }
+  }
+
+  formatTime(seconds: number): string {
+    const min = Math.floor(seconds / 60);
+    const sec = seconds % 60;
+    return `${min}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  // Reset all states
+  private resetStates(): void {
+    this.practiceComplete = false;
+    this.flashcardComplete = false;
+    this.roundResult = null;
+    this.showDecomposition = false;
+    this.isWrongBookPractice = false;
+    this.comboCount = 0;
+    this.maxCombo = 0;
+  }
+
+  // Stats
+  get totalAccuracy(): number {
+    if (this.practiceData.stats.totalPracticed === 0) return 0;
+    return Math.round((this.practiceData.stats.totalCorrect / this.practiceData.stats.totalPracticed) * 100);
+  }
+
+  get hasWrongAnswers(): boolean {
+    return this.practiceQuestions.some(q => q.isCorrect === false);
+  }
+
+  get wrongAnswers(): PracticeQuestion[] {
+    return this.practiceQuestions.filter(q => q.isCorrect === false);
   }
 }
