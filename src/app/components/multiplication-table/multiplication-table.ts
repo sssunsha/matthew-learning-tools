@@ -1,104 +1,47 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
-import {
-  MultiplicationPracticeService,
-  PracticeLevel,
-  PracticeData,
-  PracticeQuestion,
-  FlashcardItem,
-  LevelConfig,
-  BatchConfig
-} from '../../services/multiplication-practice.service';
 
-type ViewMode = 'table' | 'flashcard' | 'practice' | 'wrongbook';
+export interface BatchConfig {
+  id: string;
+  name: string;
+  emoji: string;
+  description: string;
+  color: string;
+  pairs: [number, number][];
+  patternHint?: string;
+}
 
 @Component({
   selector: 'app-multiplication-table',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, FormsModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule],
   templateUrl: './multiplication-table.html',
   styleUrl: './multiplication-table.scss'
 })
-export class MultiplicationTableComponent implements OnInit, OnDestroy {
-  Math = Math;
-
+export class MultiplicationTableComponent implements OnInit {
   // Table view
   rows: number[] = Array.from({ length: 19 }, (_, i) => i + 1);
   cols: number[] = Array.from({ length: 19 }, (_, i) => i + 1);
   selectedRow: number | null = null;
   selectedCol: number | null = null;
 
-  // Mode management
-  currentMode: ViewMode = 'table';
-  practiceData!: PracticeData;
-  levelConfigs: LevelConfig[] = [];
-  selectedLevel: PracticeLevel = PracticeLevel.LEVEL_0;
-
-  // Batch filtering for table
+  // Batch filtering
   batchConfigs: BatchConfig[] = [];
   selectedBatchId: string | null = null;
   showBatchHintDialog = false;
 
-  // Flashcard source mode
-  flashcardSource: 'level' | 'batch' = 'level';
-  selectedBatchForFlashcard: string | null = null;
-  currentBatchHint: string | null = null;
-
-  // Flashcard mode
-  flashcards: FlashcardItem[] = [];
-  currentCardIndex = 0;
-  isCardFlipped = false;
-  flashcardStats = { remembered: 0, notRemembered: 0, total: 0 };
-  flashcardComplete = false;
-
-  // Practice mode
-  practiceQuestions: PracticeQuestion[] = [];
-  currentQuestionIndex = 0;
-  practiceComplete = false;
-  roundResult: { passed: boolean; accuracy: number; leveledUp: boolean } | null = null;
-  showDecomposition = false;
-  currentDecomposition = '';
-  questionStartTime = 0;
-  comboCount = 0;
-  maxCombo = 0;
-  showComboEffect = false;
-
-  // Wrong book mode
-  isWrongBookPractice = false;
-
-  // Timer
-  timerInterval: any = null;
-  elapsedSeconds = 0;
-
-  constructor(
-    private router: Router,
-    private practiceService: MultiplicationPracticeService
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.practiceData = this.practiceService.loadData();
-    this.levelConfigs = this.practiceService.getAllLevelConfigs();
-    this.batchConfigs = this.practiceService.getAllBatchConfigs();
-    this.selectedLevel = this.practiceData.currentLevel;
-  }
-
-  ngOnDestroy(): void {
-    this.stopTimer();
+    this.batchConfigs = this.buildBatchConfigs();
   }
 
   // Navigation
   goBack(): void {
-    if (this.currentMode !== 'table') {
-      this.currentMode = 'table';
-      this.stopTimer();
-      this.resetStates();
-    } else {
-      this.router.navigate(['/']);
-    }
+    this.router.navigate(['/']);
   }
 
   // Table interactions
@@ -123,349 +66,145 @@ export class MultiplicationTableComponent implements OnInit, OnDestroy {
     return this.selectedCol === col;
   }
 
-  // Batch filtering on table
+  // Batch filtering
   selectBatch(batchId: string | null): void {
     this.selectedBatchId = batchId;
   }
 
   isCellInSelectedBatch(row: number, col: number): boolean {
     if (!this.selectedBatchId) return true;
-    return this.practiceService.isCellInBatch(row, col, this.selectedBatchId);
+    const batch = this.batchConfigs.find(b => b.id === this.selectedBatchId);
+    if (!batch) return true;
+    return batch.pairs.some(([a, b]) =>
+      (row === a && col === b) || (row === b && col === a)
+    );
   }
 
   get selectedBatchConfig(): BatchConfig | null {
     if (!this.selectedBatchId) return null;
-    return this.practiceService.getBatchConfig(this.selectedBatchId) || null;
+    return this.batchConfigs.find(b => b.id === this.selectedBatchId) || null;
   }
 
-  // Mode switching
-  startFlashcardMode(): void {
-    this.currentMode = 'flashcard';
-    this.flashcardSource = 'level';
-    this.startFlashcards();
-  }
+  // Build batch configurations
+  private buildBatchConfigs(): BatchConfig[] {
+    const range1to19 = (n: number): [number, number][] =>
+      Array.from({ length: 19 }, (_, i): [number, number] => [n, i + 1]);
 
-  startPracticeMode(): void {
-    this.currentMode = 'practice';
-    this.startPractice();
-  }
-
-  startWrongBookMode(): void {
-    if (this.practiceData.wrongBook.length === 0) {
-      return;
-    }
-    this.currentMode = 'wrongbook';
-    this.isWrongBookPractice = true;
-    this.startWrongBookPractice();
-  }
-
-  // === FLASHCARD MODE ===
-
-  startFlashcards(): void {
-    if (this.flashcardSource === 'batch' && this.selectedBatchForFlashcard) {
-      this.flashcards = this.practiceService.generateBatchFlashcards(this.selectedBatchForFlashcard);
-      const batch = this.practiceService.getBatchConfig(this.selectedBatchForFlashcard);
-      this.currentBatchHint = batch?.patternHint || null;
-    } else {
-      this.flashcards = this.practiceService.generateFlashcards(this.selectedLevel, 20);
-      this.currentBatchHint = null;
-    }
-    this.currentCardIndex = 0;
-    this.isCardFlipped = false;
-    this.flashcardComplete = false;
-    this.flashcardStats = { remembered: 0, notRemembered: 0, total: this.flashcards.length };
-  }
-
-  selectFlashcardSource(source: 'level' | 'batch'): void {
-    this.flashcardSource = source;
-    if (source === 'batch' && !this.selectedBatchForFlashcard) {
-      this.selectedBatchForFlashcard = this.batchConfigs[0]?.id || null;
-    }
-    this.startFlashcards();
-  }
-
-  selectBatchForFlashcard(batchId: string): void {
-    this.selectedBatchForFlashcard = batchId;
-    this.flashcardSource = 'batch';
-    this.startFlashcards();
-  }
-
-  flipCard(): void {
-    this.isCardFlipped = true;
-  }
-
-  markRemembered(remembered: boolean): void {
-    if (this.currentCardIndex < this.flashcards.length) {
-      this.flashcards[this.currentCardIndex].remembered = remembered;
-      if (remembered) {
-        this.flashcardStats.remembered++;
-      } else {
-        this.flashcardStats.notRemembered++;
+    return [
+      {
+        id: 'two', name: '2的朋友', emoji: '🐣',
+        description: '2×1 到 2×19，2的所有乘法', color: '#a5d6a7',
+        pairs: range1to19(2),
+        patternHint: '技巧：2×N就是N+N，两个N加在一起！'
+      },
+      {
+        id: 'three', name: '3的朋友', emoji: '🌸',
+        description: '3×1 到 3×19，3的所有乘法', color: '#f48fb1',
+        pairs: range1to19(3),
+        patternHint: '技巧：3×N = 3×10 + 3×(N-10)，如 3×14 = 30+12 = 42'
+      },
+      {
+        id: 'four', name: '4的朋友', emoji: '🍀',
+        description: '4×1 到 4×19，4的所有乘法', color: '#80cbc4',
+        pairs: range1to19(4),
+        patternHint: '技巧：4×N = 2×N×2，先算2倍再翻倍！'
+      },
+      {
+        id: 'five', name: '5的朋友', emoji: '⭐',
+        description: '5×1 到 5×19，5的所有乘法', color: '#fff59d',
+        pairs: range1to19(5),
+        patternHint: '技巧：5×N = N÷2×10，如果N是偶数结尾是0，奇数结尾是5！'
+      },
+      {
+        id: 'six', name: '6的朋友', emoji: '🎲',
+        description: '6×1 到 6×19，6的所有乘法', color: '#90caf9',
+        pairs: range1to19(6),
+        patternHint: '技巧：6×N = 5×N + N，先算5倍再加一个N'
+      },
+      {
+        id: 'seven', name: '7的朋友', emoji: '🌈',
+        description: '7×1 到 7×19，7的所有乘法', color: '#b39ddb',
+        pairs: range1to19(7),
+        patternHint: '技巧：7×N = 7×10 + 7×(N-10)，大于10的用拆分法'
+      },
+      {
+        id: 'eight', name: '8的朋友', emoji: '🎱',
+        description: '8×1 到 8×19，8的所有乘法', color: '#80deea',
+        pairs: range1to19(8),
+        patternHint: '技巧：8×N = 2×2×2×N，或者 10×N - 2×N'
+      },
+      {
+        id: 'nine', name: '9的朋友', emoji: '🔮',
+        description: '9×1 到 9×19，9的所有乘法', color: '#ce93d8',
+        pairs: range1to19(9),
+        patternHint: '技巧：9×N = 10×N - N，如 9×13 = 130-13 = 117'
+      },
+      {
+        id: 'tens', name: '10的朋友', emoji: '🔟',
+        description: '10×1 到 10×19，末尾加0就行', color: '#4fc3f7',
+        pairs: range1to19(10),
+        patternHint: '规律：任何数乘以10，只要在末尾加一个0！'
+      },
+      {
+        id: 'elevens', name: '11的朋友', emoji: '🎯',
+        description: '11×1 到 11×19，首尾相加放中间', color: '#ffab91',
+        pairs: range1to19(11),
+        patternHint: '规律：11×N（两位数），把N的两位数字拆开，中间放它们的和！如 11×12=132'
+      },
+      {
+        id: 'twelve', name: '12的朋友', emoji: '🌱',
+        description: '12×1 到 12×19，12的所有乘法', color: '#81c784',
+        pairs: range1to19(12),
+        patternHint: '技巧：12×N = 10×N + 2×N，先算10倍再加2倍'
+      },
+      {
+        id: 'thirteen', name: '13的朋友', emoji: '🌿',
+        description: '13×1 到 13×19，13的所有乘法', color: '#66bb6a',
+        pairs: range1to19(13),
+        patternHint: '技巧：13×N = 10×N + 3×N，先算10倍再加3倍'
+      },
+      {
+        id: 'fourteen', name: '14的朋友', emoji: '🍊',
+        description: '14×1 到 14×19，14的所有乘法', color: '#ffb74d',
+        pairs: range1to19(14),
+        patternHint: '技巧：14×N = 10×N + 4×N'
+      },
+      {
+        id: 'fifteen', name: '15的朋友', emoji: '🍋',
+        description: '15×1 到 15×19，15的所有乘法', color: '#fff176',
+        pairs: range1to19(15),
+        patternHint: '技巧：15×N = 10×N + 5×N，或者 15×偶数 = 该偶数的一半×30'
+      },
+      {
+        id: 'sixteen', name: '16的朋友', emoji: '🔥',
+        description: '16×1 到 16×19，16的所有乘法', color: '#ef5350',
+        pairs: range1to19(16),
+        patternHint: '技巧：16×N = 16×10 + 16×(N-10)，如 16×17 = 160+112 = 272'
+      },
+      {
+        id: 'seventeen', name: '17的朋友', emoji: '⚡',
+        description: '17×1 到 17×19，17的所有乘法', color: '#ff7043',
+        pairs: range1to19(17),
+        patternHint: '技巧：17×N = 17×10 + 17×(N-10)，如 17×18 = 170+136 = 306'
+      },
+      {
+        id: 'eighteen', name: '18的朋友', emoji: '💪',
+        description: '18×1 到 18×19，18的所有乘法', color: '#f44336',
+        pairs: range1to19(18),
+        patternHint: '技巧：18×N = 20×N - 2×N，如 18×13 = 260-26 = 234'
+      },
+      {
+        id: 'nineteen', name: '19的朋友', emoji: '🏆',
+        description: '19×1 到 19×19，19的所有乘法', color: '#e040fb',
+        pairs: range1to19(19),
+        patternHint: '技巧：19×N = 20×N - N，如 19×13 = 260-13 = 247'
+      },
+      {
+        id: 'squares', name: '平方数', emoji: '💎',
+        description: '1²到19²，同一个数乘自己', color: '#ffd54f',
+        pairs: Array.from({ length: 19 }, (_, i): [number, number] => [i + 1, i + 1]),
+        patternHint: '平方数是特殊的！1,4,9,16,25,36,49,64,81,100,121,144,169,196,225,256,289,324,361'
       }
-      this.nextCard();
-    }
-  }
-
-  nextCard(): void {
-    this.isCardFlipped = false;
-    if (this.currentCardIndex < this.flashcards.length - 1) {
-      // Small delay for flip animation reset
-      setTimeout(() => {
-        this.currentCardIndex++;
-      }, 200);
-    } else {
-      this.flashcardComplete = true;
-    }
-  }
-
-  restartFlashcardsWithFailed(): void {
-    const failedCards = this.flashcards.filter(c => c.remembered === false);
-    if (failedCards.length > 0) {
-      this.flashcards = failedCards.map(c => ({ ...c, remembered: null }));
-      this.currentCardIndex = 0;
-      this.isCardFlipped = false;
-      this.flashcardComplete = false;
-      this.flashcardStats = { remembered: 0, notRemembered: 0, total: this.flashcards.length };
-    } else {
-      this.startFlashcards();
-    }
-  }
-
-  get currentFlashcard(): FlashcardItem | null {
-    return this.flashcards[this.currentCardIndex] || null;
-  }
-
-  getFlashcardDecomposition(): string {
-    const card = this.currentFlashcard;
-    if (!card) return '';
-    return this.practiceService.getDecomposition(card.num1, card.num2);
-  }
-
-  // === PRACTICE MODE ===
-
-  startPractice(): void {
-    this.practiceQuestions = this.practiceService.generateQuestions(this.selectedLevel, 10);
-    this.currentQuestionIndex = 0;
-    this.practiceComplete = false;
-    this.roundResult = null;
-    this.showDecomposition = false;
-    this.currentDecomposition = '';
-    this.comboCount = 0;
-    this.maxCombo = 0;
-    this.elapsedSeconds = 0;
-    this.questionStartTime = Date.now();
-    this.startTimer();
-  }
-
-  startWrongBookPractice(): void {
-    this.practiceQuestions = this.practiceService.generateWrongBookQuestions(this.practiceData);
-    if (this.practiceQuestions.length === 0) {
-      this.currentMode = 'table';
-      return;
-    }
-    this.currentQuestionIndex = 0;
-    this.practiceComplete = false;
-    this.roundResult = null;
-    this.showDecomposition = false;
-    this.currentDecomposition = '';
-    this.comboCount = 0;
-    this.maxCombo = 0;
-    this.elapsedSeconds = 0;
-    this.questionStartTime = Date.now();
-    this.startTimer();
-  }
-
-  get currentPracticeQuestion(): PracticeQuestion | null {
-    return this.practiceQuestions[this.currentQuestionIndex] || null;
-  }
-
-  onNumberInput(num: number): void {
-    const question = this.currentPracticeQuestion;
-    if (!question || question.isCorrect !== null) return;
-    question.userAnswer += num.toString();
-  }
-
-  onDeleteInput(): void {
-    const question = this.currentPracticeQuestion;
-    if (!question || question.isCorrect !== null) return;
-    if (question.userAnswer.length > 0) {
-      question.userAnswer = question.userAnswer.slice(0, -1);
-    }
-  }
-
-  submitAnswer(): void {
-    const question = this.currentPracticeQuestion;
-    if (!question || question.userAnswer === '') return;
-
-    const userAnswer = parseInt(question.userAnswer, 10);
-    question.isCorrect = userAnswer === question.answer;
-    question.timeSpent = Date.now() - this.questionStartTime;
-
-    if (question.isCorrect) {
-      this.comboCount++;
-      this.maxCombo = Math.max(this.maxCombo, this.comboCount);
-      if (this.comboCount >= 3) {
-        this.showComboEffect = true;
-        setTimeout(() => this.showComboEffect = false, 1500);
-      }
-    } else {
-      this.comboCount = 0;
-      this.currentDecomposition = this.practiceService.getDecomposition(question.num1, question.num2);
-      this.showDecomposition = true;
-    }
-  }
-
-  nextQuestion(): void {
-    this.showDecomposition = false;
-    this.currentDecomposition = '';
-
-    if (this.currentQuestionIndex < this.practiceQuestions.length - 1) {
-      this.currentQuestionIndex++;
-      this.questionStartTime = Date.now();
-    } else {
-      this.finishPractice();
-    }
-  }
-
-  finishPractice(): void {
-    this.stopTimer();
-    this.practiceComplete = true;
-
-    if (this.isWrongBookPractice) {
-      // For wrong book practice, still update the wrong book entries
-      this.practiceQuestions.forEach(q => {
-        if (q.isCorrect === false) {
-          // Already in wrong book, wrongCount will be incremented
-        }
-      });
-      // Use a special recording that doesn't affect level progress
-      this.practiceData.stats.totalPracticed += this.practiceQuestions.length;
-      this.practiceData.stats.totalCorrect += this.practiceQuestions.filter(q => q.isCorrect).length;
-
-      // Update wrong book entries
-      this.practiceQuestions.forEach(q => {
-        const key1 = Math.min(q.num1, q.num2);
-        const key2 = Math.max(q.num1, q.num2);
-        const entry = this.practiceData.wrongBook.find(
-          e => Math.min(e.num1, e.num2) === key1 && Math.max(e.num1, e.num2) === key2
-        );
-        if (entry) {
-          if (q.isCorrect) {
-            entry.correctStreak++;
-            entry.lastPracticed = Date.now();
-            if (entry.correctStreak >= 3) {
-              this.practiceData.wrongBook = this.practiceData.wrongBook.filter(e => e !== entry);
-            }
-          } else {
-            entry.wrongCount++;
-            entry.correctStreak = 0;
-            entry.lastPracticed = Date.now();
-          }
-        }
-      });
-
-      this.practiceService.saveData(this.practiceData);
-      const correctCount = this.practiceQuestions.filter(q => q.isCorrect).length;
-      this.roundResult = {
-        passed: correctCount === this.practiceQuestions.length,
-        accuracy: Math.round((correctCount / this.practiceQuestions.length) * 100),
-        leveledUp: false
-      };
-    } else {
-      this.roundResult = this.practiceService.recordRoundResult(
-        this.practiceData,
-        this.selectedLevel,
-        this.practiceQuestions
-      );
-      // Reload data to get updated state
-      this.practiceData = this.practiceService.loadData();
-    }
-  }
-
-  restartPractice(): void {
-    if (this.isWrongBookPractice) {
-      this.startWrongBookPractice();
-    } else {
-      this.startPractice();
-    }
-  }
-
-  // Level selection
-  selectLevel(level: PracticeLevel): void {
-    if (this.practiceService.isLevelUnlocked(this.practiceData, level)) {
-      this.selectedLevel = level;
-    }
-  }
-
-  // Flashcard level selection (all levels open for learning)
-  selectFlashcardLevel(level: PracticeLevel): void {
-    this.selectedLevel = level;
-    this.startFlashcards();
-  }
-
-  isLevelUnlocked(level: PracticeLevel): boolean {
-    return this.practiceService.isLevelUnlocked(this.practiceData, level);
-  }
-
-  getLevelProgress(level: PracticeLevel): number {
-    const progress = this.practiceData.levelProgress[level];
-    if (!progress) return 0;
-    return Math.min(progress.consecutivePasses, 3);
-  }
-
-  // Wrong book
-  get wrongBookCount(): number {
-    return this.practiceData.wrongBook.length;
-  }
-
-  clearWrongBook(): void {
-    this.practiceService.clearWrongBook(this.practiceData);
-    this.practiceData = this.practiceService.loadData();
-  }
-
-  // Timer
-  private startTimer(): void {
-    this.elapsedSeconds = 0;
-    this.timerInterval = setInterval(() => {
-      this.elapsedSeconds++;
-    }, 1000);
-  }
-
-  private stopTimer(): void {
-    if (this.timerInterval) {
-      clearInterval(this.timerInterval);
-      this.timerInterval = null;
-    }
-  }
-
-  formatTime(seconds: number): string {
-    const min = Math.floor(seconds / 60);
-    const sec = seconds % 60;
-    return `${min}:${sec.toString().padStart(2, '0')}`;
-  }
-
-  // Reset all states
-  private resetStates(): void {
-    this.practiceComplete = false;
-    this.flashcardComplete = false;
-    this.roundResult = null;
-    this.showDecomposition = false;
-    this.isWrongBookPractice = false;
-    this.comboCount = 0;
-    this.maxCombo = 0;
-  }
-
-  // Stats
-  get totalAccuracy(): number {
-    if (this.practiceData.stats.totalPracticed === 0) return 0;
-    return Math.round((this.practiceData.stats.totalCorrect / this.practiceData.stats.totalPracticed) * 100);
-  }
-
-  get hasWrongAnswers(): boolean {
-    return this.practiceQuestions.some(q => q.isCorrect === false);
-  }
-
-  get wrongAnswers(): PracticeQuestion[] {
-    return this.practiceQuestions.filter(q => q.isCorrect === false);
+    ];
   }
 }

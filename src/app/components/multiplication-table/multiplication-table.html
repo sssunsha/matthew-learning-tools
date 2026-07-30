@@ -1,486 +1,105 @@
-<!-- TABLE MODE -->
-@if (currentMode === 'table') {
-  <div class="multiplication-table-container">
-    <div class="table-header">
-      <button mat-icon-button class="back-btn" (click)="goBack()">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-      <h1 class="table-title">19×19 乘法运算表</h1>
-      <div class="header-actions">
-        <button mat-raised-button class="action-btn flashcard-btn" (click)="startFlashcardMode()">
-          <mat-icon>style</mat-icon>
-          闪卡学习
-        </button>
-        <button mat-raised-button class="action-btn practice-btn" (click)="startPracticeMode()">
-          <mat-icon>fitness_center</mat-icon>
-          渐进练习
-        </button>
-        @if (wrongBookCount > 0) {
-          <button mat-raised-button class="action-btn wrongbook-btn" (click)="startWrongBookMode()">
-            <mat-icon>auto_stories</mat-icon>
-            错题本 ({{ wrongBookCount }})
-          </button>
-        }
-      </div>
-    </div>
+<div class="multiplication-table-container">
+  <div class="table-header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="table-title">19×19 乘法运算表</h1>
+  </div>
 
-    <!-- Batch filter buttons -->
-    <div class="batch-filter-bar">
+  <!-- Batch filter buttons -->
+  <div class="batch-filter-bar">
+    <button class="batch-btn"
+            [class.active]="selectedBatchId === null"
+            (click)="selectBatch(null)">
+      全部
+    </button>
+    @for (batch of batchConfigs; track batch.id) {
       <button class="batch-btn"
-              [class.active]="selectedBatchId === null"
-              (click)="selectBatch(null)">
-        全部
+              [class.active]="selectedBatchId === batch.id"
+              [style.--batch-color]="batch.color"
+              (click)="selectBatch(batch.id)">
+        <span class="batch-emoji">{{ batch.emoji }}</span>
+        <span class="batch-name">{{ batch.name }}</span>
       </button>
-      @for (batch of batchConfigs; track batch.id) {
-        <button class="batch-btn"
-                [class.active]="selectedBatchId === batch.id"
-                [style.--batch-color]="batch.color"
-                (click)="selectBatch(batch.id)">
-          <span class="batch-emoji">{{ batch.emoji }}</span>
-          <span class="batch-name">{{ batch.name }}</span>
-        </button>
-      }
-      <!-- Help button at the right end of the batch bar -->
-      @if (selectedBatchConfig) {
-        <button class="batch-help-btn" (click)="showBatchHintDialog = true" [style.--batch-color]="selectedBatchConfig.color">
-          <mat-icon>help_outline</mat-icon>
-        </button>
-      }
-    </div>
+    }
+    <!-- Help button at the right end of the batch bar -->
+    @if (selectedBatchConfig) {
+      <button class="batch-help-btn" (click)="showBatchHintDialog = true" [style.--batch-color]="selectedBatchConfig.color">
+        <mat-icon>help_outline</mat-icon>
+      </button>
+    }
+  </div>
 
-    <!-- Batch hint dialog -->
-    @if (showBatchHintDialog && selectedBatchConfig) {
-      <div class="batch-hint-overlay" (click)="showBatchHintDialog = false">
-        <div class="batch-hint-dialog" (click)="$event.stopPropagation()">
-          <div class="batch-hint-dialog-header" [style.background]="selectedBatchConfig.color">
-            <span class="hint-dialog-emoji">{{ selectedBatchConfig.emoji }}</span>
-            <h3>{{ selectedBatchConfig.name }}</h3>
-            <button class="hint-close-btn" (click)="showBatchHintDialog = false">
-              <mat-icon>close</mat-icon>
-            </button>
-          </div>
-          <div class="batch-hint-dialog-body">
-            <p class="hint-desc">{{ selectedBatchConfig.description }}</p>
-            @if (selectedBatchConfig.patternHint) {
-              <div class="hint-pattern">
-                <mat-icon>lightbulb</mat-icon>
-                <span>{{ selectedBatchConfig.patternHint }}</span>
-              </div>
-            }
-            <div class="hint-pairs">
-              <h4>包含的乘法：</h4>
-              <div class="pairs-grid">
-                @for (pair of selectedBatchConfig.pairs; track $index) {
-                  <span class="pair-item">{{ pair[0] }}×{{ pair[1] }}={{ pair[0] * pair[1] }}</span>
-                }
-              </div>
+  <!-- Batch hint dialog -->
+  @if (showBatchHintDialog && selectedBatchConfig) {
+    <div class="batch-hint-overlay" (click)="showBatchHintDialog = false">
+      <div class="batch-hint-dialog" (click)="$event.stopPropagation()">
+        <div class="batch-hint-dialog-header" [style.background]="selectedBatchConfig.color">
+          <span class="hint-dialog-emoji">{{ selectedBatchConfig.emoji }}</span>
+          <h3>{{ selectedBatchConfig.name }}</h3>
+          <button class="hint-close-btn" (click)="showBatchHintDialog = false">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div class="batch-hint-dialog-body">
+          <p class="hint-desc">{{ selectedBatchConfig.description }}</p>
+          @if (selectedBatchConfig.patternHint) {
+            <div class="hint-pattern">
+              <mat-icon>lightbulb</mat-icon>
+              <span>{{ selectedBatchConfig.patternHint }}</span>
+            </div>
+          }
+          <div class="hint-pairs">
+            <h4>包含的乘法：</h4>
+            <div class="pairs-grid">
+              @for (pair of selectedBatchConfig.pairs; track $index) {
+                <span class="pair-item">{{ pair[0] }}×{{ pair[1] }}={{ pair[0] * pair[1] }}</span>
+              }
             </div>
           </div>
         </div>
       </div>
-    }
+    </div>
+  }
 
-    <div class="table-wrapper">
-      <table class="multiplication-table">
-        <thead>
+  <div class="table-wrapper">
+    <table class="multiplication-table">
+      <thead>
+        <tr>
+          <th class="corner-cell">×</th>
+          @for (col of cols; track col) {
+            <th
+              class="header-cell"
+              [class.header-highlighted]="isColHeaderHighlighted(col)">
+              {{ col }}
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows; track row) {
           <tr>
-            <th class="corner-cell">×</th>
+            <th
+              class="row-header"
+              [class.header-highlighted]="isRowHeaderHighlighted(row)">
+              {{ row }}
+            </th>
             @for (col of cols; track col) {
-              <th
-                class="header-cell"
-                [class.header-highlighted]="isColHeaderHighlighted(col)">
-                {{ col }}
-              </th>
+              <td
+                class="data-cell"
+                [class.diagonal-highlight]="row === col && !selectedBatchId"
+                [class.selected-cell]="isSelected(row, col)"
+                [class.batch-highlighted]="selectedBatchId && isCellInSelectedBatch(row, col)"
+                [class.batch-dimmed]="selectedBatchId && !isCellInSelectedBatch(row, col)"
+                (click)="onCellClick(row, col)">
+                @if (!selectedBatchId || isCellInSelectedBatch(row, col)) {
+                  {{ getProduct(row, col) }}
+                }
+              </td>
             }
           </tr>
-        </thead>
-        <tbody>
-          @for (row of rows; track row) {
-            <tr>
-              <th
-                class="row-header"
-                [class.header-highlighted]="isRowHeaderHighlighted(row)">
-                {{ row }}
-              </th>
-              @for (col of cols; track col) {
-                <td
-                  class="data-cell"
-                  [class.diagonal-highlight]="row === col && !selectedBatchId"
-                  [class.selected-cell]="isSelected(row, col)"
-                  [class.batch-highlighted]="selectedBatchId && isCellInSelectedBatch(row, col)"
-                  [class.batch-dimmed]="selectedBatchId && !isCellInSelectedBatch(row, col)"
-                  (click)="onCellClick(row, col)">
-                  @if (!selectedBatchId || isCellInSelectedBatch(row, col)) {
-                    {{ getProduct(row, col) }}
-                  }
-                </td>
-              }
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
+        }
+      </tbody>
+    </table>
   </div>
-}
-
-<!-- FLASHCARD MODE -->
-@if (currentMode === 'flashcard') {
-  <div class="mode-container flashcard-container">
-    <div class="mode-header">
-      <button mat-icon-button class="back-btn" (click)="goBack()">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-      <h1 class="mode-title">
-        <mat-icon>style</mat-icon>
-        闪卡学习
-      </h1>
-      <div class="level-badge">{{ levelConfigs[selectedLevel]?.name }}</div>
-    </div>
-
-    <!-- Source mode tabs -->
-    <div class="flashcard-source-tabs">
-      <button class="source-tab" [class.active]="flashcardSource === 'level'" (click)="selectFlashcardSource('level')">
-        按等级
-      </button>
-      <button class="source-tab" [class.active]="flashcardSource === 'batch'" (click)="selectFlashcardSource('batch')">
-        按分组
-      </button>
-    </div>
-
-    <!-- Level selector -->
-    @if (flashcardSource === 'level') {
-      <div class="level-selector">
-        @for (config of levelConfigs; track config.level) {
-          <button
-            class="level-btn"
-            [class.active]="selectedLevel === config.level"
-            (click)="selectFlashcardLevel(config.level)">
-            <span class="level-name">L{{ config.level }}</span>
-            <span class="level-desc">{{ config.description }}</span>
-          </button>
-        }
-      </div>
-    }
-
-    <!-- Batch selector -->
-    @if (flashcardSource === 'batch') {
-      <div class="batch-selector">
-        @for (batch of batchConfigs; track batch.id) {
-          <button
-            class="batch-select-btn"
-            [class.active]="selectedBatchForFlashcard === batch.id"
-            [style.--batch-color]="batch.color"
-            (click)="selectBatchForFlashcard(batch.id)">
-            <span class="batch-emoji">{{ batch.emoji }}</span>
-            <span class="batch-name">{{ batch.name }}</span>
-          </button>
-        }
-      </div>
-      @if (currentBatchHint) {
-        <div class="batch-hint-bar">
-          <mat-icon>lightbulb</mat-icon>
-          <span>{{ currentBatchHint }}</span>
-        </div>
-      }
-    }
-
-    @if (!flashcardComplete) {
-      <!-- Progress -->
-      <div class="flashcard-progress">
-        <div class="progress-text">{{ currentCardIndex + 1 }} / {{ flashcards.length }}</div>
-        <div class="progress-bar">
-          <div class="progress-fill" [style.width.%]="((currentCardIndex + 1) / flashcards.length) * 100"></div>
-        </div>
-      </div>
-
-      <!-- Card -->
-      @if (currentFlashcard) {
-        <div class="flashcard-area">
-          <div class="flashcard" [class.flipped]="isCardFlipped" (click)="!isCardFlipped && flipCard()">
-            <div class="card-front">
-              <div class="card-equation">{{ currentFlashcard.num1 }} × {{ currentFlashcard.num2 }} = ?</div>
-              <div class="card-hint">点击翻转查看答案</div>
-            </div>
-            <div class="card-back">
-              <div class="card-answer">{{ currentFlashcard.num1 }} × {{ currentFlashcard.num2 }} = {{ currentFlashcard.answer }}</div>
-              <div class="card-decomposition">{{ getFlashcardDecomposition() }}</div>
-            </div>
-          </div>
-
-          @if (isCardFlipped) {
-            <div class="card-actions">
-              <button class="remember-btn not-remembered" (click)="markRemembered(false)">
-                <mat-icon>close</mat-icon>
-                没记住
-              </button>
-              <button class="remember-btn remembered" (click)="markRemembered(true)">
-                <mat-icon>check</mat-icon>
-                记住了
-              </button>
-            </div>
-          }
-        </div>
-      }
-    } @else {
-      <!-- Flashcard complete -->
-      <div class="complete-panel">
-        <div class="complete-icon">🎉</div>
-        <h2>学习完成！</h2>
-        <div class="complete-stats">
-          <div class="stat-row">
-            <span class="stat-label">记住了</span>
-            <span class="stat-value correct">{{ flashcardStats.remembered }}</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">没记住</span>
-            <span class="stat-value wrong">{{ flashcardStats.notRemembered }}</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">记忆率</span>
-            <span class="stat-value">{{ flashcardStats.total > 0 ? Math.round((flashcardStats.remembered / flashcardStats.total) * 100) : 0 }}%</span>
-          </div>
-        </div>
-        <div class="complete-actions">
-          @if (flashcardStats.notRemembered > 0) {
-            <button mat-raised-button class="action-btn retry-btn" (click)="restartFlashcardsWithFailed()">
-              <mat-icon>replay</mat-icon>
-              重练没记住的 ({{ flashcardStats.notRemembered }} 题)
-            </button>
-          }
-          <button mat-raised-button class="action-btn" (click)="startFlashcards()">
-            <mat-icon>refresh</mat-icon>
-            重新开始
-          </button>
-          <button mat-raised-button class="action-btn practice-btn" (click)="startPracticeMode()">
-            <mat-icon>fitness_center</mat-icon>
-            开始练习
-          </button>
-        </div>
-      </div>
-    }
-  </div>
-}
-
-<!-- PRACTICE MODE / WRONG BOOK MODE -->
-@if (currentMode === 'practice' || currentMode === 'wrongbook') {
-  <div class="mode-container practice-container">
-    <div class="mode-header">
-      <button mat-icon-button class="back-btn" (click)="goBack()">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-      <h1 class="mode-title">
-        @if (isWrongBookPractice) {
-          <mat-icon>auto_stories</mat-icon>
-          错题重练
-        } @else {
-          <mat-icon>fitness_center</mat-icon>
-          渐进练习
-        }
-      </h1>
-      <div class="practice-info">
-        <span class="timer">
-          <mat-icon>timer</mat-icon>
-          {{ formatTime(elapsedSeconds) }}
-        </span>
-        @if (!isWrongBookPractice) {
-          <span class="level-badge">{{ levelConfigs[selectedLevel]?.name }}</span>
-        }
-      </div>
-    </div>
-
-    @if (!isWrongBookPractice && !practiceComplete) {
-      <!-- Level selector for practice mode -->
-      <div class="level-selector">
-        @for (config of levelConfigs; track config.level) {
-          <button
-            class="level-btn"
-            [class.active]="selectedLevel === config.level"
-            [class.locked]="!isLevelUnlocked(config.level)"
-            (click)="selectLevel(config.level); startPractice()">
-            @if (!isLevelUnlocked(config.level)) {
-              <mat-icon>lock</mat-icon>
-            } @else {
-              <div class="level-stars">
-                @for (i of [1, 2, 3]; track i) {
-                  <mat-icon [class.earned]="getLevelProgress(config.level) >= i">star</mat-icon>
-                }
-              </div>
-            }
-            <span class="level-name">L{{ config.level }}</span>
-            <span class="level-desc">{{ config.description }}</span>
-          </button>
-        }
-      </div>
-    }
-
-    @if (!practiceComplete) {
-      <!-- Question progress dots -->
-      <div class="question-progress">
-        @for (q of practiceQuestions; track $index; let i = $index) {
-          <div class="progress-dot"
-               [class.current]="i === currentQuestionIndex"
-               [class.correct]="q.isCorrect === true"
-               [class.wrong]="q.isCorrect === false">
-          </div>
-        }
-      </div>
-
-      <!-- Combo effect -->
-      @if (showComboEffect) {
-        <div class="combo-effect">
-          🔥 Combo ×{{ comboCount }}!
-        </div>
-      }
-
-      <!-- Current question -->
-      @if (currentPracticeQuestion) {
-        <div class="question-area">
-          <div class="question-number">第 {{ currentQuestionIndex + 1 }} / {{ practiceQuestions.length }} 题</div>
-          <div class="question-display">
-            <span class="question-num">{{ currentPracticeQuestion.num1 }}</span>
-            <span class="question-op">×</span>
-            <span class="question-num">{{ currentPracticeQuestion.num2 }}</span>
-            <span class="question-eq">=</span>
-            <span class="question-answer" [class.correct]="currentPracticeQuestion.isCorrect === true" [class.wrong]="currentPracticeQuestion.isCorrect === false">
-              {{ currentPracticeQuestion.userAnswer || '?' }}
-            </span>
-          </div>
-
-          <!-- Feedback -->
-          @if (currentPracticeQuestion.isCorrect === true) {
-            <div class="feedback correct-feedback">
-              <mat-icon>check_circle</mat-icon>
-              正确！
-            </div>
-          }
-          @if (currentPracticeQuestion.isCorrect === false) {
-            <div class="feedback wrong-feedback">
-              <mat-icon>cancel</mat-icon>
-              错误！正确答案是 {{ currentPracticeQuestion.answer }}
-            </div>
-          }
-
-          <!-- Decomposition -->
-          @if (showDecomposition) {
-            <div class="decomposition">
-              <mat-icon>lightbulb</mat-icon>
-              <span>{{ currentDecomposition }}</span>
-            </div>
-          }
-
-          <!-- Number keyboard -->
-          @if (currentPracticeQuestion.isCorrect === null) {
-            <div class="number-keyboard">
-              <div class="keyboard-row">
-                @for (num of [1, 2, 3]; track num) {
-                  <button class="key-btn" (click)="onNumberInput(num)">{{ num }}</button>
-                }
-              </div>
-              <div class="keyboard-row">
-                @for (num of [4, 5, 6]; track num) {
-                  <button class="key-btn" (click)="onNumberInput(num)">{{ num }}</button>
-                }
-              </div>
-              <div class="keyboard-row">
-                @for (num of [7, 8, 9]; track num) {
-                  <button class="key-btn" (click)="onNumberInput(num)">{{ num }}</button>
-                }
-              </div>
-              <div class="keyboard-row">
-                <button class="key-btn" (click)="onNumberInput(0)">0</button>
-                <button class="key-btn delete-btn" (click)="onDeleteInput()">
-                  <mat-icon>backspace</mat-icon>
-                </button>
-                <button class="key-btn submit-btn" (click)="submitAnswer()" [disabled]="!currentPracticeQuestion.userAnswer">
-                  <mat-icon>check</mat-icon>
-                </button>
-              </div>
-            </div>
-          } @else {
-            <!-- Next button after answering -->
-            <div class="next-area">
-              <button mat-raised-button class="next-btn" (click)="nextQuestion()">
-                @if (currentQuestionIndex < practiceQuestions.length - 1) {
-                  下一题
-                  <mat-icon>arrow_forward</mat-icon>
-                } @else {
-                  查看结果
-                  <mat-icon>assessment</mat-icon>
-                }
-              </button>
-            </div>
-          }
-        </div>
-      }
-    } @else {
-      <!-- Practice complete / Round result -->
-      <div class="complete-panel">
-        @if (roundResult) {
-          @if (roundResult.leveledUp) {
-            <div class="complete-icon levelup">🎊</div>
-            <h2>恭喜升级！</h2>
-            <p class="levelup-text">解锁了新等级！</p>
-          } @else if (roundResult.passed) {
-            <div class="complete-icon">🌟</div>
-            <h2>通过！</h2>
-          } @else {
-            <div class="complete-icon">💪</div>
-            <h2>继续加油！</h2>
-          }
-
-          <div class="complete-stats">
-            <div class="stat-row">
-              <span class="stat-label">正确率</span>
-              <span class="stat-value" [class.correct]="roundResult.passed" [class.wrong]="!roundResult.passed">
-                {{ roundResult.accuracy }}%
-              </span>
-            </div>
-            <div class="stat-row">
-              <span class="stat-label">用时</span>
-              <span class="stat-value">{{ formatTime(elapsedSeconds) }}</span>
-            </div>
-            <div class="stat-row">
-              <span class="stat-label">最大连击</span>
-              <span class="stat-value">{{ maxCombo }}</span>
-            </div>
-            @if (!isWrongBookPractice) {
-              <div class="stat-row">
-                <span class="stat-label">通关进度</span>
-                <span class="stat-value">
-                  {{ getLevelProgress(selectedLevel) }} / 3
-                  @if (roundResult.passed) {
-                    ⭐
-                  }
-                </span>
-              </div>
-            }
-          </div>
-
-          <!-- Wrong answers summary -->
-          @if (hasWrongAnswers) {
-            <div class="wrong-summary">
-              <h3>错题回顾</h3>
-              @for (q of wrongAnswers; track $index) {
-                <div class="wrong-item">
-                  <span>{{ q.num1 }} × {{ q.num2 }} = {{ q.answer }}</span>
-                  <span class="user-wrong">你的答案: {{ q.userAnswer }}</span>
-                </div>
-              }
-            </div>
-          }
-
-          <div class="complete-actions">
-            <button mat-raised-button class="action-btn practice-btn" (click)="restartPractice()">
-              <mat-icon>replay</mat-icon>
-              再来一轮
-            </button>
-            <button mat-raised-button class="action-btn" (click)="goBack()">
-              <mat-icon>home</mat-icon>
-              返回
-            </button>
-          </div>
-        }
-      </div>
-    }
-  </div>
-}
+</div>

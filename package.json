@@ -1,6 +1,6 @@
 {
   "name": "matthew-learning-tools",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "main": "electron.js",
   "scripts": {
     "ng": "ng",
