@@ -22,6 +22,10 @@ interface DifficultyLevel {
   operations: OperationSymbol[];
   operationsCount: number;
   enabled: boolean;
+  /** When set, this level generates N×(1~19) multiplication questions. */
+  multiplicationFriend?: number;
+  /** When true, this level generates N×N square questions (1~19). */
+  isSquareType?: boolean;
 }
 
 interface FallingQuestion {
@@ -617,6 +621,23 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
     answer: number;
     operation: OperationSymbol;
   } {
+    // Handle 19×19 multiplication table: N's friends
+    if (level.multiplicationFriend) {
+      const friend = level.multiplicationFriend;
+      const other = this.randomInt(1, 19);
+      // Randomly swap order for variety: friend×other or other×friend
+      if (Math.random() < 0.5) {
+        return { text: `${friend} × ${other}`, answer: friend * other, operation: 'x' };
+      }
+      return { text: `${other} × ${friend}`, answer: other * friend, operation: 'x' };
+    }
+
+    // Handle 19×19 multiplication table: square numbers
+    if (level.isSquareType) {
+      const n = this.randomInt(1, 19);
+      return { text: `${n} × ${n}`, answer: n * n, operation: 'x' };
+    }
+
     const operation = level.operations[Math.floor(Math.random() * level.operations.length)];
     const maxValue = level.maxValue;
     let a = 0;
@@ -895,6 +916,38 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
   }
 
   private createDifficultyLevels(): DifficultyLevel[] {
+    // 19×19 multiplication table levels (N's friends + squares)
+    const multiplicationFriends: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+    const friendLabels: Record<number, string> = {
+      2: '2的朋友', 3: '3的朋友', 4: '4的朋友', 5: '5的朋友',
+      6: '6的朋友', 7: '7的朋友', 8: '8的朋友', 9: '9的朋友',
+      11: '11的朋友', 12: '12的朋友', 13: '13的朋友', 14: '14的朋友',
+      15: '15的朋友', 16: '16的朋友', 17: '17的朋友', 18: '18的朋友',
+      19: '19的朋友',
+    };
+
+    const mul19Levels: DifficultyLevel[] = multiplicationFriends.map((n) => ({
+      id: `mul19-${n}`,
+      label: friendLabels[n],
+      maxValue: n * 19,
+      operations: ['x'] as OperationSymbol[],
+      operationsCount: 1,
+      enabled: true,
+      multiplicationFriend: n,
+    }));
+
+    // Square numbers level
+    const squareLevel: DifficultyLevel = {
+      id: 'mul19-squares',
+      label: '平方数(×19)',
+      maxValue: 361,
+      operations: ['x'] as OperationSymbol[],
+      operationsCount: 1,
+      enabled: true,
+      isSquareType: true,
+    };
+
+    // Original arithmetic levels
     const baseLevels: Array<{
       id: string;
       label: string;
@@ -923,7 +976,7 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
 
     const operationCounts = [1, 2, 3];
 
-    return baseLevels.flatMap((base) =>
+    const arithmeticLevels: DifficultyLevel[] = baseLevels.flatMap((base) =>
       operationCounts.map((count) => ({
         id: `${base.id}-ops${count}`,
         label: base.label,
@@ -933,6 +986,9 @@ export class BasicOperationsGameComponent implements AfterViewInit, OnDestroy {
         enabled: true,
       })),
     );
+
+    // Place multiplication table levels first, then arithmetic levels
+    return [...mul19Levels, squareLevel, ...arithmeticLevels];
   }
 
   // ─── localStorage helpers ─────────────────────────────────────────────────
