@@ -1,0 +1,99 @@
+<div class="composition-container">
+  <div class="page-header">
+    <button class="back-btn" (click)="goBack()">
+      <span class="back-icon">&larr;</span>
+    </button>
+    <h1 class="page-title">作文助手</h1>
+    <p class="page-subtitle">Composition Helper</p>
+    <button class="mobile-nav-toggle" (click)="toggleMobileNav()">
+      <mat-icon>{{ mobileNavOpen ? 'close' : 'menu' }}</mat-icon>
+    </button>
+  </div>
+
+  <!-- Loading state -->
+  <div class="loading-state" *ngIf="!dataLoaded">
+    <p>正在加载数据...</p>
+  </div>
+
+  <!-- Error state -->
+  <div class="error-state" *ngIf="loadError">
+    <p>{{ loadError }}</p>
+  </div>
+
+  <div class="main-layout" *ngIf="dataLoaded && !loadError">
+    <nav class="side-nav" [class.mobile-open]="mobileNavOpen">
+      <div class="nav-category" *ngFor="let cat of categories">
+        <div class="nav-category-header" (click)="toggleCategory(cat)">
+          <mat-icon class="nav-cat-icon">{{ cat.icon }}</mat-icon>
+          <span class="nav-cat-label">{{ cat.label }}</span>
+          <mat-icon class="nav-expand-icon">{{ cat.expanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </div>
+        <div class="nav-items" *ngIf="cat.expanded">
+          <div
+            class="nav-item"
+            *ngFor="let item of cat.items"
+            [class.active]="item.id === selectedItemId"
+            (click)="selectItem(item)"
+          >
+            <span class="nav-item-dot" [style.backgroundColor]="item.color"></span>
+            <span class="nav-item-label">{{ item.label }}</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="content-panel">
+      <div class="content-header" *ngIf="selectedItem">
+        <div class="content-header-icon" [style.backgroundColor]="selectedItem.color">
+          <mat-icon>{{ selectedItem.icon }}</mat-icon>
+        </div>
+        <h2>{{ selectedItem.label }}</h2>
+      </div>
+
+      <!-- Genre detail -->
+      <div class="content-body" *ngIf="selectedCategoryId === 'genre' && currentGenre">
+        <section class="content-section">
+          <h3><mat-icon>format_list_numbered</mat-icon>写作结构</h3>
+          <ol class="structure-list">
+            <li *ngFor="let step of currentGenre.structure">{{ step }}</li>
+          </ol>
+        </section>
+        <section class="content-section">
+          <h3><mat-icon>lightbulb</mat-icon>写作技巧</h3>
+          <ul class="tips-list">
+            <li *ngFor="let tip of currentGenre.tips">{{ tip }}</li>
+          </ul>
+        </section>
+        <section class="content-section" *ngIf="currentGenre.example">
+          <h3><mat-icon>edit_note</mat-icon>范文片段</h3>
+          <div class="example-block">
+            <p>{{ currentGenre.example }}</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Words detail -->
+      <div class="content-body" *ngIf="selectedCategoryId === 'words' && currentWords">
+        <section class="content-section" *ngFor="let group of currentWords">
+          <h3><mat-icon>label</mat-icon>{{ group.subtitle }}</h3>
+          <div class="word-chips">
+            <span class="word-chip" *ngFor="let w of group.words" [style.borderColor]="selectedItem?.color">{{ w }}</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- Sentences detail -->
+      <div class="content-body" *ngIf="selectedCategoryId === 'sentences' && currentSentences">
+        <section class="content-section" *ngFor="let group of currentSentences">
+          <h3><mat-icon>format_quote</mat-icon>{{ group.subtitle }}</h3>
+          <ul class="sentence-list">
+            <li *ngFor="let s of group.sentences">
+              <span class="sentence-text">{{ s.text }}</span>
+              <span class="sentence-source" *ngIf="s.source">&mdash;&mdash; {{ s.source }}</span>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>

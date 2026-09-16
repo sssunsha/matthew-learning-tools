@@ -29,6 +29,10 @@ export class ChineseCategoryComponent {
     this.router.navigate(['/category/chinese/grade3-term2-morning-reading']);
   }
 
+  navigateToCompositionHelper() {
+    this.router.navigate(['/category/chinese/composition-helper']);
+  }
+
   async openCamera(): Promise<void> {
     const options = await this.photoCaptureService.showPhotoSourceDialog();
     if (options) {

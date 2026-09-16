@@ -1,0 +1,481 @@
+// Chinese category - soft purple theme
+$purple: #9575cd;
+$purple-dark: #7e57c2;
+$purple-light: #b39ddb;
+$purple-deep: #5e35b1;
+
+.composition-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, $purple 0%, $purple-dark 100%);
+  overflow: hidden;
+}
+
+// ===== Header =====
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid $purple;
+  flex-shrink: 0;
+
+  .back-btn {
+    background: rgba(149, 117, 205, 0.3);
+    color: $purple;
+    border: none;
+    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0;
+
+    &:hover {
+      background: $purple;
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .back-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .page-title {
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px $purple;
+  }
+
+  .page-subtitle {
+    font-size: 1.125em;
+    color: $purple-light;
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+
+  .mobile-nav-toggle {
+    display: none; // shown only on mobile
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    mat-icon {
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
+    }
+  }
+}
+
+// ===== Loading and error states =====
+.loading-state,
+.error-state {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2em;
+    letter-spacing: 1px;
+  }
+}
+
+.error-state p {
+  color: #ffcdd2;
+}
+
+// ===== Main layout (sidebar + content) =====
+.main-layout {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+// ===== Left sidebar =====
+.side-nav {
+  width: 200px;
+  min-width: 200px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  overflow-y: auto;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-category {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-category-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
+  transition: background 0.2s;
+  user-select: none;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-cat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: $purple-light;
+  }
+
+  .nav-cat-label {
+    flex: 1;
+    font-size: 0.95em;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  .nav-expand-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    opacity: 0.6;
+  }
+}
+
+.nav-items {
+  padding-bottom: 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px 9px 24px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.75);
+  transition: all 0.2s;
+  font-size: 0.9em;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: white;
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.14);
+    color: white;
+    font-weight: 500;
+    border-left: 3px solid white;
+    padding-left: 21px;
+  }
+
+  .nav-item-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .nav-item-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// ===== Right content panel =====
+.content-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.content-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  flex-shrink: 0;
+
+  .content-header-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: 400;
+    color: white;
+    letter-spacing: 1px;
+  }
+}
+
+.content-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+// ===== Shared content sections =====
+.content-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 18px 20px;
+
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px 0;
+    font-size: 1.05em;
+    font-weight: 500;
+    color: $purple-deep;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: $purple-dark;
+    }
+  }
+}
+
+// --- Genre: structure list ---
+.structure-list {
+  margin: 0;
+  padding-left: 22px;
+
+  li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+    color: #444;
+    font-size: 0.95em;
+
+    &::marker {
+      color: $purple;
+      font-weight: bold;
+    }
+  }
+}
+
+// --- Genre: tips list ---
+.tips-list {
+  margin: 0;
+  padding-left: 6px;
+  list-style: none;
+
+  li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+    color: #444;
+    font-size: 0.95em;
+    padding-left: 22px;
+    position: relative;
+
+    &::before {
+      content: '\1F4A1'; // light bulb emoji
+      position: absolute;
+      left: 0;
+    }
+  }
+}
+
+// --- Genre: example ---
+.example-block {
+  background: #f5f0ff;
+  border-left: 3px solid $purple;
+  border-radius: 0 8px 8px 0;
+  padding: 14px 16px;
+
+  p {
+    margin: 0;
+    line-height: 2;
+    color: #555;
+    font-size: 0.95em;
+    text-indent: 2em;
+  }
+}
+
+// --- Words: chips ---
+.word-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.word-chip {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid;
+  background: #fafafa;
+  font-size: 0.95em;
+  color: #333;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #f0e8ff;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// --- Sentences ---
+.sentence-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f0ecf5;
+    line-height: 1.8;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .sentence-text {
+    color: #444;
+    font-size: 0.95em;
+  }
+
+  .sentence-source {
+    color: #9575cd;
+    font-size: 0.82em;
+    align-self: flex-end;
+  }
+}
+
+// ===== Mobile responsive (<= 750px) =====
+@media (max-width: 750px) {
+  .page-header {
+    padding: 4px 7.5px;
+
+    .back-btn {
+      width: 18px;
+      height: 18px;
+
+      .back-icon {
+        font-size: 10px;
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    .page-title {
+      font-size: 0.75em;
+    }
+
+    .page-subtitle {
+      font-size: 0.5625em;
+    }
+
+    .mobile-nav-toggle {
+      display: flex;
+    }
+  }
+
+  // Sidebar becomes overlay on mobile
+  .side-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 200px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    background: rgba(30, 20, 50, 0.95);
+
+    &.mobile-open {
+      transform: translateX(0);
+    }
+  }
+
+  .main-layout {
+    position: relative;
+  }
+
+  .content-header {
+    padding: 12px 14px;
+
+    .content-header-icon {
+      width: 32px;
+      height: 32px;
+
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    h2 {
+      font-size: 1.1em;
+    }
+  }
+
+  .content-body {
+    padding: 0 12px 16px;
+    gap: 12px;
+  }
+
+  .content-section {
+    padding: 14px;
+  }
+
+  .word-chips {
+    gap: 6px;
+  }
+
+  .word-chip {
+    padding: 4px 10px;
+    font-size: 0.85em;
+  }
+}

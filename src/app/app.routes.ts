@@ -12,6 +12,7 @@ import { EntertainmentCategoryComponent } from './components/categories/entertai
 import { ChineseCategoryComponent } from './components/categories/chinese/chinese-category';
 import { Grade3Term2CharactersComponent } from './components/categories/chinese/grade3-term2-characters/grade3-term2-characters';
 import { Grade3Term2MorningReadingComponent } from './components/categories/chinese/grade3-term2-morning-reading/grade3-term2-morning-reading';
+import { CompositionHelperComponent } from './components/categories/chinese/composition-helper/composition-helper';
 import { EnglishCategoryComponent } from './components/categories/english/english-category';
 import { EnglishBasicLearningComponent } from './components/categories/english/basic-learning/english-basic-learning';
 import { EnglishAlphabetLearningComponent } from './components/categories/english/basic-learning/alphabet-learning/english-alphabet-learning';
@@ -174,6 +175,11 @@ export const routes: Routes = [
     path: 'category/chinese/grade3-term2-morning-reading',
     component: Grade3Term2MorningReadingComponent,
     title: '三年级下晨读 - Grade 3 Term 2 Morning Reading',
+  },
+  {
+    path: 'category/chinese/composition-helper',
+    component: CompositionHelperComponent,
+    title: '作文助手 - Composition Helper',
   },
   {
     path: 'category/entertainment',
